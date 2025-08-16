@@ -4,94 +4,112 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Test REBT – Menú Principal</title>
-  <meta name="description" content="Practica y pon a prueba tus conocimientos del Reglamento Electrotécnico de Baja Tensión (REBT).">
+  <meta name="description" content="Practica con los cuestionarios del Reglamento Electrotécnico de Baja Tensión (REBT): ITC por número, por contenido, articulado y examen.">
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Preload imagen de fondo para evitar parpadeos -->
+  <link rel="preload" as="image" href="https://i.imgur.com/lnMJeqK.jpeg">
+
+  <!-- Metadatos sociales -->
+  <meta property="og:title" content="Test REBT – Cuestionarios y Examen" />
+  <meta property="og:description" content="Practica con los cuestionarios del REBT: ITC por número, por contenido y test del articulado." />
+  <meta property="og:type" content="website" />
+  <!-- Cambia esta URL por la de tu dominio cuando esté activo -->
+  <meta property="og:url" content="https://app-rebt.es/" />
+  <!-- Opcional: añade una imagen en tu repo y apunta aquí -->
+  <!-- <meta property="og:image" content="https://app-rebt.es/og-image.jpg" /> -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#0f172a" />
+
+  <!-- Favicon (opcional: coloca /favicon.ico en tu repo) -->
+  <link rel="icon" href="/favicon.ico">
+
   <style>
     body{
       background-image:url('https://i.imgur.com/lnMJeqK.jpeg');
       background-size:cover;background-position:center;background-repeat:no-repeat;
     }
+    /* Respeta la preferencia de reducir animaciones */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+    }
   </style>
 </head>
-<body class="min-h-screen relative">
-  <!-- Capa para mejorar lectura sobre el fondo -->
+<body class="min-h-screen relative text-slate-900">
+  <!-- Capa oscura para mejorar contraste -->
   <div class="absolute inset-0 bg-slate-900/60"></div>
 
   <main class="relative z-10 flex items-center justify-center min-h-screen p-6">
     <section class="w-full max-w-3xl">
       <!-- Tarjeta principal -->
-      <div class="backdrop-blur-md bg-white/90 rounded-2xl shadow-2xl p-8 md:p-10">
-        <header class="text-center space-y-2 mb-8">
+      <div class="backdrop-blur-md bg-white/90 rounded-2xl shadow-2xl shadow-slate-900/10 ring-1 ring-white/50 p-8 md:p-10">
+        <header class="text-center space-y-3 mb-8">
           <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-800">
             Test REBT <span aria-hidden="true">⚡</span>
           </h1>
           <p class="text-slate-600 text-base md:text-lg">
             Practica con los cuestionarios del <strong>Reglamento Electrotécnico de Baja Tensión</strong>.
           </p>
+          <p class="text-slate-500 text-sm md:text-base">
+            Selecciona un modo de práctica o entra al examen. Tiempo y puntuación automáticos.
+          </p>
         </header>
 
-        <!-- Botones: en móvil en columna; en pantallas medianas, 2 columnas -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-
+        <!-- Botonera: columna en móvil, 2 columnas en pantallas medianas -->
+        <nav class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mt-6">
           <!-- Test 1 – ITC por Número -->
-          <button
-            class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transition"
-            onclick="location.href='test1_ITC.html'"
-            aria-label="Abrir Test 1: ITC por Número">
+          <a href="test1_ITC.html" aria-label="Abrir Test 1: ITC por Número"
+             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold bg-blue-600 text-white hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300 transition transform hover:-translate-y-0.5 active:translate-y-0">
             <!-- icono lista -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
             </svg>
             <span>Test 1 – ITC por Número</span>
-          </button>
+          </a>
 
           <!-- Test 2 – ITC por Contenido -->
-          <button
-            class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300 transition"
-            onclick="location.href='test2_ITC.html'"
-            aria-label="Abrir Test 2: ITC por Contenido">
+          <a href="test2_ITC.html" aria-label="Abrir Test 2: ITC por Contenido"
+             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300 transition transform hover:-translate-y-0.5 active:translate-y-0">
             <!-- icono libro -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75c-1.5-1-3.5-1-5 0v10.5c1.5-1 3.5-1 5 0m0-10.5c1.5-1 3.5-1 5 0v10.5c-1.5-1-3.5-1-5 0m0-10.5v10.5"/>
             </svg>
             <span>Test 2 – ITC por Contenido</span>
-          </button>
+          </a>
 
           <!-- Test del Articulado REBT -->
-          <button
-            class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold bg-cyan-600 text-white hover:bg-cyan-700 focus:outline-none focus:ring-4 focus:ring-cyan-300 transition"
-            onclick="location.href='articulado.html'"
-            aria-label="Abrir Test del Articulado REBT">
+          <a href="articulado.html" aria-label="Abrir Test del Articulado REBT"
+             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold bg-cyan-600 text-white hover:bg-cyan-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-cyan-300 transition transform hover:-translate-y-0.5 active:translate-y-0">
             <!-- icono documento -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6M8 4h5l3 3v13a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
             </svg>
             <span>Test del Articulado REBT</span>
-          </button>
+          </a>
 
-          <!-- Examen test (diferenciado en color) -->
-          <button
-            class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold bg-emerald-600 text-white hover:bg-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-300 transition"
-            onclick="location.href='examen1.html'"
-            aria-label="Abrir Examen tipo test">
-            <!-- icono certificado -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <!-- Examen test -->
+          <a href="examen1.html" aria-label="Abrir Examen tipo test"
+             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold bg-emerald-600 text-white hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300 transition transform hover:-translate-y-0.5 active:translate-y-0">
+            <!-- icono check/certificado -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z"/>
             </svg>
             <span>Examen test</span>
-          </button>
-        </div>
+          </a>
+        </nav>
 
-        <!-- Pie ligero -->
+        <!-- Pie -->
         <div class="mt-8 text-center text-sm text-slate-500">
-          <span>© <span id="y"></span> REBT • Aprende y practica</span>
+          © <span id="y"></span> REBT • Aprende y practica
         </div>
       </div>
     </section>
   </main>
 
   <script>
-    // año dinámico
+    // Año dinámico
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
