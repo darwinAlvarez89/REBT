@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test del Articulado</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Test del Articulado del REBT</title>
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+
   <script>
+    /* ===== Banco de preguntas ===== */
     const preguntas = [
       {pregunta: "¿Qué artículo define el objeto del Reglamento Electrotécnico para Baja Tensión?", opciones: ["Artículo 1", "Artículo 2", "Artículo 5", "Artículo 10"], respuesta: "Artículo 1"},
       {pregunta: "¿En qué artículo se indica el campo de aplicación del REBT?", opciones: ["Artículo 2", "Artículo 3", "Artículo 6", "Artículo 15"], respuesta: "Artículo 2"},
@@ -38,146 +48,183 @@
       {pregunta: "¿Qué artículo hace referencia a la guía técnica del REBT?", opciones: ["Artículo 29", "Artículo 20", "Artículo 5", "Artículo 15"], respuesta: "Artículo 29"}
     ];
 
-    let preguntasAleatorias = [], indice = 0, aciertos = 0, errores = 0, historial = [], seleccionUsuario = null, respondido = false;
-    let inicioTiempo = null, intervaloTiempo = null;
+    /* ===== Estado ===== */
+    let preguntasAleatorias = [];
+    let indice = 0, aciertos = 0, errores = 0;
+    let historial = [];
+    let seleccionUsuario = null;
+    let respondido = false;
+    let inicioTiempo = null;
+    let intervaloTiempo = null;
 
-    const mezclar = array => {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    };
+    /* ===== Utilidades ===== */
+    const mezclar = (arr) => { for (let i = arr.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
+    function mezclarPreguntas(){ preguntasAleatorias = mezclar(preguntas.map(p=>({...p, opciones: mezclar([...p.opciones]) }))); indice=0; aciertos=0; errores=0; historial=[]; }
 
-    function iniciarTest() {
-      preguntasAleatorias = mezclar(preguntas.map(p => ({ ...p, opciones: mezclar([...p.opciones]) })));
-      indice = aciertos = errores = 0;
-      historial = [];
-      inicioTiempo = new Date();
-      intervaloTiempo = setInterval(actualizarContador, 1000);
-      cargarPregunta();
+    /* ===== Render ===== */
+    function setProgreso(){
+      const total = preguntasAleatorias.length;
+      const pct = Math.round((indice/total)*100);
+      const bar = document.getElementById('progress-bar');
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+      document.getElementById('progress-txt').textContent = `${indice}/${total}`;
     }
 
-    function cargarPregunta() {
-      if (indice >= preguntasAleatorias.length) return mostrarResumen();
-
-      const q = preguntasAleatorias[indice];
-      seleccionUsuario = null;
-      respondido = false;
-
-      document.getElementById("pregunta").textContent = q.pregunta;
-      const opciones = document.getElementById("opciones");
-      opciones.innerHTML = "";
-      q.opciones.forEach(op => {
-        const btn = document.createElement("button");
-        btn.textContent = op;
-        btn.onclick = () => seleccionarOpcion(op);
-        btn.className = "opcion bg-blue-500 text-white p-2 rounded m-2 hover:bg-blue-700";
-        opciones.appendChild(btn);
-      });
-
-      document.getElementById("acciones").innerHTML = "";
-      actualizarContador();
-    }
-
-    function seleccionarOpcion(opcion) {
-      if (respondido) return;
-      seleccionUsuario = opcion;
-      document.querySelectorAll("#opciones button").forEach(btn => {
-        btn.classList.remove("ring", "ring-yellow-400");
-        if (btn.textContent === opcion) btn.classList.add("ring", "ring-yellow-400");
-      });
-      document.getElementById("acciones").innerHTML = `<div class='text-right'><button onclick='verificarRespuesta()' class='bg-gray-800 text-white px-4 py-2 rounded'>Contestar</button></div>`;
-    }
-
-    function verificarRespuesta() {
-      if (respondido || !seleccionUsuario) return;
-      const actual = preguntasAleatorias[indice];
-      const esCorrecta = seleccionUsuario === actual.respuesta;
-      respondido = true;
-
-      document.querySelectorAll("#opciones button").forEach(btn => {
-        btn.disabled = true;
-        btn.classList.remove("ring", "ring-yellow-400");
-        if (btn.textContent === actual.respuesta) {
-          btn.className = "bg-green-300 text-black p-2 rounded m-2";
-          btn.innerHTML = `✔ ${btn.textContent}`;
-        }
-        if (btn.textContent === seleccionUsuario && !esCorrecta) {
-          btn.className = "bg-red-400 text-black p-2 rounded m-2";
-          btn.innerHTML = `❌ ${btn.textContent}`;
-        }
-      });
-
-      esCorrecta ? aciertos++ : errores++;
-      historial.push({ pregunta: actual.pregunta, opciones: actual.opciones, correcta: actual.respuesta, elegida: seleccionUsuario });
-      document.getElementById("acciones").innerHTML = `<div class='mt-4 text-right'><button onclick='siguientePregunta()' class='bg-blue-600 text-white px-4 py-2 rounded'>Siguiente</button></div>`;
-      actualizarContador();
-    }
-
-    function actualizarContador() {
-      const transcurrido = inicioTiempo ? Math.floor((new Date() - inicioTiempo) / 1000) : 0;
-      const minutos = String(Math.floor(transcurrido / 60)).padStart(2, '0');
-      const segundos = String(transcurrido % 60).padStart(2, '0');
-
+    function actualizarContador(){
+      const seg = inicioTiempo ? Math.floor((Date.now()-inicioTiempo)/1000) : 0;
+      const mm = String(Math.floor(seg/60)).padStart(2,'0');
+      const ss = String(seg%60).padStart(2,'0');
       document.getElementById("contador").innerHTML = `
         <span>Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
         <span class="text-green-600">Aciertos: ${aciertos}</span>
         <span class="text-red-600">Fallos: ${errores}</span>
         <span>Puntos: ${aciertos}</span>
-        <span class="text-blue-700 font-mono">⏱ ${minutos}:${segundos}</span>
-      `;
+        <span class="font-mono ${seg>=60?'text-orange-600':'text-blue-700'}">⏱ ${mm}:${ss}</span>`;
     }
 
-    const siguientePregunta = () => { indice++; cargarPregunta(); };
+    function renderOpciones(opciones){
+      const cont = document.getElementById("opciones");
+      cont.innerHTML = "";
+      opciones.forEach((op, i)=>{
+        const btn = document.createElement("button");
+        btn.type="button";
+        btn.dataset.valor = op;
+        btn.className="opcion w-full text-left bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl shadow transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300";
+        btn.innerHTML = `<span class="font-semibold tracking-wide">${op}</span>`;
+        btn.onclick = ()=>seleccionarOpcion(op);
+        btn.setAttribute('aria-label',`Opción ${i+1}: ${op}`);
+        cont.appendChild(btn);
+      });
+    }
 
-    function mostrarResumen() {
+    function cargarPregunta(){
+      if (indice>=preguntasAleatorias.length) return mostrarResumen();
+      const q = preguntasAleatorias[indice];
+      seleccionUsuario=null; respondido=false;
+      document.getElementById("pregunta").textContent = q.pregunta;
+      renderOpciones(q.opciones);
+      document.getElementById("acciones").innerHTML =
+        `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
+           <span>Elige una respuesta (teclas 1–4 y Enter).</span>
+           <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
+         </div>`;
+      setProgreso(); actualizarContador();
+    }
+
+    function seleccionarOpcion(opcion){
+      if (respondido) return;
+      seleccionUsuario = opcion;
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.classList.remove('ring','ring-yellow-300','translate-y-0.5');
+        if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
+      });
+      const btn = document.getElementById('btn-contestar');
+      btn.disabled=false; btn.classList.remove('opacity-50','cursor-not-allowed'); btn.onclick=verificarRespuesta;
+    }
+
+    function verificarRespuesta(){
+      if (respondido || !seleccionUsuario) return;
+      const actual = preguntasAleatorias[indice];
+      const ok = seleccionUsuario===actual.respuesta;
+      respondido = true;
+
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.disabled=true; b.classList.remove('ring','ring-yellow-300');
+        const val=b.dataset.valor;
+        if (val===actual.respuesta){ b.classList.add('bg-green-600','hover:bg-green-700'); b.innerHTML=`✅ <span class="font-semibold">${val}</span>`; }
+        else if (val===seleccionUsuario && !ok){ b.classList.add('bg-red-600','hover:bg-red-700'); b.innerHTML=`❌ <span class="font-semibold">${val}</span>`; }
+        else { b.classList.add('bg-blue-500'); }
+      });
+
+      ok ? aciertos++ : errores++;
+      historial.push({pregunta:actual.pregunta, opciones:actual.opciones, correcta:actual.respuesta, elegida:seleccionUsuario});
+
+      document.getElementById("acciones").innerHTML =
+        `<div class="mt-4 flex items-center justify-end gap-3">
+           <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">Siguiente</button>
+         </div>`;
+      actualizarContador(); setProgreso();
+    }
+
+    const siguientePregunta = ()=>{ indice++; cargarPregunta(); };
+
+    function mostrarResumen(){
       clearInterval(intervaloTiempo);
-      const totalSegundos = Math.floor((new Date() - inicioTiempo) / 1000);
-      const minutos = String(Math.floor(totalSegundos / 60)).padStart(2, '0');
-      const segundos = String(totalSegundos % 60).padStart(2, '0');
+      const total = preguntasAleatorias.length;
+      const seg = Math.floor((Date.now()-inicioTiempo)/1000);
+      const mm = String(Math.floor(seg/60)).padStart(2,'0');
+      const ss = String(seg%60).padStart(2,'0');
+      const nota = Math.round((aciertos/total)*1000)/100; // % sobre 100
+
+      const detalle = historial.map(h=>`
+        <div class='mb-2 border border-slate-200 rounded-lg p-3'>
+          <p class='font-semibold mb-2'>${h.pregunta}</p>
+          <div class='flex flex-wrap gap-2'>
+            ${h.opciones.map(op=>{
+              if (op===h.elegida && op===h.correcta) return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op===h.elegida && op!==h.correcta) return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op===h.correcta && op!==h.elegida) return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
+            }).join('')}
+          </div>
+        </div>`).join('');
 
       document.getElementById("test").innerHTML = `
-        <h2 class='text-xl font-bold mb-2'>Test finalizado</h2>
-        <p class='mb-2'>Has acertado <strong>${aciertos}</strong> preguntas y fallado <strong>${errores}</strong>.</p>
-        <p class='mb-4 text-blue-600 font-semibold'>⏱ Tiempo total: ${minutos}:${segundos}</p>
-        <div class='mb-4'>
-          ${historial.map(h => `
-            <div class='mb-2 border p-2 rounded'>
-              <p class='font-semibold'>${h.pregunta}</p>
-              <div class='flex flex-wrap gap-2 mt-2'>
-                ${h.opciones.map(op => {
-                  if (op === h.elegida && op === h.correcta) return `<span class='bg-green-200 px-2 py-1 rounded'>✅ ${op}</span>`;
-                  if (op === h.elegida && op !== h.correcta) return `<span class='bg-red-300 px-2 py-1 rounded'>❌ ${op}</span>`;
-                  if (op === h.correcta && op !== h.elegida) return `<span class='bg-green-100 px-2 py-1 rounded'>✔ ${op}</span>`;
-                  return `<span class='px-2 py-1'>${op}</span>`;
-                }).join('')}
-              </div>
-            </div>
-          `).join('')}
+        <div class="space-y-3">
+          <h2 class="text-2xl font-extrabold">Resultado del test</h2>
+          <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Total: ${total}</p>
+          <p class="text-slate-700">Tiempo total: <span class="font-mono">${mm}:${ss}</span> • Acierto: <strong>${nota}%</strong></p>
+          <hr class="my-3 border-slate-200">
+          <h3 class="text-lg font-bold">Detalle de preguntas</h3>
+          <div class="max-h-[50vh] overflow-auto pr-1">${detalle}</div>
         </div>
-        <div class='flex flex-col items-center gap-4 mt-4'>
-          <button onclick='window.location.reload()' class='bg-green-500 text-white px-4 py-2 rounded'>Reiniciar</button>
-        </div>
-      `;
+
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Reiniciar</button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">Volver al inicio</a>
+        </div>`;
     }
 
-    window.onload = iniciarTest;
+    /* ===== Atajos de teclado ===== */
+    function handleKey(e){
+      if (respondido){ if (e.key==='Enter') siguientePregunta(); return; }
+      const map={'1':0,'2':1,'3':2,'4':3};
+      if (map[e.key]!==undefined){ const b=document.querySelectorAll('#opciones .opcion')[map[e.key]]; if (b) b.click(); }
+      if (e.key==='Enter'){ const b=document.getElementById('btn-contestar'); if (b && !b.disabled) b.click(); }
+    }
+
+    window.onload = ()=>{
+      mezclarPreguntas();
+      inicioTiempo = Date.now();
+      cargarPregunta();
+      intervaloTiempo = setInterval(actualizarContador, 1000);
+      document.addEventListener('keydown', handleKey);
+    };
   </script>
 </head>
+
 <body class="bg-gray-100 text-gray-900 p-4">
-  <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md" id="test">
-    <p id="contador" class="mb-6 text-center font-semibold text-gray-700 space-x-4"></p>
-    <h1 class="text-2xl font-bold mb-4 text-center">Test del Articulado del REBT</h1>
-    <p id="pregunta" class="mb-4"></p>
-    <div id="opciones" class="flex flex-col"></div>
-    <div id="acciones" class="mt-4 text-right"></div>
+  <div class="max-w-3xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-lg ring-1 ring-slate-100" id="test">
+    <div class="mb-4">
+      <div class="flex items-center justify-between text-sm text-slate-600 mb-2">
+        <p id="contador" class="font-semibold space-x-4"></p>
+        <span id="progress-txt" class="font-mono text-slate-500">0/0</span>
+      </div>
+      <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+        <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out" style="width:0%" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      </div>
+    </div>
+
+    <h1 class="text-3xl font-extrabold mb-3 text-center">Test del Articulado del REBT</h1>
+    <p id="pregunta" class="mb-4 text-lg text-center"></p>
+
+    <div id="opciones" class="flex flex-col gap-3"></div>
+    <div id="acciones" class="mt-2"></div>
   </div>
 
-  <div class="mt-8 text-center">
-    <button onclick="window.location.href='index.html'" class="bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">
-      Cancelar
-    </button>
+  <div class="mt-6 text-center">
+    <a href="index.html" class="inline-block bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">Cancelar</a>
   </div>
 </body>
 </html>
