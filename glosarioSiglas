@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glosario REBT</title>
+
+<!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RSH4ZW3VT2');
+  </script>
+
+<style>
+  :root{
+    --bg:#0f172a; --card:#ffffff; --ink:#0b1324; --accent:#059669; --muted:#6b7280;
+  }
+  html,body{margin:0}
+  body{
+    min-height:100vh; display:flex; align-items:flex-start; justify-content:center;
+    background:linear-gradient(180deg,#0f172a,#111827); font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+    color:var(--ink); padding:32px;
+  }
+  .card{
+    width:min(950px,96vw); background:var(--card); border-radius:18px; box-shadow:0 10px 35px rgba(0,0,0,.25);
+    padding:28px 22px;
+  }
+  h1{margin:0 0 6px; font-size:clamp(22px,3.2vw,32px)}
+  .sub{color:var(--muted); margin:0 0 18px}
+  .toolbar{display:flex; gap:10px; margin:12px 0 16px; flex-wrap:wrap}
+  input[type="search"]{
+    flex:1; min-width:220px; font-size:16px; padding:10px 12px; border-radius:10px; border:1px solid #e5e7eb; outline:none;
+  }
+  .btn{
+    border:0; background:var(--accent); color:#fff; padding:10px 14px; border-radius:10px; font-weight:600; cursor:pointer;
+    text-decoration:none; display:inline-block;
+  }
+  .btn.sec{ background:#e5e7eb; color:#111827 }
+
+  .item{border-top:1px solid #eef2f7; padding:12px 0}
+  .term{
+    display:flex; align-items:center; gap:10px; width:100%;
+    background:transparent; border:0; cursor:pointer; text-align:left; padding:8px 6px; border-radius:10px;
+    font-weight:700; font-size:16px; color:#065f46;
+  }
+  .chip{background:#ecfdf5; color:#065f46; padding:4px 8px; border-radius:8px; font-weight:700; font-size:14px}
+  .caret{margin-left:auto; transition:transform .25s ease}
+  .item.open .caret{ transform:rotate(180deg) }
+
+  .def{
+    overflow:hidden; max-height:0; opacity:0;
+    transition:max-height .35s ease, opacity .25s ease;
+    padding:0 6px; color:#334155; line-height:1.6;
+  }
+  .item.open .def{ max-height:250px; opacity:1; margin-top:6px }
+  .hidden{ display:none !important }
+  .empty{ color:#9ca3af; padding:16px 6px }
+</style>
+</head>
+<body>
+  <main class="card">
+    <h1>📘 Glosario de Siglas y Abreviaturas</h1>
+    <p class="sub">Pulsa en cada término para ver su descripción. Usa la búsqueda para filtrar.</p>
+
+    <div class="toolbar">
+      <input id="q" type="search" placeholder="Buscar: IGA, ID, DPS…">
+      <button class="btn" id="expand">Expandir todo</button>
+      <button class="btn sec" id="collapse">Contraer todo</button>
+    </div>
+
+    <div id="list">
+      <!-- ===== SIGLAS ===== -->
+      <div class="item"><button class="term"><span class="chip">ICP</span> Interruptor de Control de Potencia <span class="caret">▾</span></button>
+        <div class="def">Limita la potencia contratada evitando sobrecargas a nivel de acometida.</div></div>
+
+      <div class="item"><button class="term"><span class="chip">IGA</span> Interruptor General Automático <span class="caret">▾</span></button>
+        <div class="def">Protección general de toda la instalación contra sobreintensidades y cortocircuitos.</div></div>
+
+      <div class="item"><button class="term"><span class="chip">ID</span> Interruptor Diferencial <span class="caret">▾</span></button>
+        <div class="def">Detecta fugas de corriente a tierra. Protege a las personas frente a contactos indirectos.</div></div>
+
+      <div class="item"><button class="term"><span class="chip">PIA</span> Pequeño Interruptor Automático <span class="caret">▾</span></button>
+        <div class="def">Magnetotérmico de circuito. Protege individualmente iluminación, tomas, cocina, etc.</div></div>
+
+      <div class="item"><button class="term"><span class="chip">DPS</span> Protección contra Sobretensiones <span class="caret">▾</span></button>
+        <div class="def">Deriva sobretensiones transitorias o permanentes a tierra, protegiendo equipos.</div></div>
+
+      <div class="item"><button class="term"><span class="chip">LGA</span> Línea General de Alimentación <span class="caret">▾</span></button>
+        <div class="def">Alimenta derivaciones individuales desde la CGP o centralización de contadores.</div></div>
+
+      <div class="item"><button class="term"><span class="chip">CGP</span> Caja General de Protección <span class="caret">▾</span></button>
+        <div class="def">Elemento en límite de propiedad con fusibles de protección de la red de distribución.</div></div>
+
+      <div class="item"><button class="term"><span class="chip">DI</span> Derivación Individual <span class="caret">▾</span></button>
+        <div class="def">Tramo desde el contador hasta el cuadro general de una vivienda o local.</div></div>
+
+      <div class="item"><button class="term"><span class="chip">PE</span> Conductor de Protección <span class="caret">▾</span></button>
+        <div class="def">Conductor verde/amarillo que conecta las masas metálicas a la puesta a tierra.</div></div>
+
+      <div class="item"><button class="term"><span class="chip">TT / TN / IT</span> Esquemas de conexión a tierra <span class="caret">▾</span></button>
+        <div class="def">Formas de conexión del neutro y las masas. En viviendas es habitual el TT.</div></div>
+
+      <div class="item"><button class="term"><span class="chip">MBTS</span> Muy Baja Tensión de Seguridad <span class="caret">▾</span></button>
+        <div class="def">Sistema de seguridad que garantiza tensiones inferiores a 12V AC o 30V DC.</div></div>
+
+      <div class="item"><button class="term"><span class="chip">MBTP</span> Muy Baja Tensión de Protección <span class="caret">▾</span></button>
+        <div class="def">Similar a MBTS pero con condiciones más estrictas para entornos húmedos o conductivos.</div></div>
+
+      <div class="item"><button class="term"><span class="chip">REBT</span> Reglamento Electrotécnico de Baja Tensión <span class="caret">▾</span></button>
+        <div class="def">Norma española que regula las instalaciones eléctricas de baja tensión.</div></div>
+
+      <div class="item"><button class="term"><span class="chip">ITC</span> Instrucciones Técnicas Complementarias <span class="caret">▾</span></button>
+        <div class="def">Desarrollan y detallan requisitos específicos del REBT en distintos campos (alumbrado, LGA, etc.).</div></div>
+
+      <div class="item"><button class="term"><span class="chip">PEN</span> Conductor Combinado Neutro y Protección <span class="caret">▾</span></button>
+        <div class="def">En esquemas TN-C, un único conductor cumple la función de neutro y protección.</div></div>
+
+      <div id="empty" class="empty hidden">Sin resultados para tu búsqueda.</div>
+    </div>
+
+    <!-- Botón volver al inicio -->
+    <div style="margin-top: 24px; text-align: center;">
+      <a href="index.html" class="btn">⬅️ Volver al inicio</a>
+    </div>
+
+  </main>
+
+<script>
+  // Toggle individual
+  document.querySelectorAll('.item .term').forEach(btn=>{
+    btn.addEventListener('click', ()=> btn.parentElement.classList.toggle('open'));
+  });
+  // Expand / Collapse
+  document.getElementById('expand').onclick = () =>
+    document.querySelectorAll('.item').forEach(el=>el.classList.add('open'));
+  document.getElementById('collapse').onclick = () =>
+    document.querySelectorAll('.item').forEach(el=>el.classList.remove('open'));
+  // Buscar
+  const q = document.getElementById('q');
+  q.addEventListener('input', ()=>{
+    const term = q.value.trim().toLowerCase();
+    const items = [...document.querySelectorAll('#list .item')];
+    let visibles = 0;
+    items.forEach(it=>{
+      const txt = it.textContent.toLowerCase();
+      const show = !term || txt.includes(term);
+      it.style.display = show ? '' : 'none';
+      if(show) visibles++;
+    });
+    document.getElementById('empty').classList.toggle('hidden', visibles>0);
+  });
+</script>
+</body>
+</html>
