@@ -1,190 +1,260 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Test ITC-BT Electrificación Básica</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script>
-    const preguntas = [{ pregunta: "¿Qué ITC regula las empresas instaladoras en baja tensión?", opciones: ["ITC-BT-03", "ITC-BT-04", "ITC-BT-10", "ITC-BT-52"], respuesta: "ITC-BT-03" },
-  { pregunta: "¿Qué ITC trata sobre la documentación y puesta en servicio de instalaciones eléctricas?", opciones: ["ITC-BT-04", "ITC-BT-03", "ITC-BT-07", "ITC-BT-17"], respuesta: "ITC-BT-04" },
-  { pregunta: "¿Qué ITC regula las verificaciones e inspecciones?", opciones: ["ITC-BT-05", "ITC-BT-04", "ITC-BT-10", "ITC-BT-28"], respuesta: "ITC-BT-05" },
-  { pregunta: "¿Qué ITC regula los sistemas de conexión del neutro y las masas en redes de distribución?", opciones: ["ITC-BT-08", "ITC-BT-24", "ITC-BT-19", "ITC-BT-40"], respuesta: "ITC-BT-08" },
-  { pregunta: "¿Qué ITC regula el alumbrado exterior?", opciones: ["ITC-BT-09", "ITC-BT-08", "ITC-BT-10", "ITC-BT-50"], respuesta: "ITC-BT-09" },
-  { pregunta: "¿Qué ITC trata sobre la previsión de cargas para suministros en baja tensión?", opciones: ["ITC-BT-10", "ITC-BT-15", "ITC-BT-03", "ITC-BT-44"], respuesta: "ITC-BT-10" },
-  { pregunta: "¿Qué ITC regula los esquemas de las instalaciones de enlace?", opciones: ["ITC-BT-12", "ITC-BT-16", "ITC-BT-27", "ITC-BT-19"], respuesta: "ITC-BT-12" },
-  { pregunta: "¿Qué ITC regula las cajas generales de protección en las instalaciones de enlace?", opciones: ["ITC-BT-13", "ITC-BT-12", "ITC-BT-32", "ITC-BT-05"], respuesta: "ITC-BT-13" },
-  { pregunta: "¿Qué ITC trata sobre la línea general de alimentación?", opciones: ["ITC-BT-14", "ITC-BT-20", "ITC-BT-13", "ITC-BT-33"], respuesta: "ITC-BT-14" },
-  { pregunta: "¿Qué ITC regula las derivaciones individuales?", opciones: ["ITC-BT-15", "ITC-BT-25", "ITC-BT-17", "ITC-BT-43"], respuesta: "ITC-BT-15" },
-  { pregunta: "¿Qué ITC regula la ubicación y sistemas de instalación de contadores?", opciones: ["ITC-BT-16", "ITC-BT-14", "ITC-BT-35", "ITC-BT-46"], respuesta: "ITC-BT-16" },
-  { pregunta: "¿Qué ITC regula el ICP y otros dispositivos de mando y protección?", opciones: ["ITC-BT-17", "ITC-BT-13", "ITC-BT-21", "ITC-BT-33"], respuesta: "ITC-BT-17" },
-  { pregunta: "¿Qué ITC trata sobre instalaciones de puesta a tierra?", opciones: ["ITC-BT-18", "ITC-BT-08", "ITC-BT-36", "ITC-BT-29"], respuesta: "ITC-BT-18" },
-  { pregunta: "¿Qué ITC regula las prescripciones generales de las instalaciones interiores o receptoras?", opciones: ["ITC-BT-19", "ITC-BT-14", "ITC-BT-30", "ITC-BT-48"], respuesta: "ITC-BT-19" },
-  { pregunta: "¿Qué ITC regula los sistemas de instalación en interiores?", opciones: ["ITC-BT-20", "ITC-BT-22", "ITC-BT-38", "ITC-BT-45"], respuesta: "ITC-BT-20" },
-  { pregunta: "¿Qué ITC trata sobre tubos y canales protectoras en interiores?", opciones: ["ITC-BT-21", "ITC-BT-18", "ITC-BT-27", "ITC-BT-50"], respuesta: "ITC-BT-21" },
-  { pregunta: "¿Qué ITC regula la protección contra sobreintensidades?", opciones: ["ITC-BT-22", "ITC-BT-28", "ITC-BT-10", "ITC-BT-41"], respuesta: "ITC-BT-22" },
-  { pregunta: "¿Qué ITC regula la protección contra sobretensiones?", opciones: ["ITC-BT-23", "ITC-BT-08", "ITC-BT-19", "ITC-BT-40"], respuesta: "ITC-BT-23" },
-  { pregunta: "¿Qué ITC regula la protección contra contactos directos e indirectos?", opciones: ["ITC-BT-24", "ITC-BT-43", "ITC-BT-22", "ITC-BT-15"], respuesta: "ITC-BT-24" },
-  { pregunta: "¿Qué ITC regula el número de circuitos y características en viviendas?", opciones: ["ITC-BT-25", "ITC-BT-21", "ITC-BT-48", "ITC-BT-50"], respuesta: "ITC-BT-25" },
-  { pregunta: "¿Qué ITC regula las prescripciones generales en viviendas?", opciones: ["ITC-BT-26", "ITC-BT-13", "ITC-BT-44", "ITC-BT-52"], respuesta: "ITC-BT-26" },
-  { pregunta: "¿Qué ITC trata sobre locales que contienen bañera o ducha?", opciones: ["ITC-BT-27", "ITC-BT-50", "ITC-BT-39", "ITC-BT-09"], respuesta: "ITC-BT-27" },
-  { pregunta: "¿Qué ITC regula las instalaciones en locales de pública concurrencia?", opciones: ["ITC-BT-28", "ITC-BT-09", "ITC-BT-36", "ITC-BT-41"], respuesta: "ITC-BT-28" },
-  { pregunta: "¿Qué ITC regula instalaciones en locales de características especiales?", opciones: ["ITC-BT-30", "ITC-BT-31", "ITC-BT-10", "ITC-BT-05"], respuesta: "ITC-BT-30" },
-  { pregunta: "¿Qué ITC regula instalaciones en piscinas y fuentes?", opciones: ["ITC-BT-31", "ITC-BT-30", "ITC-BT-41", "ITC-BT-33"], respuesta: "ITC-BT-31" },
-  { pregunta: "¿Qué ITC regula máquinas de elevación y transporte?", opciones: ["ITC-BT-32", "ITC-BT-34", "ITC-BT-38", "ITC-BT-43"], respuesta: "ITC-BT-32" },
-  { pregunta: "¿Qué ITC regula instalaciones provisionales y temporales de obras?", opciones: ["ITC-BT-33", "ITC-BT-21", "ITC-BT-36", "ITC-BT-49"], respuesta: "ITC-BT-33" },
-  { pregunta: "¿Qué ITC regula ferias y stands?", opciones: ["ITC-BT-34", "ITC-BT-31", "ITC-BT-38", "ITC-BT-29"], respuesta: "ITC-BT-34" },
-  { pregunta: "¿Qué ITC regula establecimientos agrícolas y hortícolas?", opciones: ["ITC-BT-35", "ITC-BT-28", "ITC-BT-48", "ITC-BT-30"], respuesta: "ITC-BT-35" },
-  { pregunta: "¿Qué ITC regula instalaciones a muy baja tensión?", opciones: ["ITC-BT-36", "ITC-BT-14", "ITC-BT-41", "ITC-BT-29"], respuesta: "ITC-BT-36" },
-  { pregunta: "¿Qué ITC regula instalaciones a tensiones especiales?", opciones: ["ITC-BT-37", "ITC-BT-36", "ITC-BT-40", "ITC-BT-11"], respuesta: "ITC-BT-37" },
-  { pregunta: "¿Qué ITC regula cercas eléctricas para ganado?", opciones: ["ITC-BT-39", "ITC-BT-50", "ITC-BT-41", "ITC-BT-43"], respuesta: "ITC-BT-39" },
-  { pregunta: "¿Qué ITC regula instalaciones generadoras de baja tensión?", opciones: ["ITC-BT-40", "ITC-BT-38", "ITC-BT-03", "ITC-BT-31"], respuesta: "ITC-BT-40" },
-  { pregunta: "¿Qué ITC regula instalaciones eléctricas en caravanas?", opciones: ["ITC-BT-41", "ITC-BT-43", "ITC-BT-42", "ITC-BT-35"], respuesta: "ITC-BT-41" },
-  { pregunta: "¿Qué ITC regula instalaciones en puertos y marinas para barcos de recreo?", opciones: ["ITC-BT-42", "ITC-BT-33", "ITC-BT-25", "ITC-BT-20"], respuesta: "ITC-BT-42" },
-  { pregunta: "¿Qué ITC regula la instalación general de receptores?", opciones: ["ITC-BT-43", "ITC-BT-46", "ITC-BT-09", "ITC-BT-31"], respuesta: "ITC-BT-43" },
-  { pregunta: "¿Qué ITC regula los receptores para alumbrado?", opciones: ["ITC-BT-44", "ITC-BT-30", "ITC-BT-33", "ITC-BT-23"], respuesta: "ITC-BT-44" },
-  { pregunta: "¿Qué ITC regula los aparatos de caldeo?", opciones: ["ITC-BT-45", "ITC-BT-32", "ITC-BT-13", "ITC-BT-18"], respuesta: "ITC-BT-45" },
-  { pregunta: "¿Qué ITC regula cables y folios radiantes en viviendas?", opciones: ["ITC-BT-46", "ITC-BT-44", "ITC-BT-34", "ITC-BT-08"], respuesta: "ITC-BT-46" },
-  { pregunta: "¿Qué ITC regula la instalación de motores?", opciones: ["ITC-BT-47", "ITC-BT-48", "ITC-BT-30", "ITC-BT-10"], respuesta: "ITC-BT-47" },
-  { pregunta: "¿Qué ITC regula transformadores, reactancias y condensadores?", opciones: ["ITC-BT-48", "ITC-BT-45", "ITC-BT-17", "ITC-BT-27"], respuesta: "ITC-BT-48" },
-  { pregunta: "¿Qué ITC regula instalaciones eléctricas en muebles?", opciones: ["ITC-BT-49", "ITC-BT-41", "ITC-BT-37", "ITC-BT-22"], respuesta: "ITC-BT-49" },
-  { pregunta: "¿Qué ITC regula instalaciones eléctricas en locales con radiadores para saunas?", opciones: ["ITC-BT-50", "ITC-BT-40", "ITC-BT-09", "ITC-BT-14"], respuesta: "ITC-BT-50" },
-  { pregunta: "¿Qué ITC regula la infraestructura para recarga de vehículos eléctricos?", opciones: ["ITC-BT-52", "ITC-BT-26", "ITC-BT-39", "ITC-BT-42"], respuesta: "ITC-BT-52" }
-];
 
-    let preguntasAleatorias = [], indice = 0, aciertos = 0, errores = 0, historial = [], seleccionUsuario = null, respondido = false;
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Exportar PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <style>
+    /* Respeta la preferencia de reducir animaciones */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+
+  <script>
+    /* =========================
+       Banco de preguntas
+    ========================== */
+    const preguntas = [
+      { pregunta: "¿Qué ITC regula las empresas instaladoras en baja tensión?", opciones: ["ITC-BT-03","ITC-BT-04","ITC-BT-10","ITC-BT-52"], respuesta: "ITC-BT-03" },
+      { pregunta: "¿Qué ITC trata sobre la documentación y puesta en servicio de instalaciones eléctricas?", opciones: ["ITC-BT-04","ITC-BT-03","ITC-BT-07","ITC-BT-17"], respuesta: "ITC-BT-04" },
+      { pregunta: "¿Qué ITC regula las verificaciones e inspecciones?", opciones: ["ITC-BT-05","ITC-BT-04","ITC-BT-10","ITC-BT-28"], respuesta: "ITC-BT-05" },
+      { pregunta: "¿Qué ITC regula los sistemas de conexión del neutro y las masas en redes de distribución?", opciones: ["ITC-BT-08","ITC-BT-24","ITC-BT-19","ITC-BT-40"], respuesta: "ITC-BT-08" },
+      { pregunta: "¿Qué ITC regula el alumbrado exterior?", opciones: ["ITC-BT-09","ITC-BT-08","ITC-BT-10","ITC-BT-50"], respuesta: "ITC-BT-09" },
+      { pregunta: "¿Qué ITC trata sobre la previsión de cargas para suministros en baja tensión?", opciones: ["ITC-BT-10","ITC-BT-15","ITC-BT-03","ITC-BT-44"], respuesta: "ITC-BT-10" },
+      { pregunta: "¿Qué ITC regula los esquemas de las instalaciones de enlace?", opciones: ["ITC-BT-12","ITC-BT-16","ITC-BT-27","ITC-BT-19"], respuesta: "ITC-BT-12" },
+      { pregunta: "¿Qué ITC regula las cajas generales de protección en las instalaciones de enlace?", opciones: ["ITC-BT-13","ITC-BT-12","ITC-BT-32","ITC-BT-05"], respuesta: "ITC-BT-13" },
+      { pregunta: "¿Qué ITC trata sobre la línea general de alimentación?", opciones: ["ITC-BT-14","ITC-BT-20","ITC-BT-13","ITC-BT-33"], respuesta: "ITC-BT-14" },
+      { pregunta: "¿Qué ITC regula las derivaciones individuales?", opciones: ["ITC-BT-15","ITC-BT-25","ITC-BT-17","ITC-BT-43"], respuesta: "ITC-BT-15" },
+      { pregunta: "¿Qué ITC regula la ubicación y sistemas de instalación de contadores?", opciones: ["ITC-BT-16","ITC-BT-14","ITC-BT-35","ITC-BT-46"], respuesta: "ITC-BT-16" },
+      { pregunta: "¿Qué ITC regula el ICP y otros dispositivos de mando y protección?", opciones: ["ITC-BT-17","ITC-BT-13","ITC-BT-21","ITC-BT-33"], respuesta: "ITC-BT-17" },
+      { pregunta: "¿Qué ITC trata sobre instalaciones de puesta a tierra?", opciones: ["ITC-BT-18","ITC-BT-08","ITC-BT-36","ITC-BT-29"], respuesta: "ITC-BT-18" },
+      { pregunta: "¿Qué ITC regula las prescripciones generales de las instalaciones interiores o receptoras?", opciones: ["ITC-BT-19","ITC-BT-14","ITC-BT-30","ITC-BT-48"], respuesta: "ITC-BT-19" },
+      { pregunta: "¿Qué ITC regula los sistemas de instalación en interiores?", opciones: ["ITC-BT-20","ITC-BT-22","ITC-BT-38","ITC-BT-45"], respuesta: "ITC-BT-20" },
+      { pregunta: "¿Qué ITC trata sobre tubos y canales protectoras en interiores?", opciones: ["ITC-BT-21","ITC-BT-18","ITC-BT-27","ITC-BT-50"], respuesta: "ITC-BT-21" },
+      { pregunta: "¿Qué ITC regula la protección contra sobreintensidades?", opciones: ["ITC-BT-22","ITC-BT-28","ITC-BT-10","ITC-BT-41"], respuesta: "ITC-BT-22" },
+      { pregunta: "¿Qué ITC regula la protección contra sobretensiones?", opciones: ["ITC-BT-23","ITC-BT-08","ITC-BT-19","ITC-BT-40"], respuesta: "ITC-BT-23" },
+      { pregunta: "¿Qué ITC regula la protección contra contactos directos e indirectos?", opciones: ["ITC-BT-24","ITC-BT-43","ITC-BT-22","ITC-BT-15"], respuesta: "ITC-BT-24" },
+      { pregunta: "¿Qué ITC regula el número de circuitos y características en viviendas?", opciones: ["ITC-BT-25","ITC-BT-21","ITC-BT-48","ITC-BT-50"], respuesta: "ITC-BT-25" },
+      { pregunta: "¿Qué ITC regula las prescripciones generales en viviendas?", opciones: ["ITC-BT-26","ITC-BT-13","ITC-BT-44","ITC-BT-52"], respuesta: "ITC-BT-26" },
+      { pregunta: "¿Qué ITC trata sobre locales que contienen bañera o ducha?", opciones: ["ITC-BT-27","ITC-BT-50","ITC-BT-39","ITC-BT-09"], respuesta: "ITC-BT-27" },
+      { pregunta: "¿Qué ITC regula las instalaciones en locales de pública concurrencia?", opciones: ["ITC-BT-28","ITC-BT-09","ITC-BT-36","ITC-BT-41"], respuesta: "ITC-BT-28" },
+      { pregunta: "¿Qué ITC regula instalaciones en locales de características especiales?", opciones: ["ITC-BT-30","ITC-BT-31","ITC-BT-10","ITC-BT-05"], respuesta: "ITC-BT-30" },
+      { pregunta: "¿Qué ITC regula instalaciones en piscinas y fuentes?", opciones: ["ITC-BT-31","ITC-BT-30","ITC-BT-41","ITC-BT-33"], respuesta: "ITC-BT-31" },
+      { pregunta: "¿Qué ITC regula máquinas de elevación y transporte?", opciones: ["ITC-BT-32","ITC-BT-34","ITC-BT-38","ITC-BT-43"], respuesta: "ITC-BT-32" },
+      { pregunta: "¿Qué ITC regula instalaciones provisionales y temporales de obras?", opciones: ["ITC-BT-33","ITC-BT-21","ITC-BT-36","ITC-BT-49"], respuesta: "ITC-BT-33" },
+      { pregunta: "¿Qué ITC regula ferias y stands?", opciones: ["ITC-BT-34","ITC-BT-31","ITC-BT-38","ITC-BT-29"], respuesta: "ITC-BT-34" },
+      { pregunta: "¿Qué ITC regula establecimientos agrícolas y hortícolas?", opciones: ["ITC-BT-35","ITC-BT-28","ITC-BT-48","ITC-BT-30"], respuesta: "ITC-BT-35" },
+      { pregunta: "¿Qué ITC regula instalaciones a muy baja tensión?", opciones: ["ITC-BT-36","ITC-BT-14","ITC-BT-41","ITC-BT-29"], respuesta: "ITC-BT-36" },
+      { pregunta: "¿Qué ITC regula instalaciones a tensiones especiales?", opciones: ["ITC-BT-37","ITC-BT-36","ITC-BT-40","ITC-BT-11"], respuesta: "ITC-BT-37" },
+      { pregunta: "¿Qué ITC regula cercas eléctricas para ganado?", opciones: ["ITC-BT-39","ITC-BT-50","ITC-BT-41","ITC-BT-43"], respuesta: "ITC-BT-39" },
+      { pregunta: "¿Qué ITC regula instalaciones generadoras de baja tensión?", opciones: ["ITC-BT-40","ITC-BT-38","ITC-BT-03","ITC-BT-31"], respuesta: "ITC-BT-40" },
+      { pregunta: "¿Qué ITC regula instalaciones eléctricas en caravanas?", opciones: ["ITC-BT-41","ITC-BT-43","ITC-BT-42","ITC-BT-35"], respuesta: "ITC-BT-41" },
+      { pregunta: "¿Qué ITC regula instalaciones en puertos y marinas para barcos de recreo?", opciones: ["ITC-BT-42","ITC-BT-33","ITC-BT-25","ITC-BT-20"], respuesta: "ITC-BT-42" },
+      { pregunta: "¿Qué ITC regula la instalación general de receptores?", opciones: ["ITC-BT-43","ITC-BT-46","ITC-BT-09","ITC-BT-31"], respuesta: "ITC-BT-43" },
+      { pregunta: "¿Qué ITC regula los receptores para alumbrado?", opciones: ["ITC-BT-44","ITC-BT-30","ITC-BT-33","ITC-BT-23"], respuesta: "ITC-BT-44" },
+      { pregunta: "¿Qué ITC regula los aparatos de caldeo?", opciones: ["ITC-BT-45","ITC-BT-32","ITC-BT-13","ITC-BT-18"], respuesta: "ITC-BT-45" },
+      { pregunta: "¿Qué ITC regula cables y folios radiantes en viviendas?", opciones: ["ITC-BT-46","ITC-BT-44","ITC-BT-34","ITC-BT-08"], respuesta: "ITC-BT-46" },
+      { pregunta: "¿Qué ITC regula la instalación de motores?", opciones: ["ITC-BT-47","ITC-BT-48","ITC-BT-30","ITC-BT-10"], respuesta: "ITC-BT-47" },
+      { pregunta: "¿Qué ITC regula transformadores, reactancias y condensadores?", opciones: ["ITC-BT-48","ITC-BT-45","ITC-BT-17","ITC-BT-27"], respuesta: "ITC-BT-48" },
+      { pregunta: "¿Qué ITC regula instalaciones eléctricas en muebles?", opciones: ["ITC-BT-49","ITC-BT-41","ITC-BT-37","ITC-BT-22"], respuesta: "ITC-BT-49" },
+      { pregunta: "¿Qué ITC regula instalaciones eléctricas en locales con radiadores para saunas?", opciones: ["ITC-BT-50","ITC-BT-40","ITC-BT-09","ITC-BT-14"], respuesta: "ITC-BT-50" },
+      { pregunta: "¿Qué ITC regula la infraestructura para recarga de vehículos eléctricos?", opciones: ["ITC-BT-52","ITC-BT-26","ITC-BT-39","ITC-BT-42"], respuesta: "ITC-BT-52" }
+    ];
+
+    /* =========================
+       Estado
+    ========================== */
+    let preguntasAleatorias = [];
+    let indice = 0, aciertos = 0, errores = 0;
+    let historial = [];
+    let seleccionUsuario = null;
+    let respondido = false;
     let inicioTiempo = null;
     let intervaloTiempo = null;
-    let tiempoTexto = '00:00';
 
-    const mezclar = array => {
-      for (let i = array.length - 1; i > 0; i--) {
+    /* =========================
+       Utilidades
+    ========================== */
+    const mezclar = (arr) => {
+      for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+        [arr[i], arr[j]] = [arr[j], arr[i]];
       }
-      return array;
+      return arr;
     };
 
     function mezclarPreguntas() {
       preguntasAleatorias = [...preguntas].map(p => ({ ...p, opciones: mezclar([...p.opciones]) }));
       preguntasAleatorias = mezclar(preguntasAleatorias);
-      indice = 0;
-      aciertos = 0;
-      errores = 0;
-      historial = [];
+      indice = 0; aciertos = 0; errores = 0; historial = [];
+    }
+
+    /* =========================
+       Render
+    ========================== */
+    function setProgreso() {
+      const total = preguntasAleatorias.length;
+      const pct = Math.round((indice / total) * 100);
+      const bar = document.getElementById('progress-bar');
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+      document.getElementById('progress-txt').textContent = `${indice}/${total}`;
+    }
+
+    function actualizarContador() {
+      const ahora = new Date();
+      const seg = inicioTiempo ? Math.floor((ahora - inicioTiempo) / 1000) : 0;
+      const mm = String(Math.floor(seg / 60)).padStart(2,'0');
+      const ss = String(seg % 60).padStart(2,'0');
+
+      document.getElementById("contador").innerHTML = `
+        <span>Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
+        <span class="text-green-600">Aciertos: ${aciertos}</span>
+        <span class="text-red-600">Fallos: ${errores}</span>
+        <span>Puntos: ${aciertos}</span>
+        <span class="font-mono ${seg >= 60 ? 'text-orange-600' : 'text-blue-700'}">⏱ ${mm}:${ss}</span>
+      `;
+    }
+
+    function renderOpciones(opciones, correcta) {
+      const cont = document.getElementById("opciones");
+      cont.innerHTML = "";
+      opciones.forEach((op, idx) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.dataset.valor = op;
+        btn.className = "opcion w-full text-left bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl shadow transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300";
+        btn.innerHTML = `<span class="font-semibold tracking-wide">${op}</span>`;
+        btn.onclick = () => seleccionarOpcion(op);
+        // accesibilidad: atajos 1-4 visibles opcionalmente
+        btn.setAttribute('aria-label', `Opción ${idx+1}: ${op}`);
+        cont.appendChild(btn);
+      });
     }
 
     function cargarPregunta() {
       if (indice >= preguntasAleatorias.length) return mostrarResumen();
 
       const q = preguntasAleatorias[indice];
-      seleccionUsuario = null;
-      respondido = false;
+      seleccionUsuario = null; respondido = false;
 
       document.getElementById("pregunta").textContent = q.pregunta;
-      const opciones = document.getElementById("opciones");
-      opciones.innerHTML = "";
-      q.opciones.forEach(op => {
-        const btn = document.createElement("button");
-        btn.textContent = op;
-        btn.onclick = () => seleccionarOpcion(op);
-        btn.className = "opcion bg-blue-500 text-white p-2 rounded m-2 hover:bg-blue-700";
-        opciones.appendChild(btn);
-      });
+      renderOpciones(q.opciones, q.respuesta);
+      document.getElementById("acciones").innerHTML =
+        `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
+           <span>Elige una respuesta (teclas 1–4 y Enter).</span>
+           <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
+         </div>`;
 
-      document.getElementById("acciones").innerHTML = "";
+      setProgreso();
       actualizarContador();
     }
 
     function seleccionarOpcion(opcion) {
       if (respondido) return;
       seleccionUsuario = opcion;
-      const botones = document.querySelectorAll("#opciones button");
-      botones.forEach(btn => {
-        btn.classList.remove("ring", "ring-yellow-400");
-        if (btn.textContent === opcion) {
-          btn.classList.add("ring", "ring-yellow-400");
+
+      // Resalta selección
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.classList.remove('ring','ring-yellow-300','translate-y-0.5');
+        if (b.dataset.valor === opcion) {
+          b.classList.add('ring','ring-yellow-300','translate-y-0.5');
         }
       });
-      document.getElementById("acciones").innerHTML = `<div class='text-right'><button onclick='verificarRespuesta()' class='bg-gray-800 text-white px-4 py-2 rounded'>Contestar</button></div>`;
+
+      // Habilita botón "Contestar"
+      const btn = document.getElementById('btn-contestar');
+      btn.disabled = false;
+      btn.classList.remove('opacity-50','cursor-not-allowed');
+      btn.onclick = verificarRespuesta;
     }
 
     function verificarRespuesta() {
       if (respondido || !seleccionUsuario) return;
+
       const actual = preguntasAleatorias[indice];
       const esCorrecta = seleccionUsuario === actual.respuesta;
       respondido = true;
 
-      const botones = document.querySelectorAll("#opciones button");
-      botones.forEach(btn => {
-        btn.disabled = true;
-        btn.classList.remove("ring", "ring-yellow-400");
-        if (btn.textContent === actual.respuesta) {
-          btn.className = "bg-green-300 text-black p-2 rounded m-2";
-          btn.innerHTML = `✔ ${btn.textContent}`;
-        }
-        if (btn.textContent === seleccionUsuario && !esCorrecta) {
-          btn.className = "bg-red-400 text-black p-2 rounded m-2";
-          btn.innerHTML = `❌ ${btn.textContent}`;
+      // Desactiva y colorea botones
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.disabled = true;
+        b.classList.remove('ring','ring-yellow-300');
+        const val = b.dataset.valor;
+        if (val === actual.respuesta) {
+          b.classList.add('bg-green-600','hover:bg-green-700');
+          b.innerHTML = `✅ <span class="font-semibold">${val}</span>`;
+        } else if (val === seleccionUsuario && !esCorrecta) {
+          b.classList.add('bg-red-600','hover:bg-red-700');
+          b.innerHTML = `❌ <span class="font-semibold">${val}</span>`;
+        } else {
+          b.classList.add('bg-blue-500');
         }
       });
 
       esCorrecta ? aciertos++ : errores++;
-      historial.push({ pregunta: actual.pregunta, opciones: actual.opciones, correcta: actual.respuesta, elegida: seleccionUsuario });
+      historial.push({
+        pregunta: actual.pregunta,
+        opciones: actual.opciones,
+        correcta: actual.respuesta,
+        elegida: seleccionUsuario
+      });
 
-      document.getElementById("acciones").innerHTML = `<div class='mt-4 text-right'><button onclick='siguientePregunta()' class='bg-blue-600 text-white px-4 py-2 rounded'>Siguiente</button></div>`;
+      document.getElementById("acciones").innerHTML =
+        `<div class="mt-4 flex items-center justify-end gap-3">
+           <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">Siguiente</button>
+         </div>`;
+
       actualizarContador();
+      setProgreso();
     }
 
-    function actualizarContador() {
-      const ahora = new Date();
-      const transcurrido = inicioTiempo ? Math.floor((ahora - inicioTiempo) / 1000) : 0;
-      const minutos = String(Math.floor(transcurrido / 60)).padStart(2, '0');
-      const segundos = String(transcurrido % 60).padStart(2, '0');
-      tiempoTexto = `${minutos}:${segundos}`;
-
-      document.getElementById("contador").innerHTML = `
-        <span id="cuestion">Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
-        <span class="text-green-600" id="aciertos">Aciertos: ${aciertos}</span>
-        <span class="text-red-600" id="fallos">Fallos: ${errores}</span>
-        <span id="puntos">Puntos: ${aciertos}</span>
-        <span class="text-blue-700 font-mono">⏱ Tiempo: ${tiempoTexto}</span>
-      `;
-    }
-
-    const siguientePregunta = () => (indice++, cargarPregunta());
+    const siguientePregunta = () => { indice++; cargarPregunta(); };
 
     function mostrarResumen() {
       clearInterval(intervaloTiempo);
+      const total = preguntasAleatorias.length;
       const ahora = new Date();
-      const totalSegundos = Math.floor((ahora - inicioTiempo) / 1000);
-      const minutos = String(Math.floor(totalSegundos / 60)).padStart(2, '0');
-      const segundos = String(totalSegundos % 60).padStart(2, '0');
-      const tiempoFinal = `${minutos}:${segundos}`;
+      const seg = Math.floor((ahora - inicioTiempo) / 1000);
+      const mm = String(Math.floor(seg / 60)).padStart(2,'0');
+      const ss = String(seg % 60).padStart(2,'0');
+      const nota = Math.round((aciertos / total) * 10 * 100) / 100; // sobre 10
+
+      const detalle = historial.map(h => `
+        <div class='mb-2 border border-slate-200 rounded-lg p-3'>
+          <p class='font-semibold mb-2'>${h.pregunta}</p>
+          <div class='flex flex-wrap gap-2'>
+            ${h.opciones.map(op => {
+              if (op === h.elegida && op === h.correcta) return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op === h.elegida && op !== h.correcta) return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op === h.correcta && op !== h.elegida) return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
+            }).join('')}
+          </div>
+        </div>
+      `).join('');
 
       document.getElementById("test").innerHTML = `
-        <div id="resumenPDF">
-          <h2 class='text-xl font-bold mb-2'>Test finalizado</h2>
-          <p class='mb-2'>Has acertado <strong>${aciertos}</strong> preguntas y fallado <strong>${errores}</strong>.</p>
-          <p class='mb-4 text-blue-600 font-semibold'>⏱ Tiempo total: ${tiempoFinal}</p>
-          <div class='mb-4'>${historial.map(h => `
-            <div class='mb-2 border p-2 rounded'>
-              <p class='font-semibold'>${h.pregunta}</p>
-              <div class='flex flex-wrap gap-2 mt-2'>
-                ${h.opciones.map(op => {
-                  if (op === h.elegida && op === h.correcta) return `<span class='bg-green-200 px-2 py-1 rounded'>✅ ${op}</span>`;
-                  if (op === h.elegida && op !== h.correcta) return `<span class='bg-red-300 px-2 py-1 rounded'>❌ ${op}</span>`;
-                  if (op === h.correcta && op !== h.elegida) return `<span class='bg-green-100 px-2 py-1 rounded'>✔ ${op}</span>`;
-                  return `<span class='px-2 py-1'>${op}</span>`;
-                }).join('')}
-              </div>
-            </div>
-          `).join('')}</div>
+        <div id="resumenPDF" class="space-y-3">
+          <h2 class="text-2xl font-extrabold">Resultado del test</h2>
+          <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Total: ${total}</p>
+          <p class="text-slate-700">Tiempo total: <span class="font-mono">${mm}:${ss}</span> • Nota estimada: <strong>${nota}/10</strong></p>
+          <hr class="my-3 border-slate-200">
+          <h3 class="text-lg font-bold">Detalle de preguntas</h3>
+          <div class="max-h-[50vh] overflow-auto pr-1">${detalle}</div>
         </div>
-        <div class='flex flex-col items-center gap-4 mt-4'>
-          <button onclick='generarPDF()' class='bg-purple-600 text-white px-4 py-2 rounded'>Descargar resumen en PDF</button>
-          <button onclick='window.location.reload()' class='bg-green-500 text-white px-4 py-2 rounded'>Reiniciar</button>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+          <button onclick="generarPDF()" class="bg-purple-600 hover:bg-purple-700 text-white px-5 py-2 rounded-lg shadow">Descargar PDF</button>
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Reiniciar</button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">Volver al inicio</a>
         </div>
       `;
     }
@@ -198,33 +268,64 @@
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
       };
-      setTimeout(() => {
-        html2pdf().set(opt).from(element).save();
-      }, 300);
+      setTimeout(() => html2pdf().set(opt).from(element).save(), 250);
     }
 
+    /* =========================
+       Atajos de teclado
+    ========================== */
+    function handleKey(e) {
+      if (respondido) {
+        if (e.key === 'Enter') siguientePregunta();
+        return;
+      }
+      const map = { '1':0, '2':1, '3':2, '4':3 };
+      if (map[e.key] !== undefined) {
+        const btn = document.querySelectorAll('#opciones .opcion')[map[e.key]];
+        if (btn) btn.click();
+      }
+      if (e.key === 'Enter') {
+        const b = document.getElementById('btn-contestar');
+        if (b && !b.disabled) b.click();
+      }
+    }
+
+    /* =========================
+       Inicio
+    ========================== */
     window.onload = () => {
       mezclarPreguntas();
-      cargarPregunta();
       inicioTiempo = new Date();
+      cargarPregunta();
       intervaloTiempo = setInterval(actualizarContador, 1000);
+      document.addEventListener('keydown', handleKey);
     };
   </script>
 </head>
+
 <body class="bg-gray-100 text-gray-900 p-4">
-  <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md" id="test">
-    <p id="contador" class="mb-6 text-center font-semibold text-gray-700 space-x-4"></p>
-    <h1 class="text-2xl font-bold mb-4 text-center">Test ITC-BT Electrificación Básica</h1>
-    <p id="pregunta" class="mb-4"></p>
-    <div id="opciones" class="flex flex-col"></div>
-    <div id="acciones" class="mt-4 text-right"></div>
+  <div class="max-w-3xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-lg ring-1 ring-slate-100" id="test">
+    <!-- Cabecera con progreso -->
+    <div class="mb-4">
+      <div class="flex items-center justify-between text-sm text-slate-600 mb-2">
+        <p id="contador" class="font-semibold space-x-4"></p>
+        <span id="progress-txt" class="font-mono text-slate-500">0/0</span>
+      </div>
+      <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+        <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out" style="width:0%" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      </div>
+    </div>
+
+    <h1 class="text-3xl font-extrabold mb-3 text-center">Test ITC-BT Electrificación Básica</h1>
+    <p id="pregunta" class="mb-4 text-lg text-center"></p>
+
+    <div id="opciones" class="flex flex-col gap-3"></div>
+    <div id="acciones" class="mt-2"></div>
   </div>
 
-<div class="mt-8 text-center">
-  <button onclick="window.location.href='index.html'" class="bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">
-   Cancelar
-  </button>
-</div>
-
+  <!-- Botón cancelar -->
+  <div class="mt-6 text-center">
+    <a href="index.html" class="inline-block bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">Cancelar</a>
+  </div>
 </body>
 </html>
