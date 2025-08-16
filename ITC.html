@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test ITC-BT Electrificación Básica</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    const preguntas = [{ "pregunta": "¿Qué regula la ITC-BT-03?", "opciones": ["Empresas instaladoras en baja tensión", "Documentación y puesta en servicio de instalaciones eléctricas", "Verificaciones e inspecciones", "Instalaciones en viviendas"], "respuesta": "Empresas instaladoras en baja tensión" },
+  { "pregunta": "¿Qué regula la ITC-BT-04?", "opciones": ["Documentación y puesta en servicio de instalaciones eléctricas", "Empresas instaladoras en baja tensión", "Instalaciones en viviendas", "Verificaciones e inspecciones"], "respuesta": "Documentación y puesta en servicio de instalaciones eléctricas" },
+  { "pregunta": "¿Qué regula la ITC-BT-05?", "opciones": ["Verificaciones e inspecciones", "Empresas instaladoras en baja tensión", "Protección contra sobreintensidades", "Locales de pública concurrencia"], "respuesta": "Verificaciones e inspecciones" },
+  { "pregunta": "¿Qué regula la ITC-BT-08?", "opciones": ["Sistemas de conexión del neutro y las masas en redes de distribución", "Instalaciones de puesta a tierra", "Prescripciones generales de interiores", "Instalaciones generadoras de baja tensión"], "respuesta": "Sistemas de conexión del neutro y las masas en redes de distribución" },
+  { "pregunta": "¿Qué regula la ITC-BT-09?", "opciones": ["Alumbrado exterior", "Instalaciones de puesta a tierra", "Previsión de cargas", "Saunas"], "respuesta": "Alumbrado exterior" },
+  { "pregunta": "¿Qué regula la ITC-BT-10?", "opciones": ["Previsión de cargas para suministros en baja tensión", "Empresas instaladoras en baja tensión", "Instalaciones en locales especiales", "Receptores de alumbrado"], "respuesta": "Previsión de cargas para suministros en baja tensión" },
+  { "pregunta": "¿Qué regula la ITC-BT-12?", "opciones": ["Esquemas de las instalaciones de enlace", "Contadores", "Locales con bañera o ducha", "Instalaciones interiores"], "respuesta": "Esquemas de las instalaciones de enlace" },
+  { "pregunta": "¿Qué regula la ITC-BT-13?", "opciones": ["Cajas generales de protección en las instalaciones de enlace", "Esquemas de enlace", "Locales de pública concurrencia", "Transformadores"], "respuesta": "Cajas generales de protección en las instalaciones de enlace" },
+  { "pregunta": "¿Qué regula la ITC-BT-14?", "opciones": ["Línea general de alimentación", "Instalaciones interiores", "Instalaciones provisionales de obra", "Instalaciones de baja tensión en muebles"], "respuesta": "Línea general de alimentación" },
+  { "pregunta": "¿Qué regula la ITC-BT-15?", "opciones": ["Derivaciones individuales", "Número de circuitos en viviendas", "Protección contra sobretensiones", "Piscinas y fuentes"], "respuesta": "Derivaciones individuales" },
+  { "pregunta": "¿Qué regula la ITC-BT-16?", "opciones": ["Ubicación y sistemas de instalación de contadores", "Línea general de alimentación", "Cables radiantes", "Infraestructura de recarga de vehículos eléctricos"], "respuesta": "Ubicación y sistemas de instalación de contadores" },
+  { "pregunta": "¿Qué regula la ITC-BT-17?", "opciones": ["ICP y otros dispositivos de mando y protección", "Transformadores", "Cajas generales de protección", "Instalaciones provisionales de obra"], "respuesta": "ICP y otros dispositivos de mando y protección" },
+  { "pregunta": "¿Qué regula la ITC-BT-18?", "opciones": ["Instalaciones de puesta a tierra", "Sistemas de conexión del neutro", "Muy baja tensión", "Locales con sauna"], "respuesta": "Instalaciones de puesta a tierra" },
+  { "pregunta": "¿Qué regula la ITC-BT-19?", "opciones": ["Prescripciones generales de las instalaciones interiores o receptoras", "Instalaciones en viviendas", "Protección contra contactos directos e indirectos", "Puertos y marinas"], "respuesta": "Prescripciones generales de las instalaciones interiores o receptoras" },
+  { "pregunta": "¿Qué regula la ITC-BT-20?", "opciones": ["Sistemas de instalación en interiores", "Tubos y canales protectores", "Piscinas y fuentes", "Derivaciones individuales"], "respuesta": "Sistemas de instalación en interiores" },
+  { "pregunta": "¿Qué regula la ITC-BT-21?", "opciones": ["Tubos y canales protectores en interiores", "Instalaciones de puesta a tierra", "Locales de pública concurrencia", "Protección contra sobreintensidades"], "respuesta": "Tubos y canales protectores en interiores" },
+  { "pregunta": "¿Qué regula la ITC-BT-22?", "opciones": ["Protección contra sobreintensidades", "Protección contra sobretensiones", "Locales de pública concurrencia", "Instalaciones generadoras"], "respuesta": "Protección contra sobreintensidades" },
+  { "pregunta": "¿Qué regula la ITC-BT-23?", "opciones": ["Protección contra sobretensiones", "Protección contra contactos", "Alumbrado exterior", "Instalaciones en caravanas"], "respuesta": "Protección contra sobretensiones" },
+  { "pregunta": "¿Qué regula la ITC-BT-24?", "opciones": ["Protección contra contactos directos e indirectos", "Locales de pública concurrencia", "Número de circuitos", "Previsión de cargas"], "respuesta": "Protección contra contactos directos e indirectos" },
+  { "pregunta": "¿Qué regula la ITC-BT-25?", "opciones": ["Número de circuitos y características en viviendas", "Derivaciones individuales", "Instalaciones interiores", "Piscinas y fuentes"], "respuesta": "Número de circuitos y características en viviendas" },
+  { "pregunta": "¿Qué regula la ITC-BT-26?", "opciones": ["Prescripciones generales en viviendas", "Infraestructura de recarga de vehículos eléctricos", "Establecimientos agrícolas", "Protección contra sobretensiones"], "respuesta": "Prescripciones generales en viviendas" },
+  { "pregunta": "¿Qué regula la ITC-BT-27?", "opciones": ["Locales que contienen bañera o ducha", "Ferias y stands", "Piscinas y fuentes", "Locales especiales"], "respuesta": "Locales que contienen bañera o ducha" },
+  { "pregunta": "¿Qué regula la ITC-BT-28?", "opciones": ["Instalaciones en locales de pública concurrencia", "Protección contra sobretensiones", "Establecimientos agrícolas", "Instalaciones provisionales de obra"], "respuesta": "Instalaciones en locales de pública concurrencia" },
+  { "pregunta": "¿Qué regula la ITC-BT-30?", "opciones": ["Instalaciones en locales de características especiales", "Piscinas y fuentes", "Transformadores", "Instalaciones provisionales"], "respuesta": "Instalaciones en locales de características especiales" },
+  { "pregunta": "¿Qué regula la ITC-BT-31?", "opciones": ["Instalaciones en piscinas y fuentes", "Locales de características especiales", "Locales de pública concurrencia", "Ferias y stands"], "respuesta": "Instalaciones en piscinas y fuentes" },
+  { "pregunta": "¿Qué regula la ITC-BT-32?", "opciones": ["Máquinas de elevación y transporte", "Locales agrícolas", "Instalaciones interiores", "Receptores"], "respuesta": "Máquinas de elevación y transporte" },
+  { "pregunta": "¿Qué regula la ITC-BT-33?", "opciones": ["Instalaciones provisionales y temporales de obras", "Locales agrícolas", "Ferias y stands", "Locales especiales"], "respuesta": "Instalaciones provisionales y temporales de obras" },
+  { "pregunta": "¿Qué regula la ITC-BT-34?", "opciones": ["Ferias y stands", "Locales agrícolas", "Instalaciones en piscinas", "Transformadores"], "respuesta": "Ferias y stands" },
+  { "pregunta": "¿Qué regula la ITC-BT-35?", "opciones": ["Establecimientos agrícolas y hortícolas", "Locales de pública concurrencia", "Piscinas y fuentes", "Receptores"], "respuesta": "Establecimientos agrícolas y hortícolas" },
+  { "pregunta": "¿Qué regula la ITC-BT-36?", "opciones": ["Instalaciones a muy baja tensión", "Instalaciones de puesta a tierra", "Piscinas y fuentes", "Locales especiales"], "respuesta": "Instalaciones a muy baja tensión" },
+  { "pregunta": "¿Qué regula la ITC-BT-37?", "opciones": ["Instalaciones a tensiones especiales", "Instalaciones a muy baja tensión", "Generadores de baja tensión", "Locales especiales"], "respuesta": "Instalaciones a tensiones especiales" },
+  { "pregunta": "¿Qué regula la ITC-BT-39?", "opciones": ["Cercas eléctricas para ganado", "Instalaciones generadoras de baja tensión", "Protección contra contactos", "Ferias y stands"], "respuesta": "Cercas eléctricas para ganado" },
+  { "pregunta": "¿Qué regula la ITC-BT-40?", "opciones": ["Instalaciones generadoras de baja tensión", "Protección contra sobretensiones", "Sistemas de neutro", "Locales de pública concurrencia"], "respuesta": "Instalaciones generadoras de baja tensión" },
+  { "pregunta": "¿Qué regula la ITC-BT-41?", "opciones": ["Instalaciones eléctricas en caravanas", "Receptores de alumbrado", "Establecimientos agrícolas", "Locales con sauna"], "respuesta": "Instalaciones eléctricas en caravanas" },
+  { "pregunta": "¿Qué regula la ITC-BT-42?", "opciones": ["Instalaciones en puertos y marinas para barcos de recreo", "Número de circuitos en viviendas", "Establecimientos agrícolas", "Receptores"], "respuesta": "Instalaciones en puertos y marinas para barcos de recreo" },
+  { "pregunta": "¿Qué regula la ITC-BT-43?", "opciones": ["Instalación general de receptores", "Receptores de alumbrado", "Protección contra contactos", "Locales de pública concurrencia"], "respuesta": "Instalación general de receptores" },
+  { "pregunta": "¿Qué regula la ITC-BT-44?", "opciones": ["Receptores para alumbrado", "Locales agrícolas", "Ferias y stands", "Protección contra sobretensiones"], "respuesta": "Receptores para alumbrado" },
+  { "pregunta": "¿Qué regula la ITC-BT-45?", "opciones": ["Aparatos de caldeo", "Transformadores", "Cajas generales de protección", "Locales agrícolas"], "respuesta": "Aparatos de caldeo" },
+  { "pregunta": "¿Qué regula la ITC-BT-46?", "opciones": ["Cables y folios radiantes en viviendas", "Receptores para alumbrado", "Ferias y stands", "Instalaciones interiores"], "respuesta": "Cables y folios radiantes en viviendas" },
+  { "pregunta": "¿Qué regula la ITC-BT-47?", "opciones": ["Instalación de motores", "Transformadores", "Locales especiales", "Caravanas"], "respuesta": "Instalación de motores" },
+  { "pregunta": "¿Qué regula la ITC-BT-48?", "opciones": ["Transformadores, reactancias y condensadores", "Aparatos de caldeo", "Locales de pública concurrencia", "Protección contra sobreintensidades"], "respuesta": "Transformadores, reactancias y condensadores" },
+  { "pregunta": "¿Qué regula la ITC-BT-49?", "opciones": ["Instalaciones eléctricas en muebles", "Protección contra sobretensiones", "Locales agrícolas", "Locales especiales"], "respuesta": "Instalaciones eléctricas en muebles" },
+  { "pregunta": "¿Qué regula la ITC-BT-50?", "opciones": ["Instalaciones eléctricas en locales con radiadores para saunas", "Alumbrado exterior", "Locales especiales", "Instalaciones interiores"], "respuesta": "Instalaciones eléctricas en locales con radiadores para saunas" },
+  { "pregunta": "¿Qué regula la ITC-BT-52?", "opciones": ["Infraestructura para recarga de vehículos eléctricos", "Prescripciones generales en viviendas", "Cercas eléctricas", "Instalaciones en puertos y marinas"], "respuesta": "Infraestructura para recarga de vehículos eléctricos" }];
+
+    let preguntasAleatorias = [], indice = 0, aciertos = 0, errores = 0, historial = [], seleccionUsuario = null, respondido = false;
+    let inicioTiempo = null;
+    let intervaloTiempo = null;
+    let tiempoTexto = '00:00';
+
+    const mezclar = array => {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    };
+
+    function mezclarPreguntas() {
+      preguntasAleatorias = [...preguntas].map(p => ({ ...p, opciones: mezclar([...p.opciones]) }));
+      preguntasAleatorias = mezclar(preguntasAleatorias);
+      indice = 0;
+      aciertos = 0;
+      errores = 0;
+      historial = [];
+    }
+
+    function cargarPregunta() {
+      if (indice >= preguntasAleatorias.length) return mostrarResumen();
+
+      const q = preguntasAleatorias[indice];
+      seleccionUsuario = null;
+      respondido = false;
+
+      document.getElementById("pregunta").textContent = q.pregunta;
+      const opciones = document.getElementById("opciones");
+      opciones.innerHTML = "";
+      q.opciones.forEach(op => {
+        const btn = document.createElement("button");
+        btn.textContent = op;
+        btn.onclick = () => seleccionarOpcion(op);
+        btn.className = "opcion bg-blue-500 text-white p-2 rounded m-2 hover:bg-blue-700";
+        opciones.appendChild(btn);
+      });
+
+      document.getElementById("acciones").innerHTML = "";
+      actualizarContador();
+    }
+
+    function seleccionarOpcion(opcion) {
+      if (respondido) return;
+      seleccionUsuario = opcion;
+      const botones = document.querySelectorAll("#opciones button");
+      botones.forEach(btn => {
+        btn.classList.remove("ring", "ring-yellow-400");
+        if (btn.textContent === opcion) {
+          btn.classList.add("ring", "ring-yellow-400");
+        }
+      });
+      document.getElementById("acciones").innerHTML = `<div class='text-right'><button onclick='verificarRespuesta()' class='bg-gray-800 text-white px-4 py-2 rounded'>Contestar</button></div>`;
+    }
+
+    function verificarRespuesta() {
+      if (respondido || !seleccionUsuario) return;
+      const actual = preguntasAleatorias[indice];
+      const esCorrecta = seleccionUsuario === actual.respuesta;
+      respondido = true;
+
+      const botones = document.querySelectorAll("#opciones button");
+      botones.forEach(btn => {
+        btn.disabled = true;
+        btn.classList.remove("ring", "ring-yellow-400");
+        if (btn.textContent === actual.respuesta) {
+          btn.className = "bg-green-300 text-black p-2 rounded m-2";
+          btn.innerHTML = `✔ ${btn.textContent}`;
+        }
+        if (btn.textContent === seleccionUsuario && !esCorrecta) {
+          btn.className = "bg-red-400 text-black p-2 rounded m-2";
+          btn.innerHTML = `❌ ${btn.textContent}`;
+        }
+      });
+
+      esCorrecta ? aciertos++ : errores++;
+      historial.push({ pregunta: actual.pregunta, opciones: actual.opciones, correcta: actual.respuesta, elegida: seleccionUsuario });
+
+      document.getElementById("acciones").innerHTML = `<div class='mt-4 text-right'><button onclick='siguientePregunta()' class='bg-blue-600 text-white px-4 py-2 rounded'>Siguiente</button></div>`;
+      actualizarContador();
+    }
+
+    function actualizarContador() {
+      const ahora = new Date();
+      const transcurrido = inicioTiempo ? Math.floor((ahora - inicioTiempo) / 1000) : 0;
+      const minutos = String(Math.floor(transcurrido / 60)).padStart(2, '0');
+      const segundos = String(transcurrido % 60).padStart(2, '0');
+      tiempoTexto = `${minutos}:${segundos}`;
+
+      document.getElementById("contador").innerHTML = `
+        <span id="cuestion">Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
+        <span class="text-green-600" id="aciertos">Aciertos: ${aciertos}</span>
+        <span class="text-red-600" id="fallos">Fallos: ${errores}</span>
+        <span id="puntos">Puntos: ${aciertos}</span>
+        <span class="text-blue-700 font-mono">⏱ Tiempo: ${tiempoTexto}</span>
+      `;
+    }
+
+    const siguientePregunta = () => (indice++, cargarPregunta());
+
+    function mostrarResumen() {
+      clearInterval(intervaloTiempo);
+      const ahora = new Date();
+      const totalSegundos = Math.floor((ahora - inicioTiempo) / 1000);
+      const minutos = String(Math.floor(totalSegundos / 60)).padStart(2, '0');
+      const segundos = String(totalSegundos % 60).padStart(2, '0');
+      const tiempoFinal = `${minutos}:${segundos}`;
+
+      document.getElementById("test").innerHTML = `
+        <div id="resumenPDF">
+          <h2 class='text-xl font-bold mb-2'>Test finalizado</h2>
+          <p class='mb-2'>Has acertado <strong>${aciertos}</strong> preguntas y fallado <strong>${errores}</strong>.</p>
+          <p class='mb-4 text-blue-600 font-semibold'>⏱ Tiempo total: ${tiempoFinal}</p>
+          <div class='mb-4'>${historial.map(h => `
+            <div class='mb-2 border p-2 rounded'>
+              <p class='font-semibold'>${h.pregunta}</p>
+              <div class='flex flex-wrap gap-2 mt-2'>
+                ${h.opciones.map(op => {
+                  if (op === h.elegida && op === h.correcta) return `<span class='bg-green-200 px-2 py-1 rounded'>✅ ${op}</span>`;
+                  if (op === h.elegida && op !== h.correcta) return `<span class='bg-red-300 px-2 py-1 rounded'>❌ ${op}</span>`;
+                  if (op === h.correcta && op !== h.elegida) return `<span class='bg-green-100 px-2 py-1 rounded'>✔ ${op}</span>`;
+                  return `<span class='px-2 py-1'>${op}</span>`;
+                }).join('')}
+              </div>
+            </div>
+          `).join('')}</div>
+        </div>
+        <div class='flex flex-col items-center gap-4 mt-4'>
+          <button onclick='generarPDF()' class='bg-purple-600 text-white px-4 py-2 rounded'>Descargar resumen en PDF</button>
+          <button onclick='window.location.reload()' class='bg-green-500 text-white px-4 py-2 rounded'>Reiniciar</button>
+        </div>
+      `;
+    }
+
+    function generarPDF() {
+      const element = document.getElementById('resumenPDF');
+      const opt = {
+        margin: 0.5,
+        filename: 'resumen_test_ITC_BT.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+      setTimeout(() => {
+        html2pdf().set(opt).from(element).save();
+      }, 300);
+    }
+
+    window.onload = () => {
+      mezclarPreguntas();
+      cargarPregunta();
+      inicioTiempo = new Date();
+      intervaloTiempo = setInterval(actualizarContador, 1000);
+    };
+  </script>
+</head>
+<body class="bg-gray-100 text-gray-900 p-4">
+  <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md" id="test">
+    <p id="contador" class="mb-6 text-center font-semibold text-gray-700 space-x-4"></p>
+    <h1 class="text-2xl font-bold mb-4 text-center">Test ITC-BT Electrificación Básica</h1>
+    <p id="pregunta" class="mb-4"></p>
+    <div id="opciones" class="flex flex-col"></div>
+    <div id="acciones" class="mt-4 text-right"></div>
+  </div>
+
+<div class="mt-8 text-center">
+  <button onclick="window.location.href='test.html'" class="bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">
+   Cancelar
+  </button>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test articulado</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    const preguntas = [{pregunta: "¿Qué artículo define el objeto del Reglamento Electrotécnico para Baja Tensión?", opciones: ["Artículo 1", "Artículo 2", "Artículo 5", "Artículo 10"], respuesta: "Artículo 1" },
+      { pregunta: "¿En qué artículo se indica el campo de aplicación del REBT?", opciones: ["Artículo 2", "Artículo 3", "Artículo 6", "Artículo 15"], respuesta: "Artículo 2" },
+      { pregunta: "¿Qué artículo trata sobre la instalación eléctrica?", opciones: ["Artículo 3", "Artículo 7", "Artículo 11", "Artículo 24"], respuesta: "Artículo 3" },
+      { pregunta: "¿Qué artículo se refiere a la clasificación de las tensiones y frecuencia de las redes?", opciones: ["Artículo 4", "Artículo 8", "Artículo 13", "Artículo 19"], respuesta: "Artículo 4" },
+      { pregunta: "¿Qué artículo regula las perturbaciones en las redes?", opciones: ["Artículo 5", "Artículo 6", "Artículo 12", "Artículo 22"], respuesta: "Artículo 5" },
+      { pregunta: "¿Dónde se regulan los equipos y materiales permitidos?", opciones: ["Artículo 6", "Artículo 3", "Artículo 10", "Artículo 25"], respuesta: "Artículo 6" },
+      { pregunta: "¿Qué artículo trata sobre la coincidencia con otras tensiones?", opciones: ["Artículo 7", "Artículo 14", "Artículo 17", "Artículo 27"], respuesta: "Artículo 7" },
+      { pregunta: "¿Dónde se regulan las redes de distribución?", opciones: ["Artículo 8", "Artículo 20", "Artículo 15", "Artículo 9"], respuesta: "Artículo 8" },
+      { pregunta: "¿Qué artículo trata sobre instalaciones de alumbrado exterior?", opciones: ["Artículo 9", "Artículo 6", "Artículo 28", "Artículo 12"], respuesta: "Artículo 9" },
+      { pregunta: "¿En qué artículo se especifican los tipos de suministro eléctrico?", opciones: ["Artículo 10", "Artículo 4", "Artículo 21", "Artículo 18"], respuesta: "Artículo 10" },
+      { pregunta: "¿Qué artículo regula los locales de características especiales?", opciones: ["Artículo 11", "Artículo 16", "Artículo 22", "Artículo 8"], respuesta: "Artículo 11" },
+      { pregunta: "¿Qué artículo trata sobre la ordenación de cargas?", opciones: ["Artículo 12", "Artículo 10", "Artículo 25", "Artículo 19"], respuesta: "Artículo 12" },
+      { pregunta: "¿Qué artículo establece la reserva de local?", opciones: ["Artículo 13", "Artículo 14", "Artículo 17", "Artículo 27"], respuesta: "Artículo 13" },
+      { pregunta: "¿Dónde se mencionan las especificaciones particulares de las empresas suministradoras?", opciones: ["Artículo 14", "Artículo 23", "Artículo 5", "Artículo 3"], respuesta: "Artículo 14" },
+      { pregunta: "¿Qué artículo regula las acometidas e instalaciones de enlace?", opciones: ["Artículo 15", "Artículo 19", "Artículo 8", "Artículo 25"], respuesta: "Artículo 15" },
+      { pregunta: "¿Qué artículo trata sobre las instalaciones interiores o receptoras?", opciones: ["Artículo 16", "Artículo 12", "Artículo 20", "Artículo 4"], respuesta: "Artículo 16" },
+      { pregunta: "¿Dónde se regulan los receptores y la puesta a tierra?", opciones: ["Artículo 17", "Artículo 18", "Artículo 21", "Artículo 7"], respuesta: "Artículo 17" },
+      { pregunta: "¿Qué artículo regula la ejecución y puesta en servicio de las instalaciones?", opciones: ["Artículo 18", "Artículo 16", "Artículo 9", "Artículo 6"], respuesta: "Artículo 18" },
+      { pregunta: "¿Qué artículo trata sobre la información a los usuarios?", opciones: ["Artículo 19", "Artículo 3", "Artículo 28", "Artículo 11"], respuesta: "Artículo 19" },
+      { pregunta: "¿Qué artículo trata sobre el mantenimiento de las instalaciones?", opciones: ["Artículo 20", "Artículo 24", "Artículo 6", "Artículo 9"], respuesta: "Artículo 20" },
+      { pregunta: "¿Dónde se habla de las inspecciones a instalaciones eléctricas?", opciones: ["Artículo 21", "Artículo 18", "Artículo 8", "Artículo 27"], respuesta: "Artículo 21" },
+      { pregunta: "¿Qué artículo regula las empresas instaladoras?", opciones: ["Artículo 22", "Artículo 5", "Artículo 13", "Artículo 26"], respuesta: "Artículo 22" },
+      { pregunta: "¿Qué artículo trata sobre el cumplimiento de las prescripciones?", opciones: ["Artículo 23", "Artículo 20", "Artículo 14", "Artículo 6"], respuesta: "Artículo 23" },
+      { pregunta: "¿Qué artículo se refiere a excepciones en el reglamento?", opciones: ["Artículo 24", "Artículo 15", "Artículo 28", "Artículo 4"], respuesta: "Artículo 24" },
+      { pregunta: "¿Qué artículo regula el reconocimiento mutuo de certificaciones?", opciones: ["Artículo 25", "Artículo 22", "Artículo 17", "Artículo 12"], respuesta: "Artículo 25" },
+      { pregunta: "¿Qué artículo define las normas de referencia?", opciones: ["Artículo 26", "Artículo 1", "Artículo 19", "Artículo 13"], respuesta: "Artículo 26" },
+      { pregunta: "¿Dónde se regulan los accidentes en instalaciones eléctricas?", opciones: ["Artículo 27", "Artículo 3", "Artículo 11", "Artículo 16"], respuesta: "Artículo 27" },
+      { pregunta: "¿Qué artículo trata sobre infracciones y sanciones?", opciones: ["Artículo 28", "Artículo 10", "Artículo 9", "Artículo 4"], respuesta: "Artículo 28" },
+      { pregunta: "¿Qué artículo hace referencia a la guía técnica del REBT?", opciones: ["Artículo 29", "Artículo 20", "Artículo 5", "Artículo 15"], respuesta: "Artículo 29" }
+];
+
+    let preguntasAleatorias = [], indice = 0, aciertos = 0, errores = 0, historial = [], seleccionUsuario = null, respondido = false;
+    let inicioTiempo = null;
+    let intervaloTiempo = null;
+    let tiempoTexto = '00:00';
+
+    const mezclar = array => {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    };
+
+    function mezclarPreguntas() {
+      preguntasAleatorias = [...preguntas].map(p => ({ ...p, opciones: mezclar([...p.opciones]) }));
+      preguntasAleatorias = mezclar(preguntasAleatorias);
+      indice = 0;
+      aciertos = 0;
+      errores = 0;
+      historial = [];
+    }
+
+    function cargarPregunta() {
+      if (indice >= preguntasAleatorias.length) return mostrarResumen();
+
+      const q = preguntasAleatorias[indice];
+      seleccionUsuario = null;
+      respondido = false;
+
+      document.getElementById("pregunta").textContent = q.pregunta;
+      const opciones = document.getElementById("opciones");
+      opciones.innerHTML = "";
+      q.opciones.forEach(op => {
+        const btn = document.createElement("button");
+        btn.textContent = op;
+        btn.onclick = () => seleccionarOpcion(op);
+        btn.className = "opcion bg-blue-500 text-white p-2 rounded m-2 hover:bg-blue-700";
+        opciones.appendChild(btn);
+      });
+
+      document.getElementById("acciones").innerHTML = "";
+      actualizarContador();
+    }
+
+    function seleccionarOpcion(opcion) {
+      if (respondido) return;
+      seleccionUsuario = opcion;
+      const botones = document.querySelectorAll("#opciones button");
+      botones.forEach(btn => {
+        btn.classList.remove("ring", "ring-yellow-400");
+        if (btn.textContent === opcion) {
+          btn.classList.add("ring", "ring-yellow-400");
+        }
+      });
+      document.getElementById("acciones").innerHTML = `<div class='text-right'><button onclick='verificarRespuesta()' class='bg-gray-800 text-white px-4 py-2 rounded'>Contestar</button></div>`;
+    }
+
+    function verificarRespuesta() {
+      if (respondido || !seleccionUsuario) return;
+      const actual = preguntasAleatorias[indice];
+      const esCorrecta = seleccionUsuario === actual.respuesta;
+      respondido = true;
+
+      const botones = document.querySelectorAll("#opciones button");
+      botones.forEach(btn => {
+        btn.disabled = true;
+        btn.classList.remove("ring", "ring-yellow-400");
+        if (btn.textContent === actual.respuesta) {
+          btn.className = "bg-green-300 text-black p-2 rounded m-2";
+          btn.innerHTML = `✔ ${btn.textContent}`;
+        }
+        if (btn.textContent === seleccionUsuario && !esCorrecta) {
+          btn.className = "bg-red-400 text-black p-2 rounded m-2";
+          btn.innerHTML = `❌ ${btn.textContent}`;
+        }
+      });
+
+      esCorrecta ? aciertos++ : errores++;
+      historial.push({ pregunta: actual.pregunta, opciones: actual.opciones, correcta: actual.respuesta, elegida: seleccionUsuario });
+
+      document.getElementById("acciones").innerHTML = `<div class='mt-4 text-right'><button onclick='siguientePregunta()' class='bg-blue-600 text-white px-4 py-2 rounded'>Siguiente</button></div>`;
+      actualizarContador();
+    }
+
+    function actualizarContador() {
+      const ahora = new Date();
+      const transcurrido = inicioTiempo ? Math.floor((ahora - inicioTiempo) / 1000) : 0;
+      const minutos = String(Math.floor(transcurrido / 60)).padStart(2, '0');
+      const segundos = String(transcurrido % 60).padStart(2, '0');
+      tiempoTexto = `${minutos}:${segundos}`;
+
+      document.getElementById("contador").innerHTML = `
+        <span id="cuestion">Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
+        <span class="text-green-600" id="aciertos">Aciertos: ${aciertos}</span>
+        <span class="text-red-600" id="fallos">Fallos: ${errores}</span>
+        <span id="puntos">Puntos: ${aciertos}</span>
+        <span class="text-blue-700 font-mono">⏱ Tiempo: ${tiempoTexto}</span>
+      `;
+    }
+
+    const siguientePregunta = () => (indice++, cargarPregunta());
+
+    function mostrarResumen() {
+      clearInterval(intervaloTiempo);
+      const ahora = new Date();
+      const totalSegundos = Math.floor((ahora - inicioTiempo) / 1000);
+      const minutos = String(Math.floor(totalSegundos / 60)).padStart(2, '0');
+      const segundos = String(totalSegundos % 60).padStart(2, '0');
+      const tiempoFinal = `${minutos}:${segundos}`;
+
+      document.getElementById("test").innerHTML = `
+        <div id="resumenPDF">
+          <h2 class='text-xl font-bold mb-2'>Test finalizado</h2>
+          <p class='mb-2'>Has acertado <strong>${aciertos}</strong> preguntas y fallado <strong>${errores}</strong>.</p>
+          <p class='mb-4 text-blue-600 font-semibold'>⏱ Tiempo total: ${tiempoFinal}</p>
+          <div class='mb-4'>${historial.map(h => `
+            <div class='mb-2 border p-2 rounded'>
+              <p class='font-semibold'>${h.pregunta}</p>
+              <div class='flex flex-wrap gap-2 mt-2'>
+                ${h.opciones.map(op => {
+                  if (op === h.elegida && op === h.correcta) return `<span class='bg-green-200 px-2 py-1 rounded'>✅ ${op}</span>`;
+                  if (op === h.elegida && op !== h.correcta) return `<span class='bg-red-300 px-2 py-1 rounded'>❌ ${op}</span>`;
+                  if (op === h.correcta && op !== h.elegida) return `<span class='bg-green-100 px-2 py-1 rounded'>✔ ${op}</span>`;
+                  return `<span class='px-2 py-1'>${op}</span>`;
+                }).join('')}
+              </div>
+            </div>
+          `).join('')}</div>
+        </div>
+        <div class='flex flex-col items-center gap-4 mt-4'>
+          <button onclick='generarPDF()' class='bg-purple-600 text-white px-4 py-2 rounded'>Descargar resumen en PDF</button>
+          <button onclick='window.location.reload()' class='bg-green-500 text-white px-4 py-2 rounded'>Reiniciar</button>
+        </div>
+      `;
+    }
+
+    function generarPDF() {
+      const element = document.getElementById('resumenPDF');
+      const opt = {
+        margin: 0.5,
+        filename: 'resumen_test_ITC_BT.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+      setTimeout(() => {
+        html2pdf().set(opt).from(element).save();
+      }, 300);
+    }
+
+    window.onload = () => {
+      mezclarPreguntas();
+      cargarPregunta();
+      inicioTiempo = new Date();
+      intervaloTiempo = setInterval(actualizarContador, 1000);
+    };
+  </script>
+</head>
+<body class="bg-gray-100 text-gray-900 p-4">
+  <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md" id="test">
+    <p id="contador" class="mb-6 text-center font-semibold text-gray-700 space-x-4"></p>
+    <h1 class="text-2xl font-bold mb-4 text-center">Test del articulado del REBT</h1>
+    <p id="pregunta" class="mb-4"></p>
+    <div id="opciones" class="flex flex-col"></div>
+    <div id="acciones" class="mt-4 text-right"></div>
+  </div>
+
+<div class="mt-8 text-center">
+  <button onclick="window.location.href='test.html'" class="bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">
+   Cancelar
+  </button>
+</div>
+
+</body>
+</html>

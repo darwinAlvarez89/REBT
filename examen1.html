@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examen test REBT</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    const preguntas = [{ pregunta: "¿Cuál es el objetivo principal del REBT?", opciones: ["Regular la producción de energía eléctrica", "Asegurar la eficiencia energética", "Garantizar la seguridad de personas y bienes", "Controlar la comercialización de equipos eléctricos"], respuesta: "Garantizar la seguridad de personas y bienes" },
+  { pregunta: "¿Qué tipo de instalaciones regula el REBT?", opciones: ["Instalaciones de media y alta tensión", "Instalaciones eléctricas en baja tensión", "Solo instalaciones domésticas", "Instalaciones industriales exclusivamente"], respuesta: "Instalaciones eléctricas en baja tensión" },
+  { pregunta: "¿Qué documento debe acompañar siempre a la instalación para su puesta en servicio?", opciones: ["El presupuesto", "El certificado de garantía", "El Certificado de Instalación Eléctrica", "La factura de compra"], respuesta: "El Certificado de Instalación Eléctrica" },
+  { pregunta: "¿Qué artículo del REBT trata sobre la seguridad de las instalaciones?", opciones: ["Artículo 3", "Artículo 5", "Artículo 7", "Artículo 14"], respuesta: "Artículo 14" },
+  { pregunta: "¿Quién es responsable del mantenimiento de una instalación eléctrica?", opciones: ["El instalador", "El titular de la instalación", "La compañía eléctrica", "El fabricante del equipo"], respuesta: "El titular de la instalación" },
+  { pregunta: "¿Con qué frecuencia deben realizarse inspecciones periódicas en instalaciones que requieren inspección inicial?", opciones: ["Cada 10 años", "Cada 5 años", "Cada 3 años", "Nunca"], respuesta: "Cada 5 años" },
+  { pregunta: "Según el REBT, ¿cuál es la finalidad de la protección diferencial?", opciones: ["Evitar la sobretensión", "Proteger frente a sobrecargas", "Detectar fugas de corriente", "Regular la potencia"], respuesta: "Detectar fugas de corriente" },
+  { pregunta: "¿Qué artículo trata sobre la puesta a tierra?", opciones: ["Artículo 12", "Artículo 17", "Artículo 15", "Artículo 20"], respuesta: "Artículo 17" },
+  { pregunta: "¿Cuál es el documento legal que aprueba el REBT?", opciones: ["RD 840/1999", "RD 842/2002", "RD 846/2005", "RD 800/2001"], respuesta: "RD 842/2002" },
+  { pregunta: "¿Cuál es el contenido mínimo de un proyecto eléctrico?", opciones: ["Plano y factura", "Plano y memoria técnica", "Factura y manual de usuario", "Croquis y garantías"], respuesta: "Plano y memoria técnica" },
+  { pregunta: "En un edificio hay cuatro vivienda con IGA de 25 A, tres viviendas con IGA de 40 A y dos viviendas con IGA de 32 A. ¿Cuál es la potencia total prevista para estas viviendas según el REBT?", opciones: ["57.745 W", "56.611 W", "39.640 W", "42.800 W"], respuesta: "56.611 W" },
+  { pregunta: "Un circuito tiene dos resistencias de 10 Ω y 5 Ω en serie, y en paralelo con ellas hay dos resistencias de 20 Ω y 20 Ω. Si la tensión total es de 230 V, ¿cuál es la potencia total aproximada consumida por el circuito?", opciones: ["8820 W", "7865 W", "8815 W", "8934 W"], respuesta: "8815 W" },
+  { pregunta: "Según el REBT ¿quién puede ser empresa instaladora en baja tensión?", opciones: ["Solo personas jurídicas", "Solo personas físicas", "Cualquier persona física o jurídica que cumpla los requisitos y presente declaración responsable", "Solo empresas públicas"], respuesta: "Cualquier persona física o jurídica que cumpla los requisitos y presente declaración responsable" },
+  { pregunta: "¿Qué documento se requiere para instalaciones con potencia superior a 50 kW?", opciones: ["Presupuesto", "Memoria técnica", "Proyecto", "Factura"], respuesta: "Proyecto" },
+  { pregunta: "¿Qué instalaciones precisan de inspección inicial obligatoria?", opciones: ["Viviendas", "Locales comerciales con potencia <10 kW", "Instalaciones en locales de pública concurrencia", "Acometidas"], respuesta: "Instalaciones en locales de pública concurrencia" },
+  { pregunta: "¿Cuál es el esquema de conexión del neutro y masas más común en zonas urbanas?", opciones: ["IT", "TN-C", "TT", "TN-S"], respuesta: "TT" },
+  { pregunta: "¿Cuál es el valor máximo permitido de resistencia de puesta a tierra en esquemas TT?", opciones: ["20 ohmios", "10 ohmios", "Depende de la sensibilidad del diferencial", "Siempre menor de 1 ohmio"], respuesta: "Depende de la sensibilidad del diferencial" },
+  { pregunta: "Según el REBT, ¿qué coeficiente de simultaneidad se aplica a 5 viviendas?", opciones: ["3,8", "4,6", "5,4", "6,2"], respuesta: "4,6" },
+  { pregunta: "¿Qué potencia mínima debe preverse para una vivienda con electrificación básica?", opciones: ["3.450 W", "5.750 W", "7.360 W", "9.200 W"], respuesta: "5.750 W" },
+  { pregunta: "¿Cuál es la sección mínima de los conductores de la Línea General de Alimentación?", opciones: ["2,5 mm²", "4 mm²", "6 mm²", "10 mm²"], respuesta: "10 mm²" },
+  { pregunta: "¿Dónde debe instalarse la Caja General de Protección (CGP)?", opciones: ["Dentro del cuadro general", "En el interior de la vivienda", "En el límite de propiedad con acceso desde vía pública", "Dentro del armario de contadores"], respuesta: "En el límite de propiedad con acceso desde vía pública" },
+  { pregunta: "¿Qué función cumple el Interruptor de Control de Potencia (ICP)?", opciones: ["Evitar sobretensiones", "Controlar la energía consumida", "Controlar que no se sobrepase la potencia contratada", "Proteger frente a cortocircuitos"], respuesta: "Controlar que no se sobrepase la potencia contratada" },
+  { pregunta: "En viviendas, ¿cuántos circuitos debe haber como mínimo?", opciones: ["3", "4", "5", "6"], respuesta: "5" },
+  { pregunta: "¿Cuál es el tipo de tubo obligatorio en zonas comunes de edificios?", opciones: ["Libre de halógenos", "PVC normal", "Aluminio", "Acero galvanizado"], respuesta: "Libre de halógenos" },
+  { pregunta: "¿Cuál debe ser la sección mínima del conductor de protección en una instalación monofásica si los conductores de fase tienen una sección de 16 mm²?", opciones: ["4 mm²", "10 mm²", "16 mm²", "2,5 mm²"], respuesta: "16 mm²" },
+  { pregunta: "¿Qué tipo de receptor requiere dispositivos de arranque estrella-triángulo?", opciones: ["Resistencias", "Motores", "Lámparas", "Transformadores"], respuesta: "Motores" },
+  { pregunta: "¿A partir de qué potencia los motores deben tener limitada la intensidad de arranque?", opciones: ["0,5 kW", "0,75 kW", "1,5 kW", "2 kW"], respuesta: "0,75 kW" },
+  { pregunta: "¿Qué tipo de lámparas tienen mayor eficiencia energética?", opciones: ["Incandescentes", "Halógenas", "LED", "Fluorescentes"], respuesta: "LED" },
+  { pregunta: "¿Dónde debe instalarse el Interruptor General Automático (IGA)?", opciones: ["Junto al contador", "En la CGP", "En el cuadro de mando y protección de la vivienda", "Al inicio de la acometida"], respuesta: "En el cuadro de mando y protección de la vivienda" },
+  { pregunta: "¿Qué elemento debe tener un alumbrado de emergencia?", opciones: ["Solo bombillas LED", "Fuente autónoma o batería", "Interruptor manual", "Transformador de aislamiento"], respuesta: "Fuente autónoma o batería" },
+  { pregunta: "¿Qué sensibilidad debe tener un interruptor diferencial en un baño?", opciones: ["500 mA", "300 mA", "100 mA", "30 mA"], respuesta: "30 mA" },
+  { pregunta: "¿Qué elemento de protección se utiliza contra sobretensiones transitorias?", opciones: ["ICP", "Magnetotérmico", "SPD", "Fusible"], respuesta: "SPD" },
+  { pregunta: "En locales húmedos, ¿qué tipo de instalación es adecuada?", opciones: ["Cables al aire", "Conducción empotrada", "Canaleta abierta", "Instalación vista"], respuesta: "Conducción empotrada" },
+  { pregunta: "¿Cuál es el color del conductor de protección?", opciones: ["Negro", "Azul", "Verde y amarillo", "Marrón"], respuesta: "Verde y amarillo" },
+  { pregunta: "¿Qué conductor debe interconectar las masas metálicas y la puesta a tierra?", opciones: ["Fase", "Neutro", "Conductor de protección (PE)", "Conductor de servicio"], respuesta: "Conductor de protección (PE)" },
+  { pregunta: "¿Qué debe incluir una memoria técnica de diseño?", opciones: ["Croquis y factura", "Planos y características técnicas", "Presupuesto y manual de uso", "Solo listado de materiales"], respuesta: "Planos y características técnicas" },
+  { pregunta: "¿Qué tipo de protección se emplea frente a contacto directo?", opciones: ["Diferencial", "Envolventes o barreras", "Interruptor horario", "Fusible"], respuesta: "Envolventes o barreras" },
+  { pregunta: "¿En qué ITC se especifica la instalación de contadores?", opciones: ["ITC-BT-12", "ITC-BT-14", "ITC-BT-16", "ITC-BT-22"], respuesta: "ITC-BT-16" },
+  { pregunta: "¿Qué documento justifica la legalidad de una instalación al finalizar?", opciones: ["Proyecto", "Contrato", "Certificado de instalación", "Manual del usuario"], respuesta: "Certificado de instalación" },
+  { pregunta: "¿Qué elemento protege de sobreintensidades?", opciones: ["ICP", "Diferencial", "Magnetotérmico", "Limitador de tensión"], respuesta: "Magnetotérmico" }
+];
+
+    let preguntasAleatorias = [], indice = 0, aciertos = 0, errores = 0, historial = [], seleccionUsuario = null, respondido = false;
+    let inicioTiempo = null;
+    let intervaloTiempo = null;
+    let tiempoTexto = '00:00';
+
+    const mezclar = array => {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    };
+
+    function mezclarPreguntas() {
+      preguntasAleatorias = [...preguntas].map(p => ({ ...p, opciones: mezclar([...p.opciones]) }));
+      preguntasAleatorias = mezclar(preguntasAleatorias);
+      indice = 0;
+      aciertos = 0;
+      errores = 0;
+      historial = [];
+    }
+
+    function cargarPregunta() {
+      if (indice >= preguntasAleatorias.length) return mostrarResumen();
+
+      const q = preguntasAleatorias[indice];
+      seleccionUsuario = null;
+      respondido = false;
+
+      document.getElementById("pregunta").textContent = q.pregunta;
+      const opciones = document.getElementById("opciones");
+      opciones.innerHTML = "";
+      q.opciones.forEach(op => {
+        const btn = document.createElement("button");
+        btn.textContent = op;
+        btn.onclick = () => seleccionarOpcion(op);
+        btn.className = "opcion bg-blue-500 text-white p-2 rounded m-2 hover:bg-blue-700";
+        opciones.appendChild(btn);
+      });
+
+      document.getElementById("acciones").innerHTML = "";
+      actualizarContador();
+    }
+
+    function seleccionarOpcion(opcion) {
+      if (respondido) return;
+      seleccionUsuario = opcion;
+      const botones = document.querySelectorAll("#opciones button");
+      botones.forEach(btn => {
+        btn.classList.remove("ring", "ring-yellow-400");
+        if (btn.textContent === opcion) {
+          btn.classList.add("ring", "ring-yellow-400");
+        }
+      });
+      document.getElementById("acciones").innerHTML = `<div class='text-right'><button onclick='verificarRespuesta()' class='bg-gray-800 text-white px-4 py-2 rounded'>Contestar</button></div>`;
+    }
+
+    function verificarRespuesta() {
+      if (respondido || !seleccionUsuario) return;
+      const actual = preguntasAleatorias[indice];
+      const esCorrecta = seleccionUsuario === actual.respuesta;
+      respondido = true;
+
+      const botones = document.querySelectorAll("#opciones button");
+      botones.forEach(btn => {
+        btn.disabled = true;
+        btn.classList.remove("ring", "ring-yellow-400");
+        if (btn.textContent === actual.respuesta) {
+          btn.className = "bg-green-300 text-black p-2 rounded m-2";
+          btn.innerHTML = `✔ ${btn.textContent}`;
+        }
+        if (btn.textContent === seleccionUsuario && !esCorrecta) {
+          btn.className = "bg-red-400 text-black p-2 rounded m-2";
+          btn.innerHTML = `❌ ${btn.textContent}`;
+        }
+      });
+
+      esCorrecta ? aciertos++ : errores++;
+      historial.push({ pregunta: actual.pregunta, opciones: actual.opciones, correcta: actual.respuesta, elegida: seleccionUsuario });
+
+      document.getElementById("acciones").innerHTML = `<div class='mt-4 text-right'><button onclick='siguientePregunta()' class='bg-blue-600 text-white px-4 py-2 rounded'>Siguiente</button></div>`;
+      actualizarContador();
+    }
+
+    function actualizarContador() {
+      const ahora = new Date();
+      const transcurrido = inicioTiempo ? Math.floor((ahora - inicioTiempo) / 1000) : 0;
+      const minutos = String(Math.floor(transcurrido / 60)).padStart(2, '0');
+      const segundos = String(transcurrido % 60).padStart(2, '0');
+      tiempoTexto = `${minutos}:${segundos}`;
+
+      document.getElementById("contador").innerHTML = `
+        <span id="cuestion">Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
+        <span class="text-green-600" id="aciertos">Aciertos: ${aciertos}</span>
+        <span class="text-red-600" id="fallos">Fallos: ${errores}</span>
+        <span id="puntos">Puntos: ${aciertos}</span>
+        <span class="text-blue-700 font-mono">⏱ Tiempo: ${tiempoTexto}</span>
+      `;
+    }
+
+    const siguientePregunta = () => (indice++, cargarPregunta());
+
+    function mostrarResumen() {
+      clearInterval(intervaloTiempo);
+      const ahora = new Date();
+      const totalSegundos = Math.floor((ahora - inicioTiempo) / 1000);
+      const minutos = String(Math.floor(totalSegundos / 60)).padStart(2, '0');
+      const segundos = String(totalSegundos % 60).padStart(2, '0');
+      const tiempoFinal = `${minutos}:${segundos}`;
+
+      document.getElementById("test").innerHTML = `
+        <div id="resumenPDF">
+          <h2 class='text-xl font-bold mb-2'>Test finalizado</h2>
+          <p class='mb-2'>Has acertado <strong>${aciertos}</strong> preguntas y fallado <strong>${errores}</strong>.</p>
+          <p class='mb-4 text-blue-600 font-semibold'>⏱ Tiempo total: ${tiempoFinal}</p>
+          <div class='mb-4'>${historial.map(h => `
+            <div class='mb-2 border p-2 rounded'>
+              <p class='font-semibold'>${h.pregunta}</p>
+              <div class='flex flex-wrap gap-2 mt-2'>
+                ${h.opciones.map(op => {
+                  if (op === h.elegida && op === h.correcta) return `<span class='bg-green-200 px-2 py-1 rounded'>✅ ${op}</span>`;
+                  if (op === h.elegida && op !== h.correcta) return `<span class='bg-red-300 px-2 py-1 rounded'>❌ ${op}</span>`;
+                  if (op === h.correcta && op !== h.elegida) return `<span class='bg-green-100 px-2 py-1 rounded'>✔ ${op}</span>`;
+                  return `<span class='px-2 py-1'>${op}</span>`;
+                }).join('')}
+              </div>
+            </div>
+          `).join('')}</div>
+        </div>
+        <div class='flex flex-col items-center gap-4 mt-4'>
+          <button onclick='generarPDF()' class='bg-purple-600 text-white px-4 py-2 rounded'>Descargar resumen en PDF</button>
+          <button onclick='window.location.reload()' class='bg-green-500 text-white px-4 py-2 rounded'>Reiniciar</button>
+        </div>
+      `;
+    }
+
+    function generarPDF() {
+      const element = document.getElementById('resumenPDF');
+      const opt = {
+        margin: 0.5,
+        filename: 'resumen_test_ITC_BT.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+      setTimeout(() => {
+        html2pdf().set(opt).from(element).save();
+      }, 300);
+    }
+
+    window.onload = () => {
+      mezclarPreguntas();
+      cargarPregunta();
+      inicioTiempo = new Date();
+      intervaloTiempo = setInterval(actualizarContador, 1000);
+    };
+  </script>
+</head>
+<body class="bg-gray-100 text-gray-900 p-4">
+  <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md" id="test">
+    <p id="contador" class="mb-6 text-center font-semibold text-gray-700 space-x-4"></p>
+    <h1 class="text-2xl font-bold mb-4 text-center">Examen test del REBT</h1>
+    <p id="pregunta" class="mb-4"></p>
+    <div id="opciones" class="flex flex-col"></div>
+    <div id="acciones" class="mt-4 text-right"></div>
+  </div>
+
+<div class="mt-8 text-center">
+  <button onclick="window.location.href='test.html'" class="bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">
+   Cancelar
+  </button>
+</div>
+
+</body>
+</html>
