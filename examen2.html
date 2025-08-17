@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Examen Test REBT</title>
+
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RSH4ZW3VT2');
+</script>
+
+  
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+
+  <script>
+    /* ===== Banco de preguntas ===== */
+    const preguntas = [ 
+  { "pregunta": "Señale la afirmación correcta sobre redes de distribución.", 
+    "opciones": ["Las instalaciones de servicio privado cuya finalidad sea la distribución de energía eléctrica se definirán por la tensión entre dos conductores de fase o polares, para las instalaciones unidas directamente a tierra.", "Las instalaciones de servicio público cuya finalidad sea la distribución de energía eléctrica se definirán por los valores de la tensión entre fase o conductor polar y tierra y entre dos conductores de fase o polares, para las instalaciones no unidas directamente a tierra.", "Las intensidades admisibles en los conductores se regularán en función de las condiciones técnicas de las redes y de los sistemas de protección empleados en las mismas."], 
+    "respuesta": "Las intensidades admisibles en los conductores se regularán en función de las condiciones técnicas de las redes y de los sistemas de protección empleados en las mismas." },
+
+  { "pregunta": "Los establecimientos comerciales deberán disponer de suministro de reserva a partir de qué superficie?", 
+    "opciones": ["2000 m²", "1000 m²", "5000 m²"], 
+    "respuesta": "2000 m²" },
+
+  { "pregunta": "En una instalación de 230/400 V, la resistencia de aislamiento mínima será:", 
+    "opciones": ["1,0 MΩ", "0,25 MΩ", "0,5 MΩ"], 
+    "respuesta": "0,5 MΩ" },
+
+  { "pregunta": "La carga total de un edificio de viviendas se obtiene sumando:", 
+    "opciones": ["Conjunto de viviendas, servicios generales y garajes.", "Conjunto de viviendas, servicios generales, locales comerciales y garajes.", "Servicios generales, locales comerciales y garajes."], 
+    "respuesta": "Conjunto de viviendas, servicios generales, locales comerciales y garajes." },
+
+  { "pregunta": "En una vivienda, ¿qué circuito se utiliza para el sistema de automatización o gestión técnica de la energía cuando está previsto?", 
+    "opciones": ["Circuito C11", "Circuito C10", "Circuito C9"], 
+    "respuesta": "Circuito C11" },
+
+  { "pregunta": "En derivaciones individuales, las cajas de registro precintables comunes a todos los tubos podrán colocarse cada:", 
+    "opciones": ["25 m", "20 m", "15 m"], 
+    "respuesta": "15 m" },
+
+  { "pregunta": "La previsión de potencia mínima por metro cuadrado en garajes con ventilación forzada es de:", 
+    "opciones": ["20 W", "10 W", "15 W"], 
+    "respuesta": "20 W" },
+
+  {
+  "pregunta": "En una vivienda, los dispositivos generales e individuales mínimos de mando y protección son:",
+  "opciones": [
+    "IGA omnipolar + ID general",
+    "IGA omnipolar + ID general + dispositivos de corte omnipolar",
+    "IGA omnipolar + ID general + protección contra sobretensiones"
+  ],
+  "respuesta": "IGA omnipolar + ID general + dispositivos de corte omnipolar"
+  },
+
+  { "pregunta": "En alumbrado exterior, indique el umbral correcto de diferenciales y resistencia de tierra admitida.", 
+    "opciones": ["Se admiten ID de 500 mA si la R de tierra ≤ 5 Ω.", "ID ≤ 300 mA y R de tierra ≤ 500 Ω.", "Se admiten ID de 1 A si la R de tierra ≤ 50 Ω."], 
+    "respuesta": "Se admiten ID de 500 mA si la R de tierra ≤ 5 Ω." },
+
+  {"pregunta": "En una vivienda, cuando se superan las tomas de corriente previstas en la electrificación básica, ¿cada cuántas tomas de uso general debe añadirse un circuito adicional?",
+  "opciones": ["20 tomas", "25 tomas", "30 tomas"],
+  "respuesta": "20 tomas"},
+
+  { "pregunta": "Sobre el suministro de reserva, indique la afirmación correcta:", 
+    "opciones": ["A diferencia del de socorro, no puede realizarse por medios propios del usuario.", "No puede realizarse desde el mismo transformador del suministro normal.", "Mantiene un servicio restringido de elementos indispensables de la instalación receptora."], 
+    "respuesta": "Mantiene un servicio restringido de elementos indispensables de la instalación receptora." },
+
+  { "pregunta": "La profundidad mínima de enterrado de redes subterráneas de alumbrado exterior es:", 
+    "opciones": ["0,50 m", "0,30 m", "0,40 m"], 
+    "respuesta": "0,40 m" },
+
+  { "pregunta": "Un conductor destinado a la transmisión de energía eléctrica se denomina:", 
+    "opciones": ["Conductor activo", "Conductor pasivo", "Ambas son ciertas"], 
+    "respuesta": "Conductor activo" },
+
+  { "pregunta": "Si un local cumple condiciones tanto de suministro de socorro como de reserva, se instalará:", 
+    "opciones": ["Suministro duplicado", "Suministro de socorro", "Suministro de reserva"], 
+    "respuesta": "Suministro de reserva" },
+
+  { "pregunta": "Se considera muy baja tensión (MBT) cuando no se superan los valores de:", 
+    "opciones": ["Hasta 25V en AC y 50 V en DC", "Hasta 24V en AC y 50V en DC", "Hasta 50V en AC y 75V en DC"], 
+    "respuesta": "Hasta 50V en AC y 75 V en DC" },
+
+  { "pregunta": "La Línea General de Alimentación (LGA) es:", 
+    "opciones": ["Parte que une la CGP con las instalaciones interiores del usuario (incluidas las CGP).", "Parte de la red de distribución que alimenta la CGP.", "Enlace entre una CGP y las derivaciones individuales."], 
+    "respuesta": "Enlace entre una CGP y las derivaciones individuales." },
+
+  { "pregunta": "En el cuadro general, el interruptor con protección contra sobrecargas y cortocircuitos se denomina:", 
+    "opciones": ["Interruptor diferencial general", "Interruptor de sobretensiones", "Interruptor general automático de corte omnipolar"], 
+    "respuesta": "Interruptor general automático de corte omnipolar" },
+
+  { "pregunta": "La protección contra contactos directos se consigue mediante:", 
+    "opciones": ["Barreras/envolventes y conexiones equipotenciales locales no conectadas a tierra.", "Equipos Clase II o aislamiento equivalente.", "Alejamiento y separación eléctrica", "Todas las anteriores."], 
+    "respuesta": "Todas las anteriores." },
+
+  { "pregunta": "Se considera local de pública concurrencia:", 
+    "opciones": ["Centros culturales con ocupación > 100 personas", "50 personas", "Ninguna es cierta"], 
+    "respuesta": "Centros culturales con ocupación > 100 personas" },
+
+  { "pregunta": "Los contadores se colocarán concentrados en planta baja, entresuelo o primer sótano en edificios de hasta:", 
+    "opciones": ["16 plantas", "24 plantas", "12 plantas"], 
+    "respuesta": "12 plantas" },
+
+  { "pregunta": "La clasificación inicial de los suministros distingue entre:", 
+    "opciones": ["Normales y de reserva", "Normales y complementarios o de seguridad", "De socorro, de reserva y duplicados", "Normales y de socorro"], 
+    "respuesta": "Normales y complementarios o de seguridad" },
+
+  { "pregunta": "Las instalaciones de piscinas y fuentes requieren proyecto cuando:", 
+    "opciones": ["Potencia prevista > 10 kW", "Potencia prevista > 5 kW", "Siempre, cualquiera que sea su potencia"], 
+    "respuesta": "Potencia prevista > 5 kW" },
+
+  { "pregunta": "Un edificio con 16 contadores puede centralizarlos:", 
+    "opciones": ["Sólo en cuarto de contadores reglamentario", "En cuarto reglamentario o en armario destinado exclusivamente a este fin", "Sólo en armario destinado exclusivamente a este fin"], 
+    "respuesta": "En cuarto reglamentario o en armario destinado exclusivamente a este fin" },
+
+  { "pregunta": "El objeto de la instrucción sobre suministro de reserva es:", 
+    "opciones": ["Calcular ocupación como 1 persona/m² excluyendo pasillos y servicios", "Aplicarse a bibliotecas cualquiera que sea su ocupación", "Garantizar correcta instalación y funcionamiento de servicios de seguridad, en especial los de alumbrado"], 
+    "respuesta": "Garantizar correcta instalación y funcionamiento de servicios de seguridad, en especial los de alumbrado" },
+
+  { "pregunta": "Los límites de tensión nominal para aplicación de baja tensión son:", 
+    "opciones": ["CA ≤ 1000 V y CC ≤ 1500 V", "CA ≤ 1500 V y CC ≤ 1500 V", "CA ≤ 1000 V y CC ≤ 3500 V"], 
+    "respuesta": "CA ≤ 1000 V y CC ≤ 1500 V" },
+
+  { "pregunta": "Se consideran locales a temperatura elevada aquellos donde:", 
+    "opciones": ["La temperatura del aire se mantiene permanentemente > 50 ºC", "Puede sobrepasar frecuentemente 45 ºC o se mantiene > 40 ºC", "Puede sobrepasar frecuentemente 40 ºC o se mantiene > 35 ºC"], 
+    "respuesta": "Puede sobrepasar frecuentemente 40 ºC o se mantiene > 35 ºC" },
+
+  { "pregunta": "En edificios destinados a concentración de industrias, se considera un mínimo por planta de:", 
+    "opciones": ["125 W/m², mínimo por local 10350 W, Fs = 1", "125 W/m², mínimo por local 10350 W, Fs = 2", "125 W/m², mínimo por local 10350 W, Fs = 3"], 
+    "respuesta": "125 W/m², mínimo por local 10350 W, Fs = 1" },
+
+  {"pregunta": "En una instalación de enlace, la Línea General de Alimentación debe partir desde:",
+  "opciones": [
+    "La Caja General de Protección",
+    "El Cuadro General de Mando y Protección",
+    "La Centralización de contadores"],
+    "respuesta": "La Caja General de Protección" },
+
+  {"pregunta": "¿A partir de qué ocupación un local se considera de pública concurrencia?",
+  "opciones": ["50 personas", "100 personas", "150 personas"],
+  "respuesta": "100 personas"},
+
+  { "pregunta": "En vivienda, se instalará al menos un interruptor diferencial por cada:", 
+    "opciones": ["4 circuitos instalados", "3 circuitos instalados", "5 circuitos instalados"], 
+    "respuesta": "5 circuitos instalados" },
+
+  { "pregunta": "En alumbrado exterior, la tensión de contacto máxima admisible en partes accesibles será:", 
+    "opciones": ["50 V", "24 V", "50 V o 24 V en función del umbral del diferencial"], 
+    "respuesta": "24 V" },
+
+  { 
+  "pregunta": "En un edificio de viviendas, ¿cuál es la caída máxima de tensión permitida en la Línea General de Alimentación respecto a la tensión nominal?", 
+  "opciones": ["1,5 %", "0,5 %", "2 %"], 
+  "respuesta": "0,5 %" },
+
+
+  { "pregunta": "En redes de tierra de alumbrado exterior debe colocarse un electrodo cada:", 
+    "opciones": ["5 soportes de luminarias", "3 soportes de luminarias", "7 soportes de luminarias"], 
+    "respuesta": "5 soportes de luminarias" },
+
+  { "pregunta": "Las modificaciones o reparaciones de una instalación requerirán cumplir el reglamento cuando afecten a más del:", 
+    "opciones": ["45% de la potencia instalada", "50% de la potencia instalada", "20% de la potencia instalada"], 
+    "respuesta": "50% de la potencia instalada" },
+
+  { "pregunta": "Las dimensiones mínimas del local de centralización de contadores son:", 
+    "opciones": ["Altura ≥ 2,30 m y anchura mínima en paredes ocupadas por contadores ≥ 1,50 m", "Altura ≥ 2,20 m y anchura ≥ 1,00 m", "Altura ≥ 2,70 m y anchura ≥ 2,00 m"], 
+    "respuesta": "Altura ≥ 2,30 m y anchura mínima en paredes ocupadas por contadores ≥ 1,50 m" },
+
+  { "pregunta": "La unidad que contiene el embarrado de protección y bornes de salida en una centralización de contadores es:", 
+    "opciones": ["Unidad funcional de mando", "Unidad funcional de embarrado general y fusibles de seguridad", "Unidad funcional de embarrado de protección y bornes de salida"], 
+    "respuesta": "Unidad funcional de embarrado de protección y bornes de salida" },
+
+  { "pregunta": "Para dispositivos de control de tensión por defecto, la toma de tierra auxiliar debe:", 
+    "opciones": ["Ser eléctricamente independiente de elementos metálicos puestos a tierra", "Estar unida eléctricamente a todos los elementos metálicos puestos a tierra", "Conectarse al conductor de protección o a los elementos conectados a él"], 
+    "respuesta": "Ser eléctricamente independiente de elementos metálicos puestos a tierra" },
+
+  { "pregunta": "En redes de alimentación de alumbrado exterior, la sección mínima exigida es:", 
+    "opciones": ["6 mm² en subterráneas, 4 mm² en aéreas y 1,5 mm² en control y auxiliares", "6 mm² en subterráneas, 6 mm² en aéreas y 2,5 mm² en control y auxiliares", "6 mm² en subterráneas, 4 mm² en aéreas y 2,5 mm² en control y auxiliares"], 
+    "respuesta": "6 mm² en subterráneas, 4 mm² en aéreas y 2,5 mm² en control y auxiliares" },
+
+  { "pregunta": "El número de circuitos independientes en viviendas es:", 
+    "opciones": ["Electrificación básica y elevada: 5 y 12", "Electrificación baja y alta: 6 y 12", "Electrificación básica y elevada: según necesidad"], 
+    "respuesta": "Electrificación básica y elevada: 5 y 12" },
+
+  { "pregunta": "En el alumbrado de evacuación, la iluminancia mínima en equipos de protección contra incendios y cuadros de distribución de alumbrado debe ser:", 
+    "opciones": ["1 lux", "5 lux", "0,5 lux"], 
+    "respuesta": "5 lux" }];
+
+    /* ===== Estado ===== */
+    let preguntasAleatorias = [];
+    let indice = 0, aciertos = 0, errores = 0;
+    let historial = [];
+    let seleccionUsuario = null;
+    let respondido = false;
+
+    // Tiempo
+    const DURACION_SEG = 120 * 60; // 120 minutos
+    let inicioTiempo = null;
+    let intervaloTiempo = null;
+    let tiempoAgotado = false;
+
+    /* ===== Utilidades ===== */
+    const mezclar = (arr) => { for (let i = arr.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
+
+    function mezclarPreguntas(){
+      preguntasAleatorias = mezclar(preguntas.map(p=>({...p, opciones: mezclar([...p.opciones]) })));
+      indice=0; aciertos=0; errores=0; historial=[];
+    }
+
+    const fmt2 = (n) => String(n).padStart(2,'0');
+    const clamp0 = (x) => x < 0 ? 0 : x;
+
+    function calcularPuntuacion(){
+      const total = preguntasAleatorias.length;
+      const puntos = aciertos - 0.5 * errores; // penalización
+      const porcentaje = clamp0((puntos / total) * 100);
+      const apto = porcentaje >= 70;
+      return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), puntos, porcentaje, apto };
+    }
+
+    /* ===== Render ===== */
+    function setProgreso(){
+      const total = preguntasAleatorias.length;
+      const pct = Math.round((indice/total)*100);
+      const bar = document.getElementById('progress-bar');
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+      document.getElementById('progress-txt').textContent = `${indice}/${total}`;
+    }
+
+    function actualizarContador(){
+      if (!inicioTiempo) return;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const restantes = Math.max(0, DURACION_SEG - transcurrido);
+      const mm = fmt2(Math.floor(restantes/60));
+      const ss = fmt2(restantes%60);
+
+      const { puntos } = calcularPuntuacion();
+
+      const relojClass =
+        restantes <= 60 ? 'text-red-700' :
+        restantes <= 5*60 ? 'text-orange-600' :
+        'text-blue-700';
+
+      document.getElementById("contador").innerHTML = `
+        <span>Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
+        <span class="text-green-600">Aciertos: ${aciertos}</span>
+        <span class="text-red-600">Fallos: ${errores}</span>
+        <span>Puntos: ${puntos.toFixed(2)}</span>
+        <span class="font-mono ${relojClass}">⏳ ${mm}:${ss}</span>`;
+
+      if (restantes === 0 && !tiempoAgotado){
+        tiempoAgotado = true;
+        clearInterval(intervaloTiempo);
+        deshabilitarInteraccion();
+        abrirModalFin();
+      }
+    }
+
+    function renderOpciones(opciones){
+      const cont = document.getElementById("opciones");
+      cont.innerHTML = "";
+      opciones.forEach((op, i)=>{
+        const btn = document.createElement("button");
+        btn.type="button";
+        btn.dataset.valor = op;
+        btn.className="opcion w-full text-left bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl shadow transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300";
+        btn.innerHTML = `<span class="font-semibold tracking-wide">${op}</span>`;
+        btn.onclick = ()=>seleccionarOpcion(op);
+        btn.setAttribute('aria-label',`Opción ${i+1}: ${op}`);
+        cont.appendChild(btn);
+      });
+    }
+
+    function cargarPregunta(){
+      if (indice>=preguntasAleatorias.length) return mostrarResumen();
+      const q = preguntasAleatorias[indice];
+      seleccionUsuario=null; respondido=false;
+      document.getElementById("pregunta").textContent = q.pregunta;
+      renderOpciones(q.opciones);
+      document.getElementById("acciones").innerHTML =
+        `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
+           <span>Elige una respuesta (teclas 1–3 y Enter).</span>
+           <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
+         </div>`;
+      setProgreso(); actualizarContador();
+    }
+
+    function seleccionarOpcion(opcion){
+      if (respondido || tiempoAgotado) return;
+      seleccionUsuario = opcion;
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.classList.remove('ring','ring-yellow-300','translate-y-0.5');
+        if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
+      });
+      const btn = document.getElementById('btn-contestar');
+      btn.disabled=false; btn.classList.remove('opacity-50','cursor-not-allowed'); btn.onclick=verificarRespuesta;
+    }
+
+    function verificarRespuesta(){
+      if (respondido || !seleccionUsuario || tiempoAgotado) return;
+      const actual = preguntasAleatorias[indice];
+      const ok = seleccionUsuario===actual.respuesta;
+      respondido = true;
+
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.disabled=true; b.classList.remove('ring','ring-yellow-300');
+        const val=b.dataset.valor;
+        if (val===actual.respuesta){ b.classList.add('bg-green-600','hover:bg-green-700'); b.innerHTML=`✅ <span class="font-semibold">${val}</span>`; }
+        else if (val===seleccionUsuario && !ok){ b.classList.add('bg-red-600','hover:bg-red-700'); b.innerHTML=`❌ <span class="font-semibold">${val}</span>`; }
+        else { b.classList.add('bg-blue-500'); }
+      });
+
+      ok ? aciertos++ : errores++;
+      historial.push({pregunta:actual.pregunta, opciones:actual.opciones, correcta:actual.respuesta, elegida:seleccionUsuario});
+
+      document.getElementById("acciones").innerHTML =
+        `<div class="mt-4 flex items-center justify-end gap-3">
+           <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">Siguiente</button>
+         </div>`;
+      actualizarContador(); setProgreso();
+    }
+
+    const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
+
+    function deshabilitarInteraccion(){
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{ b.disabled=true; });
+      document.getElementById('btn-contestar')?.setAttribute('disabled','true');
+      document.removeEventListener('keydown', handleKey);
+    }
+
+    function abrirModalFin(){
+      const { total, respondidas, enBlanco, puntos, porcentaje, apto } = calcularPuntuacion();
+      const modal = document.getElementById('modal-fin');
+      document.getElementById('modal-resumen').innerHTML = `
+        <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
+        <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
+        <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${total}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+        <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
+      `;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function mostrarResumen(){
+      clearInterval(intervaloTiempo);
+      const total = preguntasAleatorias.length;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const mm = fmt2(Math.floor(transcurrido/60));
+      const ss = fmt2(transcurrido%60);
+
+      const { puntos, porcentaje, apto } = calcularPuntuacion();
+
+      const detalle = historial.map(h=>`
+        <div class='mb-2 border border-slate-200 rounded-lg p-3'>
+          <p class='font-semibold mb-2'>${h.pregunta}</p>
+          <div class='flex flex-wrap gap-2'>
+            ${h.opciones.map(op=>{
+              if (op===h.elegida && op===h.correcta) return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op===h.elegida && op!==h.correcta) return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op===h.correcta && op!==h.elegida) return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
+            }).join('')}
+          </div>
+        </div>`).join('');
+
+      document.getElementById("test").innerHTML = `
+        <div class="space-y-3">
+          <h2 class="text-2xl font-extrabold">Resultado del test <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">(${apto?'APTO ✅':'NO APTO ❌'})</span></h2>
+          <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Total: ${total}</p>
+          <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span> • Puntuación: <strong>${puntos.toFixed(2)} / ${total}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+          <hr class="my-3 border-slate-200">
+          <h3 class="text-lg font-bold">Detalle de preguntas</h3>
+          <div class="max-h-[50vh] overflow-auto pr-1">${detalle}</div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">Volver al inicio</a>
+        </div>`;
+    }
+
+    /* ===== Atajos de teclado ===== */
+    function handleKey(e){
+      if (tiempoAgotado) return;
+      if (respondido){ if (e.key==='Enter') siguientePregunta(); return; }
+      const map={'1':0,'2':1,'3':2,'4':3};
+      if (map[e.key]!==undefined){ const b=document.querySelectorAll('#opciones .opcion')[map[e.key]]; if (b) b.click(); }
+      if (e.key==='Enter'){ const b=document.getElementById('btn-contestar'); if (b && !b.disabled) b.click(); }
+    }
+
+    window.onload = ()=>{
+      mezclarPreguntas();
+      inicioTiempo = Date.now();
+      cargarPregunta();
+      intervaloTiempo = setInterval(actualizarContador, 1000);
+      document.addEventListener('keydown', handleKey);
+    };
+  </script>
+</head>
+
+<body class="bg-gray-100 text-gray-900 p-4">
+  <div class="max-w-3xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-lg ring-1 ring-slate-100" id="test">
+    <div class="mb-4">
+      <div class="flex items-center justify-between text-sm text-slate-600 mb-2">
+        <p id="contador" class="font-semibold space-x-4"></p>
+        <span id="progress-txt" class="font-mono text-slate-500">0/0</span>
+      </div>
+      <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+        <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out" style="width:0%" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      </div>
+    </div>
+
+    <h1 class="text-3xl font-extrabold mb-3 text-center">Examen Test REBT</h1>
+    <p id="pregunta" class="mb-4 text-lg text-center"></p>
+
+    <div id="opciones" class="flex flex-col gap-3"></div>
+    <div id="acciones" class="mt-2"></div>
+  </div>
+
+  <div class="mt-6 text-center">
+    <a href="index.html" class="inline-block bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">Cancelar</a>
+  </div>
+
+  <!-- Modal Tiempo Agotado -->
+  <div id="modal-fin" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
+    <div class="bg-white rounded-2xl shadow-xl max-w-lg w-full p-6">
+      <h2 class="text-2xl font-extrabold mb-1">⏰ Tiempo agotado</h2>
+      <p class="text-slate-600 mb-4">Tu tiempo se ha agotado. Estos son tus resultados:</p>
+      <div id="modal-resumen" class="space-y-1 text-slate-800"></div>
+      <div class="mt-6 flex justify-end">
+        <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
