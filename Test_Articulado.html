@@ -24,57 +24,107 @@
   </style>
 
   <script>
-    /* ===== Banco de preguntas (10) ===== */
+    /* ===== Banco de preguntas (20) – Articulado REBT ===== */
     const preguntas = [
       { 
-        pregunta: "¿Cuál es uno de los objetivos fundamentales del Reglamento Electrotécnico para Baja Tensión?", 
-        opciones: ["Promover el uso exclusivo de energía renovable", "Asegurar la seguridad de las personas y los bienes", "Regular únicamente las instalaciones industriales", "Establecer normas para equipos de media tensión"], 
-        respuesta: "Asegurar la seguridad de las personas y los bienes" 
+        pregunta: "El objeto del Reglamento Electrotécnico para Baja Tensión es:",
+        opciones: ["Regular las tarifas eléctricas aplicables a la baja tensión", "Establecer las condiciones técnicas y garantías que deben cumplir las instalaciones eléctricas", "Determinar el coste de los materiales eléctricos", "Regular la contratación de personal técnico"],
+        respuesta: "Establecer las condiciones técnicas y garantías que deben cumplir las instalaciones eléctricas"
       },
       { 
-        pregunta: "¿Hasta qué tensión nominal en corriente alterna se aplica el Reglamento?", 
-        opciones: ["500 V", "750 V", "1.000 V", "1.500 V"], 
-        respuesta: "1.000 V" 
+        pregunta: "El Reglamento se aplica a instalaciones eléctricas con tensiones nominales que no excedan de:",
+        opciones: ["500 V en corriente alterna y 1.000 V en corriente continua", "1.000 V en corriente alterna y 1.500 V en corriente continua", "1.500 V en corriente alterna y 2.000 V en corriente continua", "750 V en corriente alterna y 1.000 V en corriente continua"],
+        respuesta: "1.000 V en corriente alterna y 1.500 V en corriente continua"
       },
       { 
-        pregunta: "¿Qué se considera una modificación de importancia en una instalación eléctrica?", 
-        opciones: ["Sustitución de un enchufe", "Cambio de una lámpara", "Afectar más del 50% de la potencia instalada", "Sustituir el cuadro general sin variar potencia"], 
-        respuesta: "Afectar más del 50% de la potencia instalada" 
+        pregunta: "En redes trifásicas de cuatro conductores, las tensiones normalizadas son:",
+        opciones: ["220/380 V", "230/400 V", "240/415 V", "250/440 V"],
+        respuesta: "230/400 V"
       },
       { 
-        pregunta: "¿Cuál es la frecuencia normalizada de las redes de distribución en baja tensión?", 
-        opciones: ["40 Hz", "50 Hz", "60 Hz", "75 Hz"], 
-        respuesta: "50 Hz" 
+        pregunta: "Se considera modificación o reparación de importancia cuando:",
+        opciones: ["Afecta al 10 % de la potencia instalada", "Afecta al 25 % de la potencia instalada", "Afecta al 50 % de la potencia instalada", "Afecta a cualquier circuito del cuadro"],
+        respuesta: "Afecta al 50 % de la potencia instalada"
       },
       { 
-        pregunta: "En corriente alterna trifásica con neutro, ¿qué tensión se considera normalizada entre fases?", 
-        opciones: ["230 V", "380 V", "400 V", "450 V"], 
-        respuesta: "400 V" 
+        pregunta: "Toda instalación eléctrica debe ejecutarse de forma que:",
+        opciones: ["Se reduzca el consumo energético global", "Se garantice la seguridad de las personas y los bienes", "Se minimicen los costes de mantenimiento", "Pueda ampliarse sin autorización administrativa"],
+        respuesta: "Se garantice la seguridad de las personas y los bienes"
       },
       { 
-        pregunta: "¿Qué requisito es indispensable para la puesta en servicio de una instalación eléctrica?", 
-        opciones: ["Aprobación del fabricante", "Inspección de la empresa suministradora", "Presentar el certificado de instalación diligenciado", "Entregar factura de materiales"], 
-        respuesta: "Presentar el certificado de instalación diligenciado" 
+        pregunta: "Se considera suministro duplicado aquel que puede mantener:",
+        opciones: ["Hasta el 25 % de la potencia contratada", "El 50 % o menos de la potencia total", "Más del 50 % de la potencia total contratada", "El 100 % de la potencia instalada"],
+        respuesta: "Más del 50 % de la potencia total contratada"
       },
       { 
-        pregunta: "¿Quién puede ejecutar instalaciones eléctricas de baja tensión?", 
-        opciones: ["Cualquier persona con conocimientos básicos", "Solo empresas instaladoras en baja tensión", "Ingenieros industriales únicamente", "El propietario del inmueble si asume la responsabilidad"], 
-        respuesta: "Solo empresas instaladoras en baja tensión" 
+        pregunta: "Cuando no se pueda cumplir una prescripción del Reglamento, se deberá:",
+        opciones: ["Ejecutar la instalación igualmente", "Solicitar al órgano competente una excepción debidamente justificada", "Sustituir la norma por una recomendación del instalador", "Aplicar el criterio del titular"],
+        respuesta: "Solicitar al órgano competente una excepción debidamente justificada"
       },
       { 
-        pregunta: "¿Qué documento debe entregarse al titular junto con el certificado de instalación?", 
-        opciones: ["Una memoria justificativa", "Un esquema unifilar y un croquis del trazado", "Un informe de consumo mensual", "Una declaración del fabricante de materiales"], 
-        respuesta: "Un esquema unifilar y un croquis del trazado" 
+        pregunta: "Las instalaciones eléctricas solo podrán ser realizadas por:",
+        opciones: ["Personas con experiencia en electricidad", "Empresas instaladoras habilitadas en baja tensión", "El titular de la instalación", "La compañía distribuidora"],
+        respuesta: "Empresas instaladoras habilitadas en baja tensión"
       },
       { 
-        pregunta: "Cuando no sea posible cumplir con alguna prescripción del Reglamento, ¿qué debe hacerse?", 
-        opciones: ["Omitir la norma si no es peligrosa", "Solicitar una excepción al órgano competente", "Justificarlo en el certificado de instalación", "Sustituir la norma por una recomendación del fabricante"], 
-        respuesta: "Solicitar una excepción al órgano competente" 
+        pregunta: "Para la puesta en servicio, la empresa instaladora debe presentar ante el órgano competente:",
+        opciones: ["El presupuesto de instalación", "El certificado de instalación diligenciado", "La factura del material", "El permiso municipal de obra"],
+        respuesta: "El certificado de instalación diligenciado"
       },
       { 
-        pregunta: "¿Qué se entiende por 'suministro duplicado' según el Reglamento?", 
-        opciones: ["Aquel que mantiene más del 50% de la potencia contratada", "Un suministro temporal de emergencia", "Un suministro auxiliar de baja tensión", "Una instalación conectada a dos transformadores"], 
-        respuesta: "Aquel que mantiene más del 50% de la potencia contratada" 
+        pregunta: "El certificado de instalación debe ir acompañado de:",
+        opciones: ["Croquis del trazado y esquema unifilar", "Copia del contrato de suministro", "Presupuesto aprobado", "Manual del fabricante"],
+        respuesta: "Croquis del trazado y esquema unifilar"
+      },
+      { 
+        pregunta: "El mantenimiento de las instalaciones eléctricas corresponde a:",
+        opciones: ["El titular de la instalación", "La empresa instaladora que la ejecutó", "La compañía eléctrica", "El técnico proyectista"],
+        respuesta: "El titular de la instalación"
+      },
+      { 
+        pregunta: "Las ampliaciones o modificaciones de una instalación deben cumplir:",
+        opciones: ["El Reglamento solo en su parte modificada", "El Reglamento en toda la instalación existente", "Únicamente las normas UNE", "Los requisitos de la compañía eléctrica"],
+        respuesta: "El Reglamento solo en su parte modificada"
+      },
+      { 
+        pregunta: "En caso de detectarse defectos que representen peligro inmediato:",
+        opciones: ["Se podrá mantener el suministro provisionalmente", "Deberán corregirse antes de la puesta en servicio", "Bastará con comunicarlo al titular", "Podrán ser subsanados en un plazo de un mes"],
+        respuesta: "Deberán corregirse antes de la puesta en servicio"
+      },
+      { 
+        pregunta: "Los materiales, equipos y aparatos utilizados deben:",
+        opciones: ["Estar fabricados conforme a normas o especificaciones técnicas aplicables", "Ser fabricados en la Unión Europea", "Tener una garantía mínima de dos años", "Ser de bajo consumo energético"],
+        respuesta: "Estar fabricados conforme a normas o especificaciones técnicas aplicables"
+      },
+      { 
+        pregunta: "Los organismos de control autorizados tienen por misión:",
+        opciones: ["Verificar y comprobar el cumplimiento del Reglamento", "Elaborar proyectos eléctricos", "Emitir facturas de mantenimiento", "Sustituir a la Administración en la tramitación"],
+        respuesta: "Verificar y comprobar el cumplimiento del Reglamento"
+      },
+      { 
+        pregunta: "Las especificaciones particulares de las empresas distribuidoras de energía deben:",
+        opciones: ["Incluir siempre los materiales de su propia marca", "Ajustarse al Reglamento y ser aprobadas por técnico competente de la empresa", "Ser confidenciales", "Estar registradas en el Ministerio de Industria"],
+        respuesta: "Ajustarse al Reglamento y ser aprobadas por técnico competente de la empresa"
+      },
+      { 
+        pregunta: "Las especificaciones particulares de las distribuidoras no podrán:",
+        opciones: ["Establecer condiciones de conexión", "Limitar el tipo de suministro", "Incluir marcas o modelos que conduzcan a un único proveedor", "Definir la tensión de servicio"],
+        respuesta: "Incluir marcas o modelos que conduzcan a un único proveedor"
+      },
+      { 
+        pregunta: "La documentación técnica de las instalaciones eléctricas debe conservarse:",
+        opciones: ["Durante toda la vida útil de la instalación", "Durante cinco años", "Hasta la siguiente inspección", "Solo si lo solicita la Administración"],
+        respuesta: "Durante toda la vida útil de la instalación"
+      },
+      { 
+        pregunta: "En instalaciones conectadas a redes de distribución, ¿quién es responsable de que las especificaciones particulares cumplan las exigencias técnicas y de seguridad?",
+        opciones: ["El instalador autorizado", "El titular de la instalación", "Un técnico competente designado por la propia empresa distribuidora", "El órgano competente de la comunidad autónoma"],
+        respuesta: "Un técnico competente designado por la propia empresa distribuidora"
+      },
+      { 
+        pregunta: "El titular de la instalación eléctrica es responsable de que:",
+        opciones: ["La instalación se mantenga en condiciones seguras de utilización", "El instalador verifique la puesta en marcha", "La distribuidora realice revisiones periódicas", "Los materiales tengan marcado CE"],
+        respuesta: "La instalación se mantenga en condiciones seguras de utilización"
       }
     ];
 
@@ -86,7 +136,7 @@
     let respondido = false;
 
     // Tiempo
-    const DURACION_SEG = 30 * 60; // <<< 30 minutos
+    const DURACION_SEG = 60 * 60; // <<< 60 minutos
     let inicioTiempo = null;
     let intervaloTiempo = null;
     let tiempoAgotado = false;
@@ -95,7 +145,6 @@
     const mezclar = (arr) => { for (let i = arr.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
 
     function mezclarPreguntas(){
-      // Si quisieras limitar a 10 desde un banco mayor, aquí puedes .slice(0,10)
       preguntasAleatorias = mezclar(preguntas.map(p=>({...p, opciones: mezclar([...p.opciones]) })));
       indice=0; aciertos=0; errores=0; historial=[];
     }
@@ -104,13 +153,13 @@
     const clamp0 = (x) => x < 0 ? 0 : x;
 
     function calcularPuntuacion(){
-      const total = preguntasAleatorias.length;
-      // <<< Nueva regla: 1 punto por acierto y cada 2 fallos restan 1 punto
-      const penalizacion = Math.floor(errores / 2);
-      const puntos = Math.max(0, aciertos - penalizacion);
-      const porcentaje = clamp0((puntos / total) * 100);
-      const apto = porcentaje >= 80; // <<< mínimo 80%
-      return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), puntos, porcentaje, apto, penalizacion };
+      const total = preguntasAleatorias.length;              // 20
+      const penalizacion = Math.floor(errores / 2);          // cada 2 fallos = 1 válida menos
+      const validasNetas = Math.max(0, aciertos - penalizacion);
+      const puntos = validasNetas * 0.5;                     // cada válida = 0,5 puntos
+      const porcentaje = clamp0((validasNetas / total) * 100); // % sobre preguntas válidas netas / total
+      const apto = porcentaje >= 80;                         // mínimo 80%
+      return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
     }
 
     /* ===== Render ===== */
@@ -131,6 +180,7 @@
       const ss = fmt2(restantes%60);
 
       const { puntos } = calcularPuntuacion();
+      const totalPuntos = preguntasAleatorias.length * 0.5;
 
       const relojClass =
         restantes <= 60 ? 'text-red-700' :
@@ -141,7 +191,7 @@
         <span>Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
         <span class="text-green-600">Aciertos: ${aciertos}</span>
         <span class="text-red-600">Fallos: ${errores}</span>
-        <span>Puntos: ${puntos.toFixed(2)}</span>
+        <span>Puntos: ${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</span>
         <span class="font-mono ${relojClass}">⏳ ${mm}:${ss}</span>`;
 
       if (restantes === 0 && !tiempoAgotado){
@@ -225,12 +275,15 @@
     }
 
     function abrirModalFin(){
-      const { total, respondidas, enBlanco, puntos, porcentaje, apto, penalizacion } = calcularPuntuacion();
+      const { total, respondidas, enBlanco, penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
       const modal = document.getElementById('modal-fin');
+      const totalPuntos = total * 0.5;
       document.getElementById('modal-resumen').innerHTML = `
         <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
-        <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Penalización aplicada: <strong>-${penalizacion}</strong></p>
-        <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${total}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+        <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
+        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas (=${(penalizacion*0.5).toFixed(2)} pts)</p>
+        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total}</p>
+        <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
         <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
       `;
       modal.classList.remove('hidden');
@@ -244,7 +297,7 @@
       const mm = fmt2(Math.floor(transcurrido/60));
       const ss = fmt2(transcurrido%60);
 
-      const { puntos, porcentaje, apto, penalizacion } = calcularPuntuacion();
+      const { penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
 
       const detalle = historial.map(h=>`
         <div class='mb-2 border border-slate-200 rounded-lg p-3'>
@@ -259,11 +312,14 @@
           </div>
         </div>`).join('');
 
+      const totalPuntos = total * 0.5;
+
       document.getElementById("test").innerHTML = `
         <div class="space-y-3">
           <h2 class="text-2xl font-extrabold">Resultado del test <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">(${apto?'APTO ✅':'NO APTO ❌'})</span></h2>
-          <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Penalización: <strong>-${penalizacion}</strong> • Total: ${total}</p>
-          <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span> • Puntuación: <strong>${puntos.toFixed(2)} / ${total}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+          <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Penalización: <strong>-${penalizacion}</strong> válidas</p>
+          <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total} • Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+          <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span></p>
           <hr class="my-3 border-slate-200">
           <h3 class="text-lg font-bold">Detalle de preguntas</h3>
           <div class="max-h-[50vh] overflow-auto pr-1">${detalle}</div>
