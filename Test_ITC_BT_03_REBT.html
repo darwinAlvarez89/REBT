@@ -24,59 +24,112 @@
   </style>
 
   <script>
-    /* ===== Banco de preguntas (10) ===== */
+    /* ===== Banco de preguntas (20) – Articulado REBT ===== */
     const preguntas = [
-  { 
-    pregunta: "Una empresa instaladora en baja tensión de categoría básica (IBTB) no puede realizar instalaciones eléctricas de:", 
-    opciones: ["Edificios de viviendas", "Rótulos luminosos", "Locales comerciales", "Todas las respuestas son correctas"], 
-    respuesta: "Todas las respuestas son correctas" 
+  {
+    pregunta: "Según el REBT, una empresa instaladora en baja tensión es aquella que realiza, mantiene o repara instalaciones eléctricas y ha presentado:",
+    opciones: ["Un proyecto técnico visado", "Una declaración responsable ante el órgano competente", "Una solicitud de autorización temporal", "Un contrato con una distribuidora de energía"],
+    respuesta: "Una declaración responsable ante el órgano competente"
   },
-  { 
-    pregunta: "El instalador en baja tensión deberá desarrollar su actividad dentro de:", 
-    opciones: ["Una empresa instaladora habilitada en baja tensión", "Cualquier empresa de electricidad registrada en el ayuntamiento", "Una empresa constructora con licencia", "Una cooperativa de técnicos eléctricos"], 
-    respuesta: "Una empresa instaladora habilitada en baja tensión" 
+  {
+    pregunta: "Según el REBT, la empresa instaladora podrá ser:",
+    opciones: ["Solo persona jurídica", "Solo persona física", "Persona física o jurídica", "Únicamente sociedades mercantiles"],
+    respuesta: "Persona física o jurídica"
   },
-  { 
-    pregunta: "El instalador en baja tensión debe cumplir y acreditar una de las siguientes condiciones:", 
-    opciones: ["Disponer de título universitario, FP o certificado de profesionalidad relacionado con baja tensión", "Haber realizado un curso de prevención de riesgos eléctricos", "Poseer licencia de obra menor", "Haber superado una prueba de la compañía suministradora"], 
-    respuesta: "Disponer de título universitario, FP o certificado de profesionalidad relacionado con baja tensión" 
+  {
+    pregunta: "Según el REBT, la declaración responsable presentada por la empresa instaladora habilita para ejercer su actividad:",
+    opciones: ["Solo en la comunidad autónoma donde se presente", "En todo el territorio español por tiempo indefinido", "Durante cinco años renovables", "Únicamente después de una inspección previa"],
+    respuesta: "En todo el territorio español por tiempo indefinido"
   },
-  { 
-    pregunta: "La declaración responsable presentada por la empresa instaladora ante el órgano competente:", 
-    opciones: ["La habilita por tiempo indefinido en todo el territorio nacional", "La habilita solo en la comunidad autónoma donde se presenta", "Tiene una validez de tres años", "Necesita renovación cada cinco años"], 
-    respuesta: "La habilita por tiempo indefinido en todo el territorio nacional" 
+  {
+    pregunta: "Según el REBT, la categoría básica permite realizar, mantener y reparar instalaciones:",
+    opciones: ["En el ámbito del reglamento, excepto las reservadas a la categoría especialista", "Solo en viviendas de uso doméstico", "Exclusivamente en locales comerciales", "Únicamente en baja tensión inferior a 50 V"],
+    respuesta: "En el ámbito del reglamento, excepto las reservadas a la categoría especialista"
   },
-  { 
-    pregunta: "La categoría especialista (IBTE) permite realizar, entre otras, instalaciones en:", 
-    opciones: ["Viviendas y locales comerciales", "Quirófanos, alumbrado exterior y locales con riesgo de incendio o explosión", "Oficinas, despachos y viviendas unifamiliares", "Cualquier tipo de instalación sin necesidad de proyecto"], 
-    respuesta: "Quirófanos, alumbrado exterior y locales con riesgo de incendio o explosión" 
+  {
+    pregunta: "Según el REBT, la categoría especialista permite realizar, mantener y reparar instalaciones:",
+    opciones: ["Solo en viviendas unifamiliares", "En todas las instalaciones incluidas en el ámbito del reglamento", "Únicamente en locales de pública concurrencia", "Solo en instalaciones sin proyecto"],
+    respuesta: "En todas las instalaciones incluidas en el ámbito del reglamento"
   },
-  { 
-    pregunta: "Las empresas instaladoras deben disponer, entre otros medios técnicos, de:", 
-    opciones: ["Medidor de aislamiento y comprobador de continuidad", "Analizador de energía reactiva", "Transformador de potencia portátil", "Banco de pruebas trifásico"], 
-    respuesta: "Medidor de aislamiento y comprobador de continuidad" 
+  {
+    pregunta: "Según el REBT, el instalador en baja tensión deberá desarrollar su actividad:",
+    opciones: ["De manera independiente sin empresa", "En el seno de una empresa instaladora habilitada", "Solo como trabajador autónomo", "Únicamente para la compañía distribuidora"],
+    respuesta: "En el seno de una empresa instaladora habilitada"
   },
-  { 
-    pregunta: "Los equipos de medida o comprobación de una empresa instaladora deben:", 
-    opciones: ["Estar calibrados o verificados periódicamente", "Sustituirse cada año", "Estar homologados por la distribuidora eléctrica", "Usarse solo en instalaciones domésticas"], 
-    respuesta: "Estar calibrados o verificados periódicamente" 
+  {
+    pregunta: "Según el REBT, una de las vías válidas para acreditar la cualificación del instalador es:",
+    opciones: ["Tener experiencia laboral sin formación acreditada", "Poseer un título universitario cuyo ámbito cubra las materias del reglamento", "Presentar un certificado municipal", "Realizar un curso privado de electricidad"],
+    respuesta: "Poseer un título universitario cuyo ámbito cubra las materias del reglamento"
   },
-  { 
-    pregunta: "Las empresas instaladoras deben tener contratado un seguro de responsabilidad civil con una cobertura mínima de:", 
-    opciones: ["300.000 € para básica y 600.000 € para especialista", "600.000 € para básica y 900.000 € para especialista", "500.000 € para ambas categorías", "1.000.000 € para ambas categorías"], 
-    respuesta: "600.000 € para básica y 900.000 € para especialista" 
+  {
+    pregunta: "Según el REBT, otra forma de acreditar la cualificación del instalador es:",
+    opciones: ["Poseer un título de formación profesional o certificado de profesionalidad que cubra las materias del reglamento", "Haber trabajado tres años en mantenimiento eléctrico", "Tener un curso de riesgos eléctricos", "Disponer de licencia del ayuntamiento"],
+    respuesta: "Poseer un título de formación profesional o certificado de profesionalidad que cubra las materias del reglamento"
   },
-  { 
-    pregunta: "Cuando una empresa instaladora deje de cumplir los requisitos exigidos para su habilitación:", 
-    opciones: ["Podrá seguir trabajando hasta renovarlos", "Deberá comunicarlo al órgano competente de la comunidad autónoma", "Bastará con suspender temporalmente la actividad", "Deberá solicitar autorización de la compañía suministradora"], 
-    respuesta: "Deberá comunicarlo al órgano competente de la comunidad autónoma" 
+  {
+    pregunta: "Según el REBT, también puede ejercer como instalador quien:",
+    opciones: ["Tenga reconocida su competencia profesional adquirida por experiencia laboral", "Disponga de licencia de la distribuidora", "Sea técnico en telecomunicaciones", "Haya completado 2 años de experiencia en obras públicas"],
+    respuesta: "Tenga reconocida su competencia profesional adquirida por experiencia laboral"
   },
-  { 
-    pregunta: "La categoría básica (IBTB) permite realizar instalaciones:", 
-    opciones: ["En viviendas, locales comerciales y pequeñas industrias", "En quirófanos y alumbrado exterior", "En centros de transformación", "En locales con riesgo de explosión"], 
-    respuesta: "En viviendas, locales comerciales y pequeñas industrias" 
+  {
+    pregunta: "Según el REBT, el cese de actividad o modificación de los datos declarados por la empresa instaladora debe comunicarse en un plazo máximo de:",
+    opciones: ["10 días", "15 días", "1 mes", "3 meses"],
+    respuesta: "1 mes"
+  },
+  {
+    pregunta: "Según el REBT, la empresa instaladora deberá disponer, como mínimo, de:",
+    opciones: ["Un ingeniero técnico industrial", "Una persona instaladora en baja tensión de la misma categoría de habilitación", "Un técnico superior en electricidad y un ayudante", "Un jefe de obra y un administrativo"],
+    respuesta: "Una persona instaladora en baja tensión de la misma categoría de habilitación"
+  },
+  {
+    pregunta: "Según el REBT, la empresa instaladora deberá contar con los medios técnicos adecuados para:",
+    opciones: ["El montaje y la verificación de las instalaciones que ejecute", "La emisión de facturas electrónicas", "El control de consumo energético", "La medición de armónicos en alta tensión"],
+    respuesta: "El montaje y la verificación de las instalaciones que ejecute"
+  },
+  {
+    pregunta: "Según el REBT, la empresa instaladora deberá tener suscrita una póliza de seguro de responsabilidad civil con cobertura mínima de:",
+    opciones: ["300.000 € para básica y 600.000 € para especialista", "600.000 € para básica y 900.000 € para especialista", "900.000 € para básica y 1.200.000 € para especialista", "500.000 € para ambas categorías"],
+    respuesta: "600.000 € para básica y 900.000 € para especialista"
+  },
+  {
+    pregunta: "Según el REBT, las empresas instaladoras deberán facilitar al órgano competente la documentación o información que se les requiera:",
+    opciones: ["Cuando lo solicite la compañía eléctrica", "Cuando lo solicite el órgano competente en materia de industria", "Únicamente cada cinco años", "Solo si cambia la normativa"],
+    respuesta: "Cuando lo solicite el órgano competente en materia de industria"
+  },
+  {
+    pregunta: "Según el REBT, las empresas instaladoras deberán comunicar al órgano competente cualquier incumplimiento reglamentario en las instalaciones en las que intervengan:",
+    opciones: ["En un plazo no superior a 24 horas si existe peligro manifiesto", "En el momento de finalizar la obra", "Dentro del mismo mes", "Solo cuando el titular lo autorice"],
+    respuesta: "En un plazo no superior a 24 horas si existe peligro manifiesto"
+  },
+  {
+    pregunta: "Según el REBT, la empresa instaladora tiene prohibido:",
+    opciones: ["Emitir certificados de instalaciones propias", "Facilitar o ceder certificados de instalaciones no realizadas por ella misma", "Contratar instaladores de otra empresa", "Usar material con marcado CE"],
+    respuesta: "Facilitar o ceder certificados de instalaciones no realizadas por ella misma"
+  },
+  {
+    pregunta: "Según el REBT, la empresa instaladora deberá conservar los certificados de instalación emitidos durante un período mínimo de:",
+    opciones: ["Dos años", "Cinco años", "Diez años", "Toda la vida útil de la instalación"],
+    respuesta: "Cinco años"
+  },
+  {
+    pregunta: "Según el REBT, la empresa instaladora está obligada a asistir a las inspecciones:",
+    opciones: ["Solo si se le notifica por escrito", "Cuando sea requerida por el órgano competente", "Una vez al año", "Únicamente en instalaciones industriales"],
+    respuesta: "Cuando sea requerida por el órgano competente"
+  },
+  {
+    pregunta: "Según el REBT, entre los medios técnicos mínimos de la categoría básica se incluye:",
+    opciones: ["Medidor de aislamiento y continuidad, telurómetro y comprobador de diferenciales", "Analizador de redes trifásico", "Cámara termográfica", "Medidor de armónicos de alta precisión"],
+    respuesta: "Medidor de aislamiento y continuidad, telurómetro y comprobador de diferenciales"
+  },
+  {
+    pregunta: "Según el REBT, la categoría especialista deberá disponer, además de los medios de la categoría básica, de:",
+    opciones: ["Analizador de redes, armónicos y perturbaciones", "Un luxómetro únicamente", "Un multímetro digital portátil", "Un osciloscopio de banco"],
+    respuesta: "Analizador de redes, armónicos y perturbaciones"
   }
 ];
+
+
+
 
     /* ===== Estado ===== */
     let preguntasAleatorias = [];
@@ -86,7 +139,7 @@
     let respondido = false;
 
     // Tiempo
-    const DURACION_SEG = 30 * 60; // <<< 30 minutos
+    const DURACION_SEG = 60 * 60; // <<< 60 minutos
     let inicioTiempo = null;
     let intervaloTiempo = null;
     let tiempoAgotado = false;
@@ -95,7 +148,6 @@
     const mezclar = (arr) => { for (let i = arr.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
 
     function mezclarPreguntas(){
-      // Si quisieras limitar a 10 desde un banco mayor, aquí puedes .slice(0,10)
       preguntasAleatorias = mezclar(preguntas.map(p=>({...p, opciones: mezclar([...p.opciones]) })));
       indice=0; aciertos=0; errores=0; historial=[];
     }
@@ -104,13 +156,13 @@
     const clamp0 = (x) => x < 0 ? 0 : x;
 
     function calcularPuntuacion(){
-      const total = preguntasAleatorias.length;
-      // <<< Nueva regla: 1 punto por acierto y cada 2 fallos restan 1 punto
-      const penalizacion = Math.floor(errores / 2);
-      const puntos = Math.max(0, aciertos - penalizacion);
-      const porcentaje = clamp0((puntos / total) * 100);
-      const apto = porcentaje >= 80; // <<< mínimo 80%
-      return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), puntos, porcentaje, apto, penalizacion };
+      const total = preguntasAleatorias.length;              // 20
+      const penalizacion = Math.floor(errores / 2);          // cada 2 fallos = 1 válida menos
+      const validasNetas = Math.max(0, aciertos - penalizacion);
+      const puntos = validasNetas * 0.5;                     // cada válida = 0,5 puntos
+      const porcentaje = clamp0((validasNetas / total) * 100); // % sobre preguntas válidas netas / total
+      const apto = porcentaje >= 80;                         // mínimo 80%
+      return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
     }
 
     /* ===== Render ===== */
@@ -131,6 +183,7 @@
       const ss = fmt2(restantes%60);
 
       const { puntos } = calcularPuntuacion();
+      const totalPuntos = preguntasAleatorias.length * 0.5;
 
       const relojClass =
         restantes <= 60 ? 'text-red-700' :
@@ -141,7 +194,7 @@
         <span>Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
         <span class="text-green-600">Aciertos: ${aciertos}</span>
         <span class="text-red-600">Fallos: ${errores}</span>
-        <span>Puntos: ${puntos.toFixed(2)}</span>
+        <span>Puntos: ${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</span>
         <span class="font-mono ${relojClass}">⏳ ${mm}:${ss}</span>`;
 
       if (restantes === 0 && !tiempoAgotado){
@@ -225,12 +278,15 @@
     }
 
     function abrirModalFin(){
-      const { total, respondidas, enBlanco, puntos, porcentaje, apto, penalizacion } = calcularPuntuacion();
+      const { total, respondidas, enBlanco, penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
       const modal = document.getElementById('modal-fin');
+      const totalPuntos = total * 0.5;
       document.getElementById('modal-resumen').innerHTML = `
         <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
-        <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Penalización aplicada: <strong>-${penalizacion}</strong></p>
-        <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${total}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+        <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
+        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas (=${(penalizacion*0.5).toFixed(2)} pts)</p>
+        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total}</p>
+        <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
         <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
       `;
       modal.classList.remove('hidden');
@@ -244,7 +300,7 @@
       const mm = fmt2(Math.floor(transcurrido/60));
       const ss = fmt2(transcurrido%60);
 
-      const { puntos, porcentaje, apto, penalizacion } = calcularPuntuacion();
+      const { penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
 
       const detalle = historial.map(h=>`
         <div class='mb-2 border border-slate-200 rounded-lg p-3'>
@@ -259,11 +315,14 @@
           </div>
         </div>`).join('');
 
+      const totalPuntos = total * 0.5;
+
       document.getElementById("test").innerHTML = `
         <div class="space-y-3">
           <h2 class="text-2xl font-extrabold">Resultado del test <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">(${apto?'APTO ✅':'NO APTO ❌'})</span></h2>
-          <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Penalización: <strong>-${penalizacion}</strong> • Total: ${total}</p>
-          <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span> • Puntuación: <strong>${puntos.toFixed(2)} / ${total}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+          <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Penalización: <strong>-${penalizacion}</strong> válidas</p>
+          <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total} • Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+          <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span></p>
           <hr class="my-3 border-slate-200">
           <h3 class="text-lg font-bold">Detalle de preguntas</h3>
           <div class="max-h-[50vh] overflow-auto pr-1">${detalle}</div>
