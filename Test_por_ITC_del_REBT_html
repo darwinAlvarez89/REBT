@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Título enriquecido con palabras clave -->
+  <title>Test REBT online – Exámenes y cuestionarios del Reglamento Electrotécnico de Baja Tensión</title>
+  <!-- Descripción enfocada al SEO con términos de búsqueda habituales -->
+  <meta name="description" content="Realiza tus test del Reglamento Electrotécnico de Baja Tensión (REBT) de forma online. Practica con cuestionarios por Instrucción Técnica Complementaria, por contenido y por articulado y realiza exámenes con corrección automática." />
+  <!-- Palabras clave para facilitar la indexación (no determinantes, pero aportan contexto) -->
+  <meta name="keywords" content="test REBT, examen REBT, preguntas REBT, cuestionarios REBT, reglamento electrotécnico baja tensión, ITC, baja tensión" />
+  <!-- Indica a los bots que indexen y sigan los enlaces -->
+  <meta name="robots" content="index, follow" />
+  <!-- Canonical para evitar contenido duplicado -->
+  <link rel="canonical" href="https://app-rebt.es/" />
+  
+  <!-- Metadatos sociales actualizados -->
+  <meta property="og:title" content="Test REBT – Exámenes y cuestionarios online del REBT" />
+  <meta property="og:description" content="Practica con nuestros cuestionarios del REBT organizados por ITC, por contenido y por el articulado. Realiza exámenes con corrección automática y aprende de forma eficiente." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://app-rebt.es/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#0f172a" />
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" />
+  <!-- Google tag (gtag.js) - seguimiento analítico -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-RSH4ZW3VT2');
+  </script>
+  <!-- TailwindCSS CDN para estilos -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Precarga de imagen de fondo para reducir parpadeos -->
+  <link rel="preload" as="image" href="img/fondo.png">
+  <!-- Estilos en línea adicionales -->
+  <style>
+    body{
+      background:url('img/fondo.png');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+    }
+    /* Clase utilitaria para ocultar contenido del layout pero accesible para lectores y robots */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+  <!-- Datos estructurados JSON-LD describiendo la aplicación educativa -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalApplication",
+    "name": "Test REBT",
+    "url": "https://app-rebt.es/",
+    "operatingSystem": "Web",
+    "applicationCategory": "EducationalApplication",
+    "description": "Plataforma para practicar test del Reglamento Electrotécnico de Baja Tensión (REBT) con cuestionarios por ITC, contenido y articulado y exámenes online con corrección automática."
+  }
+  </script>
+</head>
+<body class="min-h-screen relative text-slate-900">
+  <!-- Capa oscura para mejorar contraste -->
+  <div class="absolute inset-0 bg-slate-900/60"></div>
+  
+  <main class="relative z-10 flex items-center justify-center min-h-screen p-6">
+    <section class="w-full max-w-4xl">
+      <!-- Tarjeta principal -->
+      <div class="backdrop-blur-md bg-white/90 rounded-2xl shadow-2xl shadow-slate-900/10 ring-1 ring-white/50 p-8 md:p-10">
+        <header class="text-center space-y-3 mb-8">
+          <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-800">
+            TEST del REBT <span aria-hidden="true">⚡</span>
+          </h1>
+          <p class="text-slate-600 text-base md:text-lg">
+           Refuerza tus conocimientos del <strong>Reglamento Electrotécnico de Baja Tensión</strong>.
+          </p>
+          <p class="text-slate-500 text-sm md:text-base">
+            Selecciona entre tests por ITC para estudiar de forma progresiva o tests del REBT completo para evaluar tu dominio total del Reglamento.
+          </p>
+        </header>
+
+        <!-- Texto descriptivo oculto al usuario pero indexable para SEO y accesible para lectores de pantalla -->
+        <div class="sr-only">
+          <h2>¿Qué es el REBT?</h2>
+          <p>El Reglamento Electrotécnico de Baja Tensión (REBT) establece las condiciones técnicas y garantías que deben cumplir las instalaciones eléctricas para asegurar la seguridad de las personas y el correcto funcionamiento de los equipos. Es una normativa clave para profesionales y estudiantes del ámbito eléctrico.</p>
+          <h3>Cómo utilizar esta plataforma</h3>
+          <p>En esta web encontrarás distintos tipos de cuestionarios para repasar y aprender. Los Test 1 y Test 2 están organizados por Instrucciones Técnicas Complementarias (ITC), ya sea por número o por contenido. También dispones de un Test del articulado para poner a prueba tus conocimientos sobre el texto completo del REBT. Finalmente, puedes realizar exámenes tipo test con corrección automática para evaluar tu progreso.</p>
+          <p>Todos los cuestionarios están diseñados para adaptarse a los distintos niveles de electrificación (básica, media y elevada) y cubren desde cálculos de cargas hasta requisitos de protección y seguridad. Con ellos podrás prepararte para exámenes oficiales o mejorar tus habilidades como instalador o técnico.</p>
+        </div>
+        <!-- Botonera: columna en móvil, 2 columnas en pantallas medianas -->
+        <nav class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mt-6">
+          
+        <!-- Examen test 1 -->
+          <a href="examen1.html" aria-label="Abrir Examen tipo test 1"
+             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold bg-emerald-600 text-white hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300 transition transform hover:-translate-y-0.5 active:translate-y-0">
+            <!-- icono check/certificado -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
+            </svg>
+            <span>Examen test 1</span>
+          </a>
+          <!-- Examen test 2 -->
+          <a href="examen2.html" aria-label="Abrir Examen tipo test 2"
+             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300 transition transform hover:-translate-y-0.5 active:translate-y-0"
+             style="background-color:#F97316;">
+            <!-- icono check/certificado -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
+            </svg>
+            <span>Examen test 2</span>           
+          </a>
+          
+        </nav>
+        <!-- Pie -->
+        <div class="mt-8 text-center text-sm text-slate-500">
+          © <span id="y"></span> REBT • Aprende y practica
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    // Año dinámico para el pie de página
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
