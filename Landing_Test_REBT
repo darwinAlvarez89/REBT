@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Test REBT ⚡ | Inicio</title>
+  <meta name="description" content="Practica el REBT: tests por ITC, exámenes completos y glosario de siglas." />
+  <style>
+    :root {
+      /* 👉 Cambia aquí la URL de tu imagen de fondo 👇 */
+      --bg-url: url("https://app-rebt.es/assets/img/fondo-principal.jpg");
+      --overlay: rgba(0, 0, 0, 0.55);
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --txt: #0f172a;
+      --accent: #22d3ee;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Inter, Arial;
+      background: var(--overlay), var(--bg-url) center/cover no-repeat fixed;
+      color: var(--txt);
+      display: grid;
+      min-height: 100dvh;
+      place-items: center;
+    }
+
+    .wrap {
+      width: min(940px, 92vw);
+      padding: 28px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 800;
+      text-align: center;
+    }
+
+    p {
+      margin: 0 0 22px;
+      opacity: 0.85;
+      text-align: center;
+      font-size: 1.05rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      display: block;
+      text-decoration: none;
+      border-radius: 12px;
+      padding: 18px 20px;
+      font-weight: 600;
+      color: white;
+      text-align: center;
+      transition: 0.18s transform, 0.18s box-shadow;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Colores personalizados de botones */
+    .btn-test { background: #2563eb; }
+    .btn-glosario { background: #0284c7; }
+
+    .footer {
+      margin-top: 14px;
+      opacity: 0.6;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    @media (min-width: 680px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <h1>Test REBT ⚡</h1>
+      <p>Elige cómo quieres estudiar el Reglamento: modo aprendizaje por ITC, exámenes completos y glosario.</p>
+
+      <div class="grid">
+        <a class="btn btn-test" href="/test/">
+          TEST<br><small>Aprender por ITC o Exámenes REBT</small>
+        </a>
+        <a class="btn btn-glosario" href="/glosario/">
+          Glosario de siglas<br><small>Significado, uso y ubicación en el REBT</small>
+        </a>
+      </div>
+
+      <div class="footer">© 2025 REBT · Aprende y práctica</div>
+    </section>
+  </main>
+</body>
+</html>
