@@ -7,10 +7,9 @@
   <meta name="description" content="Practica el REBT: tests por ITC, exámenes completos y glosario de siglas." />
   <style>
     :root {
-      /* 👉 Cambia aquí la URL de tu imagen de fondo 👇 */
-      --bg-url: url("https://app-rebt.es/assets/img/fondo-principal.jpg");
-      --overlay: rgba(0, 0, 0, 0.55);
-      --card-bg: rgba(255, 255, 255, 0.95);
+      --bg-url: url("https://app-rebt.es/img/fondo.png");
+      --overlay: rgba(15, 23, 42, 0.6); /* capa oscura similar a tu página */
+      --card-bg: rgba(255, 255, 255, 0.9);
       --txt: #0f172a;
       --accent: #22d3ee;
     }
@@ -78,12 +77,12 @@
     }
 
     /* Colores personalizados de botones */
-    .btn-test { background: #2563eb; }
-    .btn-glosario { background: #0284c7; }
+    .btn-test { background: #2563eb; }      /* Azul */
+    .btn-glosario { background: #0284c7; }  /* Cian */
 
     .footer {
       margin-top: 14px;
-      opacity: 0.6;
+      opacity: 0.7;
       font-size: 0.9rem;
       text-align: center;
     }
@@ -108,7 +107,7 @@
         </a>
       </div>
 
-      <div class="footer">© 2025 REBT · Aprende y práctica</div>
+      <div class="footer">© 2025 REBT · Aprende y practica</div>
     </section>
   </main>
 </body>
