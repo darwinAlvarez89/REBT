@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Examen Test REBT</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RSH4ZW3VT2');
+  </script>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+
+  <script>
+    /* ===== Banco de preguntas (20) – Articulado REBT ===== */
+    const 
+      
+preguntas = [
+  {
+    pregunta: "Según el REBT, los lugares de consumo se clasifican, entre otros, en:",
+    opciones: [
+      "Edificios destinados principalmente a viviendas, edificios comerciales u oficinas, edificios destinados a una industria específica, edificios destinados a una concentración de industrias y aparcamientos con infraestructura de recarga de vehículos eléctricos",
+      "Viviendas unifamiliares y plurifamiliares exclusivamente",
+      "Locales de pública concurrencia y centros docentes",
+      "Polígonos industriales y parques tecnológicos únicamente"
+    ],
+    respuesta: "Edificios destinados principalmente a viviendas, edificios comerciales u oficinas, edificios destinados a una industria específica, edificios destinados a una concentración de industrias y aparcamientos con infraestructura de recarga de vehículos eléctricos"
+  },
+  {
+    pregunta: "Según el REBT, la electrificación básica es la necesaria para:",
+    opciones: [
+      "Cubrir las necesidades primarias sin obras posteriores y permitir el uso de aparatos eléctricos de uso común",
+      "Instalar sistemas de climatización eléctrica en toda vivienda",
+      "Superficies útiles de vivienda superiores a 160 m²",
+      "Viviendas con instalación de recarga de vehículo eléctrico"
+    ],
+    respuesta: "Cubrir las necesidades primarias sin obras posteriores y permitir el uso de aparatos eléctricos de uso común"
+  },
+  {
+    pregunta: "Según el REBT, tendrán electrificación elevada las viviendas con:",
+    opciones: [
+      "Previsión de uso de más electrodomésticos que la básica o con calefacción/aire acondicionado, o superficie útil > 160 m², o con instalación de recarga de vehículo eléctrico en unifamiliares",
+      "Únicamente superficies útiles superiores a 120 m²",
+      "Instalación de telecomunicaciones avanzada",
+      "Iluminación LED en todas las estancias"
+    ],
+    respuesta: "Previsión de uso de más electrodomésticos que la básica o con calefacción/aire acondicionado, o superficie útil > 160 m², o con instalación de recarga de vehículo eléctrico en unifamiliares"
+  },
+  {
+    pregunta: "Según el REBT, en nuevas construcciones la potencia a prever por vivienda no será inferior a:",
+    opciones: ["5 750 W a 230 V", "4 600 W a 230 V", "6 000 W a 230 V", "7 360 W a 230 V"],
+    respuesta: "5 750 W a 230 V"
+  },
+  {
+    pregunta: "Según el REBT, en viviendas con electrificación elevada, la potencia a prever no será inferior a:",
+    opciones: ["7 360 W", "9 200 W", "10 350 W", "14 490 W"],
+    respuesta: "9 200 W"
+  },
+  {
+    pregunta: "Según el REBT, la potencia a prever en una vivienda se corresponde con:",
+    opciones: [
+      "La capacidad máxima definida por la intensidad asignada del IGA, según ITC-BT-25",
+      "La potencia inicialmente contratada por el usuario",
+      "La suma de potencias de los receptores instalados",
+      "El valor que indique la empresa instaladora"
+    ],
+    respuesta: "La capacidad máxima definida por la intensidad asignada del IGA, según ITC-BT-25"
+  },
+  {
+    pregunta: "Según el REBT, la carga correspondiente a un conjunto de viviendas se obtiene:",
+    opciones: [
+      "Multiplicando la media aritmética de las potencias máximas previstas por el coeficiente de simultaneidad de la tabla 1",
+      "Sumando todas las potencias máximas previstas sin reducción",
+      "Tomando el máximo entre todas las potencias individuales",
+      "Aplicando un coeficiente fijo del 0,5 a la suma de potencias"
+    ],
+    respuesta: "Multiplicando la media aritmética de las potencias máximas previstas por el coeficiente de simultaneidad de la tabla 1"
+  },
+  {
+    pregunta: "Según el REBT, para edificios con tarifa nocturna, la simultaneidad en viviendas será:",
+    opciones: [
+      "Igual al número de viviendas (coeficiente = n.º de viviendas)",
+      "Constante e igual a 10",
+      "La mitad del número de viviendas",
+      "La de la tabla 1 menos una vivienda"
+    ],
+    respuesta: "Igual al número de viviendas (coeficiente = n.º de viviendas)"
+  },
+  {
+    pregunta: "Según el REBT, para n > 21 viviendas, el coeficiente de simultaneidad de la tabla 1 es:",
+    opciones: [
+      "15,3 + (n − 21) · 0,5",
+      "15,0 + (n − 21) · 0,3",
+      "10,6 + (n − 15) · 0,7",
+      "n / 2"
+    ],
+    respuesta: "15,3 + (n − 21) · 0,5"
+  },
+  {
+    pregunta: "Según el REBT, la carga de los servicios generales del edificio será:",
+    opciones: [
+      "La suma de las potencias previstas (ascensores, centrales, alumbrado de comunes, etc.) con factor de simultaneidad 1",
+      "La mitad de la suma de las potencias previstas",
+      "La potencia del ascensor multiplicada por 1,8",
+      "La potencia del alumbrado de escalera más el 10 % del resto"
+    ],
+    respuesta: "La suma de las potencias previstas (ascensores, centrales, alumbrado de comunes, etc.) con factor de simultaneidad 1"
+  },
+  {
+    pregunta: "Según el REBT, en locales comerciales y oficinas integrados en el edificio de viviendas se considerará:",
+    opciones: [
+      "Mínimo 100 W/m² y planta, con mínimo por local de 3 450 W a 230 V y coeficiente 1",
+      "Mínimo 50 W/m², sin mínimo por local",
+      "Mínimo 125 W/m² y planta, con mínimo 10 350 W",
+      "Solo la potencia de iluminación instalada"
+    ],
+    respuesta: "Mínimo 100 W/m² y planta, con mínimo por local de 3 450 W a 230 V y coeficiente 1"
+  },
+  {
+    pregunta: "Según el REBT, la carga de garajes integrados se calculará considerando:",
+    opciones: [
+      "10 W/m² y planta para ventilación natural y 20 W/m² para ventilación forzada, con mínimo 3 450 W a 230 V y coeficiente 1",
+      "5 W/m² y planta, sin mínimos",
+      "15 W/m² y planta, con mínimo 9 200 W",
+      "Únicamente 100 W/m², coeficiente 1"
+    ],
+    respuesta: "10 W/m² y planta para ventilación natural y 20 W/m² para ventilación forzada, con mínimo 3 450 W a 230 V y coeficiente 1"
+  },
+  {
+    pregunta: "Según el REBT, en edificios comerciales u oficinas (no preferentemente viviendas) la carga a prever será, como mínimo:",
+    opciones: [
+      "100 W/m² y planta, con mínimo por local de 3 450 W a 230 V y coeficiente 1",
+      "50 W/m² sin mínimos",
+      "125 W/m² y planta con mínimo 10 350 W",
+      "3 680 W por local"
+    ],
+    respuesta: "100 W/m² y planta, con mínimo por local de 3 450 W a 230 V y coeficiente 1"
+  },
+  {
+    pregunta: "Según el REBT, en edificios destinados a concentración de industrias, la carga mínima a prever será:",
+    opciones: [
+      "125 W/m² y planta, con mínimo por local de 10 350 W a 230 V y coeficiente 1",
+      "100 W/m² con mínimo 3 450 W",
+      "75 W/m² sin mínimos",
+      "200 W/m² con coeficiente 0,8"
+    ],
+    respuesta: "125 W/m² y planta, con mínimo por local de 10 350 W a 230 V y coeficiente 1"
+  },
+  {
+    pregunta: "Según el REBT, en viviendas unifamiliares con infraestructura para recarga de VE se considerará:",
+    opciones: [
+      "Grado de electrificación elevado",
+      "Electrificación básica con 5 750 W",
+      "Solo aumentar el coeficiente de simultaneidad",
+      "Un mínimo de 3 680 W adicional por vivienda sin más"
+    ],
+    respuesta: "Grado de electrificación elevado"
+  },
+  {
+    pregunta: "Según el REBT, en aparcamientos colectivos en propiedad horizontal la previsión de cargas para VE se calcula:",
+    opciones: [
+      "Multiplicando 3.680 W por el 10 % de las plazas construidas; la suma se multiplica por el factor de simultaneidad y se añade al resto según el esquema y la ITC-BT-52",
+      "Sumando 3.680 W por cada plaza construida",
+      "Tomando 10 % de la potencia total del edificio",
+      "Aplicando 100 W/m² de la superficie de parking"
+    ],
+    respuesta: "Multiplicando 3.680 W por el 10 % de las plazas construidas; la suma se multiplica por el factor de simultaneidad y se añade al resto según el esquema y la ITC-BT-52"
+  },
+  {
+    pregunta: "Según el REBT, el proyectista podrá prever una potencia instalada mayor para VE cuando:",
+    opciones: [
+      "Disponga de datos que lo justifiquen",
+      "Lo exija la empresa instaladora",
+      "Siempre, sin justificación",
+      "El promotor declare uso esporádico"
+    ],
+    respuesta: "Disponga de datos que lo justifiquen"
+  },
+  {
+    pregunta: "Según el REBT, la carga total prevista en los capítulos 2, 3, 4 y 5 se utilizará para:",
+    opciones: [
+      "El cálculo de conductores de acometidas y de las instalaciones de enlace",
+      "La elección del alumbrado interior",
+      "Dimensionar únicamente la derivación individual",
+      "Definir el contrato de mantenimiento"
+    ],
+    respuesta: "El cálculo de conductores de acometidas y de las instalaciones de enlace"
+  },
+  {
+    pregunta: "Según el REBT, las empresas distribuidoras estarán obligadas, si lo solicita el cliente, a efectuar el suministro monofásico que permita:",
+    opciones: [
+      "El funcionamiento de cualquier receptor ≤ 5 750 W a 230 V, hasta un suministro máximo de 14 490 W a 230 V",
+      "El funcionamiento hasta 9 200 W por circuito",
+      "Solo receptores de hasta 3 450 W",
+      "Cargas monofásicas de 16 A máximo"
+    ],
+    respuesta: "El funcionamiento de cualquier receptor ≤ 5 750 W a 230 V, hasta un suministro máximo de 14 490 W a 230 V"
+  },
+  {
+    pregunta: "Según el REBT, en la previsión de potencia por local comercial dentro de edificio de viviendas, el coeficiente de simultaneidad aplicable es:",
+    opciones: ["1", "0,9", "0,5", "El de la tabla 1 para viviendas"],
+    respuesta: "1"
+  },
+  {
+    pregunta: "Según el REBT, la carga de garajes con ventilación forzada, a efectos de previsión, se toma con:",
+    opciones: [
+      "20 W/m² y planta, mínimo 3 450 W a 230 V y coeficiente 1",
+      "10 W/m² y planta, sin mínimo",
+      "100 W/m² y coeficiente 0,8",
+      "125 W/m², mínimo 10 350 W"
+    ],
+    respuesta: "20 W/m² y planta, mínimo 3 450 W a 230 V y coeficiente 1"
+  }
+];
+    /* ===== Estado ===== */
+    let preguntasAleatorias = [];
+    let indice = 0, aciertos = 0, errores = 0;
+    let historial = [];
+    let seleccionUsuario = null;
+    let respondido = false;
+
+    // Tiempo
+    const DURACION_SEG = 60 * 60; // <<< 60 minutos
+    let inicioTiempo = null;
+    let intervaloTiempo = null;
+    let tiempoAgotado = false;
+
+    /* ===== Utilidades ===== */
+    const mezclar = (arr) => { for (let i = arr.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
+
+    function mezclarPreguntas(){
+      preguntasAleatorias = mezclar(preguntas.map(p=>({...p, opciones: mezclar([...p.opciones]) })));
+      indice=0; aciertos=0; errores=0; historial=[];
+    }
+
+    const fmt2 = (n) => String(n).padStart(2,'0');
+    const clamp0 = (x) => x < 0 ? 0 : x;
+
+    function calcularPuntuacion(){
+      const total = preguntasAleatorias.length;              // 20
+      const penalizacion = Math.floor(errores / 2);          // cada 2 fallos = 1 válida menos
+      const validasNetas = Math.max(0, aciertos - penalizacion);
+      const puntos = validasNetas * 0.5;                     // cada válida = 0,5 puntos
+      const porcentaje = clamp0((validasNetas / total) * 100); // % sobre preguntas válidas netas / total
+      const apto = porcentaje >= 80;                         // mínimo 80%
+      return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
+    }
+
+    /* ===== Render ===== */
+    function setProgreso(){
+      const total = preguntasAleatorias.length;
+      const pct = Math.round((indice/total)*100);
+      const bar = document.getElementById('progress-bar');
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+      document.getElementById('progress-txt').textContent = `${indice}/${total}`;
+    }
+
+    function actualizarContador(){
+      if (!inicioTiempo) return;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const restantes = Math.max(0, DURACION_SEG - transcurrido);
+      const mm = fmt2(Math.floor(restantes/60));
+      const ss = fmt2(restantes%60);
+
+      const { puntos } = calcularPuntuacion();
+      const totalPuntos = preguntasAleatorias.length * 0.5;
+
+      const relojClass =
+        restantes <= 60 ? 'text-red-700' :
+        restantes <= 5*60 ? 'text-orange-600' :
+        'text-blue-700';
+
+      document.getElementById("contador").innerHTML = `
+        <span>Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
+        <span class="text-green-600">Aciertos: ${aciertos}</span>
+        <span class="text-red-600">Fallos: ${errores}</span>
+        <span>Puntos: ${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</span>
+        <span class="font-mono ${relojClass}">⏳ ${mm}:${ss}</span>`;
+
+      if (restantes === 0 && !tiempoAgotado){
+        tiempoAgotado = true;
+        clearInterval(intervaloTiempo);
+        deshabilitarInteraccion();
+        abrirModalFin();
+      }
+    }
+
+    function renderOpciones(opciones){
+      const cont = document.getElementById("opciones");
+      cont.innerHTML = "";
+      opciones.forEach((op, i)=>{
+        const btn = document.createElement("button");
+        btn.type="button";
+        btn.dataset.valor = op;
+        btn.className="opcion w-full text-left bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl shadow transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300";
+        btn.innerHTML = `<span class="font-semibold tracking-wide">${op}</span>`;
+        btn.onclick = ()=>seleccionarOpcion(op);
+        btn.setAttribute('aria-label',`Opción ${i+1}: ${op}`);
+        cont.appendChild(btn);
+      });
+    }
+
+    function cargarPregunta(){
+      if (indice>=preguntasAleatorias.length) return mostrarResumen();
+      const q = preguntasAleatorias[indice];
+      seleccionUsuario=null; respondido=false;
+      document.getElementById("pregunta").textContent = q.pregunta;
+      renderOpciones(q.opciones);
+      document.getElementById("acciones").innerHTML =
+        `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
+           <span>Elige una respuesta (teclas 1–4 y Enter).</span>
+           <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
+         </div>`;
+      setProgreso(); actualizarContador();
+    }
+
+    function seleccionarOpcion(opcion){
+      if (respondido || tiempoAgotado) return;
+      seleccionUsuario = opcion;
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.classList.remove('ring','ring-yellow-300','translate-y-0.5');
+        if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
+      });
+      const btn = document.getElementById('btn-contestar');
+      btn.disabled=false; btn.classList.remove('opacity-50','cursor-not-allowed'); btn.onclick=verificarRespuesta;
+    }
+
+    function verificarRespuesta(){
+      if (respondido || !seleccionUsuario || tiempoAgotado) return;
+      const actual = preguntasAleatorias[indice];
+      const ok = seleccionUsuario===actual.respuesta;
+      respondido = true;
+
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.disabled=true; b.classList.remove('ring','ring-yellow-300');
+        const val=b.dataset.valor;
+        if (val===actual.respuesta){ b.classList.add('bg-green-600','hover:bg-green-700'); b.innerHTML=`✅ <span class="font-semibold">${val}</span>`; }
+        else if (val===seleccionUsuario && !ok){ b.classList.add('bg-red-600','hover:bg-red-700'); b.innerHTML=`❌ <span class="font-semibold">${val}</span>`; }
+        else { b.classList.add('bg-blue-500'); }
+      });
+
+      ok ? aciertos++ : errores++;
+      historial.push({pregunta:actual.pregunta, opciones:actual.opciones, correcta:actual.respuesta, elegida:seleccionUsuario});
+
+      document.getElementById("acciones").innerHTML =
+        `<div class="mt-4 flex items-center justify-end gap-3">
+           <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">Siguiente</button>
+         </div>`;
+      actualizarContador(); setProgreso();
+    }
+
+    const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
+
+    function deshabilitarInteraccion(){
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{ b.disabled=true; });
+      document.getElementById('btn-contestar')?.setAttribute('disabled','true');
+      document.removeEventListener('keydown', handleKey);
+    }
+
+    function abrirModalFin(){
+      const { total, respondidas, enBlanco, penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+      const modal = document.getElementById('modal-fin');
+      const totalPuntos = total * 0.5;
+      document.getElementById('modal-resumen').innerHTML = `
+        <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
+        <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
+        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas (=${(penalizacion*0.5).toFixed(2)} pts)</p>
+        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total}</p>
+        <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+        <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
+      `;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function mostrarResumen(){
+      clearInterval(intervaloTiempo);
+      const total = preguntasAleatorias.length;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const mm = fmt2(Math.floor(transcurrido/60));
+      const ss = fmt2(transcurrido%60);
+
+      const { penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+
+      const detalle = historial.map(h=>`
+        <div class='mb-2 border border-slate-200 rounded-lg p-3'>
+          <p class='font-semibold mb-2'>${h.pregunta}</p>
+          <div class='flex flex-wrap gap-2'>
+            ${h.opciones.map(op=>{
+              if (op===h.elegida && op===h.correcta) return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op===h.elegida && op!==h.correcta) return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op===h.correcta && op!==h.elegida) return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
+            }).join('')}
+          </div>
+        </div>`).join('');
+
+      const totalPuntos = total * 0.5;
+
+      document.getElementById("test").innerHTML = `
+        <div class="space-y-3">
+          <h2 class="text-2xl font-extrabold">Resultado del test <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">(${apto?'APTO ✅':'NO APTO ❌'})</span></h2>
+          <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Penalización: <strong>-${penalizacion}</strong> válidas</p>
+          <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total} • Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+          <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span></p>
+          <hr class="my-3 border-slate-200">
+          <h3 class="text-lg font-bold">Detalle de preguntas</h3>
+          <div class="max-h-[50vh] overflow-auto pr-1">${detalle}</div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">Volver al inicio</a>
+        </div>`;
+    }
+
+    /* ===== Atajos de teclado ===== */
+    function handleKey(e){
+      if (tiempoAgotado) return;
+      if (respondido){ if (e.key==='Enter') siguientePregunta(); return; }
+      const map={'1':0,'2':1,'3':2,'4':3};
+      if (map[e.key]!==undefined){ const b=document.querySelectorAll('#opciones .opcion')[map[e.key]]; if (b) b.click(); }
+      if (e.key==='Enter'){ const b=document.getElementById('btn-contestar'); if (b && !b.disabled) b.click(); }
+    }
+
+    window.onload = ()=>{
+      mezclarPreguntas();
+      inicioTiempo = Date.now();
+      cargarPregunta();
+      intervaloTiempo = setInterval(actualizarContador, 1000);
+      document.addEventListener('keydown', handleKey);
+    };
+  </script>
+</head>
+
+<body class="bg-gray-100 text-gray-900 p-4">
+  <div class="max-w-3xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-lg ring-1 ring-slate-100" id="test">
+    <div class="mb-4">
+      <div class="flex items-center justify-between text-sm text-slate-600 mb-2">
+        <p id="contador" class="font-semibold space-x-4"></p>
+        <span id="progress-txt" class="font-mono text-slate-500">0/0</span>
+      </div>
+      <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+        <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out" style="width:0%" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      </div>
+    </div>
+
+    <h1 class="text-3xl font-extrabold mb-3 text-center">ITC-BT-10</h1>
+    <p id="pregunta" class="mb-4 text-lg text-center"></p>
+
+    <div id="opciones" class="flex flex-col gap-3"></div>
+    <div id="acciones" class="mt-2"></div>
+  </div>
+
+  <div class="mt-6 text-center">
+    <a href="Test_por_ITC_del_REBT.html" class="inline-block bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">Cancelar</a>
+  </div>
+
+  <!-- Modal Tiempo Agotado -->
+  <div id="modal-fin" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
+    <div class="bg-white rounded-2xl shadow-xl max-w-lg w-full p-6">
+      <h2 class="text-2xl font-extrabold mb-1">⏰ Tiempo agotado</h2>
+      <p class="text-slate-600 mb-4">Tu tiempo se ha agotado. Estos son tus resultados:</p>
+      <div id="modal-resumen" class="space-y-1 text-slate-800"></div>
+      <div class="mt-6 flex justify-end">
+        <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
