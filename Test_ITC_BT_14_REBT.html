@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Examen Test REBT</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RSH4ZW3VT2');
+  </script>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+
+  <script>
+    /* ===== Banco de preguntas (20) – Articulado REBT ===== */
+    const 
+preguntas = [
+  {
+    pregunta: "Según el REBT, la línea general de alimentación enlaza:",
+    opciones: [
+      "La Caja General de Protección con la centralización de contadores",
+      "El cuadro general de mando con la derivación individual",
+      "El contador con la instalación interior del usuario",
+      "El centro de transformación con la acometida"
+    ],
+    respuesta: "La Caja General de Protección con la centralización de contadores"
+  },
+  {
+    pregunta: "Según el REBT, de una misma línea general de alimentación pueden hacerse derivaciones para:",
+    opciones: [
+      "Distintas centralizaciones de contadores",
+      "Varias acometidas de la compañía",
+      "Los cuadros secundarios de vivienda",
+      "Los servicios generales del edificio"
+    ],
+    respuesta: "Distintas centralizaciones de contadores"
+  },
+  {
+    pregunta: "Según el REBT, las líneas generales de alimentación estarán constituidas por:",
+    opciones: [
+      "Conductores aislados en tubos, canales protectoras o canalizaciones prefabricadas",
+      "Conductores desnudos en bandejas metálicas",
+      "Cables multipolares flexibles sin tubo",
+      "Conductores trenzados sobre aisladores"
+    ],
+    respuesta: "Conductores aislados en tubos, canales protectoras o canalizaciones prefabricadas"
+  },
+  {
+    pregunta: "Según el REBT, las canalizaciones incluirán en cualquier caso:",
+    opciones: [
+      "El conductor de protección",
+      "Un cable de reserva",
+      "Un conductor de mando",
+      "Un neutro de doble sección"
+    ],
+    respuesta: "El conductor de protección"
+  },
+  {
+    pregunta: "Según el REBT, el trazado de la línea general de alimentación será:",
+    opciones: [
+      "Lo más corto y rectilíneo posible, discurriendo por zonas de uso común",
+      "Por el interior de viviendas individuales",
+      "Con curvas amplias para reducir tensiones mecánicas",
+      "En paralelo a conducciones de gas"
+    ],
+    respuesta: "Lo más corto y rectilíneo posible, discurriendo por zonas de uso común"
+  },
+  {
+    pregunta: "Según el REBT, el diámetro de los tubos en función de la sección del cable se indica en:",
+    opciones: [
+      "La tabla 1 de la ITC-BT-14",
+      "La ITC-BT-21",
+      "La UNE 21123",
+      "La tabla 2 de la ITC-BT-07"
+    ],
+    respuesta: "La tabla 1 de la ITC-BT-14"
+  },
+  {
+    pregunta: "Según el REBT, las dimensiones de otros tipos de canalizaciones deberán permitir:",
+    opciones: [
+      "La ampliación de la sección de los conductores en un 100%",
+      "La instalación de cables de reserva",
+      "El paso de líneas de mando",
+      "La ventilación natural del conducto"
+    ],
+    respuesta: "La ampliación de la sección de los conductores en un 100%"
+  },
+  {
+    pregunta: "Según el REBT, las uniones de los tubos rígidos serán:",
+    opciones: [
+      "Roscadas o embutidas, de modo que no puedan separarse los extremos",
+      "De presión con juntas de goma",
+      "Pegadas con adhesivo termofusible",
+      "Mediante abrazaderas metálicas"
+    ],
+    respuesta: "Roscadas o embutidas, de modo que no puedan separarse los extremos"
+  },
+  {
+    pregunta: "Según el REBT, cuando la línea general de alimentación discurra verticalmente lo hará:",
+    opciones: [
+      "Por el interior de una canaladura o conducto de obra de fábrica empotrado o adosado al hueco de la escalera",
+      "Por el interior de las viviendas",
+      "Por el exterior del edificio protegido por tubos metálicos",
+      "Por los falsos techos de los locales"
+    ],
+    respuesta: "Por el interior de una canaladura o conducto de obra de fábrica empotrado o adosado al hueco de la escalera"
+  },
+  {
+    pregunta: "Según el REBT, el conducto vertical de la línea general de alimentación será registrable y precintable:",
+    opciones: [
+      "En cada planta",
+      "Solo en la planta baja y cubierta",
+      "Cada tres plantas",
+      "Únicamente en el cuadro principal"
+    ],
+    respuesta: "En cada planta"
+  },
+  {
+    pregunta: "Según el REBT, se establecerán cortafuegos cada:",
+    opciones: [
+      "Tres plantas como mínimo",
+      "Dos plantas",
+      "Cinco plantas",
+      "Cada planta"
+    ],
+    respuesta: "Tres plantas como mínimo"
+  },
+  {
+    pregunta: "Según el REBT, las paredes del conducto vertical tendrán una resistencia al fuego de:",
+    opciones: [
+      "RF 120 según NBE-CPI-96",
+      "RF 90 según NBE-CPI-96",
+      "RF 60 según UNE-EN 1363",
+      "EI 60 según UNE-EN 1364"
+    ],
+    respuesta: "RF 120 según NBE-CPI-96"
+  },
+  {
+    pregunta: "Según el REBT, las tapas de registro del conducto tendrán una resistencia al fuego mínima de:",
+    opciones: [
+      "RF 30",
+      "RF 60",
+      "RF 15",
+      "RF 120"
+    ],
+    respuesta: "RF 30"
+  },
+  {
+    pregunta: "Según el REBT, las dimensiones mínimas del conducto destinado exclusivamente a la línea general de alimentación serán:",
+    opciones: [
+      "30 x 30 cm",
+      "40 x 40 cm",
+      "25 x 25 cm",
+      "20 x 30 cm"
+    ],
+    respuesta: "30 x 30 cm"
+  },
+  {
+    pregunta: "Según el REBT, los conductores a utilizar serán:",
+    opciones: [
+      "Tres de fase y uno de neutro, de cobre o aluminio, unipolares y aislados",
+      "Multiconductores flexibles con cubierta exterior",
+      "Cables de control y mando con aislamiento de baja tensión",
+      "Conductores desnudos sobre aisladores cerámicos"
+    ],
+    respuesta: "Tres de fase y uno de neutro, de cobre o aluminio, unipolares y aislados"
+  },
+  {
+    pregunta: "Según el REBT, la tensión asignada de los conductores de la línea general de alimentación será:",
+    opciones: ["0,6/1 kV", "450/750 V", "1,5/3 kV", "230/400 V"],
+    respuesta: "0,6/1 kV"
+  },
+  {
+    pregunta: "Según el REBT, los cables serán:",
+    opciones: [
+      "No propagadores del incendio y con emisión de humos y opacidad reducida",
+      "Con cubierta metálica y aislamiento mineral",
+      "Resistentes al agua y al aceite",
+      "Blindados con pantalla trenzada"
+    ],
+    respuesta: "No propagadores del incendio y con emisión de humos y opacidad reducida"
+  },
+  {
+    pregunta: "Según el REBT, la sección mínima de los cables será:",
+    opciones: [
+      "10 mm² en cobre o 16 mm² en aluminio",
+      "6 mm² en cobre o 10 mm² en aluminio",
+      "16 mm² en cobre o 25 mm² en aluminio",
+      "4 mm² en cobre o 6 mm² en aluminio"
+    ],
+    respuesta: "10 mm² en cobre o 16 mm² en aluminio"
+  },
+  {
+    pregunta: "Según el REBT, la caída de tensión máxima permitida será:",
+    opciones: [
+      "0,5 % para contadores totalmente centralizados y 1 % para centralizaciones parciales",
+      "1 % en todos los casos",
+      "2 % para instalaciones trifásicas",
+      "3 % desde la CGP al contador"
+    ],
+    respuesta: "0,5 % para contadores totalmente centralizados y 1 % para centralizaciones parciales"
+  },
+  {
+    pregunta: "Según el REBT, el conductor neutro tendrá una sección de aproximadamente:",
+    opciones: [
+      "El 50 % de la correspondiente al conductor de fase, sin ser inferior a los valores de la tabla 1",
+      "El 75 % de la fase",
+      "Igual a la fase",
+      "El 25 % de la fase"
+    ],
+    respuesta: "El 50 % de la correspondiente al conductor de fase, sin ser inferior a los valores de la tabla 1"
+  }
+];
+    /* ===== Estado ===== */
+    let preguntasAleatorias = [];
+    let indice = 0, aciertos = 0, errores = 0;
+    let historial = [];
+    let seleccionUsuario = null;
+    let respondido = false;
+
+    // Tiempo
+    const DURACION_SEG = 60 * 60; // <<< 60 minutos
+    let inicioTiempo = null;
+    let intervaloTiempo = null;
+    let tiempoAgotado = false;
+
+    /* ===== Utilidades ===== */
+    const mezclar = (arr) => { for (let i = arr.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
+
+    function mezclarPreguntas(){
+      preguntasAleatorias = mezclar(preguntas.map(p=>({...p, opciones: mezclar([...p.opciones]) })));
+      indice=0; aciertos=0; errores=0; historial=[];
+    }
+
+    const fmt2 = (n) => String(n).padStart(2,'0');
+    const clamp0 = (x) => x < 0 ? 0 : x;
+
+    function calcularPuntuacion(){
+      const total = preguntasAleatorias.length;              // 20
+      const penalizacion = Math.floor(errores / 2);          // cada 2 fallos = 1 válida menos
+      const validasNetas = Math.max(0, aciertos - penalizacion);
+      const puntos = validasNetas * 0.5;                     // cada válida = 0,5 puntos
+      const porcentaje = clamp0((validasNetas / total) * 100); // % sobre preguntas válidas netas / total
+      const apto = porcentaje >= 80;                         // mínimo 80%
+      return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
+    }
+
+    /* ===== Render ===== */
+    function setProgreso(){
+      const total = preguntasAleatorias.length;
+      const pct = Math.round((indice/total)*100);
+      const bar = document.getElementById('progress-bar');
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+      document.getElementById('progress-txt').textContent = `${indice}/${total}`;
+    }
+
+    function actualizarContador(){
+      if (!inicioTiempo) return;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const restantes = Math.max(0, DURACION_SEG - transcurrido);
+      const mm = fmt2(Math.floor(restantes/60));
+      const ss = fmt2(restantes%60);
+
+      const { puntos } = calcularPuntuacion();
+      const totalPuntos = preguntasAleatorias.length * 0.5;
+
+      const relojClass =
+        restantes <= 60 ? 'text-red-700' :
+        restantes <= 5*60 ? 'text-orange-600' :
+        'text-blue-700';
+
+      document.getElementById("contador").innerHTML = `
+        <span>Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
+        <span class="text-green-600">Aciertos: ${aciertos}</span>
+        <span class="text-red-600">Fallos: ${errores}</span>
+        <span>Puntos: ${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</span>
+        <span class="font-mono ${relojClass}">⏳ ${mm}:${ss}</span>`;
+
+      if (restantes === 0 && !tiempoAgotado){
+        tiempoAgotado = true;
+        clearInterval(intervaloTiempo);
+        deshabilitarInteraccion();
+        abrirModalFin();
+      }
+    }
+
+    function renderOpciones(opciones){
+      const cont = document.getElementById("opciones");
+      cont.innerHTML = "";
+      opciones.forEach((op, i)=>{
+        const btn = document.createElement("button");
+        btn.type="button";
+        btn.dataset.valor = op;
+        btn.className="opcion w-full text-left bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl shadow transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300";
+        btn.innerHTML = `<span class="font-semibold tracking-wide">${op}</span>`;
+        btn.onclick = ()=>seleccionarOpcion(op);
+        btn.setAttribute('aria-label',`Opción ${i+1}: ${op}`);
+        cont.appendChild(btn);
+      });
+    }
+
+    function cargarPregunta(){
+      if (indice>=preguntasAleatorias.length) return mostrarResumen();
+      const q = preguntasAleatorias[indice];
+      seleccionUsuario=null; respondido=false;
+      document.getElementById("pregunta").textContent = q.pregunta;
+      renderOpciones(q.opciones);
+      document.getElementById("acciones").innerHTML =
+        `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
+           <span>Elige una respuesta (teclas 1–4 y Enter).</span>
+           <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
+         </div>`;
+      setProgreso(); actualizarContador();
+    }
+
+    function seleccionarOpcion(opcion){
+      if (respondido || tiempoAgotado) return;
+      seleccionUsuario = opcion;
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.classList.remove('ring','ring-yellow-300','translate-y-0.5');
+        if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
+      });
+      const btn = document.getElementById('btn-contestar');
+      btn.disabled=false; btn.classList.remove('opacity-50','cursor-not-allowed'); btn.onclick=verificarRespuesta;
+    }
+
+    function verificarRespuesta(){
+      if (respondido || !seleccionUsuario || tiempoAgotado) return;
+      const actual = preguntasAleatorias[indice];
+      const ok = seleccionUsuario===actual.respuesta;
+      respondido = true;
+
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.disabled=true; b.classList.remove('ring','ring-yellow-300');
+        const val=b.dataset.valor;
+        if (val===actual.respuesta){ b.classList.add('bg-green-600','hover:bg-green-700'); b.innerHTML=`✅ <span class="font-semibold">${val}</span>`; }
+        else if (val===seleccionUsuario && !ok){ b.classList.add('bg-red-600','hover:bg-red-700'); b.innerHTML=`❌ <span class="font-semibold">${val}</span>`; }
+        else { b.classList.add('bg-blue-500'); }
+      });
+
+      ok ? aciertos++ : errores++;
+      historial.push({pregunta:actual.pregunta, opciones:actual.opciones, correcta:actual.respuesta, elegida:seleccionUsuario});
+
+      document.getElementById("acciones").innerHTML =
+        `<div class="mt-4 flex items-center justify-end gap-3">
+           <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">Siguiente</button>
+         </div>`;
+      actualizarContador(); setProgreso();
+    }
+
+    const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
+
+    function deshabilitarInteraccion(){
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{ b.disabled=true; });
+      document.getElementById('btn-contestar')?.setAttribute('disabled','true');
+      document.removeEventListener('keydown', handleKey);
+    }
+
+    function abrirModalFin(){
+      const { total, respondidas, enBlanco, penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+      const modal = document.getElementById('modal-fin');
+      const totalPuntos = total * 0.5;
+      document.getElementById('modal-resumen').innerHTML = `
+        <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
+        <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
+        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas (=${(penalizacion*0.5).toFixed(2)} pts)</p>
+        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total}</p>
+        <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+        <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
+      `;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function mostrarResumen(){
+      clearInterval(intervaloTiempo);
+      const total = preguntasAleatorias.length;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const mm = fmt2(Math.floor(transcurrido/60));
+      const ss = fmt2(transcurrido%60);
+
+      const { penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+
+      const detalle = historial.map(h=>`
+        <div class='mb-2 border border-slate-200 rounded-lg p-3'>
+          <p class='font-semibold mb-2'>${h.pregunta}</p>
+          <div class='flex flex-wrap gap-2'>
+            ${h.opciones.map(op=>{
+              if (op===h.elegida && op===h.correcta) return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op===h.elegida && op!==h.correcta) return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op===h.correcta && op!==h.elegida) return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
+            }).join('')}
+          </div>
+        </div>`).join('');
+
+      const totalPuntos = total * 0.5;
+
+      document.getElementById("test").innerHTML = `
+        <div class="space-y-3">
+          <h2 class="text-2xl font-extrabold">Resultado del test <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">(${apto?'APTO ✅':'NO APTO ❌'})</span></h2>
+          <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Penalización: <strong>-${penalizacion}</strong> válidas</p>
+          <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total} • Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+          <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span></p>
+          <hr class="my-3 border-slate-200">
+          <h3 class="text-lg font-bold">Detalle de preguntas</h3>
+          <div class="max-h-[50vh] overflow-auto pr-1">${detalle}</div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">Volver al inicio</a>
+        </div>`;
+    }
+
+    /* ===== Atajos de teclado ===== */
+    function handleKey(e){
+      if (tiempoAgotado) return;
+      if (respondido){ if (e.key==='Enter') siguientePregunta(); return; }
+      const map={'1':0,'2':1,'3':2,'4':3};
+      if (map[e.key]!==undefined){ const b=document.querySelectorAll('#opciones .opcion')[map[e.key]]; if (b) b.click(); }
+      if (e.key==='Enter'){ const b=document.getElementById('btn-contestar'); if (b && !b.disabled) b.click(); }
+    }
+
+    window.onload = ()=>{
+      mezclarPreguntas();
+      inicioTiempo = Date.now();
+      cargarPregunta();
+      intervaloTiempo = setInterval(actualizarContador, 1000);
+      document.addEventListener('keydown', handleKey);
+    };
+  </script>
+</head>
+
+<body class="bg-gray-100 text-gray-900 p-4">
+  <div class="max-w-3xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-lg ring-1 ring-slate-100" id="test">
+    <div class="mb-4">
+      <div class="flex items-center justify-between text-sm text-slate-600 mb-2">
+        <p id="contador" class="font-semibold space-x-4"></p>
+        <span id="progress-txt" class="font-mono text-slate-500">0/0</span>
+      </div>
+      <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+        <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out" style="width:0%" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      </div>
+    </div>
+
+    <h1 class="text-3xl font-extrabold mb-3 text-center">ITC-BT-14</h1>
+    <p id="pregunta" class="mb-4 text-lg text-center"></p>
+
+    <div id="opciones" class="flex flex-col gap-3"></div>
+    <div id="acciones" class="mt-2"></div>
+  </div>
+
+  <div class="mt-6 text-center">
+    <a href="Test_por_ITC_del_REBT.html" class="inline-block bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">Cancelar</a>
+  </div>
+
+  <!-- Modal Tiempo Agotado -->
+  <div id="modal-fin" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
+    <div class="bg-white rounded-2xl shadow-xl max-w-lg w-full p-6">
+      <h2 class="text-2xl font-extrabold mb-1">⏰ Tiempo agotado</h2>
+      <p class="text-slate-600 mb-4">Tu tiempo se ha agotado. Estos son tus resultados:</p>
+      <div id="modal-resumen" class="space-y-1 text-slate-800"></div>
+      <div class="mt-6 flex justify-end">
+        <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
