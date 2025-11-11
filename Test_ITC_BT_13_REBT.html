@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Examen Test REBT</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RSH4ZW3VT2');
+  </script>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+
+  <script>
+    /* ===== Banco de preguntas (20) – Articulado REBT ===== */
+    const 
+
+preguntas = [
+  {
+    pregunta: "Según el REBT, las cajas generales de protección son las que alojan:",
+    opciones: [
+      "Los elementos de protección de las líneas generales de alimentación",
+      "Los equipos de medida de energía eléctrica",
+      "Los dispositivos generales de mando y protección",
+      "Las conexiones de la derivación individual"
+    ],
+    respuesta: "Los elementos de protección de las líneas generales de alimentación"
+  },
+  {
+    pregunta: "Según el REBT, las cajas generales de protección se instalarán preferentemente:",
+    opciones: [
+      "Sobre las fachadas exteriores de los edificios en lugares de libre y permanente acceso",
+      "En el interior de las viviendas",
+      "Dentro del cuadro general de mando del usuario",
+      "En los locales del transformador"
+    ],
+    respuesta: "Sobre las fachadas exteriores de los edificios en lugares de libre y permanente acceso"
+  },
+  {
+    pregunta: "Según el REBT, la situación de la caja general de protección se fijará:",
+    opciones: [
+      "De común acuerdo entre la propiedad y la empresa suministradora",
+      "Por decisión del instalador autorizado",
+      "Por el promotor de la obra",
+      "Por el ayuntamiento correspondiente"
+    ],
+    respuesta: "De común acuerdo entre la propiedad y la empresa suministradora"
+  },
+  {
+    pregunta: "Según el REBT, en edificios con centro de transformación interior, los fusibles del cuadro de baja tensión podrán utilizarse como:",
+    opciones: [
+      "Protección de la línea general de alimentación, desempeñando la función de caja general de protección",
+      "Dispositivos generales de mando y protección del usuario",
+      "Protección de la derivación individual",
+      "Medida principal del suministro"
+    ],
+    respuesta: "Protección de la línea general de alimentación, desempeñando la función de caja general de protección"
+  },
+  {
+    pregunta: "Según el REBT, cuando los fusibles del cuadro de baja tensión del centro de transformación actúan como caja general de protección:",
+    opciones: [
+      "La propiedad y mantenimiento serán de la empresa suministradora",
+      "El propietario del edificio asumirá su mantenimiento",
+      "El instalador autorizado será responsable de su custodia",
+      "El usuario será el único responsable de su conservación"
+    ],
+    respuesta: "La propiedad y mantenimiento serán de la empresa suministradora"
+  },
+  {
+    pregunta: "Según el REBT, cuando la acometida sea aérea, las cajas generales de protección podrán instalarse:",
+    opciones: [
+      "En montaje superficial a una altura comprendida entre 3 m y 4 m sobre el suelo",
+      "A ras del suelo",
+      "A una altura mínima de 1 m",
+      "Empotradas en pared a 2 m"
+    ],
+    respuesta: "En montaje superficial a una altura comprendida entre 3 m y 4 m sobre el suelo"
+  },
+  {
+    pregunta: "Según el REBT, cuando esté previsto el paso de red aérea a subterránea, la caja general de protección se situará:",
+    opciones: [
+      "Como si se tratase de una acometida subterránea",
+      "A una altura mayor de 5 m",
+      "En el punto más alto de la fachada",
+      "Junto al cuadro de mando del usuario"
+    ],
+    respuesta: "Como si se tratase de una acometida subterránea"
+  },
+  {
+    pregunta: "Según el REBT, cuando la acometida sea subterránea, la caja general de protección se instalará:",
+    opciones: [
+      "En un nicho en pared cerrado con una puerta preferentemente metálica",
+      "En superficie exterior protegida por armario plástico",
+      "En el interior de la vivienda más próxima",
+      "Bajo el nivel del suelo dentro de arqueta"
+    ],
+    respuesta: "En un nicho en pared cerrado con una puerta preferentemente metálica"
+  },
+  {
+    pregunta: "Según el REBT, la puerta del nicho donde se ubica la caja subterránea tendrá un grado de protección mínimo:",
+    opciones: ["IK10 según UNE-EN 50.102", "IK08 según UNE-EN 50.102", "IK09 según UNE-EN 50.102", "IP43 según UNE 20.324"],
+    respuesta: "IK10 según UNE-EN 50.102"
+  },
+  {
+    pregunta: "Según el REBT, la parte inferior de la puerta del nicho deberá encontrarse:",
+    opciones: [
+      "A un mínimo de 30 cm del suelo",
+      "A 50 cm del suelo",
+      "Al nivel del suelo",
+      "A un máximo de 10 cm del suelo"
+    ],
+    respuesta: "A un mínimo de 30 cm del suelo"
+  },
+  {
+    pregunta: "Según el REBT, no se alojarán más de:",
+    opciones: [
+      "Dos cajas generales de protección en el interior del mismo nicho",
+      "Tres cajas generales de protección por línea general",
+      "Una caja general de protección por edificio",
+      "Cinco cajas generales en la fachada"
+    ],
+    respuesta: "Dos cajas generales de protección en el interior del mismo nicho"
+  },
+  {
+    pregunta: "Según el REBT, se dispondrá una caja general de protección por cada:",
+    opciones: [
+      "Línea general de alimentación",
+      "Derivación individual",
+      "Contador de usuario",
+      "Suministro contratado"
+    ],
+    respuesta: "Línea general de alimentación"
+  },
+  {
+    pregunta: "Según el REBT, cuando para un suministro se precisen más de dos cajas generales de protección:",
+    opciones: [
+      "Podrán utilizarse otras soluciones técnicas previo acuerdo entre la propiedad y la empresa suministradora",
+      "Se instalarán todas en el mismo nicho",
+      "Deberán ubicarse en el interior del edificio",
+      "Se conectarán en paralelo sin autorización"
+    ],
+    respuesta: "Podrán utilizarse otras soluciones técnicas previo acuerdo entre la propiedad y la empresa suministradora"
+  },
+  {
+    pregunta: "Según el REBT, los usuarios o instaladores solo podrán actuar sobre las conexiones a la LGA:",
+    opciones: [
+      "Previa comunicación a la empresa suministradora",
+      "Sin necesidad de autorización",
+      "Cuando exista un corte de suministro",
+      "Con presencia del titular de la vivienda"
+    ],
+    respuesta: "Previa comunicación a la empresa suministradora"
+  },
+  {
+    pregunta: "Según el REBT, el neutro en la caja general de protección estará constituido por:",
+    opciones: [
+      "Una conexión amovible situada a la izquierda de las fases",
+      "Un borne fijo unido al chasis metálico",
+      "Un conductor aislado con doble aislamiento",
+      "Una barra equipotencial común"
+    ],
+    respuesta: "Una conexión amovible situada a la izquierda de las fases"
+  },
+  {
+    pregunta: "Según el REBT, las cajas generales de protección tendrán un grado de protección mínimo:",
+    opciones: [
+      "IP43 según UNE 20.324 e IK08 según UNE-EN 50.102",
+      "IP55 e IK10",
+      "IP44 e IK09",
+      "IP54 e IK08"
+    ],
+    respuesta: "IP43 según UNE 20.324 e IK08 según UNE-EN 50.102"
+  },
+  {
+    pregunta: "Según el REBT, las cajas generales de protección cumplirán lo indicado en la norma:",
+    opciones: [
+      "UNE-EN 60.439-1",
+      "UNE-EN 50.102",
+      "UNE 20460-5-52",
+      "UNE 21123"
+    ],
+    respuesta: "UNE-EN 60.439-1"
+  },
+  {
+    pregunta: "Según el REBT, las cajas generales de protección tendrán grado de inflamabilidad según:",
+    opciones: ["UNE-EN 60.439-3", "UNE-EN 60.439-1", "UNE 20.324", "UNE 21123"],
+    respuesta: "UNE-EN 60.439-3"
+  },
+  {
+    pregunta: "Según el REBT, las cajas de protección y medida combinan:",
+    opciones: [
+      "La caja general de protección y el equipo de medida en un único elemento",
+      "El cuadro general del usuario con el contador",
+      "La derivación individual con la CGP",
+      "Los dispositivos de mando con la acometida"
+    ],
+    respuesta: "La caja general de protección y el equipo de medida en un único elemento"
+  },
+  {
+    pregunta: "Según el REBT, las cajas de protección y medida tendrán grado de protección mínimo:",
+    opciones: [
+      "IP43 según UNE 20.324 e IK09 según UNE-EN 50.102",
+      "IP55 e IK10",
+      "IP44 e IK08",
+      "IP54 e IK09"
+    ],
+    respuesta: "IP43 según UNE 20.324 e IK09 según UNE-EN 50.102"
+  }
+];
+
+    /* ===== Estado ===== */
+    let preguntasAleatorias = [];
+    let indice = 0, aciertos = 0, errores = 0;
+    let historial = [];
+    let seleccionUsuario = null;
+    let respondido = false;
+
+    // Tiempo
+    const DURACION_SEG = 60 * 60; // <<< 60 minutos
+    let inicioTiempo = null;
+    let intervaloTiempo = null;
+    let tiempoAgotado = false;
+
+    /* ===== Utilidades ===== */
+    const mezclar = (arr) => { for (let i = arr.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
+
+    function mezclarPreguntas(){
+      preguntasAleatorias = mezclar(preguntas.map(p=>({...p, opciones: mezclar([...p.opciones]) })));
+      indice=0; aciertos=0; errores=0; historial=[];
+    }
+
+    const fmt2 = (n) => String(n).padStart(2,'0');
+    const clamp0 = (x) => x < 0 ? 0 : x;
+
+    function calcularPuntuacion(){
+      const total = preguntasAleatorias.length;              // 20
+      const penalizacion = Math.floor(errores / 2);          // cada 2 fallos = 1 válida menos
+      const validasNetas = Math.max(0, aciertos - penalizacion);
+      const puntos = validasNetas * 0.5;                     // cada válida = 0,5 puntos
+      const porcentaje = clamp0((validasNetas / total) * 100); // % sobre preguntas válidas netas / total
+      const apto = porcentaje >= 80;                         // mínimo 80%
+      return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
+    }
+
+    /* ===== Render ===== */
+    function setProgreso(){
+      const total = preguntasAleatorias.length;
+      const pct = Math.round((indice/total)*100);
+      const bar = document.getElementById('progress-bar');
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+      document.getElementById('progress-txt').textContent = `${indice}/${total}`;
+    }
+
+    function actualizarContador(){
+      if (!inicioTiempo) return;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const restantes = Math.max(0, DURACION_SEG - transcurrido);
+      const mm = fmt2(Math.floor(restantes/60));
+      const ss = fmt2(restantes%60);
+
+      const { puntos } = calcularPuntuacion();
+      const totalPuntos = preguntasAleatorias.length * 0.5;
+
+      const relojClass =
+        restantes <= 60 ? 'text-red-700' :
+        restantes <= 5*60 ? 'text-orange-600' :
+        'text-blue-700';
+
+      document.getElementById("contador").innerHTML = `
+        <span>Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
+        <span class="text-green-600">Aciertos: ${aciertos}</span>
+        <span class="text-red-600">Fallos: ${errores}</span>
+        <span>Puntos: ${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</span>
+        <span class="font-mono ${relojClass}">⏳ ${mm}:${ss}</span>`;
+
+      if (restantes === 0 && !tiempoAgotado){
+        tiempoAgotado = true;
+        clearInterval(intervaloTiempo);
+        deshabilitarInteraccion();
+        abrirModalFin();
+      }
+    }
+
+    function renderOpciones(opciones){
+      const cont = document.getElementById("opciones");
+      cont.innerHTML = "";
+      opciones.forEach((op, i)=>{
+        const btn = document.createElement("button");
+        btn.type="button";
+        btn.dataset.valor = op;
+        btn.className="opcion w-full text-left bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl shadow transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300";
+        btn.innerHTML = `<span class="font-semibold tracking-wide">${op}</span>`;
+        btn.onclick = ()=>seleccionarOpcion(op);
+        btn.setAttribute('aria-label',`Opción ${i+1}: ${op}`);
+        cont.appendChild(btn);
+      });
+    }
+
+    function cargarPregunta(){
+      if (indice>=preguntasAleatorias.length) return mostrarResumen();
+      const q = preguntasAleatorias[indice];
+      seleccionUsuario=null; respondido=false;
+      document.getElementById("pregunta").textContent = q.pregunta;
+      renderOpciones(q.opciones);
+      document.getElementById("acciones").innerHTML =
+        `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
+           <span>Elige una respuesta (teclas 1–4 y Enter).</span>
+           <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
+         </div>`;
+      setProgreso(); actualizarContador();
+    }
+
+    function seleccionarOpcion(opcion){
+      if (respondido || tiempoAgotado) return;
+      seleccionUsuario = opcion;
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.classList.remove('ring','ring-yellow-300','translate-y-0.5');
+        if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
+      });
+      const btn = document.getElementById('btn-contestar');
+      btn.disabled=false; btn.classList.remove('opacity-50','cursor-not-allowed'); btn.onclick=verificarRespuesta;
+    }
+
+    function verificarRespuesta(){
+      if (respondido || !seleccionUsuario || tiempoAgotado) return;
+      const actual = preguntasAleatorias[indice];
+      const ok = seleccionUsuario===actual.respuesta;
+      respondido = true;
+
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.disabled=true; b.classList.remove('ring','ring-yellow-300');
+        const val=b.dataset.valor;
+        if (val===actual.respuesta){ b.classList.add('bg-green-600','hover:bg-green-700'); b.innerHTML=`✅ <span class="font-semibold">${val}</span>`; }
+        else if (val===seleccionUsuario && !ok){ b.classList.add('bg-red-600','hover:bg-red-700'); b.innerHTML=`❌ <span class="font-semibold">${val}</span>`; }
+        else { b.classList.add('bg-blue-500'); }
+      });
+
+      ok ? aciertos++ : errores++;
+      historial.push({pregunta:actual.pregunta, opciones:actual.opciones, correcta:actual.respuesta, elegida:seleccionUsuario});
+
+      document.getElementById("acciones").innerHTML =
+        `<div class="mt-4 flex items-center justify-end gap-3">
+           <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">Siguiente</button>
+         </div>`;
+      actualizarContador(); setProgreso();
+    }
+
+    const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
+
+    function deshabilitarInteraccion(){
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{ b.disabled=true; });
+      document.getElementById('btn-contestar')?.setAttribute('disabled','true');
+      document.removeEventListener('keydown', handleKey);
+    }
+
+    function abrirModalFin(){
+      const { total, respondidas, enBlanco, penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+      const modal = document.getElementById('modal-fin');
+      const totalPuntos = total * 0.5;
+      document.getElementById('modal-resumen').innerHTML = `
+        <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
+        <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
+        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas (=${(penalizacion*0.5).toFixed(2)} pts)</p>
+        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total}</p>
+        <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+        <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
+      `;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function mostrarResumen(){
+      clearInterval(intervaloTiempo);
+      const total = preguntasAleatorias.length;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const mm = fmt2(Math.floor(transcurrido/60));
+      const ss = fmt2(transcurrido%60);
+
+      const { penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+
+      const detalle = historial.map(h=>`
+        <div class='mb-2 border border-slate-200 rounded-lg p-3'>
+          <p class='font-semibold mb-2'>${h.pregunta}</p>
+          <div class='flex flex-wrap gap-2'>
+            ${h.opciones.map(op=>{
+              if (op===h.elegida && op===h.correcta) return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op===h.elegida && op!==h.correcta) return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op===h.correcta && op!==h.elegida) return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
+            }).join('')}
+          </div>
+        </div>`).join('');
+
+      const totalPuntos = total * 0.5;
+
+      document.getElementById("test").innerHTML = `
+        <div class="space-y-3">
+          <h2 class="text-2xl font-extrabold">Resultado del test <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">(${apto?'APTO ✅':'NO APTO ❌'})</span></h2>
+          <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Penalización: <strong>-${penalizacion}</strong> válidas</p>
+          <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total} • Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+          <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span></p>
+          <hr class="my-3 border-slate-200">
+          <h3 class="text-lg font-bold">Detalle de preguntas</h3>
+          <div class="max-h-[50vh] overflow-auto pr-1">${detalle}</div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">Volver al inicio</a>
+        </div>`;
+    }
+
+    /* ===== Atajos de teclado ===== */
+    function handleKey(e){
+      if (tiempoAgotado) return;
+      if (respondido){ if (e.key==='Enter') siguientePregunta(); return; }
+      const map={'1':0,'2':1,'3':2,'4':3};
+      if (map[e.key]!==undefined){ const b=document.querySelectorAll('#opciones .opcion')[map[e.key]]; if (b) b.click(); }
+      if (e.key==='Enter'){ const b=document.getElementById('btn-contestar'); if (b && !b.disabled) b.click(); }
+    }
+
+    window.onload = ()=>{
+      mezclarPreguntas();
+      inicioTiempo = Date.now();
+      cargarPregunta();
+      intervaloTiempo = setInterval(actualizarContador, 1000);
+      document.addEventListener('keydown', handleKey);
+    };
+  </script>
+</head>
+
+<body class="bg-gray-100 text-gray-900 p-4">
+  <div class="max-w-3xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-lg ring-1 ring-slate-100" id="test">
+    <div class="mb-4">
+      <div class="flex items-center justify-between text-sm text-slate-600 mb-2">
+        <p id="contador" class="font-semibold space-x-4"></p>
+        <span id="progress-txt" class="font-mono text-slate-500">0/0</span>
+      </div>
+      <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+        <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out" style="width:0%" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      </div>
+    </div>
+
+    <h1 class="text-3xl font-extrabold mb-3 text-center">ITC-BT-13</h1>
+    <p id="pregunta" class="mb-4 text-lg text-center"></p>
+
+    <div id="opciones" class="flex flex-col gap-3"></div>
+    <div id="acciones" class="mt-2"></div>
+  </div>
+
+  <div class="mt-6 text-center">
+    <a href="Test_por_ITC_del_REBT.html" class="inline-block bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">Cancelar</a>
+  </div>
+
+  <!-- Modal Tiempo Agotado -->
+  <div id="modal-fin" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
+    <div class="bg-white rounded-2xl shadow-xl max-w-lg w-full p-6">
+      <h2 class="text-2xl font-extrabold mb-1">⏰ Tiempo agotado</h2>
+      <p class="text-slate-600 mb-4">Tu tiempo se ha agotado. Estos son tus resultados:</p>
+      <div id="modal-resumen" class="space-y-1 text-slate-800"></div>
+      <div class="mt-6 flex justify-end">
+        <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
