@@ -7,23 +7,21 @@
   <title>Test REBT online – Exámenes y cuestionarios del Reglamento Electrotécnico de Baja Tensión</title>
   <!-- Descripción enfocada al SEO con términos de búsqueda habituales -->
   <meta name="description" content="Realiza tus test del Reglamento Electrotécnico de Baja Tensión (REBT) de forma online. Practica con cuestionarios por Instrucción Técnica Complementaria, por contenido y por articulado y realiza exámenes con corrección automática." />
-  <!-- Palabras clave para facilitar la indexación (no determinantes, pero aportan contexto) -->
+  <!-- Palabras clave -->
   <meta name="keywords" content="test REBT, examen REBT, preguntas REBT, cuestionarios REBT, reglamento electrotécnico baja tensión, ITC, baja tensión" />
-  <!-- Indica a los bots que indexen y sigan los enlaces -->
   <meta name="robots" content="index, follow" />
-  <!-- Canonical para evitar contenido duplicado -->
   <link rel="canonical" href="https://app-rebt.es/" />
   
-  <!-- Metadatos sociales actualizados -->
+  <!-- OG -->
   <meta property="og:title" content="Test REBT – Exámenes y cuestionarios online del REBT" />
   <meta property="og:description" content="Practica con nuestros cuestionarios del REBT organizados por ITC, por contenido y por el articulado. Realiza exámenes con corrección automática y aprende de forma eficiente." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://app-rebt.es/" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#0f172a" />
-  <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" />
-  <!-- Google tag (gtag.js) - seguimiento analítico -->
+
+  <!-- Google tag -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -31,11 +29,11 @@
     gtag('js', new Date());
     gtag('config', 'G-RSH4ZW3VT2');
   </script>
-  <!-- TailwindCSS CDN para estilos -->
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Precarga de imagen de fondo para reducir parpadeos -->
   <link rel="preload" as="image" href="img/fondo.png">
-  <!-- Estilos en línea adicionales -->
+
   <style>
     body{
       background:url('img/fondo.png');
@@ -46,7 +44,6 @@
     @media (prefers-reduced-motion: reduce) {
       * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
     }
-    /* Clase utilitaria para ocultar contenido del layout pero accesible para lectores y robots */
     .sr-only {
       position: absolute;
       width: 1px;
@@ -59,7 +56,8 @@
       border: 0;
     }
   </style>
-  <!-- Datos estructurados JSON-LD describiendo la aplicación educativa -->
+
+  <!-- Datos estructurados -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -72,14 +70,29 @@
   }
   </script>
 </head>
+
 <body class="min-h-screen relative text-slate-900">
-  <!-- Capa oscura para mejorar contraste -->
+
+  <!-- 🔹 BOTÓN FLOTANTE AÑADIDO AQUÍ -->
+  <a href="Test_REBT_Completo_Basica.html" 
+     class="fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-md shadow-lg shadow-slate-900/20 
+            ring-1 ring-slate-300 hover:bg-slate-100 transition px-4 py-2 rounded-full 
+            flex items-center gap-2 text-slate-700 font-semibold">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+    </svg>
+    Atrás
+  </a>
+  <!-- 🔹 FIN DEL BOTÓN FLOTANTE -->
+
+
+  <!-- Capa oscura -->
   <div class="absolute inset-0 bg-slate-900/60"></div>
   
   <main class="relative z-10 flex items-center justify-center min-h-screen p-6">
     <section class="w-full max-w-4xl">
-      <!-- Tarjeta principal -->
       <div class="backdrop-blur-md bg-white/90 rounded-2xl shadow-2xl shadow-slate-900/10 ring-1 ring-white/50 p-8 md:p-10">
+
         <header class="text-center space-y-3 mb-8">
           <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-800">
             TEST REBT (IBTB)<span aria-hidden="true">⚡</span>
@@ -88,147 +101,111 @@
            Refuerza tus conocimientos del <strong>Reglamento Electrotécnico de Baja Tensión</strong>.
           </p>
           <p class="text-slate-500 text-sm md:text-base">
-          Test enfocados en cada ITC dispones de 60 minutos para responder 20 preguntas y consolidar tus conocimientos.          </p>
+            Test enfocados en cada ITC dispones de 60 minutos para responder 20 preguntas y consolidar tus conocimientos.
+          </p>
         </header>
 
-        <!-- Texto descriptivo oculto al usuario pero indexable para SEO y accesible para lectores de pantalla -->
         <div class="sr-only">
           <h2>¿Qué es el REBT?</h2>
-          <p>El Reglamento Electrotécnico de Baja Tensión (REBT) establece las condiciones técnicas y garantías que deben cumplir las instalaciones eléctricas para asegurar la seguridad de las personas y el correcto funcionamiento de los equipos. Es una normativa clave para profesionales y estudiantes del ámbito eléctrico.</p>
-          <h3>Cómo utilizar esta plataforma</h3>
-          <p>En esta web encontrarás distintos tipos de cuestionarios para repasar y aprender. Los Test 1 y Test 2 están organizados por Instrucciones Técnicas Complementarias (ITC), ya sea por número o por contenido. También dispones de un Test del articulado para poner a prueba tus conocimientos sobre el texto completo del REBT. Finalmente, puedes realizar exámenes tipo test con corrección automática para evaluar tu progreso.</p>
-          <p>Todos los cuestionarios están diseñados para adaptarse a los distintos niveles de electrificación (básica, media y elevada) y cubren desde cálculos de cargas hasta requisitos de protección y seguridad. Con ellos podrás prepararte para exámenes oficiales o mejorar tus habilidades como instalador o técnico.</p>
+          <p>El Reglamento Electrotécnico de Baja Tensión (REBT) establece las condiciones técnicas y garantías que deben cumplir las instalaciones eléctricas.</p>
         </div>
-        <!-- Botonera: columna en móvil, 2 columnas en pantallas medianas -->
+
         <nav class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mt-6">
-          
-        <!-- Examen test ARTICULADO -->
-      <a href="Test_Articulado.html" aria-label="Abrir Examen tipo test 2"
-             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300 transition transform hover:-translate-y-0.5 active:translate-y-0"
+
+          <!-- Examenes -->
+          <a href="Test_Articulado.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white transition hover:brightness-90"
              style="background-color:#6B6B6B;">
-            <!-- icono check/certificado -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
             </svg>
             <span>Articulado</span>           
           </a>
-          
-          <!-- Examen test ITC 03 -->
-          <a href="Test_ITC_BT_03_REBT.html" aria-label="Abrir Examen tipo test 2"
-             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300 transition transform hover:-translate-y-0.5 active:translate-y-0"
+
+          <a href="Test_ITC_BT_03_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
              style="background-color:#00B527;">
-            <!-- icono check/certificado -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
             </svg>
             <span>ITC-BT-03</span>           
           </a>
-          
-          <!-- Examen test ITC 04 -->
-          <a href="Test_ITC_BT_04_REBT.html" aria-label="Abrir Examen tipo test 2"
-             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300 transition transform hover:-translate-y-0.5 active:translate-y-0"
+
+          <a href="Test_ITC_BT_04_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
              style="background-color:#A35512;">
-            <!-- icono check/certificado -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2-2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
             </svg>
             <span>ITC-BT-04</span>           
           </a>
 
-            <!-- Examen test ITC 05 -->
-          <a href="Test_ITC_BT_05_REBT.html" aria-label="Abrir Examen tipo test 2"
-             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300 transition transform hover:-translate-y-0.5 active:translate-y-0"
+          <a href="Test_ITC_BT_05_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
              style="background-color:#610D58;">
-            <!-- icono check/certificado -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2-2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
             </svg>
             <span>ITC-BT-05</span>           
           </a>
 
-           <!-- Examen test ITC 08 -->
-          <a href="Test_ITC_BT_08_REBT.html" aria-label="Abrir Examen tipo test 2"
-             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300 transition transform hover:-translate-y-0.5 active:translate-y-0"
+          <a href="Test_ITC_BT_08_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
              style="background-color:#435C13;">
-            <!-- icono check/certificado -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
             </svg>
             <span>ITC-BT-08</span>           
           </a>
 
-
-               <!-- Examen test ITC 09 -->
-          <a href="Test_ITC_BT_09_REBT.html" aria-label="Abrir Examen tipo test 2"
-             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300 transition transform hover:-translate-y-0.5 active:translate-y-0"
+          <a href="Test_ITC_BT_09_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
              style="background-color:#245791;">
-            <!-- icono check/certificado -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
             </svg>
             <span>ITC-BT-09</span>           
           </a>
 
-
-            <!-- Examen test ITC 10 -->
-          <a href="Test_ITC_BT_10_REBT.html" aria-label="Abrir Examen tipo test 2"
-             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300 transition transform hover:-translate-y-0.5 active:translate-y-0"
+          <a href="Test_ITC_BT_10_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
              style="background-color:#AD1010;">
-            <!-- icono check/certificado -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
             </svg>
             <span>ITC-BT-10</span>           
           </a>
 
-            <!-- Examen test ITC 12 -->
-          <a href="Test_ITC_BT_12_REBT.html" aria-label="Abrir Examen tipo test 2"
-             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300 transition transform hover:-translate-y-0.5 active:translate-y-0"
+          <a href="Test_ITC_BT_12_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
              style="background-color:#A65508;">
-            <!-- icono check/certificado -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
             </svg>
             <span>ITC-BT-12</span>           
           </a>
 
-
-            <!-- Examen test ITC 13 -->
-          <a href="Test_ITC_BT_13_REBT.html" aria-label="Abrir Examen tipo test 2"
-             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300 transition transform hover:-translate-y-0.5 active:translate-y-0"
+          <a href="Test_ITC_BT_13_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
              style="background-color:#87007E;">
-            <!-- icono check/certificado -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
             </svg>
             <span>ITC-BT-13</span>           
           </a>
 
-          
-            <!-- Examen test ITC 14 -->
-          <a href="Test_ITC_BT_14_REBT.html" aria-label="Abrir Examen tipo test 2"
-             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300 transition transform hover:-translate-y-0.5 active:translate-y-0"
+          <a href="Test_ITC_BT_14_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
              style="background-color:#F7822D;">
-            <!-- icono check/certificado -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
             </svg>
             <span>ITC-BT-14</span>           
           </a>
 
-          
-          
         </nav>
-        <!-- Pie -->
+
         <div class="mt-8 text-center text-sm text-slate-500">
           © <span id="y"></span> REBT • Aprende y practica
         </div>
+
       </div>
     </section>
   </main>
+
   <script>
-    // Año dinámico para el pie de página
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
+
 </body>
 </html>
