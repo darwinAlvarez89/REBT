@@ -24,8 +24,10 @@
   </style>
 
   <script>
-    /* ===== Banco de preguntas (20) – Articulado REBT ===== */
-    const
+    /* ===== Banco de preguntas + explicaciones ===== */
+    const 
+    
+
 
 preguntas = [
   {
@@ -36,7 +38,8 @@ preguntas = [
       "El contador con la derivación individual",
       "El interruptor general automático con el transformador de compañía"
     ],
-    respuesta: "La caja general de protección con las instalaciones interiores o receptoras del usuario"
+    respuesta: "La caja general de protección con las instalaciones interiores o receptoras del usuario",
+    explicacion: "ITC-BT-12, punto 1.1 Definición: “Se denominan instalaciones de enlace, aquellas que unen la caja general de protección [...] con las instalaciones interiores o receptoras del usuario.”"
   },
   {
     pregunta: "Según el REBT, las instalaciones de enlace comienzan en:",
@@ -46,7 +49,8 @@ preguntas = [
       "La derivación individual",
       "El cuadro de mando y protección"
     ],
-    respuesta: "El final de la acometida"
+    respuesta: "El final de la acometida",
+    explicacion: "ITC-BT-12, punto 1.1: “Comenzarán, por tanto, en el final de la acometida…”"
   },
   {
     pregunta: "Según el REBT, las instalaciones de enlace terminan en:",
@@ -56,7 +60,8 @@ preguntas = [
       "La caja de derivación general",
       "El cuadro secundario de alumbrado"
     ],
-    respuesta: "Los dispositivos generales de mando y protección"
+    respuesta: "Los dispositivos generales de mando y protección",
+    explicacion: "ITC-BT-12, punto 1.1: “…y terminarán en los dispositivos generales de mando y protección.”"
   },
   {
     pregunta: "Según el REBT, las instalaciones de enlace se situarán y discurrirán siempre por:",
@@ -66,7 +71,8 @@ preguntas = [
       "Locales de pública concurrencia",
       "Recorridos interiores privados"
     ],
-    respuesta: "Lugares de uso común"
+    respuesta: "Lugares de uso común",
+    explicacion: "ITC-BT-12, punto 1.1: “Estas instalaciones se situarán y discurrirán siempre por lugares de uso común…”"
   },
   {
     pregunta: "Según el REBT, las instalaciones de enlace quedarán en propiedad de:",
@@ -76,7 +82,8 @@ preguntas = [
       "El promotor del edificio",
       "El ayuntamiento correspondiente"
     ],
-    respuesta: "El usuario, que será responsable de su conservación y mantenimiento"
+    respuesta: "El usuario, que será responsable de su conservación y mantenimiento",
+    explicacion: "ITC-BT-12, punto 1.1: “…y quedarán de propiedad del usuario, que se responsabilizará de su conservación y mantenimiento.”"
   },
   {
     pregunta: "Según el REBT, forman parte de las instalaciones de enlace:",
@@ -86,7 +93,8 @@ preguntas = [
       "Caja general de protección, cuadro general del usuario y red interior",
       "Solo la línea general de alimentación y la derivación individual"
     ],
-    respuesta: "Caja general de protección, línea general de alimentación, elementos para contadores, derivación individual, caja ICP y dispositivos generales de mando y protección"
+    respuesta: "Caja general de protección, línea general de alimentación, elementos para contadores, derivación individual, caja ICP y dispositivos generales de mando y protección",
+    explicacion: "ITC-BT-12, punto 1.2: lista exactamente estos seis elementos como partes de las instalaciones de enlace."
   },
   {
     pregunta: "Según el REBT, la línea general de alimentación (LGA) forma parte de:",
@@ -96,32 +104,38 @@ preguntas = [
       "Las instalaciones interiores del usuario",
       "Los servicios generales del edificio"
     ],
-    respuesta: "Las instalaciones de enlace"
+    respuesta: "Las instalaciones de enlace",
+    explicacion: "ITC-BT-12, punto 1.2: La LGA aparece incluida en la lista de partes que constituyen las instalaciones de enlace."
   },
   {
     pregunta: "Según el REBT, en los esquemas de enlace la red de distribución se representa con el número:",
     opciones: ["1", "2", "3", "4"],
-    respuesta: "1"
+    respuesta: "1",
+    explicacion: "ITC-BT-12, Leyenda: el número 1 corresponde a 'Red de distribución'."
   },
   {
     pregunta: "Según el REBT, en los esquemas de enlace la acometida se representa con el número:",
     opciones: ["2", "3", "4", "5"],
-    respuesta: "2"
+    respuesta: "2",
+    explicacion: "ITC-BT-12, Leyenda: el número 2 corresponde a 'Acometida'."
   },
   {
     pregunta: "Según el REBT, el número que identifica la caja general de protección en la leyenda de esquemas es:",
     opciones: ["3", "4", "5", "6"],
-    respuesta: "3"
+    respuesta: "3",
+    explicacion: "ITC-BT-12, Leyenda: el número 3 corresponde a 'Caja general de protección'."
   },
   {
     pregunta: "Según el REBT, el número que identifica la línea general de alimentación en la leyenda es:",
     opciones: ["4", "5", "6", "7"],
-    respuesta: "4"
+    respuesta: "4",
+    explicacion: "ITC-BT-12, Leyenda: el número 4 corresponde a 'Línea general de alimentación'."
   },
   {
     pregunta: "Según el REBT, el número que corresponde a los dispositivos generales de mando y protección es:",
     opciones: ["12", "10", "8", "9"],
-    respuesta: "12"
+    respuesta: "12",
+    explicacion: "ITC-BT-12, Leyenda: el número 12 corresponde a 'Dispositivos generales de mando y protección'."
   },
   {
     pregunta: "Según el REBT, el conjunto formado por la derivación individual y la instalación interior constituye:",
@@ -131,7 +145,8 @@ preguntas = [
       "La acometida del usuario",
       "El circuito principal"
     ],
-    respuesta: "La instalación privada"
+    respuesta: "La instalación privada",
+    explicacion: "ITC-BT-12, Nota de la leyenda: “El conjunto de derivación individual e instalación interior constituye la instalación privada.”"
   },
   {
     pregunta: "Según el REBT, en el caso de un solo usuario se podrán simplificar las instalaciones de enlace porque:",
@@ -141,7 +156,8 @@ preguntas = [
       "La instalación pertenece a la empresa distribuidora",
       "El usuario no necesita dispositivos de mando y protección"
     ],
-    respuesta: "Coinciden en el mismo lugar la CGP y el equipo de medida y no existe línea general de alimentación"
+    respuesta: "Coinciden en el mismo lugar la CGP y el equipo de medida y no existe línea general de alimentación",
+    explicacion: "ITC-BT-12, punto 2.1: explica que para un solo usuario coinciden la CGP y el equipo de medida, y no existe LGA."
   },
   {
     pregunta: "Según el REBT, en instalaciones de un solo usuario el fusible de seguridad coincide con:",
@@ -151,7 +167,8 @@ preguntas = [
       "El fusible del cuadro interior",
       "El fusible del interruptor general automático"
     ],
-    respuesta: "El fusible de la caja general de protección"
+    respuesta: "El fusible de la caja general de protección",
+    explicacion: "ITC-BT-12, punto 2.1: “…el fusible de seguridad coincide con el fusible de la CGP.”"
   },
   {
     pregunta: "Según el REBT, el esquema para dos usuarios alimentados desde el mismo lugar:",
@@ -161,7 +178,8 @@ preguntas = [
       "Suprime la caja general de protección",
       "No utiliza contadores independientes"
     ],
-    respuesta: "Generaliza el esquema de un solo usuario y mantiene lo indicado para los fusibles de seguridad"
+    respuesta: "Generaliza el esquema de un solo usuario y mantiene lo indicado para los fusibles de seguridad",
+    explicacion: "ITC-BT-12, punto 2.2.1: “El esquema 2.1 puede generalizarse… Es válido lo indicado para los fusibles de seguridad (9).”"
   },
   {
     pregunta: "Según el REBT, la colocación de contadores en forma centralizada en un lugar se utiliza normalmente en:",
@@ -171,7 +189,8 @@ preguntas = [
       "Locales de pública concurrencia",
       "Garajes y trasteros"
     ],
-    respuesta: "Conjuntos de edificación vertical u horizontal destinados a viviendas, edificios comerciales, de oficinas o concentración de industrias"
+    respuesta: "Conjuntos de edificación vertical u horizontal destinados a viviendas, edificios comerciales, de oficinas o concentración de industrias",
+    explicacion: "ITC-BT-12, punto 2.2.2: indica literalmente los edificios donde se utiliza este esquema."
   },
   {
     pregunta: "Según el REBT, la centralización de contadores en más de un lugar se utiliza cuando:",
@@ -181,7 +200,8 @@ preguntas = [
       "Los contadores se instalan dentro de cada vivienda",
       "Las cargas sean inferiores a 5 kW"
     ],
-    respuesta: "La previsión de cargas hace aconsejable disponer de más de una centralización o en varias plantas"
+    respuesta: "La previsión de cargas hace aconsejable disponer de más de una centralización o en varias plantas",
+    explicacion: "ITC-BT-12, punto 2.2.3: lo establece de manera literal."
   },
   {
     pregunta: "Según el REBT, el esquema 2.2.3 podrá aplicarse también en agrupaciones de viviendas:",
@@ -191,7 +211,8 @@ preguntas = [
       "Únicamente si comparten un cuadro general único",
       "Cuando tengan menos de 10 viviendas"
     ],
-    respuesta: "En distribución horizontal dentro de un recinto privado"
+    respuesta: "En distribución horizontal dentro de un recinto privado",
+    explicacion: "ITC-BT-12, punto 2.2.3: “…también podrá ser de aplicación en agrupaciones de viviendas en distribución horizontal dentro de un recinto privado.”"
   },
   {
     pregunta: "Según el REBT, el esquema 2.2.3 será de aplicación en centralizaciones de contadores distribuidas mediante canalizaciones prefabricadas que cumplan:",
@@ -201,9 +222,21 @@ preguntas = [
       "La norma UNE 21123",
       "La norma UNE-EN 50.102"
     ],
-    respuesta: "La norma UNE-EN 60.439-2"
+    respuesta: "La norma UNE-EN 60.439-2",
+    explicacion: "ITC-BT-12, punto 2.2.3: “…será de aplicación [...] mediante canalizaciones eléctricas prefabricadas, que cumplan lo establecido en la norma UNE-EN 60.439-2.”"
   }
 ];
+
+
+
+
+
+
+
+
+
+
+
 
     /* ===== Estado ===== */
     let preguntasAleatorias = [];
@@ -230,12 +263,12 @@ preguntas = [
     const clamp0 = (x) => x < 0 ? 0 : x;
 
     function calcularPuntuacion(){
-      const total = preguntasAleatorias.length;              // 20
-      const penalizacion = Math.floor(errores / 2);          // cada 2 fallos = 1 válida menos
+      const total = preguntasAleatorias.length;
+      const penalizacion = Math.floor(errores / 2);
       const validasNetas = Math.max(0, aciertos - penalizacion);
-      const puntos = validasNetas * 0.5;                     // cada válida = 0,5 puntos
-      const porcentaje = clamp0((validasNetas / total) * 100); // % sobre preguntas válidas netas / total
-      const apto = porcentaje >= 80;                         // mínimo 80%
+      const puntos = validasNetas * 0.5;
+      const porcentaje = clamp0((validasNetas / total) * 100);
+      const apto = porcentaje >= 80;
       return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
     }
 
@@ -300,12 +333,15 @@ preguntas = [
       seleccionUsuario=null; respondido=false;
       document.getElementById("pregunta").textContent = q.pregunta;
       renderOpciones(q.opciones);
+
       document.getElementById("acciones").innerHTML =
         `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
            <span>Elige una respuesta (teclas 1–4 y Enter).</span>
            <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
          </div>`;
-      setProgreso(); actualizarContador();
+
+      setProgreso();
+      actualizarContador();
     }
 
     function seleccionarOpcion(opcion){
@@ -316,7 +352,9 @@ preguntas = [
         if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
       });
       const btn = document.getElementById('btn-contestar');
-      btn.disabled=false; btn.classList.remove('opacity-50','cursor-not-allowed'); btn.onclick=verificarRespuesta;
+      btn.disabled=false;
+      btn.classList.remove('opacity-50','cursor-not-allowed');
+      btn.onclick=verificarRespuesta;
     }
 
     function verificarRespuesta(){
@@ -328,19 +366,45 @@ preguntas = [
       document.querySelectorAll("#opciones .opcion").forEach(b=>{
         b.disabled=true; b.classList.remove('ring','ring-yellow-300');
         const val=b.dataset.valor;
-        if (val===actual.respuesta){ b.classList.add('bg-green-600','hover:bg-green-700'); b.innerHTML=`✅ <span class="font-semibold">${val}</span>`; }
-        else if (val===seleccionUsuario && !ok){ b.classList.add('bg-red-600','hover:bg-red-700'); b.innerHTML=`❌ <span class="font-semibold">${val}</span>`; }
-        else { b.classList.add('bg-blue-500'); }
+        if (val===actual.respuesta){
+          b.classList.add('bg-green-600','hover:bg-green-700');
+          b.innerHTML=`✅ <span class="font-semibold">${val}</span>`;
+        } else if (val===seleccionUsuario && !ok){
+          b.classList.add('bg-red-600','hover:bg-red-700');
+          b.innerHTML=`❌ <span class="font-semibold">${val}</span>`;
+        } else {
+          b.classList.add('bg-blue-500');
+        }
       });
 
       ok ? aciertos++ : errores++;
-      historial.push({pregunta:actual.pregunta, opciones:actual.opciones, correcta:actual.respuesta, elegida:seleccionUsuario});
 
+      historial.push({
+        pregunta:actual.pregunta,
+        opciones:actual.opciones,
+        correcta:actual.respuesta,
+        elegida:seleccionUsuario,
+        explicacion:actual.explicacion
+      });
+
+      /* === NUEVO: mostrar la explicación debajo del botón === */
       document.getElementById("acciones").innerHTML =
-        `<div class="mt-4 flex items-center justify-end gap-3">
-           <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">Siguiente</button>
+        `<div class="mt-4 flex flex-col gap-3">
+
+           <div class="flex items-center justify-end">
+             <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">
+               Siguiente
+             </button>
+           </div>
+
+           <div id="explicacion" class="text-sm text-slate-700 bg-slate-100 border-l-4 border-blue-600 p-3 rounded-md">
+             ${actual.explicacion || "Sin referencia disponible"}
+           </div>
+
          </div>`;
-      actualizarContador(); setProgreso();
+
+      actualizarContador();
+      setProgreso();
     }
 
     const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
@@ -358,8 +422,8 @@ preguntas = [
       document.getElementById('modal-resumen').innerHTML = `
         <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
         <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
-        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas (=${(penalizacion*0.5).toFixed(2)} pts)</p>
-        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total}</p>
+        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas</p>
+        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong></p>
         <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
         <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
       `;
@@ -381,30 +445,61 @@ preguntas = [
           <p class='font-semibold mb-2'>${h.pregunta}</p>
           <div class='flex flex-wrap gap-2'>
             ${h.opciones.map(op=>{
-              if (op===h.elegida && op===h.correcta) return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
-              if (op===h.elegida && op!==h.correcta) return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
-              if (op===h.correcta && op!==h.elegida) return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              if (op===h.elegida && op===h.correcta)
+                return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op===h.elegida && op!==h.correcta)
+                return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op===h.correcta && op!==h.elegida)
+                return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
               return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
             }).join('')}
           </div>
-        </div>`).join('');
+          <div class='mt-2 text-sm text-slate-600 bg-slate-100 border-l-4 border-blue-600 p-2 rounded-md'>
+            📘 Explicación: ${h.explicacion}
+          </div>
+        </div>
+      `).join('');
 
       const totalPuntos = total * 0.5;
 
       document.getElementById("test").innerHTML = `
         <div class="space-y-3">
-          <h2 class="text-2xl font-extrabold">Resultado del test <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">(${apto?'APTO ✅':'NO APTO ❌'})</span></h2>
-          <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Penalización: <strong>-${penalizacion}</strong> válidas</p>
-          <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total} • Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+          <h2 class="text-2xl font-extrabold">Resultado del test 
+            <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">
+              (${apto?'APTO ✅':'NO APTO ❌'})
+            </span>
+          </h2>
+
+          <p class="text-slate-700">
+            Aciertos: <strong class="text-green-700">${aciertos}</strong> • 
+            Fallos: <strong class="text-red-700">${errores}</strong> • 
+            Penalización: <strong>-${penalizacion}</strong>
+          </p>
+
+          <p class="text-slate-700">
+            Válidas netas: <strong>${validasNetas}</strong> / ${total} • 
+            Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> 
+            (<strong>${porcentaje.toFixed(2)}%</strong>)
+          </p>
+
           <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span></p>
+
           <hr class="my-3 border-slate-200">
+
           <h3 class="text-lg font-bold">Detalle de preguntas</h3>
-          <div class="max-h-[50vh] overflow-auto pr-1">${detalle}</div>
+
+          <div class="max-h-[50vh] overflow-auto pr-1">
+            ${detalle}
+          </div>
         </div>
 
         <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
-          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
-          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">Volver al inicio</a>
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">
+            Volver a intentar
+          </button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">
+            Volver al inicio
+          </a>
         </div>`;
     }
 
@@ -413,8 +508,14 @@ preguntas = [
       if (tiempoAgotado) return;
       if (respondido){ if (e.key==='Enter') siguientePregunta(); return; }
       const map={'1':0,'2':1,'3':2,'4':3};
-      if (map[e.key]!==undefined){ const b=document.querySelectorAll('#opciones .opcion')[map[e.key]]; if (b) b.click(); }
-      if (e.key==='Enter'){ const b=document.getElementById('btn-contestar'); if (b && !b.disabled) b.click(); }
+      if (map[e.key]!==undefined){
+        const b=document.querySelectorAll('#opciones .opcion')[map[e.key]];
+        if (b) b.click();
+      }
+      if (e.key==='Enter'){
+        const b=document.getElementById('btn-contestar');
+        if (b && !b.disabled) b.click();
+      }
     }
 
     window.onload = ()=>{
@@ -425,6 +526,7 @@ preguntas = [
       document.addEventListener('keydown', handleKey);
     };
   </script>
+
 </head>
 
 <body class="bg-gray-100 text-gray-900 p-4">
@@ -461,5 +563,6 @@ preguntas = [
       </div>
     </div>
   </div>
+
 </body>
 </html>
