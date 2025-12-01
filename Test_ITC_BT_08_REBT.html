@@ -24,8 +24,12 @@
   </style>
 
   <script>
-    /* ===== Banco de preguntas (20) – Articulado REBT ===== */
-    const preguntas = [
+    /* ===== Banco de preguntas + explicaciones ===== */
+    const 
+    
+
+
+preguntas = [
   {
     pregunta: "Según el REBT, los esquemas de distribución se definen en función de:",
     opciones: [
@@ -34,7 +38,8 @@
       "La sección del conductor neutro y de fase",
       "La tensión nominal y el número de fases"
     ],
-    respuesta: "Las conexiones a tierra de la red de distribución y de las masas de la instalación receptora"
+    respuesta: "Las conexiones a tierra de la red de distribución y de las masas de la instalación receptora",
+    explicacion: "ITC-BT-08, apartado 1 (Esquemas de distribución): indica que los esquemas de distribución se establecen en función de las conexiones a tierra de la red de distribución o de la alimentación, por un lado, y de las masas de la instalación receptora, por otro."
   },
   {
     pregunta: "Según el REBT, la primera letra del código de un esquema de distribución indica:",
@@ -44,7 +49,8 @@
       "La protección frente a contactos indirectos",
       "La forma de conexión del conductor de protección"
     ],
-    respuesta: "La situación de la alimentación con respecto a tierra"
+    respuesta: "La situación de la alimentación con respecto a tierra",
+    explicacion: "ITC-BT-08, apartado 1: bajo el epígrafe 'Primera letra', se indica que se refiere a la situación de la alimentación con respecto a tierra."
   },
   {
     pregunta: "Según el REBT, la letra 'T' en la primera posición del código del esquema significa:",
@@ -54,7 +60,8 @@
       "Masas conectadas directamente al neutro",
       "Neutro puesto a tierra a través de una impedancia"
     ],
-    respuesta: "Conexión directa de un punto de la alimentación a tierra"
+    respuesta: "Conexión directa de un punto de la alimentación a tierra",
+    explicacion: "ITC-BT-08, apartado 1: en la definición de la primera letra, indica 'T = Conexión directa de un punto de la alimentación a tierra'."
   },
   {
     pregunta: "Según el REBT, la letra 'I' en la primera posición del código indica:",
@@ -64,7 +71,8 @@
       "Sistema interconectado de neutros y tierras",
       "Instalación interior sin conductor de protección"
     ],
-    respuesta: "Aislamiento de todas las partes activas de la alimentación respecto a tierra o conexión a tierra mediante impedancia"
+    respuesta: "Aislamiento de todas las partes activas de la alimentación respecto a tierra o conexión a tierra mediante impedancia",
+    explicacion: "ITC-BT-08, apartado 1: para la primera letra, 'I = Aislamiento de todas las partes activas de la alimentación con respecto a tierra o conexión de un punto a tierra a través de una impedancia'."
   },
   {
     pregunta: "Según el REBT, la segunda letra del código de un esquema se refiere a:",
@@ -74,7 +82,8 @@
       "La protección frente a sobretensiones",
       "El número de conductores activos del sistema"
     ],
-    respuesta: "La situación de las masas de la instalación receptora respecto a tierra"
+    respuesta: "La situación de las masas de la instalación receptora respecto a tierra",
+    explicacion: "ITC-BT-08, apartado 1: bajo 'Segunda letra' se indica que se refiere a la situación de las masas de la instalación receptora con respecto a tierra."
   },
   {
     pregunta: "Según el REBT, la letra 'N' en la segunda posición del código indica:",
@@ -84,7 +93,8 @@
       "Masas conectadas mediante una impedancia de tierra",
       "Masas sin conexión a tierra directa"
     ],
-    respuesta: "Masas conectadas directamente al punto de la alimentación puesto a tierra"
+    respuesta: "Masas conectadas directamente al punto de la alimentación puesto a tierra",
+    explicacion: "ITC-BT-08, apartado 1, 'Segunda letra': 'N = Masas conectadas directamente al punto de la alimentación puesto a tierra (en corriente alterna, este punto es normalmente el punto neutro)'."
   },
   {
     pregunta: "Según el REBT, la letra 'S' añadida al código significa:",
@@ -94,7 +104,8 @@
       "Sistema con doble puesta a tierra",
       "Instalación sin neutro accesible"
     ],
-    respuesta: "Conductor de neutro y conductor de protección separados"
+    respuesta: "Conductor de neutro y conductor de protección separados",
+    explicacion: "ITC-BT-08, apartado 1, 'Otras letras': 'S = Las funciones de neutro y de protección, aseguradas por conductores separados'."
   },
   {
     pregunta: "Según el REBT, la letra 'C' añadida al código significa:",
@@ -104,7 +115,8 @@
       "Sistema con neutro desconectable",
       "Conexión a tierra con resistencia controlada"
     ],
-    respuesta: "Neutro y protección combinados en un solo conductor (conductor CPN)"
+    respuesta: "Neutro y protección combinados en un solo conductor (conductor CPN)",
+    explicacion: "ITC-BT-08, apartado 1, 'Otras letras': 'C = Las funciones de neutro y de protección, combinadas en un solo conductor (conductor CPN)'."
   },
   {
     pregunta: "Según el REBT, en el esquema TN las masas están conectadas:",
@@ -114,7 +126,8 @@
       "A través de una impedancia de protección",
       "A una tierra común con el sistema IT"
     ],
-    respuesta: "Al punto de la alimentación puesto a tierra"
+    respuesta: "Al punto de la alimentación puesto a tierra",
+    explicacion: "ITC-BT-08, apartado 1.1 Esquema TN: los esquemas TN tienen un punto de la alimentación conectado directamente a tierra y 'las masas de la instalación receptora conectadas a dicho punto mediante conductores de protección'."
   },
   {
     pregunta: "Según el REBT, en el esquema TN-C las funciones de neutro y protección:",
@@ -124,7 +137,8 @@
       "Se aíslan del neutro de la red",
       "Se conectan mediante transformador de aislamiento"
     ],
-    respuesta: "Se combinan en un solo conductor denominado CPN"
+    respuesta: "Se combinan en un solo conductor denominado CPN",
+    explicacion: "ITC-BT-08, apartado 1.1: define el esquema TN-C como aquel 'en el que las funciones de neutro y protección están combinados en un solo conductor en todo el esquema'; y en la definición de la letra C se indica que es el conductor CPN."
   },
   {
     pregunta: "Según el REBT, en el esquema TN-S las funciones de neutro y protección:",
@@ -134,7 +148,8 @@
       "No requieren conexión equipotencial",
       "Se conectan a tierra a través de impedancia"
     ],
-    respuesta: "Se aseguran mediante conductores separados"
+    respuesta: "Se aseguran mediante conductores separados",
+    explicacion: "ITC-BT-08, apartado 1.1: define el esquema TN-S como aquel 'en el que el conductor neutro y el de protección son distintos en todo el esquema'."
   },
   {
     pregunta: "Según el REBT, en el esquema TT las masas de la instalación están:",
@@ -144,7 +159,8 @@
       "Aisladas completamente de tierra",
       "Conectadas al conductor de protección del generador"
     ],
-    respuesta: "Conectadas directamente a una toma de tierra independiente de la alimentación"
+    respuesta: "Conectadas directamente a una toma de tierra independiente de la alimentación",
+    explicacion: "ITC-BT-08, apartado 1.2 Esquema TT: 'Las masas de la instalación receptora están conectadas a una toma de tierra separada de la toma de tierra de la alimentación'."
   },
   {
     pregunta: "Según el REBT, en el esquema IT las masas están conectadas:",
@@ -154,24 +170,30 @@
       "A una impedancia común con el neutro",
       "A una red equipotencial flotante"
     ],
-    respuesta: "A una toma de tierra propia de la instalación receptora"
+    respuesta: "A una toma de tierra propia de la instalación receptora",
+    explicacion: "ITC-BT-08, apartado 1.3 Esquema IT: 'Las masas de la instalación receptora están puestas directamente a tierra'."
   },
-  {
-    pregunta: "Según el REBT, el esquema IT se utiliza preferentemente en:",
-    opciones: [
-      "Instalaciones donde es esencial mantener la continuidad del servicio",
-      "Instalaciones de alumbrado público",
-      "Locales de pública concurrencia",
-      "Instalaciones con suministro temporal"
-    ],
-    respuesta: "Instalaciones donde es esencial mantener la continuidad del servicio"
-  },
-  {
-  pregunta: "Según el REBT, el esquema más utilizado para instalaciones receptoras alimentadas directamente desde redes de distribución pública de baja tensión es:",
-  opciones: ["TN", "TN-S", "TT", "IT"],
-  respuesta: "TT"
+  
+
+{
+  pregunta: "Según el REBT, en el esquema IT, respecto al neutro de la instalación:",
+  opciones: [
+    "Se recomienda no distribuir el neutro",
+    "Debe estar siempre conectado directamente a tierra",
+    "Debe estar siempre aislado de cualquier puesta a tierra",
+    "Debe conectarse a tierra mediante resistencia de 5 Ω"
+  ],
+  respuesta: "Se recomienda no distribuir el neutro",
+  explicacion: "ITC-BT-08, apartado 1.3 Esquema IT: después de describir la limitación de la intensidad de defecto, se indica expresamente que 'En este tipo de esquema se recomienda no distribuir el neutro'."
 },
 
+
+  {
+    pregunta: "Según el REBT, el esquema más utilizado para instalaciones receptoras alimentadas directamente desde redes de distribución pública de baja tensión es:",
+    opciones: ["TN", "TN-S", "TT", "IT"],
+    respuesta: "TT",
+    explicacion: "ITC-BT-08, apartado 1.4, letra a): se indica que las redes de distribución pública de baja tensión tienen el neutro puesto a tierra y que 'el esquema de distribución para instalaciones receptoras alimentadas directamente de una red de distribución pública de baja tensión es el esquema TT'."
+  },
   {
     pregunta: "Según el REBT, el esquema TT se aplica habitualmente en:",
     opciones: [
@@ -180,7 +202,8 @@
       "Instalaciones de potencia superior a 1 kV",
       "Redes subterráneas con conductor neutro aislado"
     ],
-    respuesta: "Redes de distribución públicas y suministros individuales"
+    respuesta: "Redes de distribución públicas y suministros individuales",
+    explicacion: "ITC-BT-08, apartado 1.4 a): al hablar de redes de distribución pública de baja tensión y de las instalaciones receptoras alimentadas directamente de ellas, se establece que el esquema de distribución es el TT; de ahí que se aplique en los suministros individuales conectados a estas redes."
   },
   {
     pregunta: "Según el REBT, en el esquema TN la corriente de defecto regresa a la fuente a través de:",
@@ -190,7 +213,8 @@
       "Una impedancia de fuga",
       "Un transformador de aislamiento"
     ],
-    respuesta: "El conductor de protección o del neutro puesto a tierra"
+    respuesta: "El conductor de protección o del neutro puesto a tierra",
+    explicacion: "ITC-BT-08, apartado 1.1: se indica que en los esquemas TN cualquier intensidad de defecto franco fase-masa es una intensidad de cortocircuito y que el bucle de defecto está constituido exclusivamente por elementos conductores metálicos. Esto implica que la corriente de defecto vuelve a la fuente por los conductores de protección y/o neutro puestos a tierra, sin pasar por el terreno."
   },
   {
     pregunta: "Según el REBT, en el esquema TT la corriente de defecto regresa a la fuente a través de:",
@@ -200,7 +224,8 @@
       "Un transformador de protección",
       "El conductor de protección del esquema TN"
     ],
-    respuesta: "La resistencia de las tomas de tierra del receptor y del neutro de la fuente"
+    respuesta: "La resistencia de las tomas de tierra del receptor y del neutro de la fuente",
+    explicacion: "ITC-BT-08, apartado 1.2: se indica que en este esquema el bucle de defecto incluye resistencia de paso a tierra en alguna parte del circuito, lo que implica que la corriente de defecto circula a través de las tomas de tierra de las masas y de la alimentación."
   },
   {
     pregunta: "Según el REBT, en el esquema IT la corriente de defecto tiene un valor:",
@@ -210,19 +235,42 @@
       "Igual al de un cortocircuito entre fases",
       "Variable según la carga conectada"
     ],
-    respuesta: "Muy reducido, limitado por la alta impedancia de puesta a tierra del sistema"
+    respuesta: "Muy reducido, limitado por la alta impedancia de puesta a tierra del sistema",
+    explicacion: "ITC-BT-08, apartado 1.3: se establece que en el esquema IT la intensidad resultante de un primer defecto fase-masa o fase-tierra tiene un valor suficientemente reducido para no provocar tensiones de contacto peligrosas, y que dicha limitación se obtiene por ausencia de conexión a tierra o por la inserción de una impedancia suficiente entre la alimentación y tierra."
   },
   {
-    pregunta: "Según el REBT, en redes de distribución de tipo TN la puesta a tierra del neutro debe realizarse:",
+    pregunta: "Según el REBT, para aplicar el esquema TN en redes de distribución la sección del conductor neutro debe ser:",
     opciones: [
-      "En varios puntos de la red o en el transformador, según lo determine la compañía distribuidora",
-      "Solo en el cuadro general de mando y protección",
-      "En cada punto de consumo conectado",
-      "A través de una impedancia fija común para todos los usuarios"
+      "Como mínimo la indicada en la tabla 1, en función de la sección de los conductores de fase",
+      "Siempre igual a la sección de fase",
+      "La mitad de la sección de los conductores de fase",
+      "Indiferente, ya que solo se usa como conductor de protección"
     ],
-    respuesta: "En varios puntos de la red o en el transformador, según lo determine la compañía distribuidora"
+    respuesta: "Como mínimo la indicada en la tabla 1, en función de la sección de los conductores de fase",
+    explicacion: "ITC-BT-08, apartado 2, prescripción a): 'La sección del conductor neutro debe, en todo su recorrido, ser como mínimo igual a la indicada en la tabla siguiente, en función de la sección de los conductores de fase.'"
+  },
+  {
+    pregunta: "Según el REBT, en el esquema TN la resistencia de tierra del neutro no será superior a:",
+    opciones: ["5 Ω en la proximidad del centro y 2 Ω global", "10 Ω en la proximidad del centro", "2 Ω en todos los puntos de la red", "1 Ω en cualquier punto de la instalación"],
+    respuesta: "5 Ω en la proximidad del centro y 2 Ω global",
+    explicacion: "ITC-BT-08, apartado 2, prescripciones d) y e): la resistencia de tierra del neutro no será superior a 5 Ω en las proximidades de la central generadora o del centro de transformación y en los 200 últimos metros de cualquier derivación, y la resistencia global de todas las tomas de tierra del neutro no será superior a 2 Ω."
   }
 ];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /* ===== Estado ===== */
     let preguntasAleatorias = [];
@@ -249,12 +297,12 @@
     const clamp0 = (x) => x < 0 ? 0 : x;
 
     function calcularPuntuacion(){
-      const total = preguntasAleatorias.length;              // 20
-      const penalizacion = Math.floor(errores / 2);          // cada 2 fallos = 1 válida menos
+      const total = preguntasAleatorias.length;
+      const penalizacion = Math.floor(errores / 2);
       const validasNetas = Math.max(0, aciertos - penalizacion);
-      const puntos = validasNetas * 0.5;                     // cada válida = 0,5 puntos
-      const porcentaje = clamp0((validasNetas / total) * 100); // % sobre preguntas válidas netas / total
-      const apto = porcentaje >= 80;                         // mínimo 80%
+      const puntos = validasNetas * 0.5;
+      const porcentaje = clamp0((validasNetas / total) * 100);
+      const apto = porcentaje >= 80;
       return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
     }
 
@@ -319,12 +367,15 @@
       seleccionUsuario=null; respondido=false;
       document.getElementById("pregunta").textContent = q.pregunta;
       renderOpciones(q.opciones);
+
       document.getElementById("acciones").innerHTML =
         `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
            <span>Elige una respuesta (teclas 1–4 y Enter).</span>
            <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
          </div>`;
-      setProgreso(); actualizarContador();
+
+      setProgreso();
+      actualizarContador();
     }
 
     function seleccionarOpcion(opcion){
@@ -335,7 +386,9 @@
         if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
       });
       const btn = document.getElementById('btn-contestar');
-      btn.disabled=false; btn.classList.remove('opacity-50','cursor-not-allowed'); btn.onclick=verificarRespuesta;
+      btn.disabled=false;
+      btn.classList.remove('opacity-50','cursor-not-allowed');
+      btn.onclick=verificarRespuesta;
     }
 
     function verificarRespuesta(){
@@ -347,19 +400,45 @@
       document.querySelectorAll("#opciones .opcion").forEach(b=>{
         b.disabled=true; b.classList.remove('ring','ring-yellow-300');
         const val=b.dataset.valor;
-        if (val===actual.respuesta){ b.classList.add('bg-green-600','hover:bg-green-700'); b.innerHTML=`✅ <span class="font-semibold">${val}</span>`; }
-        else if (val===seleccionUsuario && !ok){ b.classList.add('bg-red-600','hover:bg-red-700'); b.innerHTML=`❌ <span class="font-semibold">${val}</span>`; }
-        else { b.classList.add('bg-blue-500'); }
+        if (val===actual.respuesta){
+          b.classList.add('bg-green-600','hover:bg-green-700');
+          b.innerHTML=`✅ <span class="font-semibold">${val}</span>`;
+        } else if (val===seleccionUsuario && !ok){
+          b.classList.add('bg-red-600','hover:bg-red-700');
+          b.innerHTML=`❌ <span class="font-semibold">${val}</span>`;
+        } else {
+          b.classList.add('bg-blue-500');
+        }
       });
 
       ok ? aciertos++ : errores++;
-      historial.push({pregunta:actual.pregunta, opciones:actual.opciones, correcta:actual.respuesta, elegida:seleccionUsuario});
 
+      historial.push({
+        pregunta:actual.pregunta,
+        opciones:actual.opciones,
+        correcta:actual.respuesta,
+        elegida:seleccionUsuario,
+        explicacion:actual.explicacion
+      });
+
+      /* === NUEVO: mostrar la explicación debajo del botón === */
       document.getElementById("acciones").innerHTML =
-        `<div class="mt-4 flex items-center justify-end gap-3">
-           <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">Siguiente</button>
+        `<div class="mt-4 flex flex-col gap-3">
+
+           <div class="flex items-center justify-end">
+             <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">
+               Siguiente
+             </button>
+           </div>
+
+           <div id="explicacion" class="text-sm text-slate-700 bg-slate-100 border-l-4 border-blue-600 p-3 rounded-md">
+             ${actual.explicacion || "Sin referencia disponible"}
+           </div>
+
          </div>`;
-      actualizarContador(); setProgreso();
+
+      actualizarContador();
+      setProgreso();
     }
 
     const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
@@ -377,8 +456,8 @@
       document.getElementById('modal-resumen').innerHTML = `
         <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
         <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
-        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas (=${(penalizacion*0.5).toFixed(2)} pts)</p>
-        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total}</p>
+        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas</p>
+        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong></p>
         <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
         <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
       `;
@@ -400,30 +479,61 @@
           <p class='font-semibold mb-2'>${h.pregunta}</p>
           <div class='flex flex-wrap gap-2'>
             ${h.opciones.map(op=>{
-              if (op===h.elegida && op===h.correcta) return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
-              if (op===h.elegida && op!==h.correcta) return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
-              if (op===h.correcta && op!==h.elegida) return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              if (op===h.elegida && op===h.correcta)
+                return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op===h.elegida && op!==h.correcta)
+                return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op===h.correcta && op!==h.elegida)
+                return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
               return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
             }).join('')}
           </div>
-        </div>`).join('');
+          <div class='mt-2 text-sm text-slate-600 bg-slate-100 border-l-4 border-blue-600 p-2 rounded-md'>
+            📘 Explicación: ${h.explicacion}
+          </div>
+        </div>
+      `).join('');
 
       const totalPuntos = total * 0.5;
 
       document.getElementById("test").innerHTML = `
         <div class="space-y-3">
-          <h2 class="text-2xl font-extrabold">Resultado del test <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">(${apto?'APTO ✅':'NO APTO ❌'})</span></h2>
-          <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Penalización: <strong>-${penalizacion}</strong> válidas</p>
-          <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total} • Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+          <h2 class="text-2xl font-extrabold">Resultado del test 
+            <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">
+              (${apto?'APTO ✅':'NO APTO ❌'})
+            </span>
+          </h2>
+
+          <p class="text-slate-700">
+            Aciertos: <strong class="text-green-700">${aciertos}</strong> • 
+            Fallos: <strong class="text-red-700">${errores}</strong> • 
+            Penalización: <strong>-${penalizacion}</strong>
+          </p>
+
+          <p class="text-slate-700">
+            Válidas netas: <strong>${validasNetas}</strong> / ${total} • 
+            Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> 
+            (<strong>${porcentaje.toFixed(2)}%</strong>)
+          </p>
+
           <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span></p>
+
           <hr class="my-3 border-slate-200">
+
           <h3 class="text-lg font-bold">Detalle de preguntas</h3>
-          <div class="max-h-[50vh] overflow-auto pr-1">${detalle}</div>
+
+          <div class="max-h-[50vh] overflow-auto pr-1">
+            ${detalle}
+          </div>
         </div>
 
         <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
-          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
-          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">Volver al inicio</a>
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">
+            Volver a intentar
+          </button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">
+            Volver al inicio
+          </a>
         </div>`;
     }
 
@@ -432,8 +542,14 @@
       if (tiempoAgotado) return;
       if (respondido){ if (e.key==='Enter') siguientePregunta(); return; }
       const map={'1':0,'2':1,'3':2,'4':3};
-      if (map[e.key]!==undefined){ const b=document.querySelectorAll('#opciones .opcion')[map[e.key]]; if (b) b.click(); }
-      if (e.key==='Enter'){ const b=document.getElementById('btn-contestar'); if (b && !b.disabled) b.click(); }
+      if (map[e.key]!==undefined){
+        const b=document.querySelectorAll('#opciones .opcion')[map[e.key]];
+        if (b) b.click();
+      }
+      if (e.key==='Enter'){
+        const b=document.getElementById('btn-contestar');
+        if (b && !b.disabled) b.click();
+      }
     }
 
     window.onload = ()=>{
@@ -444,6 +560,7 @@
       document.addEventListener('keydown', handleKey);
     };
   </script>
+
 </head>
 
 <body class="bg-gray-100 text-gray-900 p-4">
@@ -480,5 +597,6 @@
       </div>
     </div>
   </div>
+
 </body>
 </html>
