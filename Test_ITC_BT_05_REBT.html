@@ -24,8 +24,15 @@
   </style>
 
   <script>
-    /* ===== Banco de preguntas (20) – Articulado REBT ===== */
-    const preguntas = [
+    /* ===== Banco de preguntas + explicaciones ===== */
+    const 
+    
+
+
+
+
+
+preguntas = [
   {
     pregunta: "Según el REBT, antes de la puesta en servicio, las instalaciones eléctricas de baja tensión deberán someterse a:",
     opciones: [
@@ -34,17 +41,19 @@
       "Una auditoría de seguridad por el titular",
       "Una revisión documental por el organismo competente"
     ],
-    respuesta: "Una verificación por la empresa instaladora que las ejecute"
+    respuesta: "Una verificación por la empresa instaladora que las ejecute",
+    explicacion: "ITC-BT-05, punto 2.1: las verificaciones previas a la puesta en servicio deberán ser realizadas por las empresas instaladoras que ejecuten las instalaciones."
   },
   {
     pregunta: "Según el REBT, la verificación de las instalaciones deberá realizarse conforme a la norma:",
     opciones: [
-      "UNE-HD 60364-5-52",
+      "UNE-HD 60364-6",
       "UNE-EN 60670-1",
       "UNE 20324-3",
       "UNE 50110-2"
     ],
-    respuesta: "UNE-HD 60364-5-52"
+    respuesta: "UNE-HD 60.364-6",
+    explicacion: "ITC-BT-05, punto 3: las instalaciones en baja tensión deberán ser verificadas antes de su puesta en servicio siguiendo la metodología de la norma UNE 20.460-6-61 anulada y sustituida por la norma UNE-HD 60.364-6."
   },
   {
     pregunta: "Según el REBT, las verificaciones deberán garantizar que:",
@@ -54,7 +63,8 @@
       "Los equipos cumplen las normas ISO correspondientes",
       "La documentación esté debidamente registrada"
     ],
-    respuesta: "La instalación cumple las prescripciones del Reglamento y sus ITC"
+    respuesta: "La instalación cumple las prescripciones del Reglamento y sus ITC",
+    explicacion: "ITC-BT-05, puntos 3 y 5.1: las instalaciones se verifican según la metodología UNE 20.460-6-61 y las inspecciones se realizan sobre la base de las prescripciones del Reglamento y la documentación técnica, para comprobar el cumplimiento reglamentario."
   },
   {
     pregunta: "Según el REBT, las inspecciones de las instalaciones eléctricas serán realizadas por:",
@@ -64,7 +74,8 @@
       "La empresa suministradora de energía",
       "El proyectista que redactó la memoria técnica"
     ],
-    respuesta: "Organismos de Control acreditados según el Real Decreto 2200/1995"
+    respuesta: "Organismos de Control acreditados según el Real Decreto 2200/1995",
+    explicacion: "ITC-BT-05, punto 2.b: los agentes que lleven a cabo las inspecciones deberán tener la condición de Organismos de Control, según el Real Decreto 2200/1995."
   },
   {
     pregunta: "Según el REBT, las inspecciones podrán ser:",
@@ -74,7 +85,8 @@
       "Documentales y técnicas",
       "De seguridad y mantenimiento"
     ],
-    respuesta: "Iniciales y periódicas"
+    respuesta: "Iniciales y periódicas",
+    explicacion: "ITC-BT-05, punto 4: se indica que las inspecciones podrán ser iniciales (antes de la puesta en servicio) y periódicas."
   },
   {
     pregunta: "Según el REBT, las instalaciones eléctricas que precisen proyecto deberán ser objeto de inspección inicial cuando:",
@@ -84,7 +96,8 @@
       "Superen los 10 circuitos independientes",
       "Sean de uso doméstico con más de 25 receptores"
     ],
-    respuesta: "Su potencia instalada sea superior a 100 kW"
+    respuesta: "Su potencia instalada sea superior a 100 kW",
+    explicacion: "ITC-BT-05, punto 4.1.a: instalaciones industriales que precisen proyecto con potencia instalada superior a 100 kW serán objeto de inspección inicial."
   },
   {
     pregunta: "Según el REBT, serán objeto de inspección inicial los locales de pública concurrencia:",
@@ -94,7 +107,8 @@
       "Siempre que estén destinados a uso industrial",
       "Cuando dispongan de más de 100 luminarias"
     ],
-    respuesta: "Cualquiera que sea su potencia instalada"
+    respuesta: "Cualquiera que sea su potencia instalada",
+    explicacion: "ITC-BT-05, punto 4.1.b: se incluyen los locales de pública concurrencia, sin condicionarlo a una potencia mínima."
   },
   {
     pregunta: "Según el REBT, en locales con riesgo de incendio o explosión de clase I no será exigible inspección inicial cuando se trate de:",
@@ -104,22 +118,26 @@
       "Talleres mecánicos con atmósfera explosiva",
       "Zonas de carga de baterías industriales"
     ],
-    respuesta: "Aparcamientos o estacionamientos de menos de 25 plazas"
+    respuesta: "Aparcamientos o estacionamientos de menos de 25 plazas",
+    explicacion: "ITC-BT-05, punto 4.1.c: se citan los locales con riesgo de incendio o explosión de clase I, excepto aparcamientos o estacionamientos de menos de 25 plazas."
   },
   {
     pregunta: "Según el REBT, las instalaciones en locales mojados deberán someterse a inspección inicial cuando su potencia instalada sea superior a:",
     opciones: ["10 kW", "15 kW", "20 kW", "25 kW"],
-    respuesta: "25 kW"
+    respuesta: "25 kW",
+    explicacion: "ITC-BT-05, punto 4.1.d: locales mojados con potencia instalada superior a 25 kW."
   },
   {
     pregunta: "Según el REBT, las piscinas deberán ser objeto de inspección inicial cuando su potencia instalada sea superior a:",
     opciones: ["5 kW", "10 kW", "15 kW", "20 kW"],
-    respuesta: "10 kW"
+    respuesta: "10 kW",
+    explicacion: "ITC-BT-05, punto 4.1.e: piscinas con potencia instalada superior a 10 kW."
   },
   {
     pregunta: "Según el REBT, las instalaciones de alumbrado exterior deberán someterse a inspección inicial cuando la potencia instalada supere:",
     opciones: ["2 kW", "3 kW", "5 kW", "7,5 kW"],
-    respuesta: "5 kW"
+    respuesta: "5 kW",
+    explicacion: "ITC-BT-05, punto 4.1.k: instalaciones de alumbrado exterior con potencia instalada superior a 5 kW."
   },
   {
     pregunta: "Según el REBT, las instalaciones de recarga de vehículos eléctricos deberán ser objeto de inspección inicial cuando:",
@@ -129,17 +147,20 @@
       "Superen 50 kW de potencia total",
       "Sean de acceso público"
     ],
-    respuesta: "Requieran proyecto para su ejecución"
+    respuesta: "Requieran proyecto para su ejecución",
+    explicacion: "ITC-BT-05, punto 4.1.h: instalaciones de estaciones de recarga para vehículo eléctrico que requieran elaboración de proyecto."
   },
   {
     pregunta: "Según el REBT, las instalaciones que precisaron inspección inicial deberán someterse a inspecciones periódicas cada:",
     opciones: ["3 años", "5 años", "10 años", "15 años"],
-    respuesta: "5 años"
+    respuesta: "5 años",
+    explicacion: "ITC-BT-05, punto 4.2: las instalaciones que precisaron inspección inicial serán objeto de inspecciones periódicas cada 5 años."
   },
   {
     pregunta: "Según el REBT, las instalaciones comunes de edificios de viviendas con potencia total instalada superior a 100 kW deberán someterse a inspección periódica cada:",
     opciones: ["5 años", "8 años", "10 años", "15 años"],
-    respuesta: "10 años"
+    respuesta: "10 años",
+    explicacion: "ITC-BT-05, punto 4.2: las comunes de edificios de viviendas de potencia total instalada superior a 100 kW cada 10 años."
   },
   {
     pregunta: "Según el REBT, los resultados de las inspecciones deberán documentarse en un:",
@@ -149,7 +170,8 @@
       "Parte de mantenimiento anual",
       "Certificado de instalación emitido por la empresa instaladora"
     ],
-    respuesta: "Certificado de inspección emitido por el Organismo de Control"
+    respuesta: "Certificado de inspección emitido por el Organismo de Control",
+    explicacion: "ITC-BT-05, punto 5.2: como resultado de la inspección el Organismo de Control emitirá un Certificado de Inspección."
   },
   {
     pregunta: "Según el REBT, el certificado de inspección deberá incluir:",
@@ -159,7 +181,8 @@
       "El coste económico de las deficiencias detectadas",
       "Las firmas de todos los trabajadores de la instalación"
     ],
-    respuesta: "Los datos de identificación de la instalación y la relación de defectos detectados"
+    respuesta: "Los datos de identificación de la instalación y la relación de defectos detectados",
+    explicacion: "ITC-BT-05, punto 5.2: el Certificado de Inspección recogerá los datos de identificación de la instalación, la relación de defectos con su clasificación y la calificación de la instalación."
   },
   {
     pregunta: "Según el REBT, se considerará que una instalación es favorable cuando:",
@@ -169,7 +192,8 @@
       "No haya defectos leves pendientes",
       "Exista un defecto grave corregido antes del acta final"
     ],
-    respuesta: "No se determine ningún defecto muy grave o grave"
+    respuesta: "No se determine ningún defecto muy grave o grave",
+    explicacion: "ITC-BT-05, punto 5.2.1: calificación favorable cuando no se determine la existencia de ningún defecto muy grave o grave."
   },
   {
     pregunta: "Según el REBT, los defectos leves deberán ser subsanados:",
@@ -179,7 +203,8 @@
       "En un plazo de treinta días",
       "Antes de la puesta en servicio de la instalación"
     ],
-    respuesta: "Antes de la próxima inspección periódica"
+    respuesta: "Antes de la próxima inspección periódica",
+    explicacion: "ITC-BT-05, punto 5.2.1: los defectos leves se anotan para constancia del titular, con la indicación de que deberá poner los medios para subsanarlos antes de la próxima inspección."
   },
   {
     pregunta: "Según el REBT, los defectos muy graves implican:",
@@ -189,7 +214,8 @@
       "Falta de señalización en cuadros eléctricos",
       "Error en el cálculo de la potencia contratada"
     ],
-    respuesta: "Riesgo inmediato para las personas o los bienes"
+    respuesta: "Riesgo inmediato para las personas o los bienes",
+    explicacion: "ITC-BT-05, punto 6.1: defecto muy grave es aquel que constituye un peligro inmediato para la seguridad de las personas o los bienes."
   },
   {
     pregunta: "Según el REBT, la finalidad de las inspecciones es:",
@@ -199,9 +225,23 @@
       "Actualizar los datos de registro de instaladores",
       "Comprobar los consumos energéticos del usuario"
     ],
-    respuesta: "Asegurar que se cumple el Reglamento a lo largo de la vida de la instalación"
+    respuesta: "Asegurar que se cumple el Reglamento a lo largo de la vida de la instalación",
+    explicacion: "ITC-BT-05, punto 4: las instalaciones de especial relevancia deberán ser objeto de inspección para asegurar, en la medida de lo posible, el cumplimiento reglamentario a lo largo de su vida."
   }
 ];
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /* ===== Estado ===== */
     let preguntasAleatorias = [];
@@ -228,12 +268,12 @@
     const clamp0 = (x) => x < 0 ? 0 : x;
 
     function calcularPuntuacion(){
-      const total = preguntasAleatorias.length;              // 20
-      const penalizacion = Math.floor(errores / 2);          // cada 2 fallos = 1 válida menos
+      const total = preguntasAleatorias.length;
+      const penalizacion = Math.floor(errores / 2);
       const validasNetas = Math.max(0, aciertos - penalizacion);
-      const puntos = validasNetas * 0.5;                     // cada válida = 0,5 puntos
-      const porcentaje = clamp0((validasNetas / total) * 100); // % sobre preguntas válidas netas / total
-      const apto = porcentaje >= 80;                         // mínimo 80%
+      const puntos = validasNetas * 0.5;
+      const porcentaje = clamp0((validasNetas / total) * 100);
+      const apto = porcentaje >= 80;
       return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
     }
 
@@ -298,12 +338,15 @@
       seleccionUsuario=null; respondido=false;
       document.getElementById("pregunta").textContent = q.pregunta;
       renderOpciones(q.opciones);
+
       document.getElementById("acciones").innerHTML =
         `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
            <span>Elige una respuesta (teclas 1–4 y Enter).</span>
            <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
          </div>`;
-      setProgreso(); actualizarContador();
+
+      setProgreso();
+      actualizarContador();
     }
 
     function seleccionarOpcion(opcion){
@@ -314,7 +357,9 @@
         if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
       });
       const btn = document.getElementById('btn-contestar');
-      btn.disabled=false; btn.classList.remove('opacity-50','cursor-not-allowed'); btn.onclick=verificarRespuesta;
+      btn.disabled=false;
+      btn.classList.remove('opacity-50','cursor-not-allowed');
+      btn.onclick=verificarRespuesta;
     }
 
     function verificarRespuesta(){
@@ -326,19 +371,45 @@
       document.querySelectorAll("#opciones .opcion").forEach(b=>{
         b.disabled=true; b.classList.remove('ring','ring-yellow-300');
         const val=b.dataset.valor;
-        if (val===actual.respuesta){ b.classList.add('bg-green-600','hover:bg-green-700'); b.innerHTML=`✅ <span class="font-semibold">${val}</span>`; }
-        else if (val===seleccionUsuario && !ok){ b.classList.add('bg-red-600','hover:bg-red-700'); b.innerHTML=`❌ <span class="font-semibold">${val}</span>`; }
-        else { b.classList.add('bg-blue-500'); }
+        if (val===actual.respuesta){
+          b.classList.add('bg-green-600','hover:bg-green-700');
+          b.innerHTML=`✅ <span class="font-semibold">${val}</span>`;
+        } else if (val===seleccionUsuario && !ok){
+          b.classList.add('bg-red-600','hover:bg-red-700');
+          b.innerHTML=`❌ <span class="font-semibold">${val}</span>`;
+        } else {
+          b.classList.add('bg-blue-500');
+        }
       });
 
       ok ? aciertos++ : errores++;
-      historial.push({pregunta:actual.pregunta, opciones:actual.opciones, correcta:actual.respuesta, elegida:seleccionUsuario});
 
+      historial.push({
+        pregunta:actual.pregunta,
+        opciones:actual.opciones,
+        correcta:actual.respuesta,
+        elegida:seleccionUsuario,
+        explicacion:actual.explicacion
+      });
+
+      /* === NUEVO: mostrar la explicación debajo del botón === */
       document.getElementById("acciones").innerHTML =
-        `<div class="mt-4 flex items-center justify-end gap-3">
-           <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">Siguiente</button>
+        `<div class="mt-4 flex flex-col gap-3">
+
+           <div class="flex items-center justify-end">
+             <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">
+               Siguiente
+             </button>
+           </div>
+
+           <div id="explicacion" class="text-sm text-slate-700 bg-slate-100 border-l-4 border-blue-600 p-3 rounded-md">
+             ${actual.explicacion || "Sin referencia disponible"}
+           </div>
+
          </div>`;
-      actualizarContador(); setProgreso();
+
+      actualizarContador();
+      setProgreso();
     }
 
     const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
@@ -356,8 +427,8 @@
       document.getElementById('modal-resumen').innerHTML = `
         <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
         <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
-        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas (=${(penalizacion*0.5).toFixed(2)} pts)</p>
-        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total}</p>
+        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas</p>
+        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong></p>
         <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
         <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
       `;
@@ -379,30 +450,61 @@
           <p class='font-semibold mb-2'>${h.pregunta}</p>
           <div class='flex flex-wrap gap-2'>
             ${h.opciones.map(op=>{
-              if (op===h.elegida && op===h.correcta) return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
-              if (op===h.elegida && op!==h.correcta) return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
-              if (op===h.correcta && op!==h.elegida) return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              if (op===h.elegida && op===h.correcta)
+                return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op===h.elegida && op!==h.correcta)
+                return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op===h.correcta && op!==h.elegida)
+                return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
               return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
             }).join('')}
           </div>
-        </div>`).join('');
+          <div class='mt-2 text-sm text-slate-600 bg-slate-100 border-l-4 border-blue-600 p-2 rounded-md'>
+            📘 Explicación: ${h.explicacion}
+          </div>
+        </div>
+      `).join('');
 
       const totalPuntos = total * 0.5;
 
       document.getElementById("test").innerHTML = `
         <div class="space-y-3">
-          <h2 class="text-2xl font-extrabold">Resultado del test <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">(${apto?'APTO ✅':'NO APTO ❌'})</span></h2>
-          <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Penalización: <strong>-${penalizacion}</strong> válidas</p>
-          <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total} • Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+          <h2 class="text-2xl font-extrabold">Resultado del test 
+            <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">
+              (${apto?'APTO ✅':'NO APTO ❌'})
+            </span>
+          </h2>
+
+          <p class="text-slate-700">
+            Aciertos: <strong class="text-green-700">${aciertos}</strong> • 
+            Fallos: <strong class="text-red-700">${errores}</strong> • 
+            Penalización: <strong>-${penalizacion}</strong>
+          </p>
+
+          <p class="text-slate-700">
+            Válidas netas: <strong>${validasNetas}</strong> / ${total} • 
+            Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> 
+            (<strong>${porcentaje.toFixed(2)}%</strong>)
+          </p>
+
           <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span></p>
+
           <hr class="my-3 border-slate-200">
+
           <h3 class="text-lg font-bold">Detalle de preguntas</h3>
-          <div class="max-h-[50vh] overflow-auto pr-1">${detalle}</div>
+
+          <div class="max-h-[50vh] overflow-auto pr-1">
+            ${detalle}
+          </div>
         </div>
 
         <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
-          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
-          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">Volver al inicio</a>
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">
+            Volver a intentar
+          </button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">
+            Volver al inicio
+          </a>
         </div>`;
     }
 
@@ -411,8 +513,14 @@
       if (tiempoAgotado) return;
       if (respondido){ if (e.key==='Enter') siguientePregunta(); return; }
       const map={'1':0,'2':1,'3':2,'4':3};
-      if (map[e.key]!==undefined){ const b=document.querySelectorAll('#opciones .opcion')[map[e.key]]; if (b) b.click(); }
-      if (e.key==='Enter'){ const b=document.getElementById('btn-contestar'); if (b && !b.disabled) b.click(); }
+      if (map[e.key]!==undefined){
+        const b=document.querySelectorAll('#opciones .opcion')[map[e.key]];
+        if (b) b.click();
+      }
+      if (e.key==='Enter'){
+        const b=document.getElementById('btn-contestar');
+        if (b && !b.disabled) b.click();
+      }
     }
 
     window.onload = ()=>{
@@ -423,6 +531,7 @@
       document.addEventListener('keydown', handleKey);
     };
   </script>
+
 </head>
 
 <body class="bg-gray-100 text-gray-900 p-4">
@@ -459,5 +568,6 @@
       </div>
     </div>
   </div>
+
 </body>
 </html>
