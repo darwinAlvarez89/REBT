@@ -24,109 +24,232 @@
   </style>
 
   <script>
-    /* ===== Banco de preguntas (20) – Articulado REBT ===== */
-    const preguntas = [
+    /* ===== Banco de preguntas + explicaciones ===== */
+    const 
+    
+
+
+
+
+
+preguntas = [
   {
     pregunta: "Según el REBT, una empresa instaladora en baja tensión es aquella que realiza, mantiene o repara instalaciones eléctricas y ha presentado:",
-    opciones: ["Un proyecto técnico visado", "Una declaración responsable ante el órgano competente", "Una solicitud de autorización temporal", "Un contrato con una distribuidora de energía"],
-    respuesta: "Una declaración responsable ante el órgano competente"
+    opciones: [
+      "Un proyecto técnico visado",
+      "Una declaración responsable ante el órgano competente",
+      "Una solicitud de autorización temporal",
+      "Un contrato con una distribuidora de energía"
+    ],
+    respuesta: "Una declaración responsable ante el órgano competente",
+    explicacion: "ITC-BT-03, punto 2.1: la empresa instaladora debe haber presentado la correspondiente declaración responsable de inicio de actividad."
   },
   {
     pregunta: "Según el REBT, la empresa instaladora podrá ser:",
     opciones: ["Solo persona jurídica", "Solo persona física", "Persona física o jurídica", "Únicamente sociedades mercantiles"],
-    respuesta: "Persona física o jurídica"
+    respuesta: "Persona física o jurídica",
+    explicacion: "ITC-BT-03, punto 2.1: define empresa instaladora como persona física o jurídica."
   },
   {
     pregunta: "Según el REBT, la declaración responsable presentada por la empresa instaladora habilita para ejercer su actividad:",
-    opciones: ["Solo en la comunidad autónoma donde se presente", "En todo el territorio español por tiempo indefinido", "Durante cinco años renovables", "Únicamente después de una inspección previa"],
-    respuesta: "En todo el territorio español por tiempo indefinido"
+    opciones: [
+      "Solo en la comunidad autónoma donde se presente",
+      "En todo el territorio español por tiempo indefinido",
+      "Durante cinco años renovables",
+      "Únicamente después de una inspección previa"
+    ],
+    respuesta: "En todo el territorio español por tiempo indefinido",
+    explicacion: "ITC-BT-03, punto 5.5: la declaración responsable habilita por tiempo indefinido y para todo el territorio español."
   },
   {
     pregunta: "Según el REBT, la categoría básica permite realizar, mantener y reparar instalaciones:",
-    opciones: ["En el ámbito del reglamento, excepto las reservadas a la categoría especialista", "Solo en viviendas de uso doméstico", "Exclusivamente en locales comerciales", "Únicamente en baja tensión inferior a 50 V"],
-    respuesta: "En el ámbito del reglamento, excepto las reservadas a la categoría especialista"
+    opciones: [
+      "En el ámbito del reglamento, excepto las reservadas a la categoría especialista",
+      "Solo en viviendas de uso doméstico",
+      "Exclusivamente en locales comerciales",
+      "Únicamente en baja tensión inferior a 50 V"
+    ],
+    respuesta: "En el ámbito del reglamento, excepto las reservadas a la categoría especialista",
+    explicacion: "ITC-BT-03, punto 3.1: la categoría básica abarca todas las instalaciones no reservadas a la categoría especialista."
   },
   {
     pregunta: "Según el REBT, la categoría especialista permite realizar, mantener y reparar instalaciones:",
-    opciones: ["Solo en viviendas unifamiliares", "En todas las instalaciones incluidas en el ámbito del reglamento", "Únicamente en locales de pública concurrencia", "Solo en instalaciones sin proyecto"],
-    respuesta: "En todas las instalaciones incluidas en el ámbito del reglamento"
+    opciones: [
+      "Solo en viviendas unifamiliares",
+      "En todas las instalaciones incluidas en el ámbito del reglamento",
+      "Únicamente en locales de pública concurrencia",
+      "Solo en instalaciones sin proyecto"
+    ],
+    respuesta: "En todas las instalaciones incluidas en el ámbito del reglamento",
+    explicacion: "ITC-BT-03, punto 3.2: la categoría especialista podrán realizar, mantener y reparar las instalaciones de la categoría Básica y, además, mencionadas en este apartado 3.2 del REBT."
   },
   {
     pregunta: "Según el REBT, el instalador en baja tensión deberá desarrollar su actividad:",
-    opciones: ["De manera independiente sin empresa", "En el seno de una empresa instaladora habilitada", "Solo como trabajador autónomo", "Únicamente para la compañía distribuidora"],
-    respuesta: "En el seno de una empresa instaladora habilitada"
+    opciones: [
+      "De manera independiente sin empresa",
+      "En el seno de una empresa instaladora habilitada",
+      "Solo como trabajador autónomo",
+      "Únicamente para la compañía distribuidora"
+    ],
+    respuesta: "En el seno de una empresa instaladora habilitada",
+    explicacion: "ITC-BT-03, punto 4: el instalador debe desarrollar su actividad dentro de una empresa instaladora habilitada."
   },
   {
     pregunta: "Según el REBT, una de las vías válidas para acreditar la cualificación del instalador es:",
-    opciones: ["Tener experiencia laboral sin formación acreditada", "Poseer un título universitario cuyo ámbito cubra las materias del reglamento", "Presentar un certificado municipal", "Realizar un curso privado de electricidad"],
-    respuesta: "Poseer un título universitario cuyo ámbito cubra las materias del reglamento"
+    opciones: [
+      "Tener experiencia laboral sin formación acreditada",
+      "Poseer un título universitario cuyo ámbito cubra las materias del reglamento",
+      "Presentar un certificado municipal",
+      "Realizar un curso privado de electricidad"
+    ],
+    respuesta: "Poseer un título universitario cuyo ámbito cubra las materias del reglamento",
+    explicacion: "ITC-BT-03, punto 4.a: permite acreditar mediante título universitario con competencias relacionadas."
   },
   {
     pregunta: "Según el REBT, otra forma de acreditar la cualificación del instalador es:",
-    opciones: ["Poseer un título de formación profesional o certificado de profesionalidad que cubra las materias del reglamento", "Haber trabajado tres años en mantenimiento eléctrico", "Tener un curso de riesgos eléctricos", "Disponer de licencia del ayuntamiento"],
-    respuesta: "Poseer un título de formación profesional o certificado de profesionalidad que cubra las materias del reglamento"
+    opciones: [
+      "Poseer un título de formación profesional o certificado de profesionalidad que cubra las materias del reglamento",
+      "Haber trabajado tres años en mantenimiento eléctrico",
+      "Tener un curso de riesgos eléctricos",
+      "Disponer de licencia del ayuntamiento"
+    ],
+    respuesta: "Poseer un título de formación profesional o certificado de profesionalidad que cubra las materias del reglamento",
+    explicacion: "ITC-BT-03, punto 4.b: se admite título de FP o certificado de profesionalidad."
   },
   {
     pregunta: "Según el REBT, también puede ejercer como instalador quien:",
-    opciones: ["Tenga reconocida su competencia profesional adquirida por experiencia laboral", "Disponga de licencia de la distribuidora", "Sea técnico en telecomunicaciones", "Haya completado 2 años de experiencia en obras públicas"],
-    respuesta: "Tenga reconocida su competencia profesional adquirida por experiencia laboral"
+    opciones: [
+      "Tenga reconocida su competencia profesional adquirida por experiencia laboral",
+      "Disponga de licencia de la distribuidora",
+      "Sea técnico en telecomunicaciones",
+      "Haya completado 2 años de experiencia en obras públicas"
+    ],
+    respuesta: "Tenga reconocida su competencia profesional adquirida por experiencia laboral",
+    explicacion: "ITC-BT-03, punto 4.c: se admite reconocimiento de competencia profesional por experiencia laboral (RD 1224/2009)."
   },
   {
     pregunta: "Según el REBT, el cese de actividad o modificación de los datos declarados por la empresa instaladora debe comunicarse en un plazo máximo de:",
     opciones: ["10 días", "15 días", "1 mes", "3 meses"],
-    respuesta: "1 mes"
+    respuesta: "1 mes",
+    explicacion: "ITC-BT-03, punto 5.7: cualquier modificación o cese debe comunicarse en el plazo máximo de un mes."
   },
   {
     pregunta: "Según el REBT, la empresa instaladora deberá disponer, como mínimo, de:",
-    opciones: ["Un ingeniero técnico industrial", "Una persona instaladora en baja tensión de la misma categoría de habilitación", "Un técnico superior en electricidad y un ayudante", "Un jefe de obra y un administrativo"],
-    respuesta: "Una persona instaladora en baja tensión de la misma categoría de habilitación"
+    opciones: [
+      "Un ingeniero técnico industrial",
+      "Una persona instaladora en baja tensión de la misma categoría de habilitación",
+      "Un técnico superior en electricidad y un ayudante",
+      "Un jefe de obra y un administrativo"
+    ],
+    respuesta: "Una persona instaladora en baja tensión de la misma categoría de habilitación",
+    explicacion: "ITC-BT-03, Apéndice I, punto 1: se requiere al menos un instalador de la misma categoría."
   },
   {
     pregunta: "Según el REBT, la empresa instaladora deberá contar con los medios técnicos adecuados para:",
-    opciones: ["El montaje y la verificación de las instalaciones que ejecute", "La emisión de facturas electrónicas", "El control de consumo energético", "La medición de armónicos en alta tensión"],
-    respuesta: "El montaje y la verificación de las instalaciones que ejecute"
+    opciones: [
+      "El montaje y la verificación de las instalaciones que ejecute",
+      "La emisión de facturas electrónicas",
+      "El control de consumo energético",
+      "La medición de armónicos en alta tensión"
+    ],
+    respuesta: "El montaje y la verificación de las instalaciones que ejecute",
+    explicacion: "ITC-BT-03, punto 5.8.b: la empresa debe contar con los medios técnicos y humanos necesarios."
   },
   {
     pregunta: "Según el REBT, la empresa instaladora deberá tener suscrita una póliza de seguro de responsabilidad civil con cobertura mínima de:",
-    opciones: ["300.000 € para básica y 600.000 € para especialista", "600.000 € para básica y 900.000 € para especialista", "900.000 € para básica y 1.200.000 € para especialista", "500.000 € para ambas categorías"],
-    respuesta: "600.000 € para básica y 900.000 € para especialista"
+    opciones: [
+      "300.000 € para básica y 600.000 € para especialista",
+      "600.000 € para básica y 900.000 € para especialista",
+      "900.000 € para básica y 1.200.000 € para especialista",
+      "500.000 € para ambas categorías"
+    ],
+    respuesta: "600.000 € para básica y 900.000 € para especialista",
+    explicacion: "ITC-BT-03, punto 5.8.c: mínimo 600.000 € para básica y 900.000 € para especialista."
   },
   {
     pregunta: "Según el REBT, las empresas instaladoras deberán facilitar al órgano competente la documentación o información que se les requiera:",
-    opciones: ["Cuando lo solicite la compañía eléctrica", "Cuando lo solicite el órgano competente en materia de industria", "Únicamente cada cinco años", "Solo si cambia la normativa"],
-    respuesta: "Cuando lo solicite el órgano competente en materia de industria"
+    opciones: [
+      "Cuando lo solicite la compañía eléctrica",
+      "Cuando lo solicite el órgano competente en materia de industria",
+      "Únicamente cada cinco años",
+      "Solo si cambia la normativa"
+    ],
+    respuesta: "Cuando lo solicite el órgano competente en materia de industria",
+    explicacion: "ITC-BT-03, punto 5.3: deberán disponer de la documentación para presentarla cuando la Administración lo requiera."
   },
   {
     pregunta: "Según el REBT, las empresas instaladoras deberán comunicar al órgano competente cualquier incumplimiento reglamentario en las instalaciones en las que intervengan:",
-    opciones: ["En un plazo no superior a 24 horas si existe peligro manifiesto", "En el momento de finalizar la obra", "Dentro del mismo mes", "Solo cuando el titular lo autorice"],
-    respuesta: "En un plazo no superior a 24 horas si existe peligro manifiesto"
+    opciones: [
+      "En un plazo no superior a 24 horas si existe peligro manifiesto",
+      "En el momento de finalizar la obra",
+      "Dentro del mismo mes",
+      "Solo cuando el titular lo autorice"
+    ],
+    respuesta: "En un plazo no superior a 24 horas si existe peligro manifiesto",
+    explicacion: "ITC-BT-03, punto 6.f: en caso de peligro manifiesto deberán comunicarlo en un plazo máximo de 24 horas."
   },
   {
     pregunta: "Según el REBT, la empresa instaladora tiene prohibido:",
-    opciones: ["Emitir certificados de instalaciones propias", "Facilitar o ceder certificados de instalaciones no realizadas por ella misma", "Contratar instaladores de otra empresa", "Usar material con marcado CE"],
-    respuesta: "Facilitar o ceder certificados de instalaciones no realizadas por ella misma"
+    opciones: [
+      "Emitir certificados de instalaciones propias",
+      "Facilitar o ceder certificados de instalaciones no realizadas por ella misma",
+      "Contratar instaladores de otra empresa",
+      "Usar material con marcado CE"
+    ],
+    respuesta: "Facilitar o ceder certificados de instalaciones no realizadas por ella misma",
+    explicacion: "ITC-BT-03, punto 5.9: prohíbe ceder o facilitar certificados de instalaciones no realizadas por la empresa."
   },
   {
     pregunta: "Según el REBT, la empresa instaladora deberá conservar los certificados de instalación emitidos durante un período mínimo de:",
     opciones: ["Dos años", "Cinco años", "Diez años", "Toda la vida útil de la instalación"],
-    respuesta: "Cinco años"
+    respuesta: "Cinco años",
+    explicacion: "ITC-BT-03, punto 6.j: debe conservar los contratos de mantenimiento al menos 5 años; por analogía con certificados emitidos."
   },
   {
     pregunta: "Según el REBT, la empresa instaladora está obligada a asistir a las inspecciones:",
-    opciones: ["Solo si se le notifica por escrito", "Cuando sea requerida por el órgano competente", "Una vez al año", "Únicamente en instalaciones industriales"],
-    respuesta: "Cuando sea requerida por el órgano competente"
+    opciones: [
+      "Solo si se le notifica por escrito",
+      "Cuando sea requerida por el órgano competente",
+      "Una vez al año",
+      "Únicamente en instalaciones industriales"
+    ],
+    respuesta: "Cuando sea requerida por el órgano competente",
+    explicacion: "ITC-BT-03, punto 6.g: debe asistir a las inspecciones si es requerida."
   },
   {
     pregunta: "Según el REBT, entre los medios técnicos mínimos de la categoría básica se incluye:",
-    opciones: ["Medidor de aislamiento y continuidad, telurómetro y comprobador de diferenciales", "Analizador de redes trifásico", "Cámara termográfica", "Medidor de armónicos de alta precisión"],
-    respuesta: "Medidor de aislamiento y continuidad, telurómetro y comprobador de diferenciales"
+    opciones: [
+      "Medidor de aislamiento y continuidad, telurómetro y comprobador de diferenciales",
+      "Analizador de redes trifásico",
+      "Cámara termográfica",
+      "Medidor de armónicos de alta precisión"
+    ],
+    respuesta: "Medidor de aislamiento y continuidad, telurómetro y comprobador de diferenciales",
+    explicacion: "ITC-BT-03, Apéndice I, punto 2.1: especifica los equipos mínimos, entre ellos telurómetro y medidor de aislamiento."
   },
   {
     pregunta: "Según el REBT, la categoría especialista deberá disponer, además de los medios de la categoría básica, de:",
-    opciones: ["Analizador de redes, armónicos y perturbaciones", "Un luxómetro únicamente", "Un multímetro digital portátil", "Un osciloscopio de banco"],
-    respuesta: "Analizador de redes, armónicos y perturbaciones"
+    opciones: [
+      "Analizador de redes, armónicos y perturbaciones",
+      "Un luxómetro únicamente",
+      "Un multímetro digital portátil",
+      "Un osciloscopio de banco"
+    ],
+    respuesta: "Analizador de redes, armónicos y perturbaciones",
+    explicacion: "ITC-BT-03, Apéndice I, punto 2.2: la categoría especialista debe disponer de analizador de redes, armónicos y perturbaciones."
   }
 ];
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -156,12 +279,12 @@
     const clamp0 = (x) => x < 0 ? 0 : x;
 
     function calcularPuntuacion(){
-      const total = preguntasAleatorias.length;              // 20
-      const penalizacion = Math.floor(errores / 2);          // cada 2 fallos = 1 válida menos
+      const total = preguntasAleatorias.length;
+      const penalizacion = Math.floor(errores / 2);
       const validasNetas = Math.max(0, aciertos - penalizacion);
-      const puntos = validasNetas * 0.5;                     // cada válida = 0,5 puntos
-      const porcentaje = clamp0((validasNetas / total) * 100); // % sobre preguntas válidas netas / total
-      const apto = porcentaje >= 80;                         // mínimo 80%
+      const puntos = validasNetas * 0.5;
+      const porcentaje = clamp0((validasNetas / total) * 100);
+      const apto = porcentaje >= 80;
       return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
     }
 
@@ -226,12 +349,15 @@
       seleccionUsuario=null; respondido=false;
       document.getElementById("pregunta").textContent = q.pregunta;
       renderOpciones(q.opciones);
+
       document.getElementById("acciones").innerHTML =
         `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
            <span>Elige una respuesta (teclas 1–4 y Enter).</span>
            <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
          </div>`;
-      setProgreso(); actualizarContador();
+
+      setProgreso();
+      actualizarContador();
     }
 
     function seleccionarOpcion(opcion){
@@ -242,7 +368,9 @@
         if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
       });
       const btn = document.getElementById('btn-contestar');
-      btn.disabled=false; btn.classList.remove('opacity-50','cursor-not-allowed'); btn.onclick=verificarRespuesta;
+      btn.disabled=false;
+      btn.classList.remove('opacity-50','cursor-not-allowed');
+      btn.onclick=verificarRespuesta;
     }
 
     function verificarRespuesta(){
@@ -254,19 +382,45 @@
       document.querySelectorAll("#opciones .opcion").forEach(b=>{
         b.disabled=true; b.classList.remove('ring','ring-yellow-300');
         const val=b.dataset.valor;
-        if (val===actual.respuesta){ b.classList.add('bg-green-600','hover:bg-green-700'); b.innerHTML=`✅ <span class="font-semibold">${val}</span>`; }
-        else if (val===seleccionUsuario && !ok){ b.classList.add('bg-red-600','hover:bg-red-700'); b.innerHTML=`❌ <span class="font-semibold">${val}</span>`; }
-        else { b.classList.add('bg-blue-500'); }
+        if (val===actual.respuesta){
+          b.classList.add('bg-green-600','hover:bg-green-700');
+          b.innerHTML=`✅ <span class="font-semibold">${val}</span>`;
+        } else if (val===seleccionUsuario && !ok){
+          b.classList.add('bg-red-600','hover:bg-red-700');
+          b.innerHTML=`❌ <span class="font-semibold">${val}</span>`;
+        } else {
+          b.classList.add('bg-blue-500');
+        }
       });
 
       ok ? aciertos++ : errores++;
-      historial.push({pregunta:actual.pregunta, opciones:actual.opciones, correcta:actual.respuesta, elegida:seleccionUsuario});
 
+      historial.push({
+        pregunta:actual.pregunta,
+        opciones:actual.opciones,
+        correcta:actual.respuesta,
+        elegida:seleccionUsuario,
+        explicacion:actual.explicacion
+      });
+
+      /* === NUEVO: mostrar la explicación debajo del botón === */
       document.getElementById("acciones").innerHTML =
-        `<div class="mt-4 flex items-center justify-end gap-3">
-           <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">Siguiente</button>
+        `<div class="mt-4 flex flex-col gap-3">
+
+           <div class="flex items-center justify-end">
+             <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">
+               Siguiente
+             </button>
+           </div>
+
+           <div id="explicacion" class="text-sm text-slate-700 bg-slate-100 border-l-4 border-blue-600 p-3 rounded-md">
+             ${actual.explicacion || "Sin referencia disponible"}
+           </div>
+
          </div>`;
-      actualizarContador(); setProgreso();
+
+      actualizarContador();
+      setProgreso();
     }
 
     const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
@@ -284,8 +438,8 @@
       document.getElementById('modal-resumen').innerHTML = `
         <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
         <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
-        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas (=${(penalizacion*0.5).toFixed(2)} pts)</p>
-        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total}</p>
+        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas</p>
+        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong></p>
         <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
         <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
       `;
@@ -307,30 +461,61 @@
           <p class='font-semibold mb-2'>${h.pregunta}</p>
           <div class='flex flex-wrap gap-2'>
             ${h.opciones.map(op=>{
-              if (op===h.elegida && op===h.correcta) return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
-              if (op===h.elegida && op!==h.correcta) return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
-              if (op===h.correcta && op!==h.elegida) return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              if (op===h.elegida && op===h.correcta)
+                return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op===h.elegida && op!==h.correcta)
+                return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op===h.correcta && op!==h.elegida)
+                return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
               return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
             }).join('')}
           </div>
-        </div>`).join('');
+          <div class='mt-2 text-sm text-slate-600 bg-slate-100 border-l-4 border-blue-600 p-2 rounded-md'>
+            📘 Explicación: ${h.explicacion}
+          </div>
+        </div>
+      `).join('');
 
       const totalPuntos = total * 0.5;
 
       document.getElementById("test").innerHTML = `
         <div class="space-y-3">
-          <h2 class="text-2xl font-extrabold">Resultado del test <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">(${apto?'APTO ✅':'NO APTO ❌'})</span></h2>
-          <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Penalización: <strong>-${penalizacion}</strong> válidas</p>
-          <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total} • Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+          <h2 class="text-2xl font-extrabold">Resultado del test 
+            <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">
+              (${apto?'APTO ✅':'NO APTO ❌'})
+            </span>
+          </h2>
+
+          <p class="text-slate-700">
+            Aciertos: <strong class="text-green-700">${aciertos}</strong> • 
+            Fallos: <strong class="text-red-700">${errores}</strong> • 
+            Penalización: <strong>-${penalizacion}</strong>
+          </p>
+
+          <p class="text-slate-700">
+            Válidas netas: <strong>${validasNetas}</strong> / ${total} • 
+            Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> 
+            (<strong>${porcentaje.toFixed(2)}%</strong>)
+          </p>
+
           <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span></p>
+
           <hr class="my-3 border-slate-200">
+
           <h3 class="text-lg font-bold">Detalle de preguntas</h3>
-          <div class="max-h-[50vh] overflow-auto pr-1">${detalle}</div>
+
+          <div class="max-h-[50vh] overflow-auto pr-1">
+            ${detalle}
+          </div>
         </div>
 
         <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
-          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
-          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">Volver al inicio</a>
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">
+            Volver a intentar
+          </button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">
+            Volver al inicio
+          </a>
         </div>`;
     }
 
@@ -339,8 +524,14 @@
       if (tiempoAgotado) return;
       if (respondido){ if (e.key==='Enter') siguientePregunta(); return; }
       const map={'1':0,'2':1,'3':2,'4':3};
-      if (map[e.key]!==undefined){ const b=document.querySelectorAll('#opciones .opcion')[map[e.key]]; if (b) b.click(); }
-      if (e.key==='Enter'){ const b=document.getElementById('btn-contestar'); if (b && !b.disabled) b.click(); }
+      if (map[e.key]!==undefined){
+        const b=document.querySelectorAll('#opciones .opcion')[map[e.key]];
+        if (b) b.click();
+      }
+      if (e.key==='Enter'){
+        const b=document.getElementById('btn-contestar');
+        if (b && !b.disabled) b.click();
+      }
     }
 
     window.onload = ()=>{
@@ -351,6 +542,7 @@
       document.addEventListener('keydown', handleKey);
     };
   </script>
+
 </head>
 
 <body class="bg-gray-100 text-gray-900 p-4">
@@ -387,5 +579,6 @@
       </div>
     </div>
   </div>
+
 </body>
 </html>
