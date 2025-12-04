@@ -24,109 +24,244 @@
   </style>
 
   <script>
-    /* ===== Banco de preguntas (20) – Articulado REBT ===== */
-    const preguntas = [
-      { 
-        pregunta: "El objeto del Reglamento Electrotécnico para Baja Tensión es:",
-        opciones: ["Regular las tarifas eléctricas aplicables a la baja tensión", "Establecer las condiciones técnicas y garantías que deben cumplir las instalaciones eléctricas", "Determinar el coste de los materiales eléctricos", "Regular la contratación de personal técnico"],
-        respuesta: "Establecer las condiciones técnicas y garantías que deben cumplir las instalaciones eléctricas"
-      },
-      { 
-        pregunta: "El Reglamento se aplica a instalaciones eléctricas con tensiones nominales que no excedan de:",
-        opciones: ["500 V en corriente alterna y 1.000 V en corriente continua", "1.000 V en corriente alterna y 1.500 V en corriente continua", "1.500 V en corriente alterna y 2.000 V en corriente continua", "750 V en corriente alterna y 1.000 V en corriente continua"],
-        respuesta: "1.000 V en corriente alterna y 1.500 V en corriente continua"
-      },
-      { 
-        pregunta: "En redes trifásicas de cuatro conductores, las tensiones normalizadas son:",
-        opciones: ["220/380 V", "230/400 V", "240/415 V", "250/440 V"],
-        respuesta: "230/400 V"
-      },
-      { 
-        pregunta: "Se considera modificación o reparación de importancia cuando:",
-        opciones: ["Afecta al 10 % de la potencia instalada", "Afecta al 25 % de la potencia instalada", "Afecta al 50 % de la potencia instalada", "Afecta a cualquier circuito del cuadro"],
-        respuesta: "Afecta al 50 % de la potencia instalada"
-      },
-      { 
-        pregunta: "Toda instalación eléctrica debe ejecutarse de forma que:",
-        opciones: ["Se reduzca el consumo energético global", "Se garantice la seguridad de las personas y los bienes", "Se minimicen los costes de mantenimiento", "Pueda ampliarse sin autorización administrativa"],
-        respuesta: "Se garantice la seguridad de las personas y los bienes"
-      },
-      { 
-        pregunta: "Se considera suministro duplicado aquel que puede mantener:",
-        opciones: ["Hasta el 25 % de la potencia contratada", "El 50 % o menos de la potencia total", "Más del 50 % de la potencia total contratada", "El 100 % de la potencia instalada"],
-        respuesta: "Más del 50 % de la potencia total contratada"
-      },
-      { 
-        pregunta: "Cuando no se pueda cumplir una prescripción del Reglamento, se deberá:",
-        opciones: ["Ejecutar la instalación igualmente", "Solicitar al órgano competente una excepción debidamente justificada", "Sustituir la norma por una recomendación del instalador", "Aplicar el criterio del titular"],
-        respuesta: "Solicitar al órgano competente una excepción debidamente justificada"
-      },
-      { 
-        pregunta: "Las instalaciones eléctricas solo podrán ser realizadas por:",
-        opciones: ["Personas con experiencia en electricidad", "Empresas instaladoras habilitadas en baja tensión", "El titular de la instalación", "La compañía distribuidora"],
-        respuesta: "Empresas instaladoras habilitadas en baja tensión"
-      },
-      { 
-        pregunta: "Para la puesta en servicio, la empresa instaladora debe presentar ante el órgano competente:",
-        opciones: ["El presupuesto de instalación", "El certificado de instalación diligenciado", "La factura del material", "El permiso municipal de obra"],
-        respuesta: "El certificado de instalación diligenciado"
-      },
-      { 
-        pregunta: "El certificado de instalación debe ir acompañado de:",
-        opciones: ["Croquis del trazado y esquema unifilar", "Copia del contrato de suministro", "Presupuesto aprobado", "Manual del fabricante"],
-        respuesta: "Croquis del trazado y esquema unifilar"
-      },
-      { 
-        pregunta: "El mantenimiento de las instalaciones eléctricas corresponde a:",
-        opciones: ["El titular de la instalación", "La empresa instaladora que la ejecutó", "La compañía eléctrica", "El técnico proyectista"],
-        respuesta: "El titular de la instalación"
-      },
-      { 
-        pregunta: "Las ampliaciones o modificaciones de una instalación deben cumplir:",
-        opciones: ["El Reglamento solo en su parte modificada", "El Reglamento en toda la instalación existente", "Únicamente las normas UNE", "Los requisitos de la compañía eléctrica"],
-        respuesta: "El Reglamento solo en su parte modificada"
-      },
-      { 
-        pregunta: "En caso de detectarse defectos que representen peligro inmediato:",
-        opciones: ["Se podrá mantener el suministro provisionalmente", "Deberán corregirse antes de la puesta en servicio", "Bastará con comunicarlo al titular", "Podrán ser subsanados en un plazo de un mes"],
-        respuesta: "Deberán corregirse antes de la puesta en servicio"
-      },
-      { 
-        pregunta: "Los materiales, equipos y aparatos utilizados deben:",
-        opciones: ["Estar fabricados conforme a normas o especificaciones técnicas aplicables", "Ser fabricados en la Unión Europea", "Tener una garantía mínima de dos años", "Ser de bajo consumo energético"],
-        respuesta: "Estar fabricados conforme a normas o especificaciones técnicas aplicables"
-      },
-      { 
-        pregunta: "Los organismos de control autorizados tienen por misión:",
-        opciones: ["Verificar y comprobar el cumplimiento del Reglamento", "Elaborar proyectos eléctricos", "Emitir facturas de mantenimiento", "Sustituir a la Administración en la tramitación"],
-        respuesta: "Verificar y comprobar el cumplimiento del Reglamento"
-      },
-      { 
-        pregunta: "Las especificaciones particulares de las empresas distribuidoras de energía deben:",
-        opciones: ["Incluir siempre los materiales de su propia marca", "Ajustarse al Reglamento y ser aprobadas por técnico competente de la empresa", "Ser confidenciales", "Estar registradas en el Ministerio de Industria"],
-        respuesta: "Ajustarse al Reglamento y ser aprobadas por técnico competente de la empresa"
-      },
-      { 
-        pregunta: "Las especificaciones particulares de las distribuidoras no podrán:",
-        opciones: ["Establecer condiciones de conexión", "Limitar el tipo de suministro", "Incluir marcas o modelos que conduzcan a un único proveedor", "Definir la tensión de servicio"],
-        respuesta: "Incluir marcas o modelos que conduzcan a un único proveedor"
-      },
-      { 
-        pregunta: "La documentación técnica de las instalaciones eléctricas debe conservarse:",
-        opciones: ["Durante toda la vida útil de la instalación", "Durante cinco años", "Hasta la siguiente inspección", "Solo si lo solicita la Administración"],
-        respuesta: "Durante toda la vida útil de la instalación"
-      },
-      { 
-        pregunta: "En instalaciones conectadas a redes de distribución, ¿quién es responsable de que las especificaciones particulares cumplan las exigencias técnicas y de seguridad?",
-        opciones: ["El instalador autorizado", "El titular de la instalación", "Un técnico competente designado por la propia empresa distribuidora", "El órgano competente de la comunidad autónoma"],
-        respuesta: "Un técnico competente designado por la propia empresa distribuidora"
-      },
-      { 
-        pregunta: "El titular de la instalación eléctrica es responsable de que:",
-        opciones: ["La instalación se mantenga en condiciones seguras de utilización", "El instalador verifique la puesta en marcha", "La distribuidora realice revisiones periódicas", "Los materiales tengan marcado CE"],
-        respuesta: "La instalación se mantenga en condiciones seguras de utilización"
-      }
-    ];
+    /* ===== Banco de preguntas + explicaciones ===== */
+    const 
+    
+
+
+
+
+
+preguntas = [
+  {
+    pregunta: "Según el REBT, el objeto del Reglamento es:",
+    opciones: [
+      "Establecer las condiciones técnicas y garantías que deben reunir las instalaciones eléctricas",
+      "Regular las tarifas eléctricas aplicables",
+      "Determinar los requisitos de conexión a redes de alta tensión",
+      "Gestionar la relación contractual entre distribuidora y usuario"
+    ],
+    respuesta: "Establecer las condiciones técnicas y garantías que deben reunir las instalaciones eléctricas",
+    explicacion: "Artículo 1: Se establece como objeto regular las condiciones técnicas y garantías de las instalaciones eléctricas conectadas a baja tensión."
+  },
+  {
+    pregunta: "Según el REBT, el Reglamento se aplica a instalaciones con tensiones nominales:",
+    opciones: [
+      "Hasta 500 V en alterna y 1.000 V en continua",
+      "Igual o inferior a 1.000 V en corriente alterna e igual o inferior a 1.500 V en corriente continua",
+      "Hasta 230/400 V en alterna",
+      "Solo tensiones inferiores a 50 V"
+    ],
+    respuesta: "Igual o inferior a 1.000 V en corriente alterna e igual o inferior a 1.500 V en corriente continua",
+    explicacion: "Artículo 2.1: El Reglamento se aplica a instalaciones con tensiones nominales ≤ 1.000 V AC y ≤ 1.500 V DC."
+  },
+  {
+    pregunta: "Según el REBT, se entiende por instalación eléctrica:",
+    opciones: [
+      "El conjunto de cables únicamente",
+      "Cualquier línea destinada a alumbrado público",
+      "Todo conjunto de aparatos y circuitos asociados para un fin particular",
+      "Una instalación interior de usuario exclusivamente"
+    ],
+    respuesta: "Todo conjunto de aparatos y circuitos asociados para un fin particular",
+    explicacion: "Artículo 3: Define instalación eléctrica como el conjunto de aparatos y circuitos asociados con un fin particular."
+  },
+  {
+    pregunta: "Según el REBT, la muy baja tensión corresponde a valores:",
+    opciones: [
+      "Un ≤ 75 V en alterna",
+      "Un ≤ 50 V en alterna y Un ≤ 75 V en continua",
+      "Un ≤ 100 V en continua",
+      "50 < Un ≤ 500 V en alterna"
+    ],
+    respuesta: "Un ≤ 50 V en alterna y Un ≤ 75 V en continua",
+    explicacion: "Artículo 4.1 y tabla de clasificación de tensiones: muy baja tensión ≤ 50 V AC y ≤ 75 V DC."
+  },
+  {
+    pregunta: "Según el REBT, en redes trifásicas de cuatro conductores, las tensiones normalizadas son:",
+    opciones: [
+      "220/380 V",
+      "230/400 V",
+      "240/415 V",
+      "250/440 V"
+    ],
+    respuesta: "230/400 V",
+    explicacion: "Artículo 4.2.b: Tensión normalizada de 230 V fase-neutro y 400 V entre fases."
+  },
+  {
+    pregunta: "Según el REBT, la frecuencia normalizada de la red es:",
+    opciones: ["60 Hz", "40 Hz", "50 Hz", "45 Hz"],
+    respuesta: "50 Hz",
+    explicacion: "Artículo 4.4: La frecuencia empleada en la red será de 50 Hz."
+  },
+  {
+    pregunta: "Según el REBT, la modificación de importancia se considera cuando:",
+    opciones: [
+      "Afecta al 10% de la potencia instalada",
+      "Afecta al 50% de la potencia instalada",
+      "Afecta a cualquier circuito",
+      "Incluye solo cambio de luminarias"
+    ],
+    respuesta: "Afecta al 50% de la potencia instalada",
+    explicacion: "Artículo 2.2.c: Se considera modificación de importancia cuando afecta a más del 50% de la potencia instalada."
+  },
+  {
+    pregunta: "Según el REBT, quedan excluidas de su aplicación las instalaciones:",
+    opciones: [
+      "De alumbrado exterior",
+      "De usos militares o reglamentación específica",
+      "De viviendas",
+      "De redes informáticas siempre"
+    ],
+    respuesta: "De usos militares o reglamentación específica",
+    explicacion: "Artículo 2.4: Se excluyen las instalaciones y equipos sujetos a reglamentación específica (minas, automóviles, navíos, usos militares, etc.)."
+  },
+  {
+    pregunta: "Según el REBT, las instalaciones de muy baja tensión solo aplicarán prescripciones específicas cuando:",
+    opciones: [
+      "Su tensión sea inferior a 75 V en alterna",
+      "Su fuente sea autónoma y no dependan de redes de BT",
+      "Se instalen en viviendas",
+      "Sean instalaciones provisionales"
+    ],
+    respuesta: "Su fuente sea autónoma y no dependan de redes de BT",
+    explicacion: "Artículo 2.6: No se aplican prescripciones generales cuando la fuente es autónoma y la instalación es independiente."
+  },
+  {
+    pregunta: "Según el REBT, las instalaciones que puedan producir perturbaciones deberán:",
+    opciones: [
+      "Desconectarse automáticamente",
+      "Estar dotadas de dispositivos protectores adecuados",
+      "Ser revisadas cada año",
+      "Ser alimentadas en corriente continua"
+    ],
+    respuesta: "Estar dotadas de dispositivos protectores adecuados",
+    explicacion: "Artículo 5: Las instalaciones que produzcan perturbaciones deben contar con dispositivos protectores."
+  },
+  {
+    pregunta: "Según el REBT, los equipos utilizados deberán incluir como indicación mínima:",
+    opciones: [
+      "Marca CE únicamente",
+      "Identificación del fabricante, modelo, tensión e intensidad asignadas",
+      "Peso y dimensiones",
+      "Kilovatios consumidos mensualmente"
+    ],
+    respuesta: "Identificación del fabricante, modelo, tensión e intensidad asignadas",
+    explicacion: "Artículo 6.1.a–d: El material debe incluir identificación del fabricante, marca/modelo, tensión/intensidad y otras indicaciones."
+  },
+  {
+    pregunta: "Según el REBT, si en una instalación coexisten tensiones superiores a BT:",
+    opciones: [
+      "Debe aplicarse únicamente este Reglamento",
+      "Debe cumplirse el reglamento correspondiente a la tensión superior",
+      "Debe reducirse la tensión por seguridad",
+      "Se prohíbe la coexistencia de tensiones"
+    ],
+    respuesta: "Debe cumplirse el reglamento correspondiente a la tensión superior",
+    explicacion: "Artículo 7: En ausencia de indicación específica, se aplica el reglamento de la tensión superior."
+  },
+  {
+    pregunta: "Según el REBT, se consideran instalaciones de alumbrado exterior:",
+    opciones: [
+      "Las de iluminación decorativa interior",
+      "Las vías de circulación o espacios entre edificaciones que requieran iluminación",
+      "Los alumbrados de emergencia interiores",
+      "Cualquier instalación con luminarias LED"
+    ],
+    respuesta: "Las vías de circulación o espacios entre edificaciones que requieran iluminación",
+    explicacion: "Artículo 9: Se consideran de alumbrado exterior las que iluminan vías o espacios entre edificaciones."
+  },
+  {
+    pregunta: "Según el REBT, un suministro normal es:",
+    opciones: [
+      "El que incluye dos puntos de entrega",
+      "El efectuado por una sola distribuidora para toda la potencia contratada",
+      "El destinado solo a alumbrado",
+      "El limitado al 15% de la potencia"
+    ],
+    respuesta: "El efectuado por una sola distribuidora para toda la potencia contratada",
+    explicacion: "Artículo 10.A: Suministro normal: efectuado por una sola empresa distribuidora con un solo punto de entrega."
+  },
+  {
+    pregunta: "Según el REBT, un suministro duplicado es aquel capaz de mantener:",
+    opciones: [
+      "El 15% de la potencia contratada",
+      "El 25% de la potencia contratada",
+      "Más del 50% de la potencia contratada",
+      "El 100% de la instalación"
+    ],
+    respuesta: "Más del 50% de la potencia contratada",
+    explicacion: "Artículo 10.B.c: El suministro duplicado mantiene más del 50% de la potencia del suministro normal."
+  },
+  {
+    pregunta: "Según el REBT, la acometida es:",
+    opciones: [
+      "La instalación interior del usuario",
+      "La parte de la red que alimenta la caja general de protección",
+      "El cable entre contador y usuario",
+      "El DGMP del edificio"
+    ],
+    respuesta: "La parte de la red que alimenta la caja general de protección",
+    explicacion: "Artículo 15.1: La acometida alimenta la CGP y es responsabilidad de la distribuidora."
+  },
+  {
+    pregunta: "Según el REBT, una instalación interior o receptora tiene como finalidad:",
+    opciones: [
+      "La distribución de energía eléctrica",
+      "La utilización de la energía eléctrica",
+      "La generación de energía",
+      "Alimentar exclusivamente alumbrado exterior"
+    ],
+    respuesta: "La utilización de la energía eléctrica",
+    explicacion: "Artículo 16.1: Describe las instalaciones interiores o receptoras como destinadas a utilizar la energía eléctrica."
+  },
+  {
+    pregunta: "Según el REBT, la puesta en servicio requiere:",
+    opciones: [
+      "Solo la firma del titular",
+      "Documentación técnica, verificaciones y certificado de instalación",
+      "Una revisión de la distribuidora",
+      "La aprobación del ayuntamiento"
+    ],
+    respuesta: "Documentación técnica, verificaciones y certificado de instalación",
+    explicacion: "Artículo 18.1.a–e: Establece proyecto/memoria, verificaciones, inspección inicial (si aplica) y certificado."
+  },
+  {
+    pregunta: "Según el REBT, la empresa suministradora no podrá conectar la instalación a la red si:",
+    opciones: [
+      "El titular no ha pagado la obra",
+      "No se entrega el certificado de instalación diligenciado",
+      "Faltan luminarias",
+      "No existe cuadro de mando"
+    ],
+    respuesta: "No se entrega el certificado de instalación diligenciado",
+    explicacion: "Artículo 18.3: La distribuidora no puede conectar sin el certificado diligenciado."
+  },
+  {
+    pregunta: "Según el REBT, el certificado de instalación debe incluir:",
+    opciones: [
+      "Plano arquitectónico completo",
+      "Esquema unifilar y croquis del trazado",
+      "Factura del material",
+      "Contrato con la distribuidora"
+    ],
+    respuesta: "Esquema unifilar y croquis del trazado",
+    explicacion: "Artículo 19: Debe entregarse esquema unifilar y croquis de la instalación al titular."
+  }
+];
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /* ===== Estado ===== */
     let preguntasAleatorias = [];
@@ -153,12 +288,12 @@
     const clamp0 = (x) => x < 0 ? 0 : x;
 
     function calcularPuntuacion(){
-      const total = preguntasAleatorias.length;              // 20
-      const penalizacion = Math.floor(errores / 2);          // cada 2 fallos = 1 válida menos
+      const total = preguntasAleatorias.length;
+      const penalizacion = Math.floor(errores / 2);
       const validasNetas = Math.max(0, aciertos - penalizacion);
-      const puntos = validasNetas * 0.5;                     // cada válida = 0,5 puntos
-      const porcentaje = clamp0((validasNetas / total) * 100); // % sobre preguntas válidas netas / total
-      const apto = porcentaje >= 80;                         // mínimo 80%
+      const puntos = validasNetas * 0.5;
+      const porcentaje = clamp0((validasNetas / total) * 100);
+      const apto = porcentaje >= 80;
       return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
     }
 
@@ -223,12 +358,15 @@
       seleccionUsuario=null; respondido=false;
       document.getElementById("pregunta").textContent = q.pregunta;
       renderOpciones(q.opciones);
+
       document.getElementById("acciones").innerHTML =
         `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
            <span>Elige una respuesta (teclas 1–4 y Enter).</span>
            <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
          </div>`;
-      setProgreso(); actualizarContador();
+
+      setProgreso();
+      actualizarContador();
     }
 
     function seleccionarOpcion(opcion){
@@ -239,7 +377,9 @@
         if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
       });
       const btn = document.getElementById('btn-contestar');
-      btn.disabled=false; btn.classList.remove('opacity-50','cursor-not-allowed'); btn.onclick=verificarRespuesta;
+      btn.disabled=false;
+      btn.classList.remove('opacity-50','cursor-not-allowed');
+      btn.onclick=verificarRespuesta;
     }
 
     function verificarRespuesta(){
@@ -251,19 +391,45 @@
       document.querySelectorAll("#opciones .opcion").forEach(b=>{
         b.disabled=true; b.classList.remove('ring','ring-yellow-300');
         const val=b.dataset.valor;
-        if (val===actual.respuesta){ b.classList.add('bg-green-600','hover:bg-green-700'); b.innerHTML=`✅ <span class="font-semibold">${val}</span>`; }
-        else if (val===seleccionUsuario && !ok){ b.classList.add('bg-red-600','hover:bg-red-700'); b.innerHTML=`❌ <span class="font-semibold">${val}</span>`; }
-        else { b.classList.add('bg-blue-500'); }
+        if (val===actual.respuesta){
+          b.classList.add('bg-green-600','hover:bg-green-700');
+          b.innerHTML=`✅ <span class="font-semibold">${val}</span>`;
+        } else if (val===seleccionUsuario && !ok){
+          b.classList.add('bg-red-600','hover:bg-red-700');
+          b.innerHTML=`❌ <span class="font-semibold">${val}</span>`;
+        } else {
+          b.classList.add('bg-blue-500');
+        }
       });
 
       ok ? aciertos++ : errores++;
-      historial.push({pregunta:actual.pregunta, opciones:actual.opciones, correcta:actual.respuesta, elegida:seleccionUsuario});
 
+      historial.push({
+        pregunta:actual.pregunta,
+        opciones:actual.opciones,
+        correcta:actual.respuesta,
+        elegida:seleccionUsuario,
+        explicacion:actual.explicacion
+      });
+
+      /* === NUEVO: mostrar la explicación debajo del botón === */
       document.getElementById("acciones").innerHTML =
-        `<div class="mt-4 flex items-center justify-end gap-3">
-           <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">Siguiente</button>
+        `<div class="mt-4 flex flex-col gap-3">
+
+           <div class="flex items-center justify-end">
+             <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">
+               Siguiente
+             </button>
+           </div>
+
+           <div id="explicacion" class="text-sm text-slate-700 bg-slate-100 border-l-4 border-blue-600 p-3 rounded-md">
+             ${actual.explicacion || "Sin referencia disponible"}
+           </div>
+
          </div>`;
-      actualizarContador(); setProgreso();
+
+      actualizarContador();
+      setProgreso();
     }
 
     const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
@@ -281,8 +447,8 @@
       document.getElementById('modal-resumen').innerHTML = `
         <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
         <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
-        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas (=${(penalizacion*0.5).toFixed(2)} pts)</p>
-        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total}</p>
+        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas</p>
+        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong></p>
         <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
         <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
       `;
@@ -304,30 +470,61 @@
           <p class='font-semibold mb-2'>${h.pregunta}</p>
           <div class='flex flex-wrap gap-2'>
             ${h.opciones.map(op=>{
-              if (op===h.elegida && op===h.correcta) return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
-              if (op===h.elegida && op!==h.correcta) return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
-              if (op===h.correcta && op!==h.elegida) return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              if (op===h.elegida && op===h.correcta)
+                return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op===h.elegida && op!==h.correcta)
+                return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op===h.correcta && op!==h.elegida)
+                return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
               return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
             }).join('')}
           </div>
-        </div>`).join('');
+          <div class='mt-2 text-sm text-slate-600 bg-slate-100 border-l-4 border-blue-600 p-2 rounded-md'>
+            📘 Explicación: ${h.explicacion}
+          </div>
+        </div>
+      `).join('');
 
       const totalPuntos = total * 0.5;
 
       document.getElementById("test").innerHTML = `
         <div class="space-y-3">
-          <h2 class="text-2xl font-extrabold">Resultado del test <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">(${apto?'APTO ✅':'NO APTO ❌'})</span></h2>
-          <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Penalización: <strong>-${penalizacion}</strong> válidas</p>
-          <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total} • Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+          <h2 class="text-2xl font-extrabold">Resultado del test 
+            <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">
+              (${apto?'APTO ✅':'NO APTO ❌'})
+            </span>
+          </h2>
+
+          <p class="text-slate-700">
+            Aciertos: <strong class="text-green-700">${aciertos}</strong> • 
+            Fallos: <strong class="text-red-700">${errores}</strong> • 
+            Penalización: <strong>-${penalizacion}</strong>
+          </p>
+
+          <p class="text-slate-700">
+            Válidas netas: <strong>${validasNetas}</strong> / ${total} • 
+            Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> 
+            (<strong>${porcentaje.toFixed(2)}%</strong>)
+          </p>
+
           <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span></p>
+
           <hr class="my-3 border-slate-200">
+
           <h3 class="text-lg font-bold">Detalle de preguntas</h3>
-          <div class="max-h-[50vh] overflow-auto pr-1">${detalle}</div>
+
+          <div class="max-h-[50vh] overflow-auto pr-1">
+            ${detalle}
+          </div>
         </div>
 
         <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
-          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
-          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">Volver al inicio</a>
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">
+            Volver a intentar
+          </button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">
+            Volver al inicio
+          </a>
         </div>`;
     }
 
@@ -336,8 +533,14 @@
       if (tiempoAgotado) return;
       if (respondido){ if (e.key==='Enter') siguientePregunta(); return; }
       const map={'1':0,'2':1,'3':2,'4':3};
-      if (map[e.key]!==undefined){ const b=document.querySelectorAll('#opciones .opcion')[map[e.key]]; if (b) b.click(); }
-      if (e.key==='Enter'){ const b=document.getElementById('btn-contestar'); if (b && !b.disabled) b.click(); }
+      if (map[e.key]!==undefined){
+        const b=document.querySelectorAll('#opciones .opcion')[map[e.key]];
+        if (b) b.click();
+      }
+      if (e.key==='Enter'){
+        const b=document.getElementById('btn-contestar');
+        if (b && !b.disabled) b.click();
+      }
     }
 
     window.onload = ()=>{
@@ -348,6 +551,7 @@
       document.addEventListener('keydown', handleKey);
     };
   </script>
+
 </head>
 
 <body class="bg-gray-100 text-gray-900 p-4">
@@ -384,5 +588,6 @@
       </div>
     </div>
   </div>
+
 </body>
 </html>
