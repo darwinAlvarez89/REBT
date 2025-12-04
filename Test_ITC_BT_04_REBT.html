@@ -24,116 +24,253 @@
   </style>
 
   <script>
-    /* ===== Banco de preguntas (20) – Articulado REBT ===== */
-    const preguntas = [
+    /* ===== Banco de preguntas + explicaciones ===== */
+    const 
+
+
+
+preguntas = [
   {
-    pregunta: "Según el REBT, la puesta en servicio de una instalación eléctrica se efectuará una vez que:",
-    opciones: ["Se realicen las verificaciones y se disponga del certificado de instalación", "La empresa suministradora autorice el suministro", "El titular firme un contrato con el instalador", "El organismo de control realice una inspección periódica"],
-    respuesta: "Se realicen las verificaciones y se disponga del certificado de instalación"
+    pregunta: "Según el REBT, la documentación técnica necesaria para una instalación dependerá de:",
+    opciones: [
+      "La empresa distribuidora",
+      "La importancia de la instalación",
+      "La ubicación geográfica",
+      "El tipo de empresa instaladora"
+    ],
+    respuesta: "La importancia de la instalación",
+    explicacion: "ITC-BT-04, apartado 2: indica que la documentación adoptará Proyecto o Memoria Técnica en función de la importancia de la instalación."
   },
+
   {
-    pregunta: "Según el REBT, el certificado de instalación será emitido por:",
-    opciones: ["El organismo de control autorizado", "El titular de la instalación", "La empresa instaladora que ejecutó la instalación", "La compañía suministradora"],
-    respuesta: "La empresa instaladora que ejecutó la instalación"
+    pregunta: "Según el REBT, cuando una instalación requiere proyecto, este debe ser redactado y firmado por:",
+    opciones: [
+      "Un instalador en baja tensión",
+      "La empresa suministradora",
+      "Un técnico titulado competente",
+      "Un organismo de control"
+    ],
+    respuesta: "Un técnico titulado competente",
+    explicacion: "ITC-BT-04, apartado 2.1: el proyecto debe ser redactado y firmado por técnico titulado competente."
   },
+
   {
-    pregunta: "Según el REBT, cuando una instalación requiera proyecto, el certificado de instalación deberá ir acompañado de:",
-    opciones: ["El acta de inspección periódica", "El proyecto y el certificado final de obra", "La declaración de conformidad del titular", "La memoria técnica de diseño"],
-    respuesta: "El proyecto y el certificado final de obra"
+    pregunta: "Según el REBT, en la memoria del proyecto deberán figurar, entre otros datos:",
+    opciones: [
+      "Los consumos mensuales del usuario",
+      "Los datos del propietario y el emplazamiento",
+      "La previsión de facturación anual",
+      "La normativa municipal aplicable"
+    ],
+    respuesta: "Los datos del propietario y el emplazamiento",
+    explicacion: "ITC-BT-04, apartado 2.1: se listan los datos que debe incluir la memoria, entre ellos propietario y emplazamiento."
   },
+
   {
-    pregunta: "Según el REBT, las instalaciones que no precisan proyecto deberán ir acompañadas de:",
-    opciones: ["Una memoria técnica de diseño", "Una inspección inicial de un organismo de control", "El certificado de dirección facultativa", "Un acta de puesta en marcha"],
-    respuesta: "Una memoria técnica de diseño"
+    pregunta: "Según el REBT, la memoria técnica de diseño deberá redactarse en:",
+    opciones: [
+      "Formato libre",
+      "Impresos oficiales definidos por la Comunidad Autónoma",
+      "Un documento elaborado por la empresa suministradora",
+      "Un modelo aprobado por el Ayuntamiento"
+    ],
+    respuesta: "Impresos oficiales definidos por la Comunidad Autónoma",
+    explicacion: "ITC-BT-04, apartado 2.2: la MTD se redactará sobre impresos según modelo de la Comunidad Autónoma."
   },
+
   {
-    pregunta: "Según el REBT, el certificado de instalación deberá presentarse ante:",
-    opciones: ["La empresa distribuidora y el órgano competente de la Comunidad Autónoma", "El Ayuntamiento correspondiente", "El Ministerio de Industria directamente", "La entidad local de energía"],
-    respuesta: "La empresa distribuidora y el órgano competente de la Comunidad Autónoma"
+    pregunta: "Según el REBT, la memoria técnica de diseño deberá incluir:",
+    opciones: [
+      "Precio total de la instalación",
+      "Relación nominal de receptores y su potencia",
+      "Contrato de mantenimiento",
+      "Vida útil estimada de los equipos"
+    ],
+    respuesta: "Relación nominal de receptores y su potencia",
+    explicacion: "ITC-BT-04, apartado 2.2: la MTD debe contener la relación de receptores y su potencia."
   },
+
   {
-    pregunta: "Según el REBT, los titulares de las instalaciones deberán conservar el certificado de instalación durante:",
-    opciones: ["Toda la vida útil de la instalación", "Cinco años", "Diez años", "Hasta la primera inspección periódica"],
-    respuesta: "Toda la vida útil de la instalación"
+    pregunta: "Según el REBT, precisarán proyecto las instalaciones nuevas incluidas en:",
+    opciones: [
+      "Cualquier instalación doméstica",
+      "Los grupos enumerados en el apartado 3.1",
+      "Solo instalaciones industriales",
+      "Solo instalaciones con potencia superior a 100 kW"
+    ],
+    respuesta: "Los grupos enumerados en el apartado 3.1",
+    explicacion: "ITC-BT-04, apartado 3.1: especifica los grupos de instalación que requieren proyecto."
   },
-  {
-    pregunta: "Según el REBT, las instalaciones correspondientes a industria en general requerirán proyecto cuando la potencia instalada sea superior a:",
-    opciones: ["10 kW", "15 kW", "20 kW", "25 kW"],
-    respuesta: "20 kW"
-  },
-  {
-    pregunta: "Según el REBT, las instalaciones en garajes o aparcamientos cubiertos requerirán proyecto cuando la potencia instalada sea superior a:",
-    opciones: ["5 kW", "10 kW", "15 kW", "20 kW"],
-    respuesta: "10 kW"
-  },
-  {
-    pregunta: "Según el REBT, los titulares de las instalaciones están obligados a mantenerlas en buen estado para:",
-    opciones: ["Garantizar la seguridad de las personas y los bienes", "Facilitar las inspecciones periódicas", "Cumplir con los requisitos del contrato eléctrico", "Evitar penalizaciones por la empresa distribuidora"],
-    respuesta: "Garantizar la seguridad de las personas y los bienes"
-  },
-  {
-    pregunta: "Según el REBT, el suministro de energía se podrá realizar una vez:",
-    opciones: ["La empresa distribuidora reciba el certificado de instalación", "Se haya obtenido la licencia municipal", "El técnico competente emita el boletín de obra", "El órgano competente lo apruebe expresamente"],
-    respuesta: "La empresa distribuidora reciba el certificado de instalación"
-  },
-  {
-    pregunta: "Según el REBT, la empresa suministradora podrá realizar verificaciones a su cargo para comprobar:",
-    opciones: ["El cumplimiento de las prescripciones del Reglamento", "El contrato de mantenimiento de la instalación", "El consumo de energía mensual", "La calibración de los contadores eléctricos"],
-    respuesta: "El cumplimiento de las prescripciones del Reglamento"
-  },
-  {
-    pregunta: "Según el REBT, si las verificaciones realizadas por la empresa suministradora detectan valores fuera de los límites de aislamiento o corrientes de fuga:",
-    opciones: ["Podrá conectar la instalación provisionalmente", "Deberá comunicarlo al instalador sin interrumpir el servicio", "No podrá conectar la instalación a su red", "Podrá autorizarla bajo inspección adicional"],
-    respuesta: "No podrá conectar la instalación a su red"
-  },
-  {
-    pregunta: "Según el REBT, el certificado de instalación emitido por un organismo de control autorizado deberá extenderse en:",
-    opciones: ["Tres copias", "Cuatro copias", "Cinco copias", "Seis copias"],
-    respuesta: "Cinco copias"
-  },
-  {
-    pregunta: "Según el REBT, cuando la tramitación del certificado de instalación se realice por medios electrónicos, se emitirá:",
-    opciones: ["Una sola copia", "Dos copias", "Tres copias", "Cinco copias"],
-    respuesta: "Una sola copia"
-  },
-  {
-    pregunta: "Según el REBT, en caso de incumplimiento en la verificación de la empresa suministradora, se deberá emitir:",
-    opciones: ["Un acta firmada por el titular y remitida al órgano competente", "Un informe técnico sin necesidad de firma", "Un certificado de deficiencias", "Una comunicación a la empresa instaladora"],
-    respuesta: "Un acta firmada por el titular y remitida al órgano competente"
-  },
-  {
-    pregunta: "Según el REBT, la empresa instaladora será responsable de:",
-    opciones: ["Emitir el certificado de instalación y conservar copia", "Verificar periódicamente el consumo eléctrico", "Supervisar el funcionamiento de los contadores", "Realizar las inspecciones periódicas cada 5 años"],
-    respuesta: "Emitir el certificado de instalación y conservar copia"
-  },
-  {
-    pregunta: "Según el REBT, la documentación técnica de una instalación incluirá:",
-    opciones: ["Proyecto o memoria técnica, certificado de instalación y actas correspondientes", "Solo el proyecto aprobado", "Acta de entrega de materiales", "Un contrato con la distribuidora eléctrica"],
-    respuesta: "Proyecto o memoria técnica, certificado de instalación y actas correspondientes"
-  },
-  {
-    pregunta: "Según el REBT, los certificados de instalación se extenderán en los modelos establecidos por:",
-    opciones: ["El órgano competente de la Comunidad Autónoma", "El Ministerio de Industria y Energía", "La empresa suministradora", "El Colegio Oficial de Ingenieros Técnicos"],
-    respuesta: "El órgano competente de la Comunidad Autónoma"
-  },
-  {
-    pregunta: "Según el REBT, las instalaciones en locales de pública concurrencia deberán:",
-    opciones: ["Contar siempre con proyecto técnico, cualquiera que sea su potencia", "Presentar solo memoria técnica si son menores de 10 kW", "Tener únicamente certificado de instalación", "Requerir proyecto solo si superan 25 kW"],
-    respuesta: "Contar siempre con proyecto técnico, cualquiera que sea su potencia"
-  },
+
  {
-  pregunta: "Según el REBT, la documentación técnica de la instalación deberá conservarse y ponerse a disposición del órgano competente:",
+  pregunta: "Según el REBT, cuando una instalación requiere proyecto, éste podrá desarrollarse:",
   opciones: [
-    "Solo cuando se realicen modificaciones importantes",
-    "Cuando lo solicite el órgano competente o durante la vida útil de la instalación",
-    "Únicamente durante los cinco primeros años",
-    "Hasta la primera inspección periódica obligatoria"
+    "Como parte del proyecto general del edificio o como proyectos específicos",
+    "Solo como un proyecto independiente del edificio",
+    "Únicamente mediante memoria técnica de diseño",
+    "Exclusivamente con planos sin memoria"
   ],
-  respuesta: "Cuando lo solicite el órgano competente o durante la vida útil de la instalación"
-}
+  respuesta: "Como parte del proyecto general del edificio o como proyectos específicos",
+  explicacion: "ITC-BT-04, apartado 2.1: el proyecto podrá desarrollarse como parte del proyecto general del edificio o como uno o varios proyectos específicos."
+},
 
+  {
+    pregunta: "Según el REBT, requerirán proyecto las ampliaciones de instalaciones cuando:",
+    opciones: [
+      "La instalación tenga más de 10 años",
+      "La ampliación supere el 50% de la potencia prevista inicialmente",
+      "El instalador lo considere necesario",
+      "Lo solicite la compañía eléctrica"
+    ],
+    respuesta: "La ampliación supere el 50% de la potencia prevista inicialmente",
+    explicacion: "ITC-BT-04, apartado 3.2.c: las ampliaciones requieren proyecto si superan el 50% del proyecto anterior."
+  },
+
+  {
+    pregunta: "Según el REBT, cuando una instalación figura en varios grupos que precisan proyecto, se aplicará:",
+    opciones: [
+      "El criterio más favorable al usuario",
+      "El criterio más económico",
+      "El criterio más exigente",
+      "El criterio elegido por la compañía suministradora"
+    ],
+    respuesta: "El criterio más exigente",
+    explicacion: "ITC-BT-04, apartado 3.3: se aplicará el criterio más exigente de los grupos."
+  },
+
+  {
+    pregunta: "Según el REBT, todas las instalaciones deben ser ejecutadas por:",
+    opciones: [
+      "Un técnico titulado",
+      "Un organismo de control",
+      "La empresa suministradora",
+      "Empresas instaladoras en baja tensión habilitadas"
+    ],
+    respuesta: "Empresas instaladoras en baja tensión habilitadas",
+    explicacion: "ITC-BT-04, apartado 5.1: indica que todas las instalaciones deben ser efectuadas por empresas instaladoras de baja tensión."
+  },
+
+  {
+    pregunta: "Según el REBT, las instalaciones que precisan proyecto deben contar con:",
+    opciones: [
+      "Revisión anual obligatoria",
+      "La dirección de un técnico titulado competente.",
+      "Un informe económico",
+      "Un aval del propietario"
+    ],
+    respuesta: "La dirección de un técnico titulado competente.",
+    explicacion: "ITC-BT-04, apartado 5.1, segundo párrafo: establece que, en el caso de instalaciones que requirieron Proyecto, su ejecución deberá contar con la dirección de un técnico titulado competente.
+."
+  },
+
+  {
+    pregunta: "Según el REBT, si la empresa instaladora considera que el proyecto no cumple el Reglamento, deberá:",
+    opciones: [
+      "Modificarlo sin avisar",
+      "Informar por escrito al autor del proyecto y al propietario",
+      "Solicitar autorización al Ayuntamiento",
+      "Suspender la obra de inmediato"
+    ],
+    respuesta: "Informar por escrito al autor del proyecto y al propietario",
+    explicacion: "ITC-BT-04, apartado 5.1, tercer párrafo: obliga a comunicar por escrito esta circunstancia."
+  },
+
+  {
+    pregunta: "Según el REBT, al finalizar la obra, la empresa instaladora deberá realizar:",
+    opciones: [
+      "Una auditoría energética",
+      "Las verificaciones necesarias según la instalación",
+      "La legalización automática",
+      "Una inspección periódica"
+    ],
+    respuesta: "Las verificaciones necesarias según la instalación",
+    explicacion: "ITC-BT-04, apartado 5.2: la empresa instaladora realizará las verificaciones oportunas."
+  },
+
+  {
+    pregunta: "Según el REBT, cuando corresponda, deberá realizarse una inspección inicial por:",
+    opciones: [
+      "La empresa suministradora",
+      "Un técnico municipal",
+      "Un organismo de control",
+      "El proyectista"
+    ],
+    respuesta: "Un organismo de control",
+    explicacion: "ITC-BT-04, apartado 5.3: Asimismo, las instalaciones que se especifican en la ITC-BT-05, deberán ser objeto de la correspondiente Inspección Inicial por Organismo de Control."
+  },
+
+  {
+    pregunta: "Según el REBT, el certificado de instalación debe incluir:",
+    opciones: [
+      "Duración estimada de la obra",
+      "Datos esenciales de la instalación y de la empresa instaladora",
+      "Contratos de mantenimiento",
+      "El precio del proyecto"
+    ],
+    respuesta: "Datos esenciales de la instalación y de la empresa instaladora",
+    explicacion: "ITC-BT-04, apartado 5.4 a), b) y d): detalla los datos que debe incluir el certificado de instalación."
+  },
+
+  {
+    pregunta: "Según el REBT, el certificado de instalación debe presentarse ante:",
+    opciones: [
+      "El Ministerio de Industria",
+      "La compañía eléctrica y el órgano competente de la Comunidad Autónoma",
+      "El Ayuntamiento",
+      "La empresa constructora"
+    ],
+    respuesta: "La compañía eléctrica y el órgano competente de la Comunidad Autónoma",
+    explicacion: "ITC-BT-04, apartado 5.5: el certificado se presenta ante el órgano competente y posteriormente a la compañía eléctrica."
+  },
+
+  {
+    pregunta: "Según el REBT, el certificado de instalación debe presentarse en:",
+    opciones: [
+      "Una sola copia en todos los casos",
+      "Cinco copias, salvo presentación electrónica",
+      "Tres copias",
+      "Dos copias"
+    ],
+    respuesta: "Cinco copias, salvo presentación electrónica",
+    explicacion: "ITC-BT-04, apartado 5.5: establece que se presentará por quintuplicado salvo tramitación electrónica."
+  },
+
+  {
+    pregunta: "Según el REBT, en montajes temporales repetidos idénticos podrá omitirse:",
+    opciones: [
+      "El certificado de instalación",
+      "La documentación de diseño después del primer registro",
+      "La inspección inicial",
+      "Las verificaciones finales"
+    ],
+    respuesta: "La documentación de diseño después del primer registro",
+    explicacion: "ITC-BT-04, apartado 5.6, segundo párrafo: permite prescindir de la documentación de diseño en montajes repetidos."
+  },
+
+  {
+    pregunta: "Según el REBT, para solicitar el suministro de energía el titular debe entregar:",
+    opciones: [
+      "El contrato de mantenimiento",
+      "El certificado de instalación",
+      "Un informe técnico del instalador",
+      "Una certificación del Ayuntamiento"
+    ],
+    respuesta: "El certificado de instalación",
+    explicacion: "ITC-BT-04, apartado 6: el titular solicitará el suministro entregando el certificado de instalación."
+  },
+
+  {
+    pregunta: "Según el REBT, la empresa suministradora no podrá conectar una instalación cuando:",
+    opciones: [
+      "No exista contrato de mantenimiento",
+      "La instalación no haya sido revisada por un arquitecto",
+      "Los valores de aislamiento o corrientes de fuga no cumplan los límites",
+      "No haya memoria técnica"
+    ],
+    respuesta: "Los valores de aislamiento o corrientes de fuga no cumplan los límites",
+    explicacion: "ITC-BT-04, apartado 6, tercer párrafo: si los valores no cumplen ITC-BT-19, la empresa suministradora no podrá conectar."
+  }
 ];
-
 
 
 
@@ -162,12 +299,12 @@
     const clamp0 = (x) => x < 0 ? 0 : x;
 
     function calcularPuntuacion(){
-      const total = preguntasAleatorias.length;              // 20
-      const penalizacion = Math.floor(errores / 2);          // cada 2 fallos = 1 válida menos
+      const total = preguntasAleatorias.length;
+      const penalizacion = Math.floor(errores / 2);
       const validasNetas = Math.max(0, aciertos - penalizacion);
-      const puntos = validasNetas * 0.5;                     // cada válida = 0,5 puntos
-      const porcentaje = clamp0((validasNetas / total) * 100); // % sobre preguntas válidas netas / total
-      const apto = porcentaje >= 80;                         // mínimo 80%
+      const puntos = validasNetas * 0.5;
+      const porcentaje = clamp0((validasNetas / total) * 100);
+      const apto = porcentaje >= 80;
       return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
     }
 
@@ -232,12 +369,15 @@
       seleccionUsuario=null; respondido=false;
       document.getElementById("pregunta").textContent = q.pregunta;
       renderOpciones(q.opciones);
+
       document.getElementById("acciones").innerHTML =
         `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
            <span>Elige una respuesta (teclas 1–4 y Enter).</span>
            <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
          </div>`;
-      setProgreso(); actualizarContador();
+
+      setProgreso();
+      actualizarContador();
     }
 
     function seleccionarOpcion(opcion){
@@ -248,7 +388,9 @@
         if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
       });
       const btn = document.getElementById('btn-contestar');
-      btn.disabled=false; btn.classList.remove('opacity-50','cursor-not-allowed'); btn.onclick=verificarRespuesta;
+      btn.disabled=false;
+      btn.classList.remove('opacity-50','cursor-not-allowed');
+      btn.onclick=verificarRespuesta;
     }
 
     function verificarRespuesta(){
@@ -260,19 +402,45 @@
       document.querySelectorAll("#opciones .opcion").forEach(b=>{
         b.disabled=true; b.classList.remove('ring','ring-yellow-300');
         const val=b.dataset.valor;
-        if (val===actual.respuesta){ b.classList.add('bg-green-600','hover:bg-green-700'); b.innerHTML=`✅ <span class="font-semibold">${val}</span>`; }
-        else if (val===seleccionUsuario && !ok){ b.classList.add('bg-red-600','hover:bg-red-700'); b.innerHTML=`❌ <span class="font-semibold">${val}</span>`; }
-        else { b.classList.add('bg-blue-500'); }
+        if (val===actual.respuesta){
+          b.classList.add('bg-green-600','hover:bg-green-700');
+          b.innerHTML=`✅ <span class="font-semibold">${val}</span>`;
+        } else if (val===seleccionUsuario && !ok){
+          b.classList.add('bg-red-600','hover:bg-red-700');
+          b.innerHTML=`❌ <span class="font-semibold">${val}</span>`;
+        } else {
+          b.classList.add('bg-blue-500');
+        }
       });
 
       ok ? aciertos++ : errores++;
-      historial.push({pregunta:actual.pregunta, opciones:actual.opciones, correcta:actual.respuesta, elegida:seleccionUsuario});
 
+      historial.push({
+        pregunta:actual.pregunta,
+        opciones:actual.opciones,
+        correcta:actual.respuesta,
+        elegida:seleccionUsuario,
+        explicacion:actual.explicacion
+      });
+
+      /* === NUEVO: mostrar la explicación debajo del botón === */
       document.getElementById("acciones").innerHTML =
-        `<div class="mt-4 flex items-center justify-end gap-3">
-           <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">Siguiente</button>
+        `<div class="mt-4 flex flex-col gap-3">
+
+           <div class="flex items-center justify-end">
+             <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">
+               Siguiente
+             </button>
+           </div>
+
+           <div id="explicacion" class="text-sm text-slate-700 bg-slate-100 border-l-4 border-blue-600 p-3 rounded-md">
+             ${actual.explicacion || "Sin referencia disponible"}
+           </div>
+
          </div>`;
-      actualizarContador(); setProgreso();
+
+      actualizarContador();
+      setProgreso();
     }
 
     const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
@@ -290,8 +458,8 @@
       document.getElementById('modal-resumen').innerHTML = `
         <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
         <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
-        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas (=${(penalizacion*0.5).toFixed(2)} pts)</p>
-        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total}</p>
+        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas</p>
+        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong></p>
         <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
         <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
       `;
@@ -313,30 +481,61 @@
           <p class='font-semibold mb-2'>${h.pregunta}</p>
           <div class='flex flex-wrap gap-2'>
             ${h.opciones.map(op=>{
-              if (op===h.elegida && op===h.correcta) return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
-              if (op===h.elegida && op!==h.correcta) return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
-              if (op===h.correcta && op!==h.elegida) return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              if (op===h.elegida && op===h.correcta)
+                return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op===h.elegida && op!==h.correcta)
+                return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op===h.correcta && op!==h.elegida)
+                return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
               return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
             }).join('')}
           </div>
-        </div>`).join('');
+          <div class='mt-2 text-sm text-slate-600 bg-slate-100 border-l-4 border-blue-600 p-2 rounded-md'>
+            📘 Explicación: ${h.explicacion}
+          </div>
+        </div>
+      `).join('');
 
       const totalPuntos = total * 0.5;
 
       document.getElementById("test").innerHTML = `
         <div class="space-y-3">
-          <h2 class="text-2xl font-extrabold">Resultado del test <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">(${apto?'APTO ✅':'NO APTO ❌'})</span></h2>
-          <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Penalización: <strong>-${penalizacion}</strong> válidas</p>
-          <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong> / ${total} • Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+          <h2 class="text-2xl font-extrabold">Resultado del test 
+            <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">
+              (${apto?'APTO ✅':'NO APTO ❌'})
+            </span>
+          </h2>
+
+          <p class="text-slate-700">
+            Aciertos: <strong class="text-green-700">${aciertos}</strong> • 
+            Fallos: <strong class="text-red-700">${errores}</strong> • 
+            Penalización: <strong>-${penalizacion}</strong>
+          </p>
+
+          <p class="text-slate-700">
+            Válidas netas: <strong>${validasNetas}</strong> / ${total} • 
+            Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> 
+            (<strong>${porcentaje.toFixed(2)}%</strong>)
+          </p>
+
           <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span></p>
+
           <hr class="my-3 border-slate-200">
+
           <h3 class="text-lg font-bold">Detalle de preguntas</h3>
-          <div class="max-h-[50vh] overflow-auto pr-1">${detalle}</div>
+
+          <div class="max-h-[50vh] overflow-auto pr-1">
+            ${detalle}
+          </div>
         </div>
 
         <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
-          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
-          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">Volver al inicio</a>
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">
+            Volver a intentar
+          </button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">
+            Volver al inicio
+          </a>
         </div>`;
     }
 
@@ -345,8 +544,14 @@
       if (tiempoAgotado) return;
       if (respondido){ if (e.key==='Enter') siguientePregunta(); return; }
       const map={'1':0,'2':1,'3':2,'4':3};
-      if (map[e.key]!==undefined){ const b=document.querySelectorAll('#opciones .opcion')[map[e.key]]; if (b) b.click(); }
-      if (e.key==='Enter'){ const b=document.getElementById('btn-contestar'); if (b && !b.disabled) b.click(); }
+      if (map[e.key]!==undefined){
+        const b=document.querySelectorAll('#opciones .opcion')[map[e.key]];
+        if (b) b.click();
+      }
+      if (e.key==='Enter'){
+        const b=document.getElementById('btn-contestar');
+        if (b && !b.disabled) b.click();
+      }
     }
 
     window.onload = ()=>{
@@ -357,6 +562,7 @@
       document.addEventListener('keydown', handleKey);
     };
   </script>
+
 </head>
 
 <body class="bg-gray-100 text-gray-900 p-4">
@@ -393,5 +599,6 @@
       </div>
     </div>
   </div>
+
 </body>
 </html>
