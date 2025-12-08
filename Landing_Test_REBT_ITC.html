@@ -121,9 +121,9 @@
 
 <!-- Repasar - ITCs - IBTB -->
 <a href="Repasar_ITCs_IBTB.html" aria-label="Abrir página de repaso ITCs"
-   class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold 
+   class="pulse-button group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold 
           text-white transition transform hover:-translate-y-0.5 active:translate-y-0
-          bg-[#22B8CF] hover:bg-[#1CA5BA] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-cyan-300">
+          bg-[#22B8CF] hover:bg-[#1CA5BA] focus-visible:outline-none">
 
   <!-- icono lista -->
   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
@@ -132,6 +132,41 @@
 
   <span>Repasar ITCs IBTB</span>
 </a>
+
+<style>
+/* 🔥 Animación de pulso suave */
+@keyframes softPulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+/* ✨ Borde luminoso dinámico */
+.pulse-button {
+  position: relative;
+  animation: softPulse 2.4s infinite ease-in-out;
+}
+
+.pulse-button::before {
+  content: "";
+  position: absolute;
+  inset: -3px; /* borde externo */
+  border-radius: 16px;
+  background: linear-gradient(90deg, #22B8CF, #7FE9FF, #22B8CF);
+  z-index: -1;
+  opacity: 0.9;
+  filter: blur(6px);
+  animation: borderGlow 3s infinite linear;
+}
+
+/* Movimiento del brillo alrededor del botón */
+@keyframes borderGlow {
+  0%   { opacity: 0.5; filter: blur(4px); }
+  50%  { opacity: 1;   filter: blur(8px); }
+  100% { opacity: 0.5; filter: blur(4px); }
+}
+</style>
+
 
 
 
