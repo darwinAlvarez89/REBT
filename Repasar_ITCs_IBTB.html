@@ -10,13 +10,14 @@
 
 <style>
 /* =======================================================
-   FONDO EXACTO DEL INDEX + CAPA OSCURA
+   FONDO EXACTO DEL INDEX + CAPA OSCURA — AHORA FIJO
 ======================================================= */
 body{
     background:url('img/fondo.png');
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
+    background-attachment: fixed; /* ← FONDO FIJO */
     position:relative;
 }
 
@@ -338,17 +339,21 @@ li:hover{
 
 </div> <!-- FIN CONTENEDOR -->
 
-<!-- BOTÓN FLOTANTE -->
+<!-- =======================================================
+   BOTÓN FLOTANTE
+======================================================= -->
 <a href="Landing_Test_REBT_ITC.html" class="floating-btn">⬅</a>
 
-<!-- ANIMACIÓN AL SCROLL -->
+<!-- =======================================================
+   ANIMACIÓN SUAVE AL SCROLL
+======================================================= -->
 <script>
 const blocks=document.querySelectorAll('.block');
 const observer=new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting) entry.target.classList.add('show');
 });
-},{threshold:0.2});
+},{threshold:0.15});
 blocks.forEach(b=>observer.observe(b));
 </script>
 
