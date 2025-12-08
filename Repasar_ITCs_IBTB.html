@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ITC REBT – Categoría Básica</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+/* VARIABLES GENERALES PARA CLARO/OSCURO */
+:root {
+    --bg: #f7f9fc;
+    --text: #1a1a1a;
+    --subtle-text: #555;
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --card-border: rgba(0,0,0,0.08);
+    --accent: #4a90e2;
+    --hover-bg: rgba(74,144,226,0.12);
+}
+
+/* MODO OSCURO AUTOMÁTICO */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0e1116;
+        --text: #f0f4ff;
+        --subtle-text: #aab6d1;
+        --card-bg: rgba(255, 255, 255, 0.04);
+        --card-border: rgba(255,255,255,0.07);
+        --accent: #6ab4ff;
+        --hover-bg: rgba(106,180,255,0.15);
+    }
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding-bottom: 50px;
+}
+
+/* ENCABEZADO */
+header {
+    text-align: center;
+    padding: 55px 20px 40px;
+}
+
+header h1 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--accent), #9dd8ff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+header p {
+    font-size: 1.1rem;
+    margin-top: 10px;
+    opacity: 0.75;
+}
+
+/* CONTENEDOR CENTRAL */
+.container {
+    max-width: 1050px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* BLOQUES DE TEMAS */
+.block {
+    margin-bottom: 35px;
+    padding: 25px;
+    border-radius: 16px;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+.block:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.06);
+}
+
+/* TÍTULOS DE BLOQUES */
+.block h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 15px;
+}
+
+/* LISTA DE ITC */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.03);
+    transition: 0.25s;
+}
+
+@media (prefers-color-scheme: dark) {
+    li {
+        background: rgba(255,255,255,0.05);
+    }
+}
+
+li:hover {
+    background: var(--hover-bg);
+    transform: translateX(6px);
+}
+
+.itc-code {
+    font-weight: 600;
+    color: var(--accent);
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>ITC del REBT – Categoría Básica</h1>
+    <p>Consulta, estudia y repasa todas las Instrucciones Técnicas Complementarias antes de practicar con los tests.</p>
+</header>
+
+<div class="container">
+
+    <!-- BLOQUE -->
+    <div class="block">
+        <h2>Empresas e instalaciones</h2>
+        <ul>
+            <li><span class="itc-code">ITC-BT-03:</span> Empresas instaladoras en baja tensión</li>
+            <li><span class="itc-code">ITC-BT-04:</span> Documentación y puesta en servicio</li>
+            <li><span class="itc-code">ITC-BT-05:</span> Verificaciones e inspecciones</li>
+        </ul>
+    </div>
+
+    <div class="block">
+        <h2>Conexión del neutro, masas y alumbrado exterior</h2>
+        <ul>
+            <li><span class="itc-code">ITC-BT-08:</span> Sistemas de conexión del neutro y masas</li>
+            <li><span class="itc-code">ITC-BT-09:</span> Instalaciones de alumbrado exterior</li>
+        </ul>
+    </div>
+
+    <div class="block">
+        <h2>Previsión de cargas e instalaciones de enlace</h2>
+        <ul>
+            <li><span class="itc-code">ITC-BT-10:</span> Previsión de cargas</li>
+            <li><span class="itc-code">ITC-BT-12:</span> Esquemas de enlace</li>
+            <li><span class="itc-code">ITC-BT-13:</span> Cajas generales de protección</li>
+            <li><span class="itc-code">ITC-BT-14:</span> Línea general de alimentación</li>
+            <li><span class="itc-code">ITC-BT-15:</span> Derivaciones individuales</li>
+            <li><span class="itc-code">ITC-BT-16:</span> Contadores: ubicación e instalación</li>
+            <li><span class="itc-code">ITC-BT-17:</span> Mando y protección. ICP</li>
+        </ul>
+    </div>
+
+    <div class="block">
+        <h2>Puesta a tierra e instalaciones interiores</h2>
+        <ul>
+            <li><span class="itc-code">ITC-BT-18:</span> Instalaciones de puesta a tierra</li>
+            <li><span class="itc-code">ITC-BT-19:</span> Instalaciones interiores: prescripciones</li>
+            <li><span class="itc-code">ITC-BT-20:</span> Sistemas de instalación</li>
+            <li><span class="itc-code">ITC-BT-21:</span> Tubos y canales protectoras</li>
+            <li><span class="itc-code">ITC-BT-22:</span> Protección contra sobreintensidades</li>
+            <li><span class="itc-code">ITC-BT-23:</span> Protección contra sobretensiones</li>
+            <li><span class="itc-code">ITC-BT-24:</span> Contactos directos e indirectos</li>
+            <li><span class="itc-code">ITC-BT-25:</span> Viviendas: número de circuitos</li>
+            <li><span class="itc-code">ITC-BT-26:</span> Viviendas: prescripciones</li>
+            <li><span class="itc-code">ITC-BT-27:</span> Locales con bañera o ducha</li>
+        </ul>
+    </div>
+
+    <div class="block">
+        <h2>Locales y entornos especiales</h2>
+        <ul>
+            <li><span class="itc-code">ITC-BT-28:</span> Locales de pública concurrencia</li>
+            <li><span class="itc-code">ITC-BT-30:</span> Locales de características especiales</li>
+            <li><span class="itc-code">ITC-BT-31:</span> Piscinas y fuentes</li>
+            <li><span class="itc-code">ITC-BT-32:</span> Máquinas de elevación</li>
+            <li><span class="itc-code">ITC-BT-33:</span> Instalaciones provisionales de obra</li>
+            <li><span class="itc-code">ITC-BT-34:</span> Ferias y stands</li>
+            <li><span class="itc-code">ITC-BT-35:</span> Establecimientos agrícolas</li>
+            <li><span class="itc-code">ITC-BT-36:</span> Muy baja tensión</li>
+            <li><span class="itc-code">ITC-BT-37:</span> Tensiones especiales</li>
+            <li><span class="itc-code">ITC-BT-39:</span> Cercas eléctricas</li>
+            <li><span class="itc-code">ITC-BT-41:</span> Caravanas y parques</li>
+            <li><span class="itc-code">ITC-BT-42:</span> Puertos y marinas</li>
+            <li><span class="itc-code">ITC-BT-50:</span> Saunas</li>
+            <li><span class="itc-code">ITC-BT-52:</span> Recarga de vehículos eléctricos</li>
+        </ul>
+    </div>
+
+    <div class="block">
+        <h2>Instalación de receptores</h2>
+        <ul>
+            <li><span class="itc-code">ITC-BT-43:</span> Prescripciones generales</li>
+            <li><span class="itc-code">ITC-BT-44:</span> Alumbrado</li>
+            <li><span class="itc-code">ITC-BT-45:</span> Aparatos de caldeo</li>
+            <li><span class="itc-code">ITC-BT-46:</span> Cables y folios radiantes</li>
+            <li><span class="itc-code">ITC-BT-47:</span> Motores</li>
+            <li><span class="itc-code">ITC-BT-48:</span> Transformadores y reactancias</li>
+            <li><span class="itc-code">ITC-BT-49:</span> Instalaciones en muebles</li>
+        </ul>
+    </div>
+
+    <div class="block">
+        <h2>Generación de energía</h2>
+        <ul>
+            <li><span class="itc-code">ITC-BT-40:</span> Instalaciones generadoras</li>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>
