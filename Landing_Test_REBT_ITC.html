@@ -141,29 +141,8 @@
   100% { transform: scale(1); }
 }
 
-/* ✨ Borde luminoso dinámico */
 .pulse-button {
-  position: relative;
   animation: softPulse 2.4s infinite ease-in-out;
-}
-
-.pulse-button::before {
-  content: "";
-  position: absolute;
-  inset: -3px; /* borde externo */
-  border-radius: 16px;
-  background: linear-gradient(90deg, #22B8CF, #7FE9FF, #22B8CF);
-  z-index: -1;
-  opacity: 0.9;
-  filter: blur(6px);
-  animation: borderGlow 3s infinite linear;
-}
-
-/* Movimiento del brillo alrededor del botón */
-@keyframes borderGlow {
-  0%   { opacity: 0.5; filter: blur(4px); }
-  50%  { opacity: 1;   filter: blur(8px); }
-  100% { opacity: 0.5; filter: blur(4px); }
 }
 </style>
 
