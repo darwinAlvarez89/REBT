@@ -1,1 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Examen Test REBT</title>
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RSH4ZW3VT2');
+  </script>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+
+  <script>
+    /* ===== Banco de preguntas + explicaciones ===== */
+    const 
+    
+
+
+
+
+
+preguntas = [
+{
+  pregunta: "Según el REBT, varios circuitos pueden alojarse en el mismo tubo siempre que:",
+  opciones: [
+    "Todos los conductores estén aislados para la tensión más elevada presente",
+    "Los conductores de fase sean del mismo color",
+    "La intensidad total no supere la del conductor mayor",
+    "Exista un conductor neutro común para todos los circuitos"
+  ],
+  respuesta: "Todos los conductores estén aislados para la tensión más elevada presente",
+  explicacion: "ITC-BT-20, apartado 2.1 Prescripciones generales: pueden coexistir varios circuitos si todos los conductores están aislados para la tensión asignada más elevada."
+},
+{
+  pregunta: "Según el REBT, los circuitos de potencia y los circuitos MBTS o MBTP podrán ir en la misma canalización solamente si:",
+  opciones: [
+    "Cada conductor está aislado para la tensión más alta presente",
+    "La canalización dispone de tapa metálica",
+    "Los cables cumplen UNE 20315",
+    "Se instalan en tubos enterrados"
+  ],
+  respuesta: "Cada conductor está aislado para la tensión más alta presente",
+  explicacion: "ITC-BT-20, apartado 2.1 Prescripciones generales: no deben instalarse juntos salvo si cada conductor está aislado para la tensión más alta presente o existe separación adecuada."
+},
+{
+  pregunta: "Según el REBT, la separación mínima entre canalizaciones eléctricas y conductos no eléctricos debe ser de:",
+  opciones: [
+    "3 cm",
+    "5 cm",
+    "10 cm",
+    "1 cm"
+  ],
+  respuesta: "3 cm",
+  explicacion: "ITC-BT-20, apartado 2.1.1 Disposiciones: debe mantenerse una distancia mínima de 3 cm entre superficies exteriores."
+},
+{
+  pregunta: "Según el REBT, las canalizaciones eléctricas no deben situarse por debajo de conductos susceptibles de producir condensaciones salvo que:",
+  opciones: [
+    "Se adopten medidas para protegerlas de dichas condensaciones",
+    "Los cables sean armados",
+    "La altura supere 2 metros",
+    "La canalización tenga grado IP4X"
+  ],
+  respuesta: "Se adopten medidas para protegerlas de dichas condensaciones",
+  explicacion: "ITC-BT-20, apartado 2.1.1 Disposiciones: no se colocarán debajo de conductos con condensaciones salvo con protecciones adecuadas."
+},
+{
+  pregunta: "Según el REBT, en un mismo canal o hueco podrán ir canalizaciones eléctricas junto a no eléctricas únicamente si:",
+  opciones: [
+    "Se cumplen simultáneamente todas las condiciones de protección contra contactos indirectos y riesgos adicionales",
+    "Los cables eléctricos son todos multipolares",
+    "La canalización no eléctrica es de PVC",
+    "La distancia entre ambas es superior a 10 cm"
+  ],
+  respuesta: "Se cumplen simultáneamente todas las condiciones de protección contra contactos indirectos y riesgos adicionales",
+  explicacion: "ITC-BT-20, apartado 2.1.1 Disposiciones: se admiten ambas canalizaciones solo si se cumplen conjuntamente condiciones a) y b)."
+},
+{
+  pregunta: "Según el REBT, la identificación de las canalizaciones debe permitir:",
+  opciones: [
+    "Reparaciones y transformaciones siempre que se garantice la correcta identificación de circuitos",
+    "Reconocer únicamente la fase",
+    "Localizar exclusivamente el neutro",
+    "Eliminar la necesidad de planos"
+  ],
+  respuesta: "Reparaciones y transformaciones siempre que se garantice la correcta identificación de circuitos",
+  explicacion: "ITC-BT-20, apartado 2.1.3 Identificación: deben permitir reparaciones y transformaciones mediante identificación clara."
+},
+{
+  pregunta: "Según el REBT, en conductores aislados bajo tubo protector, la tensión asignada mínima del cable debe ser:",
+  opciones: [
+    "450/750 V",
+    "300/500 V",
+    "0,6/1 kV",
+    "125/250 V"
+  ],
+  respuesta: "450/750 V",
+  explicacion: "ITC-BT-20, apartado 2.2.1: los cables serán de tensión asignada no inferior a 450/750 V."
+},
+{
+  pregunta: "Según el REBT, en instalaciones con conductores fijados directamente sobre paredes, la distancia máxima entre puntos de fijación debe ser:",
+  opciones: [
+    "0,40 m",
+    "1 m",
+    "0,20 m",
+    "0,60 m"
+  ],
+  respuesta: "0,40 m",
+  explicacion: "ITC-BT-20, apartado 2.2.2: la distancia entre dos puntos de fijación sucesivos no excederá de 0,40 m."
+},
+{
+  pregunta: "Según el REBT, el radio de curvatura de un cable fijado sobre pared no será inferior a:",
+  opciones: [
+    "10 veces el diámetro exterior del cable",
+    "5 veces el diámetro",
+    "El doble del diámetro",
+    "20 veces el diámetro exterior"
+  ],
+  respuesta: "10 veces el diámetro exterior del cable",
+  explicacion: "ITC-BT-20, apartado 2.2.2: el radio no será inferior a 10 veces el diámetro exterior."
+},
+{
+  pregunta: "Según el REBT, los extremos de los cables instalados sobre paredes deberán ser:",
+  opciones: [
+    "Estancos cuando el local lo exija",
+    "Pintados para su identificación",
+    "Soldados en todos los casos",
+    "Cubiertos con resina"
+  ],
+  respuesta: "Estancos cuando el local lo exija",
+  explicacion: "ITC-BT-20, apartado 2.2.2: los extremos serán estancos cuando las características del local lo exijan."
+},
+{
+  pregunta: "Según el REBT, los conductores enterrados deberán ir bajo tubo salvo que:",
+  opciones: [
+    "Tengan cubierta y tensión asignada 0,6/1 kV",
+    "Sean cables armados",
+    "La zanja sea superior a 1 metro",
+    "Se utilicen bandejas metálicas"
+  ],
+  respuesta: "Tengan cubierta y tensión asignada 0,6/1 kV",
+  explicacion: "ITC-BT-20, apartado 2.2.3: deben ir bajo tubo salvo que posean cubierta y 0,6/1 kV."
+},
+{
+  pregunta: "Según el REBT, los conductores empotrados en estructuras deben tener:",
+  opciones: [
+    "Cubierta y temperatura de servicio hasta 90 ºC",
+    "Cubierta metálica obligatoria",
+    "Aislamiento PVC exclusivamente",
+    "Protección por bandeja"
+  ],
+  respuesta: "Cubierta y temperatura de servicio hasta 90 ºC",
+  explicacion: "ITC-BT-20, apartado 2.2.4: deben ser conductores aislados con cubierta, temperatura -5 ºC a 90 ºC."
+},
+{
+  pregunta: "Según el REBT, los huecos de construcción utilizados para canalizaciones deben tener una sección mínima:",
+  opciones: [
+    "Cuatro veces la ocupada por los cables o tubos",
+    "Igual a la del conducto mayor",
+    "El doble del diámetro del tubo",
+    "Tres veces la sección del cable mayor"
+  ],
+  respuesta: "Cuatro veces la ocupada por los cables o tubos",
+  explicacion: "ITC-BT-20, apartado 2.2.6: sección mínima cuatro veces la ocupación."
+},
+{
+  pregunta: "Según el REBT, la dimensión mínima del lado menor del hueco donde se instalan canalizaciones será:",
+  opciones: [
+    "Dos veces el diámetro exterior del cable mayor, con un mínimo de 20 mm",
+    "10 mm en todos los casos",
+    "Depende del fabricante",
+    "El mismo diámetro del tubo"
+  ],
+  respuesta: "Dos veces el diámetro exterior del cable mayor, con un mínimo de 20 mm",
+  explicacion: "ITC-BT-20, apartado 2.2.6 su dimensión más pequeña no será inferior a dos veces el diámetro exterior de mayor sección de éstos, con un mínimo de 20 milímetros."
+},
+{
+  pregunta: "Según el REBT, en canales protectoras IP4X se permite:",
+  opciones: [
+    "Realizar empalmes y conexiones a los mecanismos",
+    "Usar conductores desnudos",
+    "Instalar varios circuitos MBTS y MT en el mismo compartimento",
+    "Colocar tuberías de agua junto a ellas"
+  ],
+  respuesta: "Realizar empalmes y conexiones a los mecanismos",
+  explicacion: "ITC-BT-20, apartado 2.2.7 (C) Realizar empalmes de conductores en su interior y conexiones a los mecanismos."
+},
+{
+  pregunta: "Según el REBT, en molduras la anchura mínima de ranura para cables rígidos ≤ 6 mm² debe ser:",
+  opciones: [
+    "6 mm",
+    "10 mm",
+    "3 mm",
+    "12 mm"
+  ],
+  respuesta: "6 mm",
+  explicacion: "ITC-BT-20, apartado 2.2.8: anchura mínima de 6 mm."
+},
+{
+  pregunta: "Según el REBT, las molduras no podrán:",
+  opciones: [
+    "Estar totalmente empotradas ni recubiertas",
+    "Ser colocadas a más de 2 metros",
+    "Utilizarse en locales secos",
+    "Contener más de un cable por ranura"
+  ],
+  respuesta: "Estar totalmente empotradas ni recubiertas",
+  explicacion: "ITC-BT-20, apartado 2.2.8: no estarán completamente empotradas ni recubiertas."
+},
+{
+  pregunta: "Según el REBT, en bandejas solo podrán utilizarse:",
+  opciones: [
+    "Cables con cubierta",
+    "Conductores desnudos",
+    "Cables 300/500 V",
+    "Tubos flexibles"
+  ],
+  respuesta: "Cables con cubierta",
+  explicacion: "ITC-BT-20, apartado 2.2.9: únicamente cables con cubierta, incluyendo armados o aislamiento mineral."
+},
+{
+  pregunta: "Según el REBT, al atravesar elementos constructivos, no se permite que existan:",
+  opciones: [
+    "Empalmes o derivaciones en toda la longitud del paso",
+    "Tubos metálicos",
+    "Cables armados",
+    "Cables unipolares"
+  ],
+  respuesta: "Empalmes o derivaciones en toda la longitud del paso",
+  explicacion: "ITC-BT-20, apartado 3: está prohibido realizar empalmes o derivaciones dentro del paso."
+},
+{
+  pregunta: "Según el REBT, cuando se atraviesa un techo mediante tubo, éste debe:",
+  opciones: [
+    "Estar obturado y sobresalir por encima del suelo al menos 10 cm",
+    "Ser metálico obligatoriamente",
+    "Ser flexible y sin fijación",
+    "Contener cables sin aislamiento"
+  ],
+  respuesta: "Estar obturado y sobresalir por encima del suelo al menos 10 cm",
+  explicacion: "ITC-BT-20, apartado 3: los tubos en pasos de techo deben estar obturados y sobresalir 10 cm."
+}
+];
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* ===== Estado ===== */
+    let preguntasAleatorias = [];
+    let indice = 0, aciertos = 0, errores = 0;
+    let historial = [];
+    let seleccionUsuario = null;
+    let respondido = false;
+
+    // Tiempo
+    const DURACION_SEG = 60 * 60; // <<< 60 minutos
+    let inicioTiempo = null;
+    let intervaloTiempo = null;
+    let tiempoAgotado = false;
+
+    /* ===== Utilidades ===== */
+    const mezclar = (arr) => { for (let i = arr.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
+
+    function mezclarPreguntas(){
+      preguntasAleatorias = mezclar(preguntas.map(p=>({...p, opciones: mezclar([...p.opciones]) })));
+      indice=0; aciertos=0; errores=0; historial=[];
+    }
+
+    const fmt2 = (n) => String(n).padStart(2,'0');
+    const clamp0 = (x) => x < 0 ? 0 : x;
+
+    function calcularPuntuacion(){
+      const total = preguntasAleatorias.length;
+      const penalizacion = Math.floor(errores / 2);
+      const validasNetas = Math.max(0, aciertos - penalizacion);
+      const puntos = validasNetas * 0.5;
+      const porcentaje = clamp0((validasNetas / total) * 100);
+      const apto = porcentaje >= 80;
+      return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
+    }
+
+    /* ===== Render ===== */
+    function setProgreso(){
+      const total = preguntasAleatorias.length;
+      const pct = Math.round((indice/total)*100);
+      const bar = document.getElementById('progress-bar');
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+      document.getElementById('progress-txt').textContent = `${indice}/${total}`;
+    }
+
+    function actualizarContador(){
+      if (!inicioTiempo) return;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const restantes = Math.max(0, DURACION_SEG - transcurrido);
+      const mm = fmt2(Math.floor(restantes/60));
+      const ss = fmt2(restantes%60);
+
+      const { puntos } = calcularPuntuacion();
+      const totalPuntos = preguntasAleatorias.length * 0.5;
+
+      const relojClass =
+        restantes <= 60 ? 'text-red-700' :
+        restantes <= 5*60 ? 'text-orange-600' :
+        'text-blue-700';
+
+      document.getElementById("contador").innerHTML = `
+        <span>Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
+        <span class="text-green-600">Aciertos: ${aciertos}</span>
+        <span class="text-red-600">Fallos: ${errores}</span>
+        <span>Puntos: ${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</span>
+        <span class="font-mono ${relojClass}">⏳ ${mm}:${ss}</span>`;
+
+      if (restantes === 0 && !tiempoAgotado){
+        tiempoAgotado = true;
+        clearInterval(intervaloTiempo);
+        deshabilitarInteraccion();
+        abrirModalFin();
+      }
+    }
+
+    function renderOpciones(opciones){
+      const cont = document.getElementById("opciones");
+      cont.innerHTML = "";
+      opciones.forEach((op, i)=>{
+        const btn = document.createElement("button");
+        btn.type="button";
+        btn.dataset.valor = op;
+        btn.className="opcion w-full text-left bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl shadow transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300";
+        btn.innerHTML = `<span class="font-semibold tracking-wide">${op}</span>`;
+        btn.onclick = ()=>seleccionarOpcion(op);
+        btn.setAttribute('aria-label',`Opción ${i+1}: ${op}`);
+        cont.appendChild(btn);
+      });
+    }
+
+    function cargarPregunta(){
+      if (indice>=preguntasAleatorias.length) return mostrarResumen();
+      const q = preguntasAleatorias[indice];
+      seleccionUsuario=null; respondido=false;
+      document.getElementById("pregunta").textContent = q.pregunta;
+      renderOpciones(q.opciones);
+
+      document.getElementById("acciones").innerHTML =
+        `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
+           <span>Elige una respuesta (teclas 1–4 y Enter).</span>
+           <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
+         </div>`;
+
+      setProgreso();
+      actualizarContador();
+    }
+
+    function seleccionarOpcion(opcion){
+      if (respondido || tiempoAgotado) return;
+      seleccionUsuario = opcion;
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.classList.remove('ring','ring-yellow-300','translate-y-0.5');
+        if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
+      });
+      const btn = document.getElementById('btn-contestar');
+      btn.disabled=false;
+      btn.classList.remove('opacity-50','cursor-not-allowed');
+      btn.onclick=verificarRespuesta;
+    }
+
+    function verificarRespuesta(){
+      if (respondido || !seleccionUsuario || tiempoAgotado) return;
+      const actual = preguntasAleatorias[indice];
+      const ok = seleccionUsuario===actual.respuesta;
+      respondido = true;
+
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.disabled=true; b.classList.remove('ring','ring-yellow-300');
+        const val=b.dataset.valor;
+        if (val===actual.respuesta){
+          b.classList.add('bg-green-600','hover:bg-green-700');
+          b.innerHTML=`✅ <span class="font-semibold">${val}</span>`;
+        } else if (val===seleccionUsuario && !ok){
+          b.classList.add('bg-red-600','hover:bg-red-700');
+          b.innerHTML=`❌ <span class="font-semibold">${val}</span>`;
+        } else {
+          b.classList.add('bg-blue-500');
+        }
+      });
+
+      ok ? aciertos++ : errores++;
+
+      historial.push({
+        pregunta:actual.pregunta,
+        opciones:actual.opciones,
+        correcta:actual.respuesta,
+        elegida:seleccionUsuario,
+        explicacion:actual.explicacion
+      });
+
+      /* === NUEVO: mostrar la explicación debajo del botón === */
+      document.getElementById("acciones").innerHTML =
+        `<div class="mt-4 flex flex-col gap-3">
+
+           <div class="flex items-center justify-end">
+             <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">
+               Siguiente
+             </button>
+           </div>
+
+           <div id="explicacion" class="text-sm text-slate-700 bg-slate-100 border-l-4 border-blue-600 p-3 rounded-md">
+             ${actual.explicacion || "Sin referencia disponible"}
+           </div>
+
+         </div>`;
+
+      actualizarContador();
+      setProgreso();
+    }
+
+    const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
+
+    function deshabilitarInteraccion(){
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{ b.disabled=true; });
+      document.getElementById('btn-contestar')?.setAttribute('disabled','true');
+      document.removeEventListener('keydown', handleKey);
+    }
+
+    function abrirModalFin(){
+      const { total, respondidas, enBlanco, penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+      const modal = document.getElementById('modal-fin');
+      const totalPuntos = total * 0.5;
+      document.getElementById('modal-resumen').innerHTML = `
+        <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
+        <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
+        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas</p>
+        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong></p>
+        <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+        <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
+      `;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function mostrarResumen(){
+      clearInterval(intervaloTiempo);
+      const total = preguntasAleatorias.length;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const mm = fmt2(Math.floor(transcurrido/60));
+      const ss = fmt2(transcurrido%60);
+
+      const { penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+
+      const detalle = historial.map(h=>`
+        <div class='mb-2 border border-slate-200 rounded-lg p-3'>
+          <p class='font-semibold mb-2'>${h.pregunta}</p>
+          <div class='flex flex-wrap gap-2'>
+            ${h.opciones.map(op=>{
+              if (op===h.elegida && op===h.correcta)
+                return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op===h.elegida && op!==h.correcta)
+                return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op===h.correcta && op!==h.elegida)
+                return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
+            }).join('')}
+          </div>
+          <div class='mt-2 text-sm text-slate-600 bg-slate-100 border-l-4 border-blue-600 p-2 rounded-md'>
+            📘 Explicación: ${h.explicacion}
+          </div>
+        </div>
+      `).join('');
+
+      const totalPuntos = total * 0.5;
+
+      document.getElementById("test").innerHTML = `
+        <div class="space-y-3">
+          <h2 class="text-2xl font-extrabold">Resultado del test 
+            <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">
+              (${apto?'APTO ✅':'NO APTO ❌'})
+            </span>
+          </h2>
+
+          <p class="text-slate-700">
+            Aciertos: <strong class="text-green-700">${aciertos}</strong> • 
+            Fallos: <strong class="text-red-700">${errores}</strong> • 
+            Penalización: <strong>-${penalizacion}</strong>
+          </p>
+
+          <p class="text-slate-700">
+            Válidas netas: <strong>${validasNetas}</strong> / ${total} • 
+            Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> 
+            (<strong>${porcentaje.toFixed(2)}%</strong>)
+          </p>
+
+          <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span></p>
+
+          <hr class="my-3 border-slate-200">
+
+          <h3 class="text-lg font-bold">Detalle de preguntas</h3>
+
+          <div class="max-h-[50vh] overflow-auto pr-1">
+            ${detalle}
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">
+            Volver a intentar
+          </button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">
+            Volver al inicio
+          </a>
+        </div>`;
+    }
+
+    /* ===== Atajos de teclado ===== */
+    function handleKey(e){
+      if (tiempoAgotado) return;
+      if (respondido){ if (e.key==='Enter') siguientePregunta(); return; }
+      const map={'1':0,'2':1,'3':2,'4':3};
+      if (map[e.key]!==undefined){
+        const b=document.querySelectorAll('#opciones .opcion')[map[e.key]];
+        if (b) b.click();
+      }
+      if (e.key==='Enter'){
+        const b=document.getElementById('btn-contestar');
+        if (b && !b.disabled) b.click();
+      }
+    }
+
+    window.onload = ()=>{
+      mezclarPreguntas();
+      inicioTiempo = Date.now();
+      cargarPregunta();
+      intervaloTiempo = setInterval(actualizarContador, 1000);
+      document.addEventListener('keydown', handleKey);
+    };
+  </script>
+
+</head>
+
+<body class="bg-gray-100 text-gray-900 p-4">
+  <div class="max-w-3xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-lg ring-1 ring-slate-100" id="test">
+    <div class="mb-4">
+      <div class="flex items-center justify-between text-sm text-slate-600 mb-2">
+        <p id="contador" class="font-semibold space-x-4"></p>
+        <span id="progress-txt" class="font-mono text-slate-500">0/0</span>
+      </div>
+      <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+        <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out" style="width:0%" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      </div>
+    </div>
+
+    <h1 class="text-3xl font-extrabold mb-3 text-center">ITC-BT-20</h1>
+    <p id="pregunta" class="mb-4 text-lg text-center"></p>
+
+    <div id="opciones" class="flex flex-col gap-3"></div>
+    <div id="acciones" class="mt-2"></div>
+  </div>
+
+  <div class="mt-6 text-center">
+    <a href="Test_por_ITC_del_REBT.html" class="inline-block bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">Cancelar</a>
+  </div>
+
+  <!-- Modal Tiempo Agotado -->
+  <div id="modal-fin" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
+    <div class="bg-white rounded-2xl shadow-xl max-w-lg w-full p-6">
+      <h2 class="text-2xl font-extrabold mb-1">⏰ Tiempo agotado</h2>
+      <p class="text-slate-600 mb-4">Tu tiempo se ha agotado. Estos son tus resultados:</p>
+      <div id="modal-resumen" class="space-y-1 text-slate-800"></div>
+      <div class="mt-6 flex justify-end">
+        <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
