@@ -1,1 +1,599 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Examen Test REBT</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RSH4ZW3VT2');
+  </script>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+
+  <script>
+    /* ===== Banco de preguntas + explicaciones ===== */
+    const 
+
+
+
+
+preguntas = [
+  {
+    pregunta: "Según el REBT, esta instrucción trata de los requisitos particulares de los sistemas de instalación del equipo eléctrico de:",
+    opciones: [
+      "Grúas, aparatos de elevación y transporte y otros equipos similares",
+      "Únicamente ascensores de edificios",
+      "Máquinas industriales fijas",
+      "Instalaciones temporales de obra"
+    ],
+    respuesta: "Grúas, aparatos de elevación y transporte y otros equipos similares",
+    explicacion: "ITC-BT-32, apartado 1: «Esta instrucción trata de los requisitos particulares de los sistemas de instalación del equipo eléctrico de grúas, aparatos de elevación y transporte y otros equipos similares tales como escaleras mecánicas, cintas transportadoras, puentes rodantes, cabrestantes, andamios eléctricos, etc.»"
+  },
+  {
+    pregunta: "Según el REBT, la instalación podrá ponerse fuera de servicio mediante:",
+    opciones: [
+      "Un interruptor omnipolar general de accionamiento manual",
+      "Un interruptor unipolar",
+      "Un seccionador automático",
+      "Un contactor de potencia"
+    ],
+    respuesta: "Un interruptor omnipolar general de accionamiento manual",
+    explicacion: "ITC-BT-32, apartado 2: «La instalación en su conjunto se podrá poner fuera de servicio mediante un interruptor omnipolar general de accionamiento manual, colocado en el circuito principal.»"
+  },
+  {
+    pregunta: "Según el REBT, el interruptor omnipolar general deberá estar situado:",
+    opciones: [
+      "En lugares fácilmente accesibles desde el suelo y en el mismo local del equipo",
+      "En el interior del motor exclusivamente",
+      "En un local distinto al del equipo",
+      "En el cuadro general del edificio"
+    ],
+    respuesta: "En lugares fácilmente accesibles desde el suelo y en el mismo local del equipo",
+    explicacion: "ITC-BT-32, apartado 2: «Este interruptor deberá estar situado en lugares fácilmente accesibles desde el suelo, en el mismo local o recinto en el que esté situado el equipo eléctrico de accionamiento.»"
+  },
+  {
+    pregunta: "Según el REBT, la caída de tensión en el arranque del motor no deberá ser superior al:",
+    opciones: [
+      "5 %",
+      "3 %",
+      "10 %",
+      "2 %"
+    ],
+    respuesta: "5 %",
+    explicacion: "ITC-BT-32, apartado 2: «Las canalizaciones ... deberán estar dimensionadas de manera que el arranque del motor no provoque una caída de tensión superior al 5 %.»"
+  },
+  {
+    pregunta: "Según el REBT, se permitirá la instalación de interruptores suspendidos de la canalización móvil únicamente cuando:",
+    opciones: [
+      "Las máquinas estén destinadas exclusivamente al transporte de mercancías sin jaulas",
+      "Se trate de grúas de personas",
+      "Existan jaulas de transporte",
+      "Sean ascensores"
+    ],
+    respuesta: "Las máquinas estén destinadas exclusivamente al transporte de mercancías sin jaulas",
+    explicacion: "ITC-BT-32, apartado 2: «Únicamente en el caso de que las máquinas destinadas exclusivamente al transporte de mercancías no dispongan de jaulas para el transporte, se permitirá la instalación de interruptores suspendidos de la extremidad de la canalización móvil.»"
+  },
+  {
+    pregunta: "Según el REBT, en instalaciones exteriores para servicios móviles se utilizarán:",
+    opciones: [
+      "Cables flexibles con cubierta de policloropreno o similar",
+      "Cables rígidos armados",
+      "Conductores desnudos",
+      "Cables con aislamiento mineral"
+    ],
+    respuesta: "Cables flexibles con cubierta de policloropreno o similar",
+    explicacion: "ITC-BT-32, apartado 2: «En las instalaciones en el exterior para servicios móviles se utilizarán cables flexibles con cubierta de policloropeno o similar según UNE 21.027 ó UNE 21.150.»"
+  },
+  {
+    pregunta: "Según el REBT, los ascensores y estructuras metálicas de los motores:",
+    opciones: [
+      "Se conectarán a tierra",
+      "Quedarán aislados",
+      "Se conectarán al neutro",
+      "No requieren conexión"
+    ],
+    respuesta: "Se conectarán a tierra",
+    explicacion: "ITC-BT-32, apartado 2: «Los ascensores, las estructuras de todos los motores, máquinas elevadoras, combinadores y cubiertas metálicas ... se conectarán a tierra.»"
+  },
+  {
+    pregunta: "Según el REBT, los locales donde esté instalado el equipo eléctrico de accionamiento:",
+    opciones: [
+      "Sólo deberán ser accesibles a personas cualificadas",
+      "Podrán ser accesibles al público",
+      "No requieren restricciones de acceso",
+      "Podrán ser utilizados como almacén"
+    ],
+    respuesta: "Sólo deberán ser accesibles a personas cualificadas",
+    explicacion: "ITC-BT-32, apartado 2: «Los locales, recintos, etc. en los que esté instalado el equipo eléctrico de accionamiento, sólo deberán ser accesibles a personas cualificadas.»"
+  },
+  {
+    pregunta: "Según el REBT, los sistemas colectores deben estar dispuestos de forma que:",
+    opciones: [
+      "Exista protección frente al contacto directo",
+      "Permitan el contacto accidental",
+      "Sean accesibles sin protección",
+      "No requieran cerramientos"
+    ],
+    respuesta: "Exista protección frente al contacto directo",
+    explicacion: "ITC-BT-32, apartado 3.1: «... tenga protección frente al contacto directo con las partes en tensión, de acuerdo con el apartado 2 de la ITC-BT-24.»"
+  },
+  {
+    pregunta: "Según el REBT, la protección por puesta fuera de alcance:",
+    opciones: [
+      "Está pensada únicamente para evitar el contacto accidental",
+      "Garantiza protección total",
+      "Sustituye al aislamiento",
+      "Es válida para cualquier persona"
+    ],
+    respuesta: "Está pensada únicamente para evitar el contacto accidental",
+    explicacion: "ITC-BT-32, apartado 3.1: «La protección mediante la colocación fuera del alcance está pensada únicamente para evitar el contacto accidental con las partes en tensión.»"
+  },
+  {
+    pregunta: "Según el REBT, el equipo eléctrico se protegerá contra sobreintensidades mediante:",
+    opciones: [
+      "Dispositivos automáticos de protección",
+      "Fusibles únicamente",
+      "Relés térmicos exclusivamente",
+      "Contactores"
+    ],
+    respuesta: "Dispositivos automáticos de protección",
+    explicacion: "ITC-BT-32, apartado 3.2: «El equipo eléctrico se protegerá mediante uno o más dispositivos automáticos de protección que actúen en caso de una sobreintensidad provocada por sobrecarga o cortocircuito.»"
+  },
+  {
+    pregunta: "Según el REBT, los interruptores de mantenimiento deberán ser:",
+    opciones: [
+      "De corte omnipolar",
+      "Unipolares",
+      "De mando a distancia",
+      "Automáticos"
+    ],
+    respuesta: "De corte omnipolar",
+    explicacion: "ITC-BT-32, apartado 4.1: «Los interruptores deben ser de corte omnipolar y deberá tener los medios necesarios para impedir toda puesta en tensión de las instalaciones de forma imprevista.»"
+  },
+  {
+    pregunta: "Según el REBT, cada grúa deberá disponer de:",
+    opciones: [
+      "Uno o más mecanismos de parada de emergencia",
+      "Un interruptor unipolar",
+      "Un relé térmico",
+      "Un temporizador"
+    ],
+    respuesta: "Uno o más mecanismos de parada de emergencia",
+    explicacion: "ITC-BT-32, apartado 4.2: «Cada grúa, aparato de elevación o transporte debe tener uno o más mecanismos de parada de emergencia.»"
+  },
+  {
+    pregunta: "Según el REBT, la reconexión tras una parada de emergencia:",
+    opciones: [
+      "Sólo puede realizarse desde el dispositivo desde el cual se realizó el corte",
+      "Puede realizarse desde cualquier punto",
+      "Es automática",
+      "No está regulada"
+    ],
+    respuesta: "Sólo puede realizarse desde el dispositivo desde el cual se realizó el corte",
+    explicacion: "ITC-BT-32, apartado 4.2: «La reconexión solamente puede ser posible desde el dispositivo de control desde el cual se realizó el corte de emergencia.»"
+  },
+  {
+    pregunta: "Según el REBT, los interruptores deberán cumplir la norma:",
+    opciones: [
+      "UNE-EN 60.947-2",
+      "UNE 20.460-3",
+      "UNE-EN 60.598-2-18",
+      "UNE 21.027"
+    ],
+    respuesta: "UNE-EN 60.947-2",
+    explicacion: "ITC-BT-32, apartado 5.1: «Los interruptores deberán cumplir la UNE-EN 60.947-2.»"
+  },
+  {
+    pregunta: "Según el REBT, los contactores:",
+    opciones: [
+      "No deben utilizarse para seccionamiento",
+      "Son obligatorios para seccionamiento",
+      "Sustituyen a los interruptores",
+      "Se usan como protección diferencial"
+    ],
+    respuesta: "No deben utilizarse para seccionamiento",
+    explicacion: "ITC-BT-32, apartado 5.1: «Los contactores no deben utilizarse para seccionamiento.»"
+  },
+  {
+    pregunta: "Según el REBT, los interruptores del lado de la alimentación deben permitir:",
+    opciones: [
+      "Aislar los anillos y barras del suministro principal",
+      "Sólo el corte del neutro",
+      "El arranque automático",
+      "La regulación de velocidad"
+    ],
+    respuesta: "Aislar los anillos y barras del suministro principal",
+    explicacion: "ITC-BT-32, apartado 5.2: «Debe ser posible aislar los anillos del colector y las barras o cables del suministro principal antes del punto de conexión de la grúa.»"
+  },
+  {
+    pregunta: "Según el REBT, el conductor de protección en sistemas con anillos colectores:",
+    opciones: [
+      "Debe tener un anillo o barra colectora individual",
+      "Puede compartirse con conductores activos",
+      "No es obligatorio",
+      "Puede ser móvil"
+    ],
+    respuesta: "Debe tener un anillo o barra colectora individual",
+    explicacion: "ITC-BT-32, apartado 6: «El conductor de protección debe tener un anillo colector individual o una barra colectora, cuyos soportes sean claramente visibles y distinguibles de aquellos de los anillos o barras colectoras activos.»"
+  },
+  {
+    pregunta: "Según el REBT, los conductores de protección:",
+    opciones: [
+      "No deben transportar corriente en funcionamiento normal",
+      "Deben transportar corriente permanentemente",
+      "Pueden sustituirse por ruedas",
+      "Son opcionales"
+    ],
+    respuesta: "No deben transportar corriente en funcionamiento normal",
+    explicacion: "ITC-BT-32, apartado 6: «Los conductores de protección no deben transportar ninguna corriente cuando funcionen normalmente.»"
+  },
+  {
+    pregunta: "Según el REBT, los aparatos de elevación:",
+    opciones: [
+      "Deben conectarse a los conductores de protección",
+      "Pueden conectarse mediante ruedas",
+      "No requieren conexión",
+      "Se conectan al neutro"
+    ],
+    respuesta: "Deben conectarse a los conductores de protección",
+    explicacion: "ITC-BT-32, apartado 6: «Los aparatos de elevación deben conectarse a los conductores de protección no admitiéndose ruedas o rodillos para su conexión.»"
+  }
+];
+
+ 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* ===== Estado ===== */
+    let preguntasAleatorias = [];
+    let indice = 0, aciertos = 0, errores = 0;
+    let historial = [];
+    let seleccionUsuario = null;
+    let respondido = false;
+
+    // Tiempo
+    const DURACION_SEG = 60 * 60; // <<< 60 minutos
+    let inicioTiempo = null;
+    let intervaloTiempo = null;
+    let tiempoAgotado = false;
+
+    /* ===== Utilidades ===== */
+    const mezclar = (arr) => { for (let i = arr.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
+
+    function mezclarPreguntas(){
+      preguntasAleatorias = mezclar(preguntas.map(p=>({...p, opciones: mezclar([...p.opciones]) })));
+      indice=0; aciertos=0; errores=0; historial=[];
+    }
+
+    const fmt2 = (n) => String(n).padStart(2,'0');
+    const clamp0 = (x) => x < 0 ? 0 : x;
+
+    function calcularPuntuacion(){
+      const total = preguntasAleatorias.length;
+      const penalizacion = Math.floor(errores / 2);
+      const validasNetas = Math.max(0, aciertos - penalizacion);
+      const puntos = validasNetas * 0.5;
+      const porcentaje = clamp0((validasNetas / total) * 100);
+      const apto = porcentaje >= 80;
+      return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
+    }
+
+    /* ===== Render ===== */
+    function setProgreso(){
+      const total = preguntasAleatorias.length;
+      const pct = Math.round((indice/total)*100);
+      const bar = document.getElementById('progress-bar');
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+      document.getElementById('progress-txt').textContent = `${indice}/${total}`;
+    }
+
+    function actualizarContador(){
+      if (!inicioTiempo) return;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const restantes = Math.max(0, DURACION_SEG - transcurrido);
+      const mm = fmt2(Math.floor(restantes/60));
+      const ss = fmt2(restantes%60);
+
+      const { puntos } = calcularPuntuacion();
+      const totalPuntos = preguntasAleatorias.length * 0.5;
+
+      const relojClass =
+        restantes <= 60 ? 'text-red-700' :
+        restantes <= 5*60 ? 'text-orange-600' :
+        'text-blue-700';
+
+      document.getElementById("contador").innerHTML = `
+        <span>Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
+        <span class="text-green-600">Aciertos: ${aciertos}</span>
+        <span class="text-red-600">Fallos: ${errores}</span>
+        <span>Puntos: ${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</span>
+        <span class="font-mono ${relojClass}">⏳ ${mm}:${ss}</span>`;
+
+      if (restantes === 0 && !tiempoAgotado){
+        tiempoAgotado = true;
+        clearInterval(intervaloTiempo);
+        deshabilitarInteraccion();
+        abrirModalFin();
+      }
+    }
+
+    function renderOpciones(opciones){
+      const cont = document.getElementById("opciones");
+      cont.innerHTML = "";
+      opciones.forEach((op, i)=>{
+        const btn = document.createElement("button");
+        btn.type="button";
+        btn.dataset.valor = op;
+        btn.className="opcion w-full text-left bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl shadow transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300";
+        btn.innerHTML = `<span class="font-semibold tracking-wide">${op}</span>`;
+        btn.onclick = ()=>seleccionarOpcion(op);
+        btn.setAttribute('aria-label',`Opción ${i+1}: ${op}`);
+        cont.appendChild(btn);
+      });
+    }
+
+    function cargarPregunta(){
+      if (indice>=preguntasAleatorias.length) return mostrarResumen();
+      const q = preguntasAleatorias[indice];
+      seleccionUsuario=null; respondido=false;
+      document.getElementById("pregunta").textContent = q.pregunta;
+      renderOpciones(q.opciones);
+
+      document.getElementById("acciones").innerHTML =
+        `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
+           <span>Elige una respuesta (teclas 1–4 y Enter).</span>
+           <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
+         </div>`;
+
+      setProgreso();
+      actualizarContador();
+    }
+
+    function seleccionarOpcion(opcion){
+      if (respondido || tiempoAgotado) return;
+      seleccionUsuario = opcion;
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.classList.remove('ring','ring-yellow-300','translate-y-0.5');
+        if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
+      });
+      const btn = document.getElementById('btn-contestar');
+      btn.disabled=false;
+      btn.classList.remove('opacity-50','cursor-not-allowed');
+      btn.onclick=verificarRespuesta;
+    }
+
+    function verificarRespuesta(){
+      if (respondido || !seleccionUsuario || tiempoAgotado) return;
+      const actual = preguntasAleatorias[indice];
+      const ok = seleccionUsuario===actual.respuesta;
+      respondido = true;
+
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.disabled=true; b.classList.remove('ring','ring-yellow-300');
+        const val=b.dataset.valor;
+        if (val===actual.respuesta){
+          b.classList.add('bg-green-600','hover:bg-green-700');
+          b.innerHTML=`✅ <span class="font-semibold">${val}</span>`;
+        } else if (val===seleccionUsuario && !ok){
+          b.classList.add('bg-red-600','hover:bg-red-700');
+          b.innerHTML=`❌ <span class="font-semibold">${val}</span>`;
+        } else {
+          b.classList.add('bg-blue-500');
+        }
+      });
+
+      ok ? aciertos++ : errores++;
+
+      historial.push({
+        pregunta:actual.pregunta,
+        opciones:actual.opciones,
+        correcta:actual.respuesta,
+        elegida:seleccionUsuario,
+        explicacion:actual.explicacion
+      });
+
+      /* === NUEVO: mostrar la explicación debajo del botón === */
+      document.getElementById("acciones").innerHTML =
+        `<div class="mt-4 flex flex-col gap-3">
+
+           <div class="flex items-center justify-end">
+             <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">
+               Siguiente
+             </button>
+           </div>
+
+           <div id="explicacion" class="text-sm text-slate-700 bg-slate-100 border-l-4 border-blue-600 p-3 rounded-md">
+             ${actual.explicacion || "Sin referencia disponible"}
+           </div>
+
+         </div>`;
+
+      actualizarContador();
+      setProgreso();
+    }
+
+    const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
+
+    function deshabilitarInteraccion(){
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{ b.disabled=true; });
+      document.getElementById('btn-contestar')?.setAttribute('disabled','true');
+      document.removeEventListener('keydown', handleKey);
+    }
+
+    function abrirModalFin(){
+      const { total, respondidas, enBlanco, penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+      const modal = document.getElementById('modal-fin');
+      const totalPuntos = total * 0.5;
+      document.getElementById('modal-resumen').innerHTML = `
+        <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
+        <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
+        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas</p>
+        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong></p>
+        <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+        <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
+      `;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function mostrarResumen(){
+      clearInterval(intervaloTiempo);
+      const total = preguntasAleatorias.length;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const mm = fmt2(Math.floor(transcurrido/60));
+      const ss = fmt2(transcurrido%60);
+
+      const { penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+
+      const detalle = historial.map(h=>`
+        <div class='mb-2 border border-slate-200 rounded-lg p-3'>
+          <p class='font-semibold mb-2'>${h.pregunta}</p>
+          <div class='flex flex-wrap gap-2'>
+            ${h.opciones.map(op=>{
+              if (op===h.elegida && op===h.correcta)
+                return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op===h.elegida && op!==h.correcta)
+                return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op===h.correcta && op!==h.elegida)
+                return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
+            }).join('')}
+          </div>
+          <div class='mt-2 text-sm text-slate-600 bg-slate-100 border-l-4 border-blue-600 p-2 rounded-md'>
+            📘 Explicación: ${h.explicacion}
+          </div>
+        </div>
+      `).join('');
+
+      const totalPuntos = total * 0.5;
+
+      document.getElementById("test").innerHTML = `
+        <div class="space-y-3">
+          <h2 class="text-2xl font-extrabold">Resultado del test 
+            <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">
+              (${apto?'APTO ✅':'NO APTO ❌'})
+            </span>
+          </h2>
+
+          <p class="text-slate-700">
+            Aciertos: <strong class="text-green-700">${aciertos}</strong> • 
+            Fallos: <strong class="text-red-700">${errores}</strong> • 
+            Penalización: <strong>-${penalizacion}</strong>
+          </p>
+
+          <p class="text-slate-700">
+            Válidas netas: <strong>${validasNetas}</strong> / ${total} • 
+            Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> 
+            (<strong>${porcentaje.toFixed(2)}%</strong>)
+          </p>
+
+          <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span></p>
+
+          <hr class="my-3 border-slate-200">
+
+          <h3 class="text-lg font-bold">Detalle de preguntas</h3>
+
+          <div class="max-h-[50vh] overflow-auto pr-1">
+            ${detalle}
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">
+            Volver a intentar
+          </button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">
+            Volver al inicio
+          </a>
+        </div>`;
+    }
+
+    /* ===== Atajos de teclado ===== */
+    function handleKey(e){
+      if (tiempoAgotado) return;
+      if (respondido){ if (e.key==='Enter') siguientePregunta(); return; }
+      const map={'1':0,'2':1,'3':2,'4':3};
+      if (map[e.key]!==undefined){
+        const b=document.querySelectorAll('#opciones .opcion')[map[e.key]];
+        if (b) b.click();
+      }
+      if (e.key==='Enter'){
+        const b=document.getElementById('btn-contestar');
+        if (b && !b.disabled) b.click();
+      }
+    }
+
+    window.onload = ()=>{
+      mezclarPreguntas();
+      inicioTiempo = Date.now();
+      cargarPregunta();
+      intervaloTiempo = setInterval(actualizarContador, 1000);
+      document.addEventListener('keydown', handleKey);
+    };
+  </script>
+
+</head>
+
+<body class="bg-gray-100 text-gray-900 p-4">
+  <div class="max-w-3xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-lg ring-1 ring-slate-100" id="test">
+    <div class="mb-4">
+      <div class="flex items-center justify-between text-sm text-slate-600 mb-2">
+        <p id="contador" class="font-semibold space-x-4"></p>
+        <span id="progress-txt" class="font-mono text-slate-500">0/0</span>
+      </div>
+      <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+        <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out" style="width:0%" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      </div>
+    </div>
+
+    <h1 class="text-3xl font-extrabold mb-3 text-center">ITC-BT-32</h1>
+    <p id="pregunta" class="mb-4 text-lg text-center"></p>
+
+    <div id="opciones" class="flex flex-col gap-3"></div>
+    <div id="acciones" class="mt-2"></div>
+  </div>
+
+  <div class="mt-6 text-center">
+    <a href="Test_por_ITC_del_REBT.html" class="inline-block bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">Cancelar</a>
+  </div>
+
+  <!-- Modal Tiempo Agotado -->
+  <div id="modal-fin" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
+    <div class="bg-white rounded-2xl shadow-xl max-w-lg w-full p-6">
+      <h2 class="text-2xl font-extrabold mb-1">⏰ Tiempo agotado</h2>
+      <p class="text-slate-600 mb-4">Tu tiempo se ha agotado. Estos son tus resultados:</p>
+      <div id="modal-resumen" class="space-y-1 text-slate-800"></div>
+      <div class="mt-6 flex justify-end">
+        <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+  </html>
