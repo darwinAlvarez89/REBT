@@ -1,1 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Examen Test REBT</title>
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RSH4ZW3VT2');
+  </script>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+
+  <script>
+    /* ===== Banco de preguntas + explicaciones ===== */
+    const 
+    
+
+ 
+preguntas = [
+  {
+    pregunta: "Según el REBT, se consideran locales o emplazamientos húmedos aquellos cuyas condiciones ambientales se manifiestan:",
+    opciones: [
+      "Momentánea o permanentemente bajo la forma de condensación en el techo y paredes, manchas salinas o moho",
+      "Únicamente cuando aparecen gotas visibles de agua",
+      "Solo cuando el techo esté impregnado de agua",
+      "Exclusivamente cuando existe agua en el suelo"
+    ],
+    respuesta: "Momentánea o permanentemente bajo la forma de condensación en el techo y paredes, manchas salinas o moho",
+    explicacion: "ITC-BT-30, apartado 1: «Locales o emplazamientos húmedos son aquellos cuyas condiciones ambientales se manifiestan momentánea o permanentemente bajo la forma de condensación en el techo y paredes, manchas salinas o moho aún cuando no aparezcan gotas, ni el techo o paredes estén impregnados de agua.»"
+  },
+  {
+    pregunta: "Según el REBT, en locales húmedos las canalizaciones eléctricas serán:",
+    opciones: [
+      "Estancas y con grado de protección IPX1",
+      "Estancas con grado IPX4",
+      "Protegidas como mínimo IP5X",
+      "De cualquier tipo sin exigencia de protección"
+    ],
+    respuesta: "Estancas y con grado de protección IPX1",
+    explicacion: "ITC-BT-30, apartado 1.1: «Las canalizaciones serán estancas, utilizándose, para terminales, empalmes y conexiones de las mismas, sistemas o dispositivos que presenten el grado de protección correspondiente a la caída vertical de gotas de agua (IPX1).»"
+  },
+  {
+    pregunta: "Según el REBT, la tensión asignada de los conductores instalados en tubos en locales húmedos será de:",
+    opciones: [
+      "450/750 V",
+      "230/400 V",
+      "0,6/1 kV",
+      "300/500 V"
+    ],
+    respuesta: "450/750 V",
+    explicacion: "ITC-BT-30, apartado 1.1.1: «Los conductores tendrán una tensión asignada de 450/750V y discurrirán por el interior de tubos.»"
+  },
+  {
+    pregunta: "Según el REBT, los cables armados sin tubo protector en locales húmedos tendrán una tensión asignada de:",
+    opciones: [
+      "0,6/1 kV",
+      "450/750 V",
+      "230/400 V",
+      "300/500 V"
+    ],
+    respuesta: "0,6/1 kV",
+    explicacion: "ITC-BT-30, apartado 1.1.3: «Los conductores tendrán una tensión asignada de 0,6/1 kV.»"
+  },
+  {
+    pregunta: "Según el REBT, la aparamenta en locales húmedos deberá presentar un grado de protección:",
+    opciones: [
+      "IPX1",
+      "IPX4",
+      "IP5X",
+      "IPXXB"
+    ],
+    respuesta: "IPX1",
+    explicacion: "ITC-BT-30, apartado 1.2: «Toda la aparamenta utilizada, deberá presentar el grado de protección correspondiente a la caída vertical de gotas de agua, IPX1.»"
+  },
+  {
+    pregunta: "Según el REBT, los aparatos portátiles de alumbrado en locales húmedos serán:",
+    opciones: [
+      "De la Clase II",
+      "De la Clase 0",
+      "De la Clase I",
+      "Sin exigencia de clase"
+    ],
+    respuesta: "De la Clase II",
+    explicacion: "ITC-BT-30, apartado 1.3: «Los aparatos de alumbrado portátiles serán de la Clase II, según la Instrucción ITC-BT-43.»"
+  },
+  {
+    pregunta: "Según el REBT, se consideran locales o emplazamientos mojados aquellos en que:",
+    opciones: [
+      "Los suelos, techos y paredes estén o puedan estar impregnados de humedad",
+      "Exista únicamente condensación ligera",
+      "Solo aparezcan manchas salinas",
+      "Únicamente estén situados a la intemperie"
+    ],
+    respuesta: "Los suelos, techos y paredes estén o puedan estar impregnados de humedad",
+    explicacion: "ITC-BT-30, apartado 2: «Locales o emplazamientos mojados son aquellos en que los suelos, techos y paredes estén o puedan estar impregnados de humedad.»"
+  },
+  {
+    pregunta: "Según el REBT, las canalizaciones en locales mojados deberán presentar un grado de protección:",
+    opciones: [
+      "IPX4",
+      "IPX1",
+      "IP5X",
+      "IPXXB"
+    ],
+    respuesta: "IPX4",
+    explicacion: "ITC-BT-30, apartado 2.1: «Las canalizaciones serán estancas… con el grado de protección correspondiente a las proyecciones de agua, IPX4.»"
+  },
+  {
+    pregunta: "Según el REBT, en locales mojados los aparatos de mando y protección:",
+    opciones: [
+      "Se instalarán fuera del local o deberán ser IPX4",
+      "Se instalarán siempre dentro del local",
+      "No requieren protección especial",
+      "Podrán ser de clase 0"
+    ],
+    respuesta: "Se instalarán fuera del local o deberán ser IPX4",
+    explicacion: "ITC-BT-30, apartado 2.2: «Se instalarán los aparatos de mando y protección y tomas de corriente fuera de estos locales… serán del tipo protegido contra las proyecciones de agua, IPX4.»"
+  },
+  {
+    pregunta: "Según el REBT, en locales mojados se instalará un dispositivo de protección:",
+    opciones: [
+      "En el origen de cada circuito que penetre en el local",
+      "Únicamente en el cuadro general",
+      "Solo si el circuito es trifásico",
+      "Cuando lo determine el instalador"
+    ],
+    respuesta: "En el origen de cada circuito que penetre en el local",
+    explicacion: "ITC-BT-30, apartado 2.3: «Se instalará, en cualquier caso, un dispositivo de protección en el origen de cada circuito derivado de otro que penetre en el local mojado.»"
+  },
+  {
+    pregunta: "Según el REBT, en locales mojados queda prohibida la utilización de aparatos móviles o portátiles:",
+    opciones: [
+      "Excepto cuando se utilice separación de circuitos o MBTS",
+      "En todos los casos sin excepción",
+      "Solo si son de clase I",
+      "Solo en corriente alterna"
+    ],
+    respuesta: "Excepto cuando se utilice separación de circuitos o MBTS",
+    explicacion: "ITC-BT-30, apartado 2.4: «Queda prohibido… excepto cuando se utilice como sistema de protección la separación de circuitos o el empleo de muy bajas tensiones de seguridad, MBTS.»"
+  },
+  {
+    pregunta: "Según el REBT, los receptores de alumbrado en locales mojados estarán protegidos contra:",
+    opciones: [
+      "Las proyecciones de agua, IPX4",
+      "La caída vertical de gotas, IPX1",
+      "El polvo, IP5X",
+      "Contactos directos exclusivamente"
+    ],
+    respuesta: "Las proyecciones de agua, IPX4",
+    explicacion: "ITC-BT-30, apartado 2.5: «Los receptores de alumbrado estarán protegidos contra las proyecciones de agua, IPX4.»"
+  },
+  {
+    pregunta: "Según el REBT, los locales con riesgo de corrosión son aquellos en los que:",
+    opciones: [
+      "Existan gases o vapores que puedan atacar a los materiales eléctricos",
+      "Exista únicamente humedad ambiental",
+      "Se superen los 40 ºC",
+      "Haya polvo en suspensión"
+    ],
+    respuesta: "Existan gases o vapores que puedan atacar a los materiales eléctricos",
+    explicacion: "ITC-BT-30, apartado 3: «Locales o emplazamientos con riesgo de corrosión son aquellos en los que existan gases o vapores que puedan atacar a los materiales eléctricos utilizados en la instalación.»"
+  },
+  {
+    pregunta: "Según el REBT, en locales polvorientos sin riesgo de incendio el grado mínimo de protección será:",
+    opciones: [
+      "IP5X",
+      "IPX4",
+      "IPX1",
+      "IP2X"
+    ],
+    respuesta: "IP5X",
+    explicacion: "ITC-BT-30, apartado 4: «Las canalizaciones… tendrán un grado de protección mínimo IP5X.»"
+  },
+  {
+    pregunta: "Según el REBT, se consideran locales a temperatura elevada aquellos donde:",
+    opciones: [
+      "La temperatura pueda sobrepasar frecuentemente los 40 ºC",
+      "La temperatura supere ocasionalmente los 30 ºC",
+      "La temperatura sea inferior a -20 ºC",
+      "Exista condensación permanente"
+    ],
+    respuesta: "La temperatura pueda sobrepasar frecuentemente los 40 ºC",
+    explicacion: "ITC-BT-30, apartado 5: «Locales o emplazamientos a temperatura elevada son aquellos donde la temperatura del aire ambiente es susceptible de sobrepasar frecuentemente los 40 ºC.»"
+  },
+  {
+    pregunta: "Según el REBT, se consideran locales a muy baja temperatura aquellos donde:",
+    opciones: [
+      "Pueden presentarse temperaturas inferiores a -20 ºC",
+      "La temperatura no supere los 0 ºC",
+      "Existan corrientes de aire",
+      "La temperatura supere los 50 ºC"
+    ],
+    respuesta: "Pueden presentarse temperaturas inferiores a -20 ºC",
+    explicacion: "ITC-BT-30, apartado 6: «Locales o emplazamientos a muy baja temperatura son aquellos donde pueden presentarse y mantenerse temperaturas ambientales inferiores a -20 ºC.»"
+  },
+  {
+    pregunta: "Según el REBT, los locales con baterías de acumuladores se considerarán:",
+    opciones: [
+      "Locales con riesgo de corrosión",
+      "Locales mojados",
+      "Locales polvorientos",
+      "Locales a temperatura elevada"
+    ],
+    respuesta: "Locales con riesgo de corrosión",
+    explicacion: "ITC-BT-30, apartado 7: «Los locales en que deban disponerse baterías de acumuladores… se considerarán como locales o emplazamientos con riesgo de corrosión.»"
+  },
+  {
+    pregunta: "Según el REBT, los locales afectos a un servicio eléctrico:",
+    opciones: [
+      "Solo tienen acceso personas cualificadas",
+      "Pueden ser accesibles al público",
+      "No requieren medidas especiales",
+      "No necesitan alumbrado de seguridad"
+    ],
+    respuesta: "Solo tienen acceso personas cualificadas",
+    explicacion: "ITC-BT-30, apartado 8: «Locales… destinados a la explotación de instalaciones eléctricas y, en general, sólo tienen acceso a los mismos personas cualificadas para ello.»"
+  },
+  {
+    pregunta: "Según el REBT, los locales con personal de servicio permanente estarán dotados de:",
+    opciones: [
+      "Alumbrado de seguridad",
+      "Alumbrado de reemplazamiento",
+      "Iluminación portátil",
+      "Iluminación decorativa"
+    ],
+    respuesta: "Alumbrado de seguridad",
+    explicacion: "ITC-BT-30, apartado 8: «Los locales que tengan personal de servicio permanente, estarán dotados de un alumbrado de seguridad.»"
+  },
+  {
+    pregunta: "Según el REBT, la norma que establece la clasificación de las influencias externas es:",
+    opciones: [
+      "UNE-HD 60.364-1",
+      "UNE 20.324",
+      "UNE 21.123",
+      "UNE-EN 60598"
+    ],
+    respuesta: "UNE-HD 60.364-1",
+    explicacion: "ITC-BT-30, apartado 9.1: «La norma UNE 20.460-3 (Anulada y sustituida por UNE-HD 60.364-1) establece una clasificación y una codificación de las influencias que deben ser tenidas en cuenta para el proyecto y la ejecución de las instalaciones eléctricas.»"
+  }
+];
+
+
+
+
+
+
+
+
+
+
+
+
+    /* ===== Estado ===== */
+    let preguntasAleatorias = [];
+    let indice = 0, aciertos = 0, errores = 0;
+    let historial = [];
+    let seleccionUsuario = null;
+    let respondido = false;
+
+    // Tiempo
+    const DURACION_SEG = 60 * 60; // <<< 60 minutos
+    let inicioTiempo = null;
+    let intervaloTiempo = null;
+    let tiempoAgotado = false;
+
+    /* ===== Utilidades ===== */
+    const mezclar = (arr) => { for (let i = arr.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
+
+    function mezclarPreguntas(){
+      preguntasAleatorias = mezclar(preguntas.map(p=>({...p, opciones: mezclar([...p.opciones]) })));
+      indice=0; aciertos=0; errores=0; historial=[];
+    }
+
+    const fmt2 = (n) => String(n).padStart(2,'0');
+    const clamp0 = (x) => x < 0 ? 0 : x;
+
+    function calcularPuntuacion(){
+      const total = preguntasAleatorias.length;
+      const penalizacion = Math.floor(errores / 2);
+      const validasNetas = Math.max(0, aciertos - penalizacion);
+      const puntos = validasNetas * 0.5;
+      const porcentaje = clamp0((validasNetas / total) * 100);
+      const apto = porcentaje >= 80;
+      return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
+    }
+
+    /* ===== Render ===== */
+    function setProgreso(){
+      const total = preguntasAleatorias.length;
+      const pct = Math.round((indice/total)*100);
+      const bar = document.getElementById('progress-bar');
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+      document.getElementById('progress-txt').textContent = `${indice}/${total}`;
+    }
+
+    function actualizarContador(){
+      if (!inicioTiempo) return;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const restantes = Math.max(0, DURACION_SEG - transcurrido);
+      const mm = fmt2(Math.floor(restantes/60));
+      const ss = fmt2(restantes%60);
+
+      const { puntos } = calcularPuntuacion();
+      const totalPuntos = preguntasAleatorias.length * 0.5;
+
+      const relojClass =
+        restantes <= 60 ? 'text-red-700' :
+        restantes <= 5*60 ? 'text-orange-600' :
+        'text-blue-700';
+
+      document.getElementById("contador").innerHTML = `
+        <span>Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
+        <span class="text-green-600">Aciertos: ${aciertos}</span>
+        <span class="text-red-600">Fallos: ${errores}</span>
+        <span>Puntos: ${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</span>
+        <span class="font-mono ${relojClass}">⏳ ${mm}:${ss}</span>`;
+
+      if (restantes === 0 && !tiempoAgotado){
+        tiempoAgotado = true;
+        clearInterval(intervaloTiempo);
+        deshabilitarInteraccion();
+        abrirModalFin();
+      }
+    }
+
+    function renderOpciones(opciones){
+      const cont = document.getElementById("opciones");
+      cont.innerHTML = "";
+      opciones.forEach((op, i)=>{
+        const btn = document.createElement("button");
+        btn.type="button";
+        btn.dataset.valor = op;
+        btn.className="opcion w-full text-left bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl shadow transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300";
+        btn.innerHTML = `<span class="font-semibold tracking-wide">${op}</span>`;
+        btn.onclick = ()=>seleccionarOpcion(op);
+        btn.setAttribute('aria-label',`Opción ${i+1}: ${op}`);
+        cont.appendChild(btn);
+      });
+    }
+
+    function cargarPregunta(){
+      if (indice>=preguntasAleatorias.length) return mostrarResumen();
+      const q = preguntasAleatorias[indice];
+      seleccionUsuario=null; respondido=false;
+      document.getElementById("pregunta").textContent = q.pregunta;
+      renderOpciones(q.opciones);
+
+      document.getElementById("acciones").innerHTML =
+        `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
+           <span>Elige una respuesta (teclas 1–4 y Enter).</span>
+           <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
+         </div>`;
+
+      setProgreso();
+      actualizarContador();
+    }
+
+    function seleccionarOpcion(opcion){
+      if (respondido || tiempoAgotado) return;
+      seleccionUsuario = opcion;
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.classList.remove('ring','ring-yellow-300','translate-y-0.5');
+        if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
+      });
+      const btn = document.getElementById('btn-contestar');
+      btn.disabled=false;
+      btn.classList.remove('opacity-50','cursor-not-allowed');
+      btn.onclick=verificarRespuesta;
+    }
+
+    function verificarRespuesta(){
+      if (respondido || !seleccionUsuario || tiempoAgotado) return;
+      const actual = preguntasAleatorias[indice];
+      const ok = seleccionUsuario===actual.respuesta;
+      respondido = true;
+
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.disabled=true; b.classList.remove('ring','ring-yellow-300');
+        const val=b.dataset.valor;
+        if (val===actual.respuesta){
+          b.classList.add('bg-green-600','hover:bg-green-700');
+          b.innerHTML=`✅ <span class="font-semibold">${val}</span>`;
+        } else if (val===seleccionUsuario && !ok){
+          b.classList.add('bg-red-600','hover:bg-red-700');
+          b.innerHTML=`❌ <span class="font-semibold">${val}</span>`;
+        } else {
+          b.classList.add('bg-blue-500');
+        }
+      });
+
+      ok ? aciertos++ : errores++;
+
+      historial.push({
+        pregunta:actual.pregunta,
+        opciones:actual.opciones,
+        correcta:actual.respuesta,
+        elegida:seleccionUsuario,
+        explicacion:actual.explicacion
+      });
+
+      /* === NUEVO: mostrar la explicación debajo del botón === */
+      document.getElementById("acciones").innerHTML =
+        `<div class="mt-4 flex flex-col gap-3">
+
+           <div class="flex items-center justify-end">
+             <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">
+               Siguiente
+             </button>
+           </div>
+
+           <div id="explicacion" class="text-sm text-slate-700 bg-slate-100 border-l-4 border-blue-600 p-3 rounded-md">
+             ${actual.explicacion || "Sin referencia disponible"}
+           </div>
+
+         </div>`;
+
+      actualizarContador();
+      setProgreso();
+    }
+
+    const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
+
+    function deshabilitarInteraccion(){
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{ b.disabled=true; });
+      document.getElementById('btn-contestar')?.setAttribute('disabled','true');
+      document.removeEventListener('keydown', handleKey);
+    }
+
+    function abrirModalFin(){
+      const { total, respondidas, enBlanco, penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+      const modal = document.getElementById('modal-fin');
+      const totalPuntos = total * 0.5;
+      document.getElementById('modal-resumen').innerHTML = `
+        <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
+        <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
+        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas</p>
+        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong></p>
+        <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+        <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
+      `;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function mostrarResumen(){
+      clearInterval(intervaloTiempo);
+      const total = preguntasAleatorias.length;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const mm = fmt2(Math.floor(transcurrido/60));
+      const ss = fmt2(transcurrido%60);
+
+      const { penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+
+      const detalle = historial.map(h=>`
+        <div class='mb-2 border border-slate-200 rounded-lg p-3'>
+          <p class='font-semibold mb-2'>${h.pregunta}</p>
+          <div class='flex flex-wrap gap-2'>
+            ${h.opciones.map(op=>{
+              if (op===h.elegida && op===h.correcta)
+                return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op===h.elegida && op!==h.correcta)
+                return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op===h.correcta && op!==h.elegida)
+                return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
+            }).join('')}
+          </div>
+          <div class='mt-2 text-sm text-slate-600 bg-slate-100 border-l-4 border-blue-600 p-2 rounded-md'>
+            📘 Explicación: ${h.explicacion}
+          </div>
+        </div>
+      `).join('');
+
+      const totalPuntos = total * 0.5;
+
+      document.getElementById("test").innerHTML = `
+        <div class="space-y-3">
+          <h2 class="text-2xl font-extrabold">Resultado del test 
+            <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">
+              (${apto?'APTO ✅':'NO APTO ❌'})
+            </span>
+          </h2>
+
+          <p class="text-slate-700">
+            Aciertos: <strong class="text-green-700">${aciertos}</strong> • 
+            Fallos: <strong class="text-red-700">${errores}</strong> • 
+            Penalización: <strong>-${penalizacion}</strong>
+          </p>
+
+          <p class="text-slate-700">
+            Válidas netas: <strong>${validasNetas}</strong> / ${total} • 
+            Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> 
+            (<strong>${porcentaje.toFixed(2)}%</strong>)
+          </p>
+
+          <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span></p>
+
+          <hr class="my-3 border-slate-200">
+
+          <h3 class="text-lg font-bold">Detalle de preguntas</h3>
+
+          <div class="max-h-[50vh] overflow-auto pr-1">
+            ${detalle}
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">
+            Volver a intentar
+          </button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">
+            Volver al inicio
+          </a>
+        </div>`;
+    }
+
+    /* ===== Atajos de teclado ===== */
+    function handleKey(e){
+      if (tiempoAgotado) return;
+      if (respondido){ if (e.key==='Enter') siguientePregunta(); return; }
+      const map={'1':0,'2':1,'3':2,'4':3};
+      if (map[e.key]!==undefined){
+        const b=document.querySelectorAll('#opciones .opcion')[map[e.key]];
+        if (b) b.click();
+      }
+      if (e.key==='Enter'){
+        const b=document.getElementById('btn-contestar');
+        if (b && !b.disabled) b.click();
+      }
+    }
+
+    window.onload = ()=>{
+      mezclarPreguntas();
+      inicioTiempo = Date.now();
+      cargarPregunta();
+      intervaloTiempo = setInterval(actualizarContador, 1000);
+      document.addEventListener('keydown', handleKey);
+    };
+  </script>
+
+</head>
+
+<body class="bg-gray-100 text-gray-900 p-4">
+  <div class="max-w-3xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-lg ring-1 ring-slate-100" id="test">
+    <div class="mb-4">
+      <div class="flex items-center justify-between text-sm text-slate-600 mb-2">
+        <p id="contador" class="font-semibold space-x-4"></p>
+        <span id="progress-txt" class="font-mono text-slate-500">0/0</span>
+      </div>
+      <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+        <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out" style="width:0%" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      </div>
+    </div>
+
+    <h1 class="text-3xl font-extrabold mb-3 text-center">ITC-BT-30</h1>
+    <p id="pregunta" class="mb-4 text-lg text-center"></p>
+
+    <div id="opciones" class="flex flex-col gap-3"></div>
+    <div id="acciones" class="mt-2"></div>
+  </div>
+
+  <div class="mt-6 text-center">
+    <a href="Test_por_ITC_del_REBT.html" class="inline-block bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">Cancelar</a>
+  </div>
+
+  <!-- Modal Tiempo Agotado -->
+  <div id="modal-fin" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
+    <div class="bg-white rounded-2xl shadow-xl max-w-lg w-full p-6">
+      <h2 class="text-2xl font-extrabold mb-1">⏰ Tiempo agotado</h2>
+      <p class="text-slate-600 mb-4">Tu tiempo se ha agotado. Estos son tus resultados:</p>
+      <div id="modal-resumen" class="space-y-1 text-slate-800"></div>
+      <div class="mt-6 flex justify-end">
+        <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
