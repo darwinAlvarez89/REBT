@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Examen Test REBT</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RSH4ZW3VT2');
+  </script>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+
+  <script>
+    /* ===== Banco de preguntas + explicaciones ===== */
+    const 
+    
+
+
+
+preguntas = [
+  {
+    pregunta: "Según el REBT, el grado de electrificación básico se plantea como:",
+    opciones: [
+      "El sistema mínimo de la instalación interior de las viviendas en edificios nuevos",
+      "Un sistema opcional para viviendas existentes",
+      "Un sistema exclusivo para electrificación elevada",
+      "Un sistema aplicable solo a viviendas unifamiliares"
+    ],
+    respuesta: "El sistema mínimo de la instalación interior de las viviendas en edificios nuevos",
+    explicacion: "ITC-BT-25, apartado 1: \"El grado de electrificación básico se plantea como el sistema mínimo, a los efectos de uso, de la instalación interior de las viviendas en edificios nuevos\"."
+  },
+  {
+    pregunta: "Según el REBT, el objeto del grado de electrificación básico es:",
+    opciones: [
+      "Permitir la utilización de los aparatos electrodomésticos de uso básico sin necesidad de obras posteriores",
+      "Garantizar el uso de sistemas de climatización",
+      "Permitir la recarga de vehículos eléctricos",
+      "Cubrir únicamente las necesidades de iluminación"
+    ],
+    respuesta: "Permitir la utilización de los aparatos electrodomésticos de uso básico sin necesidad de obras posteriores",
+    explicacion: "ITC-BT-25, apartado 1: \"Su objeto es permitir la utilización de los aparatos electrodomésticos de uso básico sin necesidad de obras posteriores de adecuación\"."
+  },
+  {
+    pregunta: "Según el REBT, la capacidad de la instalación interior debe corresponderse como mínimo a:",
+    opciones: [
+      "La intensidad asignada del interruptor general automático",
+      "La potencia contratada",
+      "La sección de los conductores",
+      "El número de circuitos instalados"
+    ],
+    respuesta: "La intensidad asignada del interruptor general automático",
+    explicacion: "ITC-BT-25, apartado 1: \"La capacidad de instalación se corresponderá como mínimo al valor de la intensidad asignada determinada para el interruptor general automático\"."
+  },
+  {
+    pregunta: "Según el REBT, el interruptor general automático debe ser:",
+    opciones: [
+      "De corte omnipolar con accionamiento manual",
+      "Un interruptor diferencial de alta sensibilidad",
+      "El mismo que el interruptor de control de potencia",
+      "De corte unipolar"
+    ],
+    respuesta: "De corte omnipolar con accionamiento manual",
+    explicacion: "ITC-BT-25, apartado 2.1: \"Un interruptor general automático de corte omnipolar con accionamiento manual\"."
+  },
+  {
+    pregunta: "Según el REBT, la intensidad nominal mínima del interruptor general automático será de:",
+    opciones: [
+      "25 A",
+      "16 A",
+      "20 A",
+      "30 A"
+    ],
+    respuesta: "25 A",
+    explicacion: "ITC-BT-25, apartado 2.1: \"de intensidad nominal mínima de 25 A\"."
+  },
+  {
+    pregunta: "Según el REBT, el interruptor general automático:",
+    opciones: [
+      "Es independiente del interruptor para el control de potencia",
+      "Puede ser sustituido por el ICP",
+      "Debe integrarse en el contador",
+      "Es opcional en viviendas"
+    ],
+    respuesta: "Es independiente del interruptor para el control de potencia",
+    explicacion: "ITC-BT-25, apartado 2.1: \"El interruptor general es independiente del interruptor para el control de potencia (ICP) y no puede ser sustituido por éste\"."
+  },
+  {
+    pregunta: "Según el REBT, los interruptores diferenciales deben garantizar:",
+    opciones: [
+      "La protección contra contactos indirectos de todos los circuitos",
+      "La protección contra sobrecargas",
+      "La protección contra sobretensiones",
+      "La protección contra contactos directos exclusivamente"
+    ],
+    respuesta: "La protección contra contactos indirectos de todos los circuitos",
+    explicacion: "ITC-BT-25, apartado 2.1: \"Uno o varios interruptores diferenciales que garanticen la protección contra contactos indirectos de todos los circuitos\"."
+  },
+  {
+    pregunta: "Según el REBT, la intensidad diferencial-residual máxima de los diferenciales será de:",
+    opciones: [
+      "30 mA",
+      "100 mA",
+      "300 mA",
+      "10 mA"
+    ],
+    respuesta: "30 mA",
+    explicacion: "ITC-BT-25, apartado 2.1: \"con una intensidad diferencial-residual máxima de 30 mA\"."
+  },
+  {
+    pregunta: "Según el REBT, el circuito C1 está destinado a:",
+    opciones: [
+      "Alimentar los puntos de iluminación",
+      "Tomas de corriente de uso general",
+      "Cocina y horno",
+      "Lavadora y lavavajillas"
+    ],
+    respuesta: "Alimentar los puntos de iluminación",
+    explicacion: "ITC-BT-25, apartado 2.3.1: \"C1 circuito de distribución interna, destinado a alimentar los puntos de iluminación\"."
+  },
+  {
+    pregunta: "Según el REBT, el circuito C2 está destinado a:",
+    opciones: [
+      "Tomas de corriente de uso general y frigorífico",
+      "Cocina y horno",
+      "Calefacción eléctrica",
+      "Secadora independiente"
+    ],
+    respuesta: "Tomas de corriente de uso general y frigorífico",
+    explicacion: "ITC-BT-25, apartado 2.3.1: \"C2 circuito de distribución interna, destinado a tomas de corriente de uso general y frigorífico\"."
+  },
+  {
+    pregunta: "Según el REBT, el circuito C3 está destinado a:",
+    opciones: [
+      "Alimentar la cocina y horno",
+      "Alimentar puntos de luz",
+      "Alimentar tomas del baño",
+      "Alimentar climatización"
+    ],
+    respuesta: "Alimentar la cocina y horno",
+    explicacion: "ITC-BT-25, apartado 2.3.1: \"C3 circuito de distribución interna, destinado a alimentar la cocina y horno\"."
+  },
+  {
+    pregunta: "Según el REBT, el circuito C4 está destinado a:",
+    opciones: [
+      "Lavadora, lavavajillas y termo eléctrico",
+      "Cocina y horno",
+      "Tomas de uso general",
+      "Calefacción eléctrica"
+    ],
+    respuesta: "Lavadora, lavavajillas y termo eléctrico",
+    explicacion: "ITC-BT-25, apartado 2.3.1: \"C4 circuito de distribución interna, destinado a alimentar la lavadora, lavavajillas y termo eléctrico\"."
+  },
+  {
+    pregunta: "Según el REBT, el circuito C5 está destinado a:",
+    opciones: [
+      "Tomas de corriente de los cuartos de baño y bases auxiliares de cocina",
+      "Puntos de iluminación",
+      "Climatización",
+      "Secadora"
+    ],
+    respuesta: "Tomas de corriente de los cuartos de baño y bases auxiliares de cocina",
+    explicacion: "ITC-BT-25, apartado 2.3.1: \"C5 circuito de distribución interna, destinado a alimentar tomas de corriente de los cuartos de baño, así como las bases auxiliares del cuarto de cocina\"."
+  },
+  {
+    pregunta: "Según el REBT, la electrificación elevada se aplica cuando:",
+    opciones: [
+      "La superficie útil de la vivienda es superior a 160 m2",
+      "La vivienda tiene una sola planta",
+      "La potencia contratada es inferior a 5,75 kW",
+      "No existe previsión de nuevos receptores"
+    ],
+    respuesta: "La superficie útil de la vivienda es superior a 160 m2",
+    explicacion: "ITC-BT-25, apartado 2.3.2: \"o con superficies útiles de las viviendas superiores a 160 m2\"."
+  },
+  {
+    pregunta: "Según el REBT, el circuito C8 corresponde a:",
+    opciones: [
+      "Calefacción eléctrica",
+      "Aire acondicionado",
+      "Secadora",
+      "Automatización"
+    ],
+    respuesta: "Calefacción eléctrica",
+    explicacion: "ITC-BT-25, apartado 2.3.2: \"C8 Circuito de distribución interna, destinado a la instalación de calefacción eléctrica\"."
+  },
+  {
+    pregunta: "Según el REBT, el circuito C9 corresponde a:",
+    opciones: [
+      "Aire acondicionado",
+      "Calefacción eléctrica",
+      "Secadora",
+      "Cocina y horno"
+    ],
+    respuesta: "Aire acondicionado",
+    explicacion: "ITC-BT-25, apartado 2.3.2: \"C9 Circuito de distribución interna, destinado a la instalación aire acondicionado\"."
+  },
+  {
+    pregunta: "Según el REBT, el circuito C10 corresponde a:",
+    opciones: [
+      "Secadora independiente",
+      "Lavadora",
+      "Frigorífico",
+      "Iluminación"
+    ],
+    respuesta: "Secadora independiente",
+    explicacion: "ITC-BT-25, apartado 2.3.2: \"C10 Circuito de distribución interna, destinado a la instalación de una secadora independiente\"."
+  },
+  {
+    pregunta: "Según el REBT, el circuito C13 está destinado a:",
+    opciones: [
+      "Infraestructura de recarga de vehículos eléctricos",
+      "Automatización de la vivienda",
+      "Calefacción eléctrica",
+      "Climatización"
+    ],
+    respuesta: "Infraestructura de recarga de vehículos eléctricos",
+    explicacion: "ITC-BT-25, apartado 2.3.2: \"C13 Circuito adicional para la infraestructura de recarga de vehículos eléctricos\"."
+  },
+  {
+    pregunta: "Según el REBT, la caída de tensión máxima en la instalación interior será de:",
+    opciones: [
+      "3 %",
+      "5 %",
+      "2 %",
+      "1 %"
+    ],
+    respuesta: "3 %",
+    explicacion: "ITC-BT-25, apartado 3: \"la caída de tensión sea como máximo el 3 %\"."
+  },
+  {
+    pregunta: "Según el REBT, la intensidad prevista de cada circuito se calculará mediante la fórmula:",
+    opciones: [
+      "I = n × Ia × Fs × Fu",
+      "I = P / U",
+      "I = √3 × U × cosφ",
+      "I = Z × U"
+    ],
+    respuesta: "I = n × Ia × Fs × Fu",
+    explicacion: "ITC-BT-25, apartado 3: \"El valor de la intensidad de corriente prevista en cada circuito se calculará de acuerdo con la fórmula: I = n × Ia × Fs × Fu\"."
+  }
+];
+
+
+
+
+
+
+
+
+
+    /* ===== Estado ===== */
+    let preguntasAleatorias = [];
+    let indice = 0, aciertos = 0, errores = 0;
+    let historial = [];
+    let seleccionUsuario = null;
+    let respondido = false;
+
+    // Tiempo
+    const DURACION_SEG = 60 * 60; // <<< 60 minutos
+    let inicioTiempo = null;
+    let intervaloTiempo = null;
+    let tiempoAgotado = false;
+
+    /* ===== Utilidades ===== */
+    const mezclar = (arr) => { for (let i = arr.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
+
+    function mezclarPreguntas(){
+      preguntasAleatorias = mezclar(preguntas.map(p=>({...p, opciones: mezclar([...p.opciones]) })));
+      indice=0; aciertos=0; errores=0; historial=[];
+    }
+
+    const fmt2 = (n) => String(n).padStart(2,'0');
+    const clamp0 = (x) => x < 0 ? 0 : x;
+
+    function calcularPuntuacion(){
+      const total = preguntasAleatorias.length;
+      const penalizacion = Math.floor(errores / 2);
+      const validasNetas = Math.max(0, aciertos - penalizacion);
+      const puntos = validasNetas * 0.5;
+      const porcentaje = clamp0((validasNetas / total) * 100);
+      const apto = porcentaje >= 80;
+      return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
+    }
+
+    /* ===== Render ===== */
+    function setProgreso(){
+      const total = preguntasAleatorias.length;
+      const pct = Math.round((indice/total)*100);
+      const bar = document.getElementById('progress-bar');
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+      document.getElementById('progress-txt').textContent = `${indice}/${total}`;
+    }
+
+    function actualizarContador(){
+      if (!inicioTiempo) return;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const restantes = Math.max(0, DURACION_SEG - transcurrido);
+      const mm = fmt2(Math.floor(restantes/60));
+      const ss = fmt2(restantes%60);
+
+      const { puntos } = calcularPuntuacion();
+      const totalPuntos = preguntasAleatorias.length * 0.5;
+
+      const relojClass =
+        restantes <= 60 ? 'text-red-700' :
+        restantes <= 5*60 ? 'text-orange-600' :
+        'text-blue-700';
+
+      document.getElementById("contador").innerHTML = `
+        <span>Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
+        <span class="text-green-600">Aciertos: ${aciertos}</span>
+        <span class="text-red-600">Fallos: ${errores}</span>
+        <span>Puntos: ${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</span>
+        <span class="font-mono ${relojClass}">⏳ ${mm}:${ss}</span>`;
+
+      if (restantes === 0 && !tiempoAgotado){
+        tiempoAgotado = true;
+        clearInterval(intervaloTiempo);
+        deshabilitarInteraccion();
+        abrirModalFin();
+      }
+    }
+
+    function renderOpciones(opciones){
+      const cont = document.getElementById("opciones");
+      cont.innerHTML = "";
+      opciones.forEach((op, i)=>{
+        const btn = document.createElement("button");
+        btn.type="button";
+        btn.dataset.valor = op;
+        btn.className="opcion w-full text-left bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl shadow transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300";
+        btn.innerHTML = `<span class="font-semibold tracking-wide">${op}</span>`;
+        btn.onclick = ()=>seleccionarOpcion(op);
+        btn.setAttribute('aria-label',`Opción ${i+1}: ${op}`);
+        cont.appendChild(btn);
+      });
+    }
+
+    function cargarPregunta(){
+      if (indice>=preguntasAleatorias.length) return mostrarResumen();
+      const q = preguntasAleatorias[indice];
+      seleccionUsuario=null; respondido=false;
+      document.getElementById("pregunta").textContent = q.pregunta;
+      renderOpciones(q.opciones);
+
+      document.getElementById("acciones").innerHTML =
+        `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
+           <span>Elige una respuesta (teclas 1–4 y Enter).</span>
+           <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
+         </div>`;
+
+      setProgreso();
+      actualizarContador();
+    }
+
+    function seleccionarOpcion(opcion){
+      if (respondido || tiempoAgotado) return;
+      seleccionUsuario = opcion;
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.classList.remove('ring','ring-yellow-300','translate-y-0.5');
+        if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
+      });
+      const btn = document.getElementById('btn-contestar');
+      btn.disabled=false;
+      btn.classList.remove('opacity-50','cursor-not-allowed');
+      btn.onclick=verificarRespuesta;
+    }
+
+    function verificarRespuesta(){
+      if (respondido || !seleccionUsuario || tiempoAgotado) return;
+      const actual = preguntasAleatorias[indice];
+      const ok = seleccionUsuario===actual.respuesta;
+      respondido = true;
+
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.disabled=true; b.classList.remove('ring','ring-yellow-300');
+        const val=b.dataset.valor;
+        if (val===actual.respuesta){
+          b.classList.add('bg-green-600','hover:bg-green-700');
+          b.innerHTML=`✅ <span class="font-semibold">${val}</span>`;
+        } else if (val===seleccionUsuario && !ok){
+          b.classList.add('bg-red-600','hover:bg-red-700');
+          b.innerHTML=`❌ <span class="font-semibold">${val}</span>`;
+        } else {
+          b.classList.add('bg-blue-500');
+        }
+      });
+
+      ok ? aciertos++ : errores++;
+
+      historial.push({
+        pregunta:actual.pregunta,
+        opciones:actual.opciones,
+        correcta:actual.respuesta,
+        elegida:seleccionUsuario,
+        explicacion:actual.explicacion
+      });
+
+      /* === NUEVO: mostrar la explicación debajo del botón === */
+      document.getElementById("acciones").innerHTML =
+        `<div class="mt-4 flex flex-col gap-3">
+
+           <div class="flex items-center justify-end">
+             <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">
+               Siguiente
+             </button>
+           </div>
+
+           <div id="explicacion" class="text-sm text-slate-700 bg-slate-100 border-l-4 border-blue-600 p-3 rounded-md">
+             ${actual.explicacion || "Sin referencia disponible"}
+           </div>
+
+         </div>`;
+
+      actualizarContador();
+      setProgreso();
+    }
+
+    const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
+
+    function deshabilitarInteraccion(){
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{ b.disabled=true; });
+      document.getElementById('btn-contestar')?.setAttribute('disabled','true');
+      document.removeEventListener('keydown', handleKey);
+    }
+
+    function abrirModalFin(){
+      const { total, respondidas, enBlanco, penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+      const modal = document.getElementById('modal-fin');
+      const totalPuntos = total * 0.5;
+      document.getElementById('modal-resumen').innerHTML = `
+        <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
+        <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
+        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas</p>
+        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong></p>
+        <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+        <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
+      `;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function mostrarResumen(){
+      clearInterval(intervaloTiempo);
+      const total = preguntasAleatorias.length;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const mm = fmt2(Math.floor(transcurrido/60));
+      const ss = fmt2(transcurrido%60);
+
+      const { penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+
+      const detalle = historial.map(h=>`
+        <div class='mb-2 border border-slate-200 rounded-lg p-3'>
+          <p class='font-semibold mb-2'>${h.pregunta}</p>
+          <div class='flex flex-wrap gap-2'>
+            ${h.opciones.map(op=>{
+              if (op===h.elegida && op===h.correcta)
+                return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op===h.elegida && op!==h.correcta)
+                return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op===h.correcta && op!==h.elegida)
+                return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
+            }).join('')}
+          </div>
+          <div class='mt-2 text-sm text-slate-600 bg-slate-100 border-l-4 border-blue-600 p-2 rounded-md'>
+            📘 Explicación: ${h.explicacion}
+          </div>
+        </div>
+      `).join('');
+
+      const totalPuntos = total * 0.5;
+
+      document.getElementById("test").innerHTML = `
+        <div class="space-y-3">
+          <h2 class="text-2xl font-extrabold">Resultado del test 
+            <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">
+              (${apto?'APTO ✅':'NO APTO ❌'})
+            </span>
+          </h2>
+
+          <p class="text-slate-700">
+            Aciertos: <strong class="text-green-700">${aciertos}</strong> • 
+            Fallos: <strong class="text-red-700">${errores}</strong> • 
+            Penalización: <strong>-${penalizacion}</strong>
+          </p>
+
+          <p class="text-slate-700">
+            Válidas netas: <strong>${validasNetas}</strong> / ${total} • 
+            Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> 
+            (<strong>${porcentaje.toFixed(2)}%</strong>)
+          </p>
+
+          <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span></p>
+
+          <hr class="my-3 border-slate-200">
+
+          <h3 class="text-lg font-bold">Detalle de preguntas</h3>
+
+          <div class="max-h-[50vh] overflow-auto pr-1">
+            ${detalle}
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">
+            Volver a intentar
+          </button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">
+            Volver al inicio
+          </a>
+        </div>`;
+    }
+
+    /* ===== Atajos de teclado ===== */
+    function handleKey(e){
+      if (tiempoAgotado) return;
+      if (respondido){ if (e.key==='Enter') siguientePregunta(); return; }
+      const map={'1':0,'2':1,'3':2,'4':3};
+      if (map[e.key]!==undefined){
+        const b=document.querySelectorAll('#opciones .opcion')[map[e.key]];
+        if (b) b.click();
+      }
+      if (e.key==='Enter'){
+        const b=document.getElementById('btn-contestar');
+        if (b && !b.disabled) b.click();
+      }
+    }
+
+    window.onload = ()=>{
+      mezclarPreguntas();
+      inicioTiempo = Date.now();
+      cargarPregunta();
+      intervaloTiempo = setInterval(actualizarContador, 1000);
+      document.addEventListener('keydown', handleKey);
+    };
+  </script>
+
+</head>
+
+<body class="bg-gray-100 text-gray-900 p-4">
+  <div class="max-w-3xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-lg ring-1 ring-slate-100" id="test">
+    <div class="mb-4">
+      <div class="flex items-center justify-between text-sm text-slate-600 mb-2">
+        <p id="contador" class="font-semibold space-x-4"></p>
+        <span id="progress-txt" class="font-mono text-slate-500">0/0</span>
+      </div>
+      <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+        <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out" style="width:0%" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      </div>
+    </div>
+
+    <h1 class="text-3xl font-extrabold mb-3 text-center">ITC-BT-25</h1>
+    <p id="pregunta" class="mb-4 text-lg text-center"></p>
+
+    <div id="opciones" class="flex flex-col gap-3"></div>
+    <div id="acciones" class="mt-2"></div>
+  </div>
+
+  <div class="mt-6 text-center">
+    <a href="Test_por_ITC_del_REBT.html" class="inline-block bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">Cancelar</a>
+  </div>
+
+  <!-- Modal Tiempo Agotado -->
+  <div id="modal-fin" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
+    <div class="bg-white rounded-2xl shadow-xl max-w-lg w-full p-6">
+      <h2 class="text-2xl font-extrabold mb-1">⏰ Tiempo agotado</h2>
+      <p class="text-slate-600 mb-4">Tu tiempo se ha agotado. Estos son tus resultados:</p>
+      <div id="modal-resumen" class="space-y-1 text-slate-800"></div>
+      <div class="mt-6 flex justify-end">
+        <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
