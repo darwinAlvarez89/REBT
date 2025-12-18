@@ -1,1 +1,611 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Examen Test REBT</title>
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RSH4ZW3VT2');
+  </script>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+
+  <script>
+    /* ===== Banco de preguntas + explicaciones ===== */
+    const 
+
+
+
+preguntas = [
+  {
+    pregunta: "Según el REBT, el objeto de la ITC-BT-39 es:",
+    opciones: [
+      "Determinar los requisitos particulares de las cercas eléctricas para ganado, su alimentador y su instalación",
+      "Regular únicamente los alimentadores eléctricos",
+      "Definir las instalaciones provisionales agrícolas",
+      "Regular las líneas aéreas de baja tensión"
+    ],
+    respuesta: "Determinar los requisitos particulares de las cercas eléctricas para ganado, su alimentador y su instalación",
+    explicacion: "ITC-BT-39, apartado 1: «El objeto de la presente Instrucción es determinar los requisitos particulares de las cercas eléctricas para ganado, su alimentador y su instalación.»"
+  },
+  {
+    pregunta: "Según el REBT, se entiende por cerca eléctrica para ganado:",
+    opciones: [
+      "Una barrera para animales que comprende uno o varios conductores formados por hilos metálicos, barrotes o alambradas",
+      "Un cerramiento metálico conectado a tierra",
+      "Una valla electrificada de alta tensión",
+      "Un sistema de protección perimetral industrial"
+    ],
+    respuesta: "Una barrera para animales que comprende uno o varios conductores formados por hilos metálicos, barrotes o alambradas",
+    explicacion: "ITC-BT-39, apartado 1: «Se entiende por cerca eléctrica para ganado, a una barrera para animales que comprende uno o varios conductores formados por hilos metálicos, barrotes o alambradas.»"
+  },
+  {
+    pregunta: "Según el REBT, se entiende por alimentador de cerca eléctrica:",
+    opciones: [
+      "El aparato destinado a suministrar regularmente impulsos de tensión a la cerca",
+      "El conductor principal de la cerca",
+      "La toma de tierra de la instalación",
+      "El sistema de señalización"
+    ],
+    respuesta: "El aparato destinado a suministrar regularmente impulsos de tensión a la cerca",
+    explicacion: "ITC-BT-39, apartado 1: «Se entiende por alimentador de cerca eléctrica, al aparato destinado a suministrar regularmente impulsos de tensión a la cerca a la que está conectado.»"
+  },
+  {
+    pregunta: "Según el REBT, el alimentador de una cerca eléctrica puede alimentarse:",
+    opciones: [
+      "Conectado a una red de distribución de energía eléctrica",
+      "Únicamente mediante baterías autónomas",
+      "Solo mediante generadores portátiles",
+      "Exclusivamente mediante energía solar"
+    ],
+    respuesta: "Conectado a una red de distribución de energía eléctrica",
+    explicacion: "ITC-BT-39, apartado 2: «El alimentador de cerca eléctrica puede estar alimentado… Conectado a una red de distribución de energía eléctrica.»"
+  },
+  {
+    pregunta: "Según el REBT, el alimentador de cerca eléctrica puede estar alimentado:",
+    opciones: [
+      "Conectado a baterías o acumuladores cuya carga se realiza mediante una red de distribución de energía eléctrica",
+      "Únicamente mediante pilas desechables",
+      "Solo mediante red de telecomunicaciones",
+      "Exclusivamente mediante transformadores de separación"
+    ],
+    respuesta: "Conectado a baterías o acumuladores cuya carga se realiza mediante una red de distribución de energía eléctrica",
+    explicacion: "ITC-BT-39, apartado 2: «Conectado a baterías o acumuladores cuya carga se realiza mediante una red de distribución de energía eléctrica.»"
+  },
+  {
+    pregunta: "Según el REBT, el alimentador de cerca eléctrica puede alimentarse:",
+    opciones: [
+      "Conectados a baterías o acumuladores autónomos no destinados a conectarse a una red",
+      "Solo mediante red de baja tensión",
+      "Únicamente mediante autotransformador",
+      "Exclusivamente mediante grupo electrógeno"
+    ],
+    respuesta: "Conectados a baterías o acumuladores autónomos no destinados a conectarse a una red",
+    explicacion: "ITC-BT-39, apartado 2: «Conectados a baterías o acumuladores autónomos, es decir que no están destinados a ser conectados a una red de distribución de energía eléctrica.»"
+  },
+  {
+    pregunta: "Según el REBT, los alimentadores conectados a una red eléctrica deberán cumplir:",
+    opciones: [
+      "La norma UNE-EN 60.335-2-76",
+      "La ITC-BT-06",
+      "La UNE-EN 60.947-2",
+      "La ITC-BT-19"
+    ],
+    respuesta: "La norma UNE-EN 60.335-2-76",
+    explicacion: "ITC-BT-39, apartado 3: «Los alimentadores de cercas eléctricas conectados a una red de distribución de energía eléctrica, deberán cumplir la norma UNE-EN 60.335-2-76…»"
+  },
+  {
+    pregunta: "Según el REBT, el circuito de alimentación del alimentador deberá cumplir:",
+    opciones: [
+      "Las prescripciones de las ITC-BT-22, ITC-BT-23 e ITC-BT-24",
+      "Únicamente la ITC-BT-24",
+      "Solo la ITC-BT-19",
+      "Exclusivamente la ITC-BT-06"
+    ],
+    respuesta: "Las prescripciones de las ITC-BT-22, ITC-BT-23 e ITC-BT-24",
+    explicacion: "ITC-BT-39, apartado 3: «… y su circuito de alimentación las prescripciones de las ITC-BT-22, ITC-BT-23 e ITC-BT-24.»"
+  },
+  {
+    pregunta: "Según el REBT, los alimentadores de cercas eléctricas se colocarán:",
+    opciones: [
+      "En lugares donde no puedan quedar cubiertos por paja, heno, etc.",
+      "En el interior de edificaciones habitables",
+      "En zonas inundables",
+      "En recintos cerrados sin ventilación"
+    ],
+    respuesta: "En lugares donde no puedan quedar cubiertos por paja, heno, etc.",
+    explicacion: "ITC-BT-39, apartado 3: «Los alimentadores se colocarán en lugares donde no puedan quedar cubiertos por paja, heno, etc.»"
+  },
+  {
+    pregunta: "Según el REBT, los alimentadores estarán:",
+    opciones: [
+      "Próximos a la cerca que alimentan",
+      "A más de 50 m de la cerca",
+      "En locales separados obligatoriamente",
+      "En el interior de viviendas"
+    ],
+    respuesta: "Próximos a la cerca que alimentan",
+    explicacion: "ITC-BT-39, apartado 3: «… y estarán próximos a la cerca que alimentan.»"
+  },
+  {
+    pregunta: "Según el REBT, los conductores de la cerca estarán separados:",
+    opciones: [
+      "De cualquier objeto metálico no perteneciente a la misma",
+      "Solo de elementos de madera",
+      "Únicamente del suelo",
+      "Exclusivamente de estructuras de hormigón"
+    ],
+    respuesta: "De cualquier objeto metálico no perteneciente a la misma",
+    explicacion: "ITC-BT-39, apartado 3: «Los conductores de la cerca estarán separados de cualquier objeto metálico no perteneciente a la misma…»"
+  },
+  {
+    pregunta: "Según el REBT, los conductores de la cerca no se sujetarán:",
+    opciones: [
+      "En apoyos correspondientes a otra canalización",
+      "En postes de madera",
+      "En soportes aislantes",
+      "En apoyos propios de la cerca"
+    ],
+    respuesta: "En apoyos correspondientes a otra canalización",
+    explicacion: "ITC-BT-39, apartado 3: «Los conductores de la cerca… no se sujetarán en apoyos correspondientes a otra canalización…»"
+  },
+  {
+    pregunta: "Según el REBT, los elementos de maniobra de las puertas de la cerca:",
+    opciones: [
+      "Estarán aislados convenientemente de los conductores",
+      "Estarán conectados a tierra",
+      "Serán metálicos sin aislamiento",
+      "No tendrán requisitos especiales"
+    ],
+    respuesta: "Estarán aislados convenientemente de los conductores",
+    explicacion: "ITC-BT-39, apartado 3: «Los elementos de maniobra de las puertas de la cerca estarán aislados convenientemente de los conductores…»"
+  },
+  {
+    pregunta: "Según el REBT, la maniobra de las puertas de la cerca tendrá por efecto:",
+    opciones: [
+      "La puesta fuera de tensión de los conductores entre los soportes laterales",
+      "El aumento de la tensión de la cerca",
+      "La conexión permanente de la cerca",
+      "La desconexión del alimentador general"
+    ],
+    respuesta: "La puesta fuera de tensión de los conductores entre los soportes laterales",
+    explicacion: "ITC-BT-39, apartado 3: «… y su maniobra tendrá por efecto la puesta fuera de tensión de los conductores comprendidos entre los soportes laterales de la puerta.»"
+  },
+  {
+    pregunta: "Según el REBT, entre cercas no alimentadas por un mismo alimentador:",
+    opciones: [
+      "Se tomarán medidas para evitar el contacto simultáneo",
+      "No se requiere ninguna separación",
+      "Se conectarán entre sí",
+      "Se unirán a la misma toma de tierra"
+    ],
+    respuesta: "Se tomarán medidas para evitar el contacto simultáneo",
+    explicacion: "ITC-BT-39, apartado 3: «Entre cercas que no estén alimentadas por un mismo alimentador, se tomarán medidas convenientes para evitar que una persona o animal pueda tocarlas simultáneamente.»"
+  },
+  {
+    pregunta: "Según el REBT, la separación normalmente considerada suficiente entre cercas es:",
+    opciones: [
+      "2 metros",
+      "1 metro",
+      "5 metros",
+      "50 centímetros"
+    ],
+    respuesta: "2 metros",
+    explicacion: "ITC-BT-39, apartado 3: «Normalmente se considera suficiente una separación de 2 m…»"
+  },
+  {
+    pregunta: "Según el REBT, se colocarán carteles de aviso cuando:",
+    opciones: [
+      "Las cercas puedan estar al alcance de personas no prevenidas",
+      "La cerca sea de baja altura",
+      "La instalación sea interior",
+      "La cerca esté conectada a baterías"
+    ],
+    respuesta: "Las cercas puedan estar al alcance de personas no prevenidas",
+    explicacion: "ITC-BT-39, apartado 3: «Se colocarán carteles de aviso cuando las cercas puedan estar al alcance de personas no prevenidas de su presencia…»"
+  },
+  {
+    pregunta: "Según el REBT, los carteles se colocarán en todo caso cuando la cerca esté:",
+    opciones: [
+      "Junto a una vía pública",
+      "En el interior de una finca privada",
+      "En zonas rurales aisladas",
+      "En recintos cerrados"
+    ],
+    respuesta: "Junto a una vía pública",
+    explicacion: "ITC-BT-39, apartado 3: «… y, en todo caso, cuando estén junto a una vía pública.»"
+  },
+  {
+    pregunta: "Según el REBT, la distancia máxima entre carteles será de:",
+    opciones: [
+      "50 metros",
+      "100 metros",
+      "25 metros",
+      "10 metros"
+    ],
+    respuesta: "50 metros",
+    explicacion: "ITC-BT-39, apartado 3: «… a distancias máximas de 50 metros.»"
+  },
+  {
+    pregunta: "Según el REBT, la toma de tierra del alimentador de la cerca será:",
+    opciones: [
+      "De tierra separada de cualquier otra",
+      "Común con la tierra de masa",
+      "Compartida con otras instalaciones",
+      "La misma que la del edificio"
+    ],
+    respuesta: "De tierra separada de cualquier otra",
+    explicacion: "ITC-BT-39, apartado 3: «La toma de tierra del alimentador de la cerca tendrá las características de «tierra separada» de cualquier otra…»"
+  },
+  {
+    pregunta: "Según el REBT, en zonas expuestas a descargas atmosféricas:",
+    opciones: [
+      "Se tomarán las medidas de protección apropiadas",
+      "No se requieren medidas adicionales",
+      "Se prohibirá la instalación",
+      "Se conectará directamente a tierra"
+    ],
+    respuesta: "Se tomarán las medidas de protección apropiadas",
+    explicacion: "ITC-BT-39, apartado 3: «… se tomarán las medidas de protección apropiadas.»"
+  }
+];
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* ===== Estado ===== */
+    let preguntasAleatorias = [];
+    let indice = 0, aciertos = 0, errores = 0;
+    let historial = [];
+    let seleccionUsuario = null;
+    let respondido = false;
+
+    // Tiempo
+    const DURACION_SEG = 60 * 60; // <<< 60 minutos
+    let inicioTiempo = null;
+    let intervaloTiempo = null;
+    let tiempoAgotado = false;
+
+    /* ===== Utilidades ===== */
+    const mezclar = (arr) => { for (let i = arr.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
+
+    function mezclarPreguntas(){
+      preguntasAleatorias = mezclar(preguntas.map(p=>({...p, opciones: mezclar([...p.opciones]) })));
+      indice=0; aciertos=0; errores=0; historial=[];
+    }
+
+    const fmt2 = (n) => String(n).padStart(2,'0');
+    const clamp0 = (x) => x < 0 ? 0 : x;
+
+    function calcularPuntuacion(){
+      const total = preguntasAleatorias.length;
+      const penalizacion = Math.floor(errores / 2);
+      const validasNetas = Math.max(0, aciertos - penalizacion);
+      const puntos = validasNetas * 0.5;
+      const porcentaje = clamp0((validasNetas / total) * 100);
+      const apto = porcentaje >= 80;
+      return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
+    }
+
+    /* ===== Render ===== */
+    function setProgreso(){
+      const total = preguntasAleatorias.length;
+      const pct = Math.round((indice/total)*100);
+      const bar = document.getElementById('progress-bar');
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+      document.getElementById('progress-txt').textContent = `${indice}/${total}`;
+    }
+
+    function actualizarContador(){
+      if (!inicioTiempo) return;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const restantes = Math.max(0, DURACION_SEG - transcurrido);
+      const mm = fmt2(Math.floor(restantes/60));
+      const ss = fmt2(restantes%60);
+
+      const { puntos } = calcularPuntuacion();
+      const totalPuntos = preguntasAleatorias.length * 0.5;
+
+      const relojClass =
+        restantes <= 60 ? 'text-red-700' :
+        restantes <= 5*60 ? 'text-orange-600' :
+        'text-blue-700';
+
+      document.getElementById("contador").innerHTML = `
+        <span>Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
+        <span class="text-green-600">Aciertos: ${aciertos}</span>
+        <span class="text-red-600">Fallos: ${errores}</span>
+        <span>Puntos: ${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</span>
+        <span class="font-mono ${relojClass}">⏳ ${mm}:${ss}</span>`;
+
+      if (restantes === 0 && !tiempoAgotado){
+        tiempoAgotado = true;
+        clearInterval(intervaloTiempo);
+        deshabilitarInteraccion();
+        abrirModalFin();
+      }
+    }
+
+    function renderOpciones(opciones){
+      const cont = document.getElementById("opciones");
+      cont.innerHTML = "";
+      opciones.forEach((op, i)=>{
+        const btn = document.createElement("button");
+        btn.type="button";
+        btn.dataset.valor = op;
+        btn.className="opcion w-full text-left bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl shadow transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300";
+        btn.innerHTML = `<span class="font-semibold tracking-wide">${op}</span>`;
+        btn.onclick = ()=>seleccionarOpcion(op);
+        btn.setAttribute('aria-label',`Opción ${i+1}: ${op}`);
+        cont.appendChild(btn);
+      });
+    }
+
+    function cargarPregunta(){
+      if (indice>=preguntasAleatorias.length) return mostrarResumen();
+      const q = preguntasAleatorias[indice];
+      seleccionUsuario=null; respondido=false;
+      document.getElementById("pregunta").textContent = q.pregunta;
+      renderOpciones(q.opciones);
+
+      document.getElementById("acciones").innerHTML =
+        `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
+           <span>Elige una respuesta (teclas 1–4 y Enter).</span>
+           <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
+         </div>`;
+
+      setProgreso();
+      actualizarContador();
+    }
+
+    function seleccionarOpcion(opcion){
+      if (respondido || tiempoAgotado) return;
+      seleccionUsuario = opcion;
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.classList.remove('ring','ring-yellow-300','translate-y-0.5');
+        if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
+      });
+      const btn = document.getElementById('btn-contestar');
+      btn.disabled=false;
+      btn.classList.remove('opacity-50','cursor-not-allowed');
+      btn.onclick=verificarRespuesta;
+    }
+
+    function verificarRespuesta(){
+      if (respondido || !seleccionUsuario || tiempoAgotado) return;
+      const actual = preguntasAleatorias[indice];
+      const ok = seleccionUsuario===actual.respuesta;
+      respondido = true;
+
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.disabled=true; b.classList.remove('ring','ring-yellow-300');
+        const val=b.dataset.valor;
+        if (val===actual.respuesta){
+          b.classList.add('bg-green-600','hover:bg-green-700');
+          b.innerHTML=`✅ <span class="font-semibold">${val}</span>`;
+        } else if (val===seleccionUsuario && !ok){
+          b.classList.add('bg-red-600','hover:bg-red-700');
+          b.innerHTML=`❌ <span class="font-semibold">${val}</span>`;
+        } else {
+          b.classList.add('bg-blue-500');
+        }
+      });
+
+      ok ? aciertos++ : errores++;
+
+      historial.push({
+        pregunta:actual.pregunta,
+        opciones:actual.opciones,
+        correcta:actual.respuesta,
+        elegida:seleccionUsuario,
+        explicacion:actual.explicacion
+      });
+
+      /* === NUEVO: mostrar la explicación debajo del botón === */
+      document.getElementById("acciones").innerHTML =
+        `<div class="mt-4 flex flex-col gap-3">
+
+           <div class="flex items-center justify-end">
+             <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">
+               Siguiente
+             </button>
+           </div>
+
+           <div id="explicacion" class="text-sm text-slate-700 bg-slate-100 border-l-4 border-blue-600 p-3 rounded-md">
+             ${actual.explicacion || "Sin referencia disponible"}
+           </div>
+
+         </div>`;
+
+      actualizarContador();
+      setProgreso();
+    }
+
+    const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
+
+    function deshabilitarInteraccion(){
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{ b.disabled=true; });
+      document.getElementById('btn-contestar')?.setAttribute('disabled','true');
+      document.removeEventListener('keydown', handleKey);
+    }
+
+    function abrirModalFin(){
+      const { total, respondidas, enBlanco, penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+      const modal = document.getElementById('modal-fin');
+      const totalPuntos = total * 0.5;
+      document.getElementById('modal-resumen').innerHTML = `
+        <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
+        <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
+        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas</p>
+        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong></p>
+        <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+        <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
+      `;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function mostrarResumen(){
+      clearInterval(intervaloTiempo);
+      const total = preguntasAleatorias.length;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const mm = fmt2(Math.floor(transcurrido/60));
+      const ss = fmt2(transcurrido%60);
+
+      const { penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+
+      const detalle = historial.map(h=>`
+        <div class='mb-2 border border-slate-200 rounded-lg p-3'>
+          <p class='font-semibold mb-2'>${h.pregunta}</p>
+          <div class='flex flex-wrap gap-2'>
+            ${h.opciones.map(op=>{
+              if (op===h.elegida && op===h.correcta)
+                return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op===h.elegida && op!==h.correcta)
+                return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op===h.correcta && op!==h.elegida)
+                return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
+            }).join('')}
+          </div>
+          <div class='mt-2 text-sm text-slate-600 bg-slate-100 border-l-4 border-blue-600 p-2 rounded-md'>
+            📘 Explicación: ${h.explicacion}
+          </div>
+        </div>
+      `).join('');
+
+      const totalPuntos = total * 0.5;
+
+      document.getElementById("test").innerHTML = `
+        <div class="space-y-3">
+          <h2 class="text-2xl font-extrabold">Resultado del test 
+            <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">
+              (${apto?'APTO ✅':'NO APTO ❌'})
+            </span>
+          </h2>
+
+          <p class="text-slate-700">
+            Aciertos: <strong class="text-green-700">${aciertos}</strong> • 
+            Fallos: <strong class="text-red-700">${errores}</strong> • 
+            Penalización: <strong>-${penalizacion}</strong>
+          </p>
+
+          <p class="text-slate-700">
+            Válidas netas: <strong>${validasNetas}</strong> / ${total} • 
+            Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> 
+            (<strong>${porcentaje.toFixed(2)}%</strong>)
+          </p>
+
+          <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span></p>
+
+          <hr class="my-3 border-slate-200">
+
+          <h3 class="text-lg font-bold">Detalle de preguntas</h3>
+
+          <div class="max-h-[50vh] overflow-auto pr-1">
+            ${detalle}
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">
+            Volver a intentar
+          </button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">
+            Volver al inicio
+          </a>
+        </div>`;
+    }
+
+    /* ===== Atajos de teclado ===== */
+    function handleKey(e){
+      if (tiempoAgotado) return;
+      if (respondido){ if (e.key==='Enter') siguientePregunta(); return; }
+      const map={'1':0,'2':1,'3':2,'4':3};
+      if (map[e.key]!==undefined){
+        const b=document.querySelectorAll('#opciones .opcion')[map[e.key]];
+        if (b) b.click();
+      }
+      if (e.key==='Enter'){
+        const b=document.getElementById('btn-contestar');
+        if (b && !b.disabled) b.click();
+      }
+    }
+
+    window.onload = ()=>{
+      mezclarPreguntas();
+      inicioTiempo = Date.now();
+      cargarPregunta();
+      intervaloTiempo = setInterval(actualizarContador, 1000);
+      document.addEventListener('keydown', handleKey);
+    };
+  </script>
+
+</head>
+
+<body class="bg-gray-100 text-gray-900 p-4">
+  <div class="max-w-3xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-lg ring-1 ring-slate-100" id="test">
+    <div class="mb-4">
+      <div class="flex items-center justify-between text-sm text-slate-600 mb-2">
+        <p id="contador" class="font-semibold space-x-4"></p>
+        <span id="progress-txt" class="font-mono text-slate-500">0/0</span>
+      </div>
+      <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+        <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out" style="width:0%" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      </div>
+    </div>
+
+    <h1 class="text-3xl font-extrabold mb-3 text-center">ITC-BT-39</h1>
+    <p id="pregunta" class="mb-4 text-lg text-center"></p>
+
+    <div id="opciones" class="flex flex-col gap-3"></div>
+    <div id="acciones" class="mt-2"></div>
+  </div>
+
+  <div class="mt-6 text-center">
+    <a href="Test_por_ITC_del_REBT.html" class="inline-block bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">Cancelar</a>
+  </div>
+
+  <!-- Modal Tiempo Agotado -->
+  <div id="modal-fin" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
+    <div class="bg-white rounded-2xl shadow-xl max-w-lg w-full p-6">
+      <h2 class="text-2xl font-extrabold mb-1">⏰ Tiempo agotado</h2>
+      <p class="text-slate-600 mb-4">Tu tiempo se ha agotado. Estos son tus resultados:</p>
+      <div id="modal-resumen" class="space-y-1 text-slate-800"></div>
+      <div class="mt-6 flex justify-end">
+        <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
