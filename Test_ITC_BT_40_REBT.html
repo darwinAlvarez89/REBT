@@ -1,1 +1,588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Examen Test REBT</title>
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RSH4ZW3VT2');
+  </script>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+
+  <script>
+    /* ===== Banco de preguntas + explicaciones ===== */
+    const 
+
+
+
+preguntas = [
+  {
+    pregunta: "Según el REBT, la ITC-BT-40 se aplica a las instalaciones generadoras entendiendo como tales las destinadas a:",
+    opciones: [
+      "Transformar cualquier tipo de energía no eléctrica en energía eléctrica",
+      "Distribuir energía eléctrica a terceros",
+      "Transportar energía eléctrica en alta tensión",
+      "Almacenar energía eléctrica"
+    ],
+    respuesta: "Transformar cualquier tipo de energía no eléctrica en energía eléctrica",
+    explicacion: "ITC-BT-40, apartado 1: «…las destinadas a transformar cualquier tipo de energía no eléctrica en energía eléctrica.»"
+  },
+  {
+    pregunta: "Según el REBT, se entiende por Redes de Distribución Pública:",
+    opciones: [
+      "Las redes explotadas por empresas cuyo fin principal es la distribución de energía eléctrica para su venta a terceros",
+      "Las redes interiores de los consumidores",
+      "Las redes privadas de autoconsumo",
+      "Las redes de alta tensión exclusivamente"
+    ],
+    respuesta: "Las redes explotadas por empresas cuyo fin principal es la distribución de energía eléctrica para su venta a terceros",
+    explicacion: "ITC-BT-40, apartado 1: «…las redes eléctricas que pertenecen o son explotadas por empresas cuyo fin principal es la distribución de energía eléctrica para su venta a terceros.»"
+  },
+  {
+    pregunta: "Según el REBT, se entiende por Autogenerador:",
+    opciones: [
+      "La empresa que produce energía eléctrica destinada total o parcialmente a sus propias necesidades",
+      "La empresa distribuidora de energía eléctrica",
+      "El fabricante de generadores",
+      "El titular de una instalación fotovoltaica aislada"
+    ],
+    respuesta: "La empresa que produce energía eléctrica destinada total o parcialmente a sus propias necesidades",
+    explicacion: "ITC-BT-40, apartado 1: «…la empresa que… produce… la energía eléctrica destinada en su totalidad o en parte, a sus necesidades propias.»"
+  },
+  {
+    pregunta: "Según el REBT, una instalación generadora aislada es aquella:",
+    opciones: [
+      "En la que no puede existir conexión eléctrica alguna con la Red de Distribución Pública",
+      "Que funciona en paralelo con la red",
+      "Que dispone de baterías de acumulación",
+      "Que tiene potencia inferior a 100 kVA"
+    ],
+    respuesta: "En la que no puede existir conexión eléctrica alguna con la Red de Distribución Pública",
+    explicacion: "ITC-BT-40, apartado 2.a: «…aquellas en las que no puede existir conexión eléctrica alguna con la Red de Distribución Pública.»"
+  },
+  {
+    pregunta: "Según el REBT, una instalación generadora asistida es aquella:",
+    opciones: [
+      "En la que existe conexión con la red sin trabajar en paralelo con ella",
+      "Que trabaja siempre en paralelo con la red",
+      "Que no dispone de conmutación",
+      "Que solo funciona con baterías"
+    ],
+    respuesta: "En la que existe conexión con la red sin trabajar en paralelo con ella",
+    explicacion: "ITC-BT-40, apartado 2.b: «…existe una conexión con la Red de Distribución Pública, pero sin que los generadores puedan estar trabajando en paralelo con ella.»"
+  },
+  {
+    pregunta: "Según el REBT, para impedir la conexión simultánea en instalaciones generadoras asistidas:",
+    opciones: [
+      "Se deben instalar los correspondientes sistemas de conmutación",
+      "Se utilizarán fusibles",
+      "Se emplearán protecciones diferenciales",
+      "Se conectará el neutro común"
+    ],
+    respuesta: "Se deben instalar los correspondientes sistemas de conmutación",
+    explicacion: "ITC-BT-40, apartado 2.b: «Para impedir la conexión simultánea de ambas, se deben instalar los correspondientes sistemas de conmutación.»"
+  },
+  {
+    pregunta: "Según el REBT, las instalaciones generadoras interconectadas son aquellas:",
+    opciones: [
+      "Que trabajan normalmente en paralelo con la Red de Distribución Pública",
+      "Que no tienen conexión con la red",
+      "Que funcionan solo en emergencia",
+      "Que disponen de baterías"
+    ],
+    respuesta: "Que trabajan normalmente en paralelo con la Red de Distribución Pública",
+    explicacion: "ITC-BT-40, apartado 2.c: «…las que están trabajando normalmente en paralelo con la Red de Distribución Pública.»"
+  },
+  {
+    pregunta: "Según el REBT, los locales donde estén instalados motores térmicos deberán:",
+    opciones: [
+      "Estar suficientemente ventilados",
+      "Ser de uso no exclusivo",
+      "Disponer de climatización",
+      "Estar enterrados"
+    ],
+    respuesta: "Estar suficientemente ventilados",
+    explicacion: "ITC-BT-40, apartado 3: «Los locales donde estén instalados los motores térmicos… deberán estar suficientemente ventilados.»"
+  },
+  {
+    pregunta: "Según el REBT, los conductos de salida de gases de combustión serán:",
+    opciones: [
+      "De material incombustible y evacuarán directamente al exterior o mediante aprovechamiento energético",
+      "Metálicos sin aislamiento",
+      "De material plástico",
+      "Instalados en interiores"
+    ],
+    respuesta: "De material incombustible y evacuarán directamente al exterior o mediante aprovechamiento energético",
+    explicacion: "ITC-BT-40, apartado 3: «Los conductos de salida de los gases de combustión serán de material incombustible y evacuarán directamente al exterior…»"
+  },
+  {
+    pregunta: "Según el REBT, en instalaciones generadoras aisladas deberá existir:",
+    opciones: [
+      "Un dispositivo que permita conectar y desconectar la carga",
+      "Un sistema de vertido a red",
+      "Un equipo de sincronización obligatorio",
+      "Un contador bidireccional"
+    ],
+    respuesta: "Un dispositivo que permita conectar y desconectar la carga",
+    explicacion: "ITC-BT-40, apartado 4.1: «…precisará la instalación de un dispositivo que permita conectar y desconectar la carga…»"
+  },
+  {
+    pregunta: "Según el REBT, cuando existan varios generadores cuya conexión exija sincronización:",
+    opciones: [
+      "Se deberá disponer de un equipo manual o automático de sincronización",
+      "Se conectarán directamente",
+      "No será necesaria ninguna medida",
+      "Se conectarán mediante fusibles"
+    ],
+    respuesta: "Se deberá disponer de un equipo manual o automático de sincronización",
+    explicacion: "ITC-BT-40, apartado 4.1: «…se deberá disponer de un equipo manual o automático para realizar dicha operación.»"
+  },
+  {
+    pregunta: "Según el REBT, los generadores portátiles deberán incorporar:",
+    opciones: [
+      "Protecciones contra sobreintensidades y contactos directos e indirectos",
+      "Únicamente protección mecánica",
+      "Solo protección diferencial",
+      "Ninguna protección específica"
+    ],
+    respuesta: "Protecciones contra sobreintensidades y contactos directos e indirectos",
+    explicacion: "ITC-BT-40, apartado 4.1: «Los generadores portátiles deberán incorporar las protecciones generales contra sobreintensidades y contactos directos e indirectos…»"
+  },
+  {
+    pregunta: "Según el REBT, solo podrán realizar maniobras de transferencia de carga sin corte los generadores de potencia:",
+    opciones: [
+      "Superior a 100 kVA",
+      "Inferior a 100 kVA",
+      "Igual a 50 kVA",
+      "Cualquiera"
+    ],
+    respuesta: "Superior a 100 kVA",
+    explicacion: "ITC-BT-40, apartado 4.2: «Sólo podrán realizar maniobras de transferencia de carga sin corte los generadores de potencia superior a 100 kVA.»"
+  },
+  {
+    pregunta: "Según el REBT, en la interconexión generador-red el tiempo máximo de interconexión será:",
+    opciones: [
+      "5 segundos",
+      "10 segundos",
+      "1 segundo",
+      "No existe límite"
+    ],
+    respuesta: "5 segundos",
+    explicacion: "ITC-BT-40, apartado 4.2: «…no se podrá mantener la interconexión más de 5 segundos.»"
+  },
+  {
+    pregunta: "Según el REBT, la potencia máxima general de centrales interconectadas a redes 3x400/230 V será:",
+    opciones: [
+      "100 kVA",
+      "60 kVA",
+      "50 kVA",
+      "200 kVA"
+    ],
+    respuesta: "100 kVA",
+    explicacion: "ITC-BT-40, apartado 4.3.1: «…no exceda de 100 kVA…»"
+  },
+  {
+    pregunta: "Según el REBT, la caída de tensión admisible en la conexión de generadores asíncronos será:",
+    opciones: [
+      "No superior al 3 % de la tensión asignada",
+      "No superior al 5 %",
+      "No superior al 1 %",
+      "No se limita"
+    ],
+    respuesta: "No superior al 3 % de la tensión asignada",
+    explicacion: "ITC-BT-40, apartado 4.3.2.1: «La caída de tensión… no será superior al 3 % de la tensión asignada de la red.»"
+  },
+  {
+    pregunta: "Según el REBT, los cables de conexión deberán dimensionarse para una intensidad:",
+    opciones: [
+      "No inferior al 125 % de la máxima intensidad del generador",
+      "Igual a la intensidad nominal",
+      "No inferior al 100 %",
+      "No superior al 150 %"
+    ],
+    respuesta: "No inferior al 125 % de la máxima intensidad del generador",
+    explicacion: "ITC-BT-40, apartado 5: «…dimensionados para una intensidad no inferior al 125% de la máxima intensidad del generador…»"
+  },
+ 
+  {
+    pregunta: "Según el REBT, la protección de mínima tensión actuará cuando la tensión alcance:",
+    opciones: [
+      "El 85 % de su valor asignado",
+      "El 90 %",
+      "El 80 %",
+      "El 95 %"
+    ],
+    respuesta: "El 85 % de su valor asignado",
+    explicacion: "ITC-BT-40, apartado 7: «…a partir de que la tensión llegue al 85% de su valor asignado.»"
+  },
+  {
+    pregunta: "Según el REBT, la protección de máxima frecuencia actuará cuando la frecuencia sea:",
+    opciones: [
+      "Superior a 51 Hz",
+      "Superior a 52 Hz",
+      "Inferior a 48 Hz",
+      "Igual a 50 Hz"
+    ],
+    respuesta: "Superior a 51 Hz",
+    explicacion: "ITC-BT-40, apartado 7: «…cuando la frecuencia sea inferior a 49 Hz o superior a 51 Hz…»"
+  },
+  {
+    pregunta: "Según el REBT, en instalaciones generadoras aisladas la red de tierras será:",
+    opciones: [
+      "Independiente de cualquier otra red de tierras",
+      "Común con la red pública",
+      "Conectada al neutro de la red",
+      "Compartida con otras instalaciones"
+    ],
+    respuesta: "Independiente de cualquier otra red de tierras",
+    explicacion: "ITC-BT-40, apartado 8.2.1: «La red de tierras… será independiente de cualquier otra red de tierras.»"
+  }
+];
+
+
+
+
+
+
+    /* ===== Estado ===== */
+    let preguntasAleatorias = [];
+    let indice = 0, aciertos = 0, errores = 0;
+    let historial = [];
+    let seleccionUsuario = null;
+    let respondido = false;
+
+    // Tiempo
+    const DURACION_SEG = 60 * 60; // <<< 60 minutos
+    let inicioTiempo = null;
+    let intervaloTiempo = null;
+    let tiempoAgotado = false;
+
+    /* ===== Utilidades ===== */
+    const mezclar = (arr) => { for (let i = arr.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
+
+    function mezclarPreguntas(){
+      preguntasAleatorias = mezclar(preguntas.map(p=>({...p, opciones: mezclar([...p.opciones]) })));
+      indice=0; aciertos=0; errores=0; historial=[];
+    }
+
+    const fmt2 = (n) => String(n).padStart(2,'0');
+    const clamp0 = (x) => x < 0 ? 0 : x;
+
+    function calcularPuntuacion(){
+      const total = preguntasAleatorias.length;
+      const penalizacion = Math.floor(errores / 2);
+      const validasNetas = Math.max(0, aciertos - penalizacion);
+      const puntos = validasNetas * 0.5;
+      const porcentaje = clamp0((validasNetas / total) * 100);
+      const apto = porcentaje >= 80;
+      return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
+    }
+
+    /* ===== Render ===== */
+    function setProgreso(){
+      const total = preguntasAleatorias.length;
+      const pct = Math.round((indice/total)*100);
+      const bar = document.getElementById('progress-bar');
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+      document.getElementById('progress-txt').textContent = `${indice}/${total}`;
+    }
+
+    function actualizarContador(){
+      if (!inicioTiempo) return;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const restantes = Math.max(0, DURACION_SEG - transcurrido);
+      const mm = fmt2(Math.floor(restantes/60));
+      const ss = fmt2(restantes%60);
+
+      const { puntos } = calcularPuntuacion();
+      const totalPuntos = preguntasAleatorias.length * 0.5;
+
+      const relojClass =
+        restantes <= 60 ? 'text-red-700' :
+        restantes <= 5*60 ? 'text-orange-600' :
+        'text-blue-700';
+
+      document.getElementById("contador").innerHTML = `
+        <span>Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
+        <span class="text-green-600">Aciertos: ${aciertos}</span>
+        <span class="text-red-600">Fallos: ${errores}</span>
+        <span>Puntos: ${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</span>
+        <span class="font-mono ${relojClass}">⏳ ${mm}:${ss}</span>`;
+
+      if (restantes === 0 && !tiempoAgotado){
+        tiempoAgotado = true;
+        clearInterval(intervaloTiempo);
+        deshabilitarInteraccion();
+        abrirModalFin();
+      }
+    }
+
+    function renderOpciones(opciones){
+      const cont = document.getElementById("opciones");
+      cont.innerHTML = "";
+      opciones.forEach((op, i)=>{
+        const btn = document.createElement("button");
+        btn.type="button";
+        btn.dataset.valor = op;
+        btn.className="opcion w-full text-left bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl shadow transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300";
+        btn.innerHTML = `<span class="font-semibold tracking-wide">${op}</span>`;
+        btn.onclick = ()=>seleccionarOpcion(op);
+        btn.setAttribute('aria-label',`Opción ${i+1}: ${op}`);
+        cont.appendChild(btn);
+      });
+    }
+
+    function cargarPregunta(){
+      if (indice>=preguntasAleatorias.length) return mostrarResumen();
+      const q = preguntasAleatorias[indice];
+      seleccionUsuario=null; respondido=false;
+      document.getElementById("pregunta").textContent = q.pregunta;
+      renderOpciones(q.opciones);
+
+      document.getElementById("acciones").innerHTML =
+        `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
+           <span>Elige una respuesta (teclas 1–4 y Enter).</span>
+           <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
+         </div>`;
+
+      setProgreso();
+      actualizarContador();
+    }
+
+    function seleccionarOpcion(opcion){
+      if (respondido || tiempoAgotado) return;
+      seleccionUsuario = opcion;
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.classList.remove('ring','ring-yellow-300','translate-y-0.5');
+        if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
+      });
+      const btn = document.getElementById('btn-contestar');
+      btn.disabled=false;
+      btn.classList.remove('opacity-50','cursor-not-allowed');
+      btn.onclick=verificarRespuesta;
+    }
+
+    function verificarRespuesta(){
+      if (respondido || !seleccionUsuario || tiempoAgotado) return;
+      const actual = preguntasAleatorias[indice];
+      const ok = seleccionUsuario===actual.respuesta;
+      respondido = true;
+
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.disabled=true; b.classList.remove('ring','ring-yellow-300');
+        const val=b.dataset.valor;
+        if (val===actual.respuesta){
+          b.classList.add('bg-green-600','hover:bg-green-700');
+          b.innerHTML=`✅ <span class="font-semibold">${val}</span>`;
+        } else if (val===seleccionUsuario && !ok){
+          b.classList.add('bg-red-600','hover:bg-red-700');
+          b.innerHTML=`❌ <span class="font-semibold">${val}</span>`;
+        } else {
+          b.classList.add('bg-blue-500');
+        }
+      });
+
+      ok ? aciertos++ : errores++;
+
+      historial.push({
+        pregunta:actual.pregunta,
+        opciones:actual.opciones,
+        correcta:actual.respuesta,
+        elegida:seleccionUsuario,
+        explicacion:actual.explicacion
+      });
+
+      /* === NUEVO: mostrar la explicación debajo del botón === */
+      document.getElementById("acciones").innerHTML =
+        `<div class="mt-4 flex flex-col gap-3">
+
+           <div class="flex items-center justify-end">
+             <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">
+               Siguiente
+             </button>
+           </div>
+
+           <div id="explicacion" class="text-sm text-slate-700 bg-slate-100 border-l-4 border-blue-600 p-3 rounded-md">
+             ${actual.explicacion || "Sin referencia disponible"}
+           </div>
+
+         </div>`;
+
+      actualizarContador();
+      setProgreso();
+    }
+
+    const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
+
+    function deshabilitarInteraccion(){
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{ b.disabled=true; });
+      document.getElementById('btn-contestar')?.setAttribute('disabled','true');
+      document.removeEventListener('keydown', handleKey);
+    }
+
+    function abrirModalFin(){
+      const { total, respondidas, enBlanco, penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+      const modal = document.getElementById('modal-fin');
+      const totalPuntos = total * 0.5;
+      document.getElementById('modal-resumen').innerHTML = `
+        <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
+        <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
+        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas</p>
+        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong></p>
+        <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+        <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
+      `;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function mostrarResumen(){
+      clearInterval(intervaloTiempo);
+      const total = preguntasAleatorias.length;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const mm = fmt2(Math.floor(transcurrido/60));
+      const ss = fmt2(transcurrido%60);
+
+      const { penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+
+      const detalle = historial.map(h=>`
+        <div class='mb-2 border border-slate-200 rounded-lg p-3'>
+          <p class='font-semibold mb-2'>${h.pregunta}</p>
+          <div class='flex flex-wrap gap-2'>
+            ${h.opciones.map(op=>{
+              if (op===h.elegida && op===h.correcta)
+                return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op===h.elegida && op!==h.correcta)
+                return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op===h.correcta && op!==h.elegida)
+                return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
+            }).join('')}
+          </div>
+          <div class='mt-2 text-sm text-slate-600 bg-slate-100 border-l-4 border-blue-600 p-2 rounded-md'>
+            📘 Explicación: ${h.explicacion}
+          </div>
+        </div>
+      `).join('');
+
+      const totalPuntos = total * 0.5;
+
+      document.getElementById("test").innerHTML = `
+        <div class="space-y-3">
+          <h2 class="text-2xl font-extrabold">Resultado del test 
+            <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">
+              (${apto?'APTO ✅':'NO APTO ❌'})
+            </span>
+          </h2>
+
+          <p class="text-slate-700">
+            Aciertos: <strong class="text-green-700">${aciertos}</strong> • 
+            Fallos: <strong class="text-red-700">${errores}</strong> • 
+            Penalización: <strong>-${penalizacion}</strong>
+          </p>
+
+          <p class="text-slate-700">
+            Válidas netas: <strong>${validasNetas}</strong> / ${total} • 
+            Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> 
+            (<strong>${porcentaje.toFixed(2)}%</strong>)
+          </p>
+
+          <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span></p>
+
+          <hr class="my-3 border-slate-200">
+
+          <h3 class="text-lg font-bold">Detalle de preguntas</h3>
+
+          <div class="max-h-[50vh] overflow-auto pr-1">
+            ${detalle}
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">
+            Volver a intentar
+          </button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">
+            Volver al inicio
+          </a>
+        </div>`;
+    }
+
+    /* ===== Atajos de teclado ===== */
+    function handleKey(e){
+      if (tiempoAgotado) return;
+      if (respondido){ if (e.key==='Enter') siguientePregunta(); return; }
+      const map={'1':0,'2':1,'3':2,'4':3};
+      if (map[e.key]!==undefined){
+        const b=document.querySelectorAll('#opciones .opcion')[map[e.key]];
+        if (b) b.click();
+      }
+      if (e.key==='Enter'){
+        const b=document.getElementById('btn-contestar');
+        if (b && !b.disabled) b.click();
+      }
+    }
+
+    window.onload = ()=>{
+      mezclarPreguntas();
+      inicioTiempo = Date.now();
+      cargarPregunta();
+      intervaloTiempo = setInterval(actualizarContador, 1000);
+      document.addEventListener('keydown', handleKey);
+    };
+  </script>
+
+</head>
+
+<body class="bg-gray-100 text-gray-900 p-4">
+  <div class="max-w-3xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-lg ring-1 ring-slate-100" id="test">
+    <div class="mb-4">
+      <div class="flex items-center justify-between text-sm text-slate-600 mb-2">
+        <p id="contador" class="font-semibold space-x-4"></p>
+        <span id="progress-txt" class="font-mono text-slate-500">0/0</span>
+      </div>
+      <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+        <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out" style="width:0%" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      </div>
+    </div>
+
+    <h1 class="text-3xl font-extrabold mb-3 text-center">ITC-BT-40</h1>
+    <p id="pregunta" class="mb-4 text-lg text-center"></p>
+
+    <div id="opciones" class="flex flex-col gap-3"></div>
+    <div id="acciones" class="mt-2"></div>
+  </div>
+
+  <div class="mt-6 text-center">
+    <a href="Test_por_ITC_del_REBT.html" class="inline-block bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">Cancelar</a>
+  </div>
+
+  <!-- Modal Tiempo Agotado -->
+  <div id="modal-fin" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
+    <div class="bg-white rounded-2xl shadow-xl max-w-lg w-full p-6">
+      <h2 class="text-2xl font-extrabold mb-1">⏰ Tiempo agotado</h2>
+      <p class="text-slate-600 mb-4">Tu tiempo se ha agotado. Estos son tus resultados:</p>
+      <div id="modal-resumen" class="space-y-1 text-slate-800"></div>
+      <div class="mt-6 flex justify-end">
+        <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+  </html>
