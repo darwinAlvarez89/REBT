@@ -25,14 +25,9 @@
 
   <script>
     /* ===== Banco de preguntas + explicaciones ===== */
-    const 
-    
 
 
-
-
-
-preguntas = [
+const preguntas = [
   {
     pregunta: "Según el REBT, esta instrucción trata de la protección de las instalaciones interiores contra:",
     opciones: [
@@ -42,7 +37,7 @@ preguntas = [
       "Los contactos directos e indirectos"
     ],
     respuesta: "Las sobretensiones transitorias transmitidas por las redes de distribución",
-    explicacion: "ITC-BT-23, apartado 1. Objeto y campo de aplicación."
+    explicacion: "ITC-BT-23, punto 1: «Esta instrucción trata de la protección de las instalaciones eléctricas interiores contra las sobretensiones transitorias que se transmiten por las redes de distribución…»"
   },
   {
     pregunta: "Según el REBT, las sobretensiones tratadas en esta ITC se originan fundamentalmente por:",
@@ -53,7 +48,7 @@ preguntas = [
       "Defectos de aislamiento de baja impedancia"
     ],
     respuesta: "Descargas atmosféricas, conmutaciones de red y defectos en las mismas",
-    explicacion: "ITC-BT-23, apartado 1."
+    explicacion: "ITC-BT-23, punto 1: «…que se originan, fundamentalmente, como consecuencia de las descargas atmosféricas, conmutaciones de redes y defectos en las mismas.»"
   },
   {
     pregunta: "Según el REBT, el nivel de sobretensión que puede aparecer en la red es función de:",
@@ -64,7 +59,7 @@ preguntas = [
       "La sección del conductor de fase"
     ],
     respuesta: "Nivel isoceraúnico, tipo de acometida y proximidad del transformador",
-    explicacion: "ITC-BT-23, apartado 1."
+    explicacion: "ITC-BT-23, punto 1: «El nivel de sobretensión que puede aparecer en la red es función del: nivel isoceraúnico estimado, tipo de acometida aérea o subterránea, proximidad del transformador de MT/BT…»"
   },
   {
     pregunta: "Según el REBT, la incidencia de la sobretensión en la seguridad depende, entre otros factores, de:",
@@ -75,7 +70,7 @@ preguntas = [
       "La longitud de los conductores"
     ],
     respuesta: "La coordinación del aislamiento de los equipos",
-    explicacion: "ITC-BT-23, apartado 1."
+    explicacion: "ITC-BT-23, punto 1: «La incidencia que la sobretensión puede tener en la seguridad… es función de: – La coordinación del aislamiento de los equipos…»"
   },
   {
     pregunta: "Según el REBT, esta instrucción se aplica a líneas de alimentación principal de:",
@@ -86,7 +81,7 @@ preguntas = [
       "Muy baja tensión"
     ],
     respuesta: "230/400 V en corriente alterna",
-    explicacion: "ITC-BT-23, apartado 1."
+    explicacion: "ITC-BT-23, punto 1: «…cuando la protección contra sobretensiones está prescrita o recomendada en las líneas de alimentación principal 230/400 V en corriente alterna…»"
   },
   {
     pregunta: "Según el REBT, las categorías de sobretensiones permiten distinguir:",
@@ -97,7 +92,7 @@ preguntas = [
       "Las potencias máximas admisibles"
     ],
     respuesta: "Los grados de tensión soportada en las distintas partes de la instalación",
-    explicacion: "ITC-BT-23, apartado 2.1."
+    explicacion: "ITC-BT-23, punto 2.1: «Las categorías de sobretensiones permiten distinguir los diversos grados de tensión soportada a las sobretensiones en cada una de las partes de la instalación, equipos y receptores.»"
   },
   {
     pregunta: "Según el REBT, las categorías de sobretensiones indican:",
@@ -108,7 +103,7 @@ preguntas = [
       "La resistencia de puesta a tierra"
     ],
     respuesta: "Los valores de tensión soportada a la onda de choque",
-    explicacion: "ITC-BT-23, apartado 2.1."
+    explicacion: "ITC-BT-23, punto 2.1: «Las categorías indican los valores de tensión soportada a la onda de choque de sobretensión que deben de tener los equipos…»"
   },
   {
     pregunta: "Según el REBT, la estrategia de protección en cascada integra:",
@@ -119,7 +114,7 @@ preguntas = [
       "Protección diferencial y magnetotérmica"
     ],
     respuesta: "Tres niveles de protección: basta, media y fina",
-    explicacion: "ITC-BT-23, apartado 2.1."
+    explicacion: "ITC-BT-23, punto 2.1: «…una estrategia de protección en cascada que integra tres niveles de protección: basta, media y fina…»"
   },
   {
     pregunta: "Según el REBT, la categoría I se aplica a:",
@@ -130,7 +125,7 @@ preguntas = [
       "Motores de conexión fija"
     ],
     respuesta: "Equipos muy sensibles a las sobretensiones",
-    explicacion: "ITC-BT-23, apartado 2.2. Categoría I."
+    explicacion: "ITC-BT-23, punto 2.2, Categoría I: «Se aplica a los equipos muy sensibles a las sobretensiones…»"
   },
   {
     pregunta: "Según el REBT, los equipos destinados a conectarse a una instalación eléctrica fija pertenecen a:",
@@ -141,7 +136,7 @@ preguntas = [
       "Categoría IV"
     ],
     respuesta: "Categoría II",
-    explicacion: "ITC-BT-23, apartado 2.2. Categoría II."
+    explicacion: "ITC-BT-23, punto 2.2, Categoría II: «Se aplica a los equipos destinados a conectarse a una instalación eléctrica fija.»"
   },
   {
     pregunta: "Según el REBT, los armarios de distribución y la aparamenta pertenecen a:",
@@ -152,10 +147,10 @@ preguntas = [
       "Categoría IV"
     ],
     respuesta: "Categoría III",
-    explicacion: "ITC-BT-23, apartado 2.2. Categoría III."
+    explicacion: "ITC-BT-23, punto 2.2, Categoría III: «Ejemplo: armarios de distribución, embarrados, aparamenta…»"
   },
   {
-    pregunta: "Según el REBT, los equipos conectados en el origen o muy proximos al origen de la instalación pertenecen a:",
+    pregunta: "Según el REBT, los equipos conectados en el origen o muy próximos al origen de la instalación pertenecen a:",
     opciones: [
       "Categoría IV",
       "Categoría III",
@@ -163,7 +158,7 @@ preguntas = [
       "Categoría I"
     ],
     respuesta: "Categoría IV",
-    explicacion: "ITC-BT-23, apartado 2.2. Categoría IV."
+    explicacion: "ITC-BT-23, punto 2.2, Categoría IV: «Se aplica a los equipos y materiales que se conectan en el origen o muy próximos al origen de la instalación…»"
   },
   {
     pregunta: "Según el REBT, la descarga directa del rayo:",
@@ -174,7 +169,7 @@ preguntas = [
       "No produce sobretensiones"
     ],
     respuesta: "No es tratada por esta instrucción",
-    explicacion: "ITC-BT-23, apartado 3."
+    explicacion: "ITC-BT-23, punto 3: «Las producidas como consecuencia de la descarga directa del rayo. Esta instrucción no trata este caso.»"
   },
   {
     pregunta: "Según el REBT, una situación natural se da cuando:",
@@ -185,7 +180,7 @@ preguntas = [
       "Se instalan descargadores obligatoriamente"
     ],
     respuesta: "La instalación está alimentada por red subterránea en su totalidad",
-    explicacion: "ITC-BT-23, apartado 3.1."
+    explicacion: "ITC-BT-23, punto 3.1: «…cuando no es preciso la protección… debido a que está alimentada por una red subterránea en su totalidad…»"
   },
   {
     pregunta: "Según el REBT, una línea aérea con conductores aislados y pantalla metálica a tierra se considera:",
@@ -196,7 +191,7 @@ preguntas = [
       "De alto riesgo"
     ],
     respuesta: "Equivalente a una línea subterránea",
-    explicacion: "ITC-BT-23, apartado 3.1."
+    explicacion: "ITC-BT-23, punto 3.1: «…se considera equivalente a una línea subterránea.»"
   },
   {
     pregunta: "Según el REBT, se considera necesaria protección contra sobretensiones cuando:",
@@ -207,7 +202,7 @@ preguntas = [
       "Existe solo una categoría I"
     ],
     respuesta: "La instalación incluye una línea aérea",
-    explicacion: "ITC-BT-23, apartado 3.2."
+    explicacion: "ITC-BT-23, punto 3.2: «Cuando una instalación se alimenta por, o incluye, una línea aérea… se considera necesaria una protección contra sobretensiones…»"
   },
   {
     pregunta: "Según el REBT, en redes TT o IT los descargadores se conectarán entre:",
@@ -218,7 +213,7 @@ preguntas = [
       "Solo fases"
     ],
     respuesta: "Cada conductor, incluido el neutro, y tierra",
-    explicacion: "ITC-BT-23, apartado 3.2."
+    explicacion: "ITC-BT-23, punto 3.2: «En redes TT o IT, los descargadores se conectarán entre cada uno de los conductores, incluyendo el neutro… y la tierra…»"
   },
   {
     pregunta: "Según el REBT, en redes TN-S los descargadores se conectarán entre:",
@@ -229,7 +224,7 @@ preguntas = [
       "Fase y fase"
     ],
     respuesta: "Cada fase y el conductor de protección",
-    explicacion: "ITC-BT-23, apartado 3.2."
+    explicacion: "ITC-BT-23, punto 3.2: «En redes TN-S, los descargadores se conectarán entre cada uno de los conductores de fase y el conductor de protección.»"
   },
   {
     pregunta: "Según el REBT, los equipos deberán escogerse de forma que su tensión soportada a impulsos:",
@@ -240,21 +235,27 @@ preguntas = [
       "Dependa del diferencial"
     ],
     respuesta: "No sea inferior a la indicada en la tabla 1",
-    explicacion: "ITC-BT-23, apartado 4."
+    explicacion: "ITC-BT-23, punto 4: «Los equipos y materiales deben escogerse de manera que su tensión soportada a impulsos no sea inferior a la tensión soportada prescrita en la tabla 1…»"
   },
   {
-  pregunta: "Según el REBT, los equipos y materiales deben escogerse de manera que:",
-  opciones: [
-    "Su tensión soportada a impulsos no sea inferior a la prescrita en la tabla 1",
-    "Su tensión nominal sea siempre superior a 400 V",
-    "Dispongan obligatoriamente de protección diferencial",
-    "Se instalen únicamente en situación controlada"
-  ],
-  respuesta: "Su tensión soportada a impulsos no sea inferior a la prescrita en la tabla 1",
-  explicacion: "ITC-BT-23, apartado 4. Selección de los materiales en la instalación."
-}
-
+    pregunta: "Según el REBT, los equipos y materiales deben escogerse de manera que:",
+    opciones: [
+      "Su tensión soportada a impulsos no sea inferior a la prescrita en la tabla 1",
+      "Su tensión nominal sea siempre superior a 400 V",
+      "Dispongan obligatoriamente de protección diferencial",
+      "Se instalen únicamente en situación controlada"
+    ],
+    respuesta: "Su tensión soportada a impulsos no sea inferior a la prescrita en la tabla 1",
+    explicacion: "ITC-BT-23, punto 4: «Los equipos y materiales deben escogerse de manera que su tensión soportada a impulsos no sea inferior a la tensión soportada prescrita en la tabla 1, según su categoría.»"
+  }
 ];
+
+
+
+
+
+
+
 
 
 
