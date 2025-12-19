@@ -1,38 +1,134 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Home -->
   <url>
     <loc>https://app-rebt.es/</loc>
-    <lastmod>2025-08-17</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <priority>1.0</priority>
   </url>
+
+  <!-- Landings y tests principales -->
+  <url>
+    <loc>https://app-rebt.es/Landing_Test_REBT_ITC.html</loc>
+    <lastmod>2025-12-19</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://app-rebt.es/Test_REBT_Completo_Basica.html</loc>
+    <lastmod>2025-12-19</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://app-rebt.es/Test_completos_REBT.html</loc>
+    <lastmod>2025-12-19</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://app-rebt.es/Test_por_ITC_del_REBT.html</loc>
+    <lastmod>2025-12-19</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://app-rebt.es/Repasar_ITCs_IBTB.html</loc>
+    <lastmod>2025-12-19</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tests antiguos aún en uso -->
   <url>
     <loc>https://app-rebt.es/test1_ITC.html</loc>
     <lastmod>2025-08-17</lastmod>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://app-rebt.es/test2_ITC.html</loc>
     <lastmod>2025-08-17</lastmod>
     <priority>0.8</priority>
   </url>
+
+  <!-- Articulado -->
   <url>
     <loc>https://app-rebt.es/articulado.html</loc>
     <lastmod>2025-08-17</lastmod>
     <priority>0.8</priority>
   </url>
+
+  <url>
+    <loc>https://app-rebt.es/Test_Articulado.html</loc>
+    <lastmod>2025-12-19</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Glosario -->
   <url>
     <loc>https://app-rebt.es/glosarioSiglas.html</loc>
     <lastmod>2025-08-17</lastmod>
     <priority>0.8</priority>
   </url>
+
+  <!-- Exámenes -->
   <url>
     <loc>https://app-rebt.es/examen1.html</loc>
     <lastmod>2025-08-17</lastmod>
     <priority>0.7</priority>
   </url>
+
   <url>
     <loc>https://app-rebt.es/examen2.html</loc>
     <lastmod>2025-08-17</lastmod>
     <priority>0.7</priority>
   </url>
+
+  <!-- Tests por ITC del REBT -->
+  <url><loc>https://app-rebt.es/Test_ITC_BT_03_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_04_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_05_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_08_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_09_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_10_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_12_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_13_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_14_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_15_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_16_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_17_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_18_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_19_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_20_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_21_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_22_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_23_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_24_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_25_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_26_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_27_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_28_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_30_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_31_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_32_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_33_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_34_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_35_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_36_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_37_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_39_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_40_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_41_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_42_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_43_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_44_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_45_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_46_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_47_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_48_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_49_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_50_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://app-rebt.es/Test_ITC_BT_52_REBT.html</loc><lastmod>2025-12-19</lastmod><priority>0.8</priority></url>
+
 </urlset>
