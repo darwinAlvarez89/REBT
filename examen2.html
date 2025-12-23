@@ -1,23 +1,19 @@
-  <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Examen Test REBT</title>
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RSH4ZW3VT2');
+  </script>
 
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-RSH4ZW3VT2');
-</script>
-
-  
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -28,178 +24,466 @@
   </style>
 
   <script>
-    /* ===== Banco de preguntas ===== */
-    const preguntas = [ 
-  { "pregunta": "Señale la afirmación correcta sobre redes de distribución.", 
-    "opciones": ["Las instalaciones de servicio privado cuya finalidad sea la distribución de energía eléctrica se definirán por la tensión entre dos conductores de fase o polares, para las instalaciones unidas directamente a tierra.", "Las instalaciones de servicio público cuya finalidad sea la distribución de energía eléctrica se definirán por los valores de la tensión entre fase o conductor polar y tierra y entre dos conductores de fase o polares, para las instalaciones no unidas directamente a tierra.", "Las intensidades admisibles en los conductores se regularán en función de las condiciones técnicas de las redes y de los sistemas de protección empleados en las mismas."], 
-    "respuesta": "Las intensidades admisibles en los conductores se regularán en función de las condiciones técnicas de las redes y de los sistemas de protección empleados en las mismas." },
+    /* ===== Banco de preguntas + explicaciones ===== */
+    const 
+    
 
-  { "pregunta": "Los establecimientos comerciales deberán disponer de suministro de reserva a partir de qué superficie?", 
-    "opciones": ["2000 m²", "1000 m²", "5000 m²"], 
-    "respuesta": "2000 m²" },
 
-  { "pregunta": "En una instalación de 230/400 V, la resistencia de aislamiento mínima será:", 
-    "opciones": ["1,0 MΩ", "0,25 MΩ", "0,5 MΩ"], 
-    "respuesta": "0,5 MΩ" },
 
-  { "pregunta": "La carga total de un edificio de viviendas se obtiene sumando:", 
-    "opciones": ["Conjunto de viviendas, servicios generales y garajes.", "Conjunto de viviendas, servicios generales, locales comerciales y garajes.", "Servicios generales, locales comerciales y garajes."], 
-    "respuesta": "Conjunto de viviendas, servicios generales, locales comerciales y garajes." },
 
-  { "pregunta": "Para un garaje de 300 m2 con ventilación natural instalado en un edificio de viviendas, se debe prever una potencia mínima de:",
-    "opciones": ["3.000 W.", "5.750 W.", "3.450 W."],
-    "respuesta": "3.450 W." },
 
-  { "pregunta": "En derivaciones individuales, las cajas de registro precintables comunes a todos los tubos podrán colocarse cada:", 
-    "opciones": ["25 m", "20 m", "15 m"], 
-    "respuesta": "15 m" },
-
-  { "pregunta": "La previsión de potencia mínima por metro cuadrado en garajes con ventilación forzada es de:", 
-    "opciones": ["20 W", "10 W", "15 W"], 
-    "respuesta": "20 W" },
-
-  {
-  "pregunta": "En una vivienda, los dispositivos generales e individuales mínimos de mando y protección son:",
-  "opciones": [
-    "IGA omnipolar + ID general",
-    "IGA omnipolar + ID general + dispositivos de corte omnipolar",
-    "IGA omnipolar + ID general + protección contra sobretensiones"
-  ],
-  "respuesta": "IGA omnipolar + ID general + dispositivos de corte omnipolar"
+   preguntas = [
+    {
+    "pregunta": "Según el REBT, ¿qué circuito de distribución interna se destina específicamente a alimentar la cocina y el horno en una vivienda?",
+    "opciones": [
+      "C1",
+      "C2",
+      "C3",
+      "C4"
+    ],
+    "respuesta": "C3",
+    "explicacion": "La ITC‑BT‑25, apartado 2.3.1, enumera los circuitos independientes en la electrificación básica y señala que el circuito C3 es el \"circuito de distribución interna, destinado a alimentar la cocina y horno\"."
   },
-
-  { "pregunta": "En alumbrado exterior, indique el umbral correcto de diferenciales y resistencia de tierra admitida.", 
-    "opciones": ["Se admiten ID de 500 mA si la R de tierra ≤ 5 Ω.", "ID ≤ 300 mA y R de tierra ≤ 500 Ω.", "Se admiten ID de 1 A si la R de tierra ≤ 50 Ω."], 
-    "respuesta": "Se admiten ID de 500 mA si la R de tierra ≤ 5 Ω." },
-
-  {"pregunta": "En una vivienda, cuando se superan las tomas de corriente previstas en la electrificación básica, ¿cada cuántas tomas de uso general debe añadirse un circuito adicional?",
-  "opciones": ["20 tomas", "25 tomas", "30 tomas"],
-  "respuesta": "20 tomas"},
-
-  { "pregunta": "Sobre el suministro de reserva, indique la afirmación correcta:", 
-    "opciones": ["A diferencia del de socorro, no puede realizarse por medios propios del usuario.", "No puede realizarse desde el mismo transformador del suministro normal.", "Mantiene un servicio restringido de elementos indispensables de la instalación receptora."], 
-    "respuesta": "Mantiene un servicio restringido de elementos indispensables de la instalación receptora." },
-
-  { "pregunta": "La profundidad mínima de enterrado de redes subterráneas de alumbrado exterior es:", 
-    "opciones": ["0,50 m", "0,30 m", "0,40 m"], 
-    "respuesta": "0,40 m" },
-
-  { "pregunta": "Un conductor destinado a la transmisión de energía eléctrica se denomina:", 
-    "opciones": ["Conductor activo", "Conductor pasivo", "Ambas son ciertas"], 
-    "respuesta": "Conductor activo" },
-
-  { "pregunta": "Si un local cumple condiciones tanto de suministro de socorro como de reserva, se instalará:", 
-    "opciones": ["Suministro duplicado", "Suministro de socorro", "Suministro de reserva"], 
-    "respuesta": "Suministro de reserva" },
-
-  { "pregunta": "Se considera muy baja tensión (MBT) cuando no se superan los valores de:", 
-    "opciones": ["Hasta 25V en AC y 50V en DC", "Hasta 24V en AC y 50V en DC", "Hasta 50V en AC y 75V en DC"], 
-    "respuesta": "Hasta 50V en AC y 75V en DC"},
-
-  { "pregunta": "La Línea General de Alimentación (LGA) es:", 
-    "opciones": ["Parte que une la CGP con las instalaciones interiores del usuario (incluidas las CGP).", "Parte de la red de distribución que alimenta la CGP.", "Enlace entre una CGP y las derivaciones individuales."], 
-    "respuesta": "Enlace entre una CGP y las derivaciones individuales." },
-
-  { "pregunta": "En el cuadro general, el interruptor con protección contra sobrecargas y cortocircuitos se denomina:", 
-    "opciones": ["Interruptor diferencial general", "Interruptor de sobretensiones", "Interruptor general automático de corte omnipolar"], 
-    "respuesta": "Interruptor general automático de corte omnipolar" },
-
-  { "pregunta": "La protección contra contactos directos se consigue mediante:", 
-    "opciones": ["Barreras/envolventes y conexiones equipotenciales locales no conectadas a tierra.", "Equipos Clase II o aislamiento equivalente.", "Alejamiento y separación eléctrica", "Todas las anteriores."], 
-    "respuesta": "Todas las anteriores." },
-
-  { "pregunta": "Calcúlese la previsión de cargas mínima de un edificio compuesto de 9 viviendas de electrificación elevada, 12 viviendas de electrificación básica, un local de 120 m2, y un garaje con ventilación forzada de 300 m2.",
-    "opciones": ["128,5 kW", "126,04 kW", "128,95 kW"],
-    "respuesta": "128,5 kW" },
-
-  { "pregunta": "Los contadores se colocarán concentrados en planta baja, entresuelo o primer sótano en edificios de hasta:", 
-    "opciones": ["16 plantas", "24 plantas", "12 plantas"], 
-    "respuesta": "12 plantas" },
-
-  { "pregunta": "La clasificación inicial de los suministros distingue entre:", 
-    "opciones": ["Normales y de reserva", "Normales y complementarios o de seguridad", "De socorro, de reserva y duplicados", "Normales y de socorro"], 
-    "respuesta": "Normales y complementarios o de seguridad" },
-
-  { "pregunta": "Las instalaciones de piscinas y fuentes requieren proyecto cuando:", 
-    "opciones": ["Potencia prevista > 10 kW", "Potencia prevista > 5 kW", "Siempre, cualquiera que sea su potencia"], 
-    "respuesta": "Potencia prevista > 5 kW" },
-
-  { "pregunta": "Un edificio con 16 contadores puede centralizarlos:", 
-    "opciones": ["Sólo en cuarto de contadores reglamentario", "En cuarto reglamentario o en armario destinado exclusivamente a este fin", "Sólo en armario destinado exclusivamente a este fin"], 
-    "respuesta": "En cuarto reglamentario o en armario destinado exclusivamente a este fin" },
-
-  { "pregunta": "El objeto de la instrucción sobre suministro de reserva es:", 
-    "opciones": ["Calcular ocupación como 1 persona/m² excluyendo pasillos y servicios", "Aplicarse a bibliotecas cualquiera que sea su ocupación", "Garantizar correcta instalación y funcionamiento de servicios de seguridad, en especial los de alumbrado"], 
-    "respuesta": "Garantizar correcta instalación y funcionamiento de servicios de seguridad, en especial los de alumbrado" },
-
-  { "pregunta": "Los límites de tensión nominal para aplicación de baja tensión son:", 
-    "opciones": ["CA ≤ 1000 V y CC ≤ 1500 V", "CA ≤ 1500 V y CC ≤ 1500 V", "CA ≤ 1000 V y CC ≤ 3500 V"], 
-    "respuesta": "CA ≤ 1000 V y CC ≤ 1500 V" },
-
-  { "pregunta": "Se consideran locales a temperatura elevada aquellos donde:", 
-    "opciones": ["La temperatura del aire se mantiene permanentemente > 50 ºC", "Puede sobrepasar frecuentemente 45 ºC o se mantiene > 40 ºC", "Puede sobrepasar frecuentemente 40 ºC o se mantiene > 35 ºC"], 
-    "respuesta": "Puede sobrepasar frecuentemente 40 ºC o se mantiene > 35 ºC" },
-
-  { "pregunta": "En edificios destinados a concentración de industrias, se considera un mínimo por planta de:", 
-    "opciones": ["125 W/m², mínimo por local 10350 W, Fs = 1", "125 W/m², mínimo por local 10350 W, Fs = 2", "125 W/m², mínimo por local 10350 W, Fs = 3"], 
-    "respuesta": "125 W/m², mínimo por local 10350 W, Fs = 1" },
-
-  {"pregunta": "En una instalación de enlace, la Línea General de Alimentación debe partir desde:",
+  {
+    "pregunta": "Según el REBT, ¿qué circuito de distribución interna se utiliza para alimentar la lavadora, el lavavajillas y el termo eléctrico?",
+    "opciones": [
+      "C2",
+      "C3",
+      "C4",
+      "C5"
+    ],
+    "respuesta": "C4",
+    "explicacion": "En la enumeración de circuitos de la ITC‑BT‑25 (apartado 2.3.1) se indica: \"C4 circuito de distribución interna, destinado a alimentar la lavadora, lavavajillas y termo eléctrico\", por lo que el circuito C4 es el destinado a esos receptores."
+  },
+  {
+    "pregunta": "Según el REBT, en una electrificación elevada, ¿qué circuito adicional se instala por cada 20 tomas de corriente de uso general o cuando la superficie útil de la vivienda supera los 160 m²?",
+    "opciones": [
+      "C6",
+      "C7",
+      "C8",
+      "C9"
+    ],
+    "respuesta": "C7",
+    "explicacion": "En el apartado 2.3.2 de la ITC‑BT‑25 se describen los circuitos de la electrificación elevada y se especifica que el circuito C7 es un \"circuito adicional del tipo C2, por cada 20 tomas de corriente de uso general o si la superficie útil de la vivienda es mayor de 160 m²\", por lo que C7 es el circuito exigido en esas circunstancias."
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuál de los siguientes circuitos está específicamente destinado a la infraestructura de recarga de vehículos eléctricos en viviendas?",
+    "opciones": [
+      "C10",
+      "C11",
+      "C12",
+      "C13"
+    ],
+    "respuesta": "C13",
+    "explicacion": "La ITC‑BT‑25 (apartado 2.3.2) detalla que el circuito C13 es un \"circuito adicional para la infraestructura de recarga de vehículos eléctricos, cuando esté prevista una o más plazas o espacios para el estacionamiento de vehículos eléctricos\"."
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué circuito de electrificación elevada se utiliza para la instalación de aire acondicionado cuando se prevé su uso?",
+    "opciones": [
+      "C8",
+      "C9",
+      "C10",
+      "C11"
+    ],
+    "respuesta": "C9",
+    "explicacion": "En la ITC‑BT‑25, apartado 2.3.2, la electrificación elevada incluye el circuito C9 como \"circuito de distribución interna, destinado a la instalación aire acondicionado\"."
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué circuito de la electrificación básica está destinado a alimentar las tomas de corriente de los cuartos de baño y las bases auxiliares de la cocina?",
+    "opciones": [
+      "C2",
+      "C4",
+      "C5",
+      "C6"
+    ],
+    "respuesta": "C5",
+    "explicacion": "El apartado 2.3.1 de la ITC‑BT‑25 indica que el circuito C5 es el \"circuito de distribución interna, destinado a alimentar tomas de corriente de los cuartos de baño, así como las bases auxiliares del cuarto de cocina\"."
+  },
+  {
+    "pregunta": "Según el REBT, en una instalación interior de vivienda, ¿cuántos circuitos como máximo pueden protegerse con un mismo interruptor diferencial?",
+    "opciones": [
+      "Tres circuitos",
+      "Cinco circuitos",
+      "Siete circuitos",
+      "Diez circuitos"
+    ],
+    "respuesta": "Cinco circuitos",
+    "explicacion": "La ITC‑BT‑25 en el punto 2.3.2 señala que tanto en electrificación básica como en la elevada se colocará, como mínimo, un interruptor diferencial por cada cinco circuitos instalados."
+  },
+  {
+    "pregunta": "Según el REBT, para el circuito destinado a la recarga de vehículos eléctricos (C13) en una vivienda unifamiliar, ¿qué requisito se aplica al interruptor diferencial?",
+    "opciones": [
+      "Debe compartir el mismo diferencial que los demás circuitos de la vivienda",
+      "No es necesario ningún interruptor diferencial",
+      "Debe instalarse un interruptor diferencial exclusivo con las características de la ITC‑BT‑52",
+      "Puede utilizarse cualquier diferencial mientras tenga sensibilidad de 500 mA"
+    ],
+    "respuesta": "Debe instalarse un interruptor diferencial exclusivo con las características de la ITC‑BT‑52",
+    "explicacion": "El apartado 2.3.2 de la ITC‑BT‑25 establece que en el circuito C13 \"se colocará un interruptor diferencial exclusivo para éste con las características especificadas en la ITC‑BT‑52\"."
+  },
+  {
+    "pregunta": "Según el REBT, en la fórmula I = n × Ia × Fs × Fu para calcular la intensidad prevista de cada circuito, ¿qué representa el factor Fs?",
+    "opciones": [
+      "Factor de servicio",
+      "Factor de simultaneidad",
+      "Factor de seguridad",
+      "Factor de uso máximo"
+    ],
+    "respuesta": "Factor de simultaneidad",
+    "explicacion": "La ITC‑BT‑25, apartado 3, explica que la intensidad de cada circuito se calcula como I = n × Ia × Fs × Fu, donde Fs es el \"factor de simultaneidad\" que relaciona los receptores conectados simultáneamente sobre el total."
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué caída de tensión máxima se admite en cada circuito interior de vivienda al dimensionar la sección de los conductores?",
+    "opciones": [
+      "2 %",
+      "3 %",
+      "5 %",
+      "6 %"
+    ],
+    "respuesta": "3 %",
+    "explicacion": "En el apartado 3 de la ITC‑BT‑25 se indica que los conductores serán de cobre y su sección estará condicionada a que la caída de tensión sea como máximo el 3 %."
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué factor de utilización se asigna al circuito C1?",
+    "opciones": [
+      "0,25",
+      "0,50",
+      "0,75",
+      "1,00"
+    ],
+    "respuesta": "0,50",
+    "explicacion": "La Tabla 1 de la ITC‑BT‑25 recoge las características eléctricas de los circuitos y señala para el circuito C1 (iluminación) un factor de utilización Fu = 0,5."
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuál es el número máximo de puntos de utilización para el circuito C2 de tomas de corriente de uso general?",
+    "opciones": [
+      "10",
+      "20",
+      "25",
+      "30"
+    ],
+    "respuesta": "20",
+    "explicacion": "En la Tabla 1 de la ITC‑BT‑25 del apartado 3 se indica que para el circuito C2 (tomas de uso general) el número máximo de puntos de utilización por circuito es 20."
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué intensidad nominal debe tener el interruptor automático del circuito C3?",
+    "opciones": [
+      "16 A",
+      "20 A",
+      "25 A",
+      "40 A"
+    ],
+    "respuesta": "25 A",
+    "explicacion": "La Tabla 1 especifica que el circuito C3, destinado a alimentar la cocina y el horno, debe estar protegido por un interruptor automático de 25 A."
+  },
+  {
+  "pregunta": "Según el REBT, cuando el circuito C4 se desdobla en circuitos independientes para lavadora, lavavajillas y termo eléctrico, ¿qué sección mínima deben tener los conductores de cada circuito?",
   "opciones": [
-    "La Caja General de Protección",
-    "El Cuadro General de Mando y Protección",
-    "La Centralización de contadores"],
-    "respuesta": "La Caja General de Protección" },
+    "1,5 mm²",
+    "2,5 mm²",
+    "4 mm²",
+    "6 mm²"
+  ],
+  "respuesta": "2,5 mm²",
+  "explicacion": "La ITC-BT-25 permite el desdoblamiento del circuito C4. En ese caso, cada circuito independiente puede realizarse con conductores de sección mínima 2,5 mm², conforme a la Tabla 1 de la ITC-BT-25."
+},
+  {
+    "pregunta": "Según el REBT, ¿cuál es la potencia máxima permisible por circuito para los circuitos de calefacción (C8) y de aire acondicionado (C9)?",
+    "opciones": [
+      "3 000 W",
+      "5 750 W",
+      "9 200 W",
+      "11 500 W"
+    ],
+    "respuesta": "5 750 W",
+    "explicacion": "En la Tabla 1 se añade una nota (2) que indica que la potencia máxima permisible por circuito para C8 (calefacción) y C9 (aire acondicionado) es de 5 750 W."
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué factor de simultaneidad corresponde al circuito C2 de tomas de corriente de uso general?",
+    "opciones": [
+      "0,20",
+      "0,50",
+      "0,66",
+      "1,00"
+    ],
+    "respuesta": "0,20",
+    "explicacion": "La Tabla 1 del REBT asigna al circuito C2 un factor de simultaneidad Fs = 0,2."
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuál es la sección mínima de los conductores para el circuito C1 (iluminación)?",
+    "opciones": [
+      "1,0 mm²",
+      "1,5 mm²",
+      "2,5 mm²",
+      "4,0 mm²"
+    ],
+    "respuesta": "1,5 mm²",
+    "explicacion": "La Tabla 1 muestra que el circuito C1 de iluminación debe emplear conductores de sección mínima 1,5 mm²."
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuántos puntos de utilización como máximo puede tener el circuito C4?",
+    "opciones": [
+      "2 puntos",
+      "3 puntos",
+      "4 puntos",
+      "6 puntos"
+    ],
+    "respuesta": "3 puntos",
+    "explicacion": "La Tabla 1 indica que el circuito C4, destinado a lavadora, lavavajillas y termo eléctrico, admite como máximo 3 puntos de utilización."
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué factor de simultaneidad se aplica al circuito C5 (destinado a baño y cocina)?",
+    "opciones": [
+      "0,20",
+      "0,40",
+      "0,50",
+      "0,66"
+    ],
+    "respuesta": "0,40",
+    "explicacion": "El circuito C5 para baño y cocina tiene un factor de simultaneidad Fs = 0,4 según la Tabla 1 de la ITC‑BT‑25."
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué circuito utiliza un interruptor automático de 10 A y conductores de 1,5 mm²?",
+    "opciones": [
+      "C1 (iluminación)",
+      "C2 (tomas de uso general)",
+      "C3 (cocina y horno)",
+      "C4 (lavadora, lavavajillas y termo)"
+    ],
+    "respuesta": "C1 (iluminación)",
+    "explicacion": "La Tabla 1 muestra que el circuito C1 para iluminación emplea conductores de 1,5 mm² y está protegido con un interruptor automático de 10 A."
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué esquema de conexión y tensiones de alimentación deben adoptarse para las instalaciones de viviendas alimentadas por una red de distribución pública de baja tensión?",
+    "opciones": [
+      "Esquema TT con 230 V en monofásica y 230/400 V en trifásica",
+      "Esquema IT con 110 V en monofásica y 230 V en trifásica",
+      "Esquema TN‑C con 400/690 V",
+      "Esquema TN‑S con 127/220 V"
+    ],
+    "respuesta": "Esquema TT con 230 V en monofásica y 230/400 V en trifásica",
+    "explicacion": "La ITC‑BT‑26, apartado 2, establece que las instalaciones de las viviendas que están alimentadas por una red de distribución pública de baja tensión se consideran alimentadas según un esquema TT y a una tensión de 230 V en alimentación monofásica y 230/400 V en alimentación trifásica."
+  },
+  {
+    "pregunta": "Según el REBT, ¿cómo debe ejecutarse la toma de tierra de protección en una nueva edificación de viviendas?",
+    "opciones": [
+      "Mediante un cable desnudo de cobre que forme un anillo cerrado alrededor del edificio", 
+      "Uniendo una pica de tierra a las instalaciones interiores sin anillo", 
+      "Utilizando únicamente las tuberías de agua como toma de tierra", 
+      "Conectando el neutro al suelo sin conductor de protección"
+    ],
+    "respuesta": "Mediante un cable desnudo de cobre que forme un anillo cerrado alrededor del edificio",
+    "explicacion": "La ITC‑BT‑26 indica que en toda nueva edificación se establecerá una toma de tierra de protección instalando un cable rígido de cobre desnudo, formando un anillo cerrado que rodee todo el perímetro del edificio, de manera que la resistencia de tierra pueda mantenerse baja."
+  },
+  {
+    "pregunta": "Según el REBT, en la rehabilitación o reforma de edificios existentes, ¿cómo puede realizarse la toma de tierra de protección?",
+    "opciones": [
+      "Se debe instalar siempre un nuevo anillo de cobre alrededor del edificio", 
+      "Puede realizarse utilizando las armaduras de los cimientos o varias líneas equipotenciales de características adecuadas", 
+      "Basta con conectar el neutro de la instalación a la estructura metálica del edificio", 
+      "No se puede realizar si el edificio es antiguo"
+    ],
+    "respuesta": "Puede realizarse utilizando las armaduras de los cimientos o varias líneas equipotenciales de características adecuadas",
+    "explicacion": "La ITC‑BT‑26, apartado 3.1, permite que en rehabilitación de edificios existentes la toma de tierra se pueda realizar utilizando las armaduras de los cimientos o con varias tomas de tierra que se interconecten mediante conductores de características adecuadas."
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué sección mínima debe tener el conductor de la línea principal de tierra (o embarrado de protección) en una instalación de vivienda?",
+    "opciones": [
+      "10 mm² de cobre",
+      "16 mm² de cobre",
+      "25 mm² de cobre",
+      "50 mm² de cobre"
+    ],
+    "respuesta": "16 mm² de cobre",
+    "explicacion": "En la ITC‑BT‑26, apartado 3.4, se indica que las líneas principales de tierra estarán constituidas por conductores de cobre de sección igual o superior a la indicada en la Instrucción ITC‑BT‑19 y que en las líneas principales de puesta a tierra la sección mínima será de 16 milímetros cuadrados."
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué colores deben utilizarse para identificar los conductores de equipotencialidad en las instalaciones interiores de viviendas?",
+    "opciones": [
+      "Azul claro",
+      "Verde‑amarillo",
+      "Marrón",
+      "Negro"
+    ],
+    "respuesta": "Verde‑amarillo",
+    "explicacion": "La ITC‑BT‑26 especifica que los conductores de equipotencialidad y los conductores de protección deberán identificarse con el doble color verde‑amarillo."
+  },
+  {
+    "pregunta": "Según el REBT, ¿pueden utilizarse tuberías de agua, gas o calefacción como conductores de protección en las instalaciones interiores de viviendas?",
+    "opciones": [
+      "Sí, siempre que se instalen abrazaderas",
+      "Sí, únicamente en instalaciones antiguas", 
+      "No, esos elementos no pueden utilizarse como conductores de protección", 
+      "Sí, si se pintan de verde‑amarillo"
+    ],
+    "respuesta": "No, esos elementos no pueden utilizarse como conductores de protección",
+    "explicacion": "El apartado 3.4 de la ITC‑BT‑26 señala que no podrán utilizarse como conductores de protección las tuberías de agua, gas, calefacción o desagües, ni las conducciones de evacuación de humos o basuras."
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué tensión asignada mínima deben tener los conductores activos utilizados en las instalaciones interiores de viviendas?",
+    "opciones": [
+      "300/500 V",
+      "450/750 V",
+      "0,6/1 kV",
+      "1,5 kV"
+    ],
+    "respuesta": "450/750 V",
+    "explicacion": "La ITC‑BT‑26, apartado 6.1.1, establece que los conductores activos serán de cobre, aislados y con una tensión asignada de 450/750 V, como mínimo."
+  },
+  {
+    "pregunta": "Según el REBT, ¿cómo deben identificarse los conductores neutro, de protección y de fase en una instalación interior de vivienda?",
+    "opciones": [
+      "Neutro: verde‑amarillo; Protección: azul claro; Fases: marrón o negro",
+      "Neutro: azul claro; Protección: verde‑amarillo; Fases: marrón o negro",
+      "Neutro: negro; Protección: azul claro; Fases: verde‑amarillo",
+      "Neutro: marrón; Protección: negro; Fases: azul claro"
+    ],
+    "respuesta": "Neutro: azul claro; Protección: verde‑amarillo; Fases: marrón o negro",
+    "explicacion": "El apartado 6.2 de la ITC‑BT‑26 dispone que el conductor neutro se identificará por el color azul claro, el conductor de protección por el doble color verde‑amarillo y los conductores de fase por los colores marrón o negro."
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué sistemas de instalación se consideran admisibles para las instalaciones interiores de viviendas?",
+    "opciones": [
+      "Cables aislados bajo tubo curvable, cables aislados bajo tubo flexible, cables aislados bajo canal protectora cerrada y canalizaciones prefabricadas",
+      "Cables aéreos en suspensión dentro de la vivienda",
+      "Cables sin aislamiento empotrados directamente en las paredes",
+      "Cables desnudos sobre aisladores de porcelana"
+    ],
+    "respuesta": "Cables aislados bajo tubo curvable, cables aislados bajo tubo flexible, cables aislados bajo canal protectora cerrada y canalizaciones prefabricadas",
+    "explicacion": "La ITC‑BT‑26, apartado 7.1, señala que las instalaciones se realizarán mediante algunos de los siguientes sistemas: cables aislados bajo tubo curvable, cables aislados bajo tubo flexible, cables aislados bajo canal protectora cerrada y canalizaciones prefabricadas."
+  },
+  {
+    "pregunta": "Según el REBT, ¿cómo se delimita el volumen 0 en un local que contiene una bañera o ducha?",
+    "opciones": [
+      "Es la zona comprendida entre la bañera y un plano horizontal situado a 0,05 m por encima del suelo",
+      "Es la zona situada a menos de 0,60 m alrededor de la bañera, hasta 2,25 m de altura",
+      "Es la zona exterior de la bañera hasta 2,40 m del borde",
+      "Comprende toda la superficie del cuarto de baño"
+    ],
+    "respuesta": "Es la zona comprendida entre la bañera y un plano horizontal situado a 0,05 m por encima del suelo",
+    "explicacion": "La ITC‑BT‑27 define el volumen 0 como el interior de la bañera o ducha y lo delimita por el suelo y un plano horizontal situado a 0,05 m por encima del suelo."
+  },
+  {
+    "pregunta": "Según el REBT, ¿a qué altura sobre el suelo se limita verticalmente el volumen 1 en locales con bañera o ducha?",
+    "opciones": [
+      "1,50 m",
+      "2,25 m",
+      "2,40 m",
+      "3,00 m"
+    ],
+    "respuesta": "2,25 m",
+    "explicacion": "El apartado 2.1.2 de la ITC‑BT‑27 establece que el volumen 1 está limitado por el plano horizontal superior al volumen 0 y por un plano horizontal situado a 2,25 m por encima del suelo."
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué distancia lateral delimita el volumen 2 respecto del volumen 1 en un cuarto de baño?",
+    "opciones": [
+      "0,30 m",
+      "0,60 m",
+      "1,20 m",
+      "2,40 m"
+    ],
+    "respuesta": "0,60 m",
+    "explicacion": "La ITC‑BT‑27 indica que el volumen 2 está limitado por el plano vertical exterior al volumen 1 y por un plano vertical paralelo situado a una distancia de 0,60 m."
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué distancia lateral delimita el volumen 3 respecto del volumen 2 en locales con bañera o ducha?",
+    "opciones": [
+      "0,60 m",
+      "1,20 m",
+      "2,40 m",
+      "3,00 m"
+    ],
+    "respuesta": "2,40 m",
+    "explicacion": "El apartado 2.1.4 de la ITC‑BT‑27 establece que el volumen 3 está limitado por el plano vertical exterior del volumen 2 y por un plano vertical paralelo situado a 2,40 m de éste."
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué tipo de cable debe utilizarse para la conexión de bañeras de hidromasaje o cabinas de ducha con circuitos eléctricos?",
+    "opciones": [
+      "Cable flexible tipo H03VV‑F de 300/300 V",
+      "Cable con cubierta H05VV‑F o cable bajo tubo aislante con conductores de 450/750 V",
+      "Cable coaxial para televisión",
+      "No se requiere ningún tipo de cable especial"
+    ],
+    "respuesta": "Cable con cubierta H05VV‑F o cable bajo tubo aislante con conductores de 450/750 V",
+    "explicacion": "La ITC‑BT‑27, apartado 3, indica que la conexión de las bañeras y cabinas se realizará mediante un cable con cubierta de características no menores que H05VV‑F o mediante cable bajo tubo aislante con conductores aislados de tensión asignada 450/750 V."
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué grado de protección mínima deben garantizar las cajas de conexión situadas en las paredes o el suelo de un local con bañera de hidromasaje o cabina de ducha?",
+    "opciones": [
+      "IPX1",
+      "IPX4",
+      "IPX5",
+      "IPX7"
+    ],
+    "respuesta": "IPX5",
+    "explicacion": "El apartado 3 de la ITC‑BT‑27 exige que todas las cajas de conexión localizadas en paredes y suelo del local bajo la bañera o cabina de ducha, por donde discurren tubos o depósitos de agua, garanticen un grado de protección mínimo IPX5."
+  },
+  {
+    "pregunta": "Según el REBT, ¿están permitidos los empalmes en los cables y canalizaciones que discurren por los volúmenes de una bañera o ducha?",
+    "opciones": [
+      "Sí, sin restricciones",
+      "Sí, siempre que se utilicen bornas de conexión rápidas",
+      "No, salvo que los empalmes se realicen en cajas con el grado de protección requerido",
+      "No, en ningún caso"
+    ],
+    "respuesta": "No, salvo que los empalmes se realicen en cajas con el grado de protección requerido",
+    "explicacion": "El apartado 3 de la ITC‑BT‑27 establece que no se admiten empalmes en cables y canalizaciones que discurren por los volúmenes determinados, salvo que estos empalmes se realicen en cajas de conexión que cumplan el grado de protección mínimo IPX5."
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué condición debe cumplirse entre la resistencia de puesta a tierra y la corriente de defecto en un esquema IT para que el contacto sea seguro?",
+    "opciones": [
+      "R × I_A ≥ U_L",
+      "R × I_A ≤ U_L",
+      "R + I_A ≥ U_L",
+      "R + I_A ≤ U_L"
+    ],
+    "respuesta": "R × I_A ≤ U_L",
+    "explicacion": "En el esquema IT aislado de tierra, la ITC‑BT‑08 indica que debe satisfacerse la condición siguiente: R_A × I_A ≤ U_L, donde R_A es la suma de las resistencias de toma de tierra y de los conductores de protección y I_A la corriente de defecto; U_L es la tensión de contacto límite convencional."
+  },
+  {
+    "pregunta": "Según el REBT, en un esquema IT aislado de tierra, ¿es necesario interrumpir la alimentación inmediatamente en caso de un primer defecto franco entre un conductor de fase y una masa?",
+    "opciones": [
+      "Sí, siempre debe cortarse la alimentación de forma inmediata",
+      "No, la corriente de fallo es tan pequeña que no requiere ninguna medida",
+      "No es imperativo el corte, pero deben tomarse medidas para evitar cualquier peligro",
+      "Solo se corta la alimentación si el defecto ocurre en el conductor neutro"
+    ],
+    "respuesta": "No es imperativo el corte, pero deben tomarse medidas para evitar cualquier peligro",
+    "explicacion": "La ITC‑BT‑08 señala que en caso de un solo defecto a masa o a tierra en un esquema IT la corriente de fallo es de poca intensidad y no es imperativo el corte; sin embargo, se deben tomar medidas para evitar cualquier peligro."
+  },
+  {
+  "pregunta": "Según el REBT, ¿cómo se caracteriza la conexión a tierra de la alimentación en un sistema de distribución IT?",
+  "opciones": [
+    "Existe un punto de la alimentación conectado directamente a tierra",
+    "Uno de los conductores de la alimentación se conecta permanentemente a tierra",
+    "La alimentación no tiene ningún punto conectado directamente a tierra",
+    "Todos los puntos de la alimentación deben conectarse a tierra mediante el conductor de protección"
+  ],
+  "respuesta": "La alimentación no tiene ningún punto conectado directamente a tierra",
+  "explicacion": "La ITC-BT-08, apartado 1.3 (Esquema IT), establece que el esquema IT es aquel en el que ningún punto de la alimentación está conectado directamente a tierra."
+},
+  {
+    "pregunta": "Según el REBT, ¿cómo deben conectarse las masas en un esquema IT aislado de tierra?",
+    "opciones": [
+      "Deben conectarse a tierra individualmente o por grupos",
+      "Deben dejarse sin conexión a tierra", 
+      "Deben conectarse al neutro del transformador", 
+      "Deben conectarse entre sí pero no a tierra"
+    ],
+    "respuesta": "Deben conectarse a tierra individualmente o por grupos",
+    "explicacion": "En el esquema IT, la ITC‑BT‑08 indica que las masas deben conectarse a tierra, bien sea individualmente o por grupos."
+  }
+];
 
-  { "pregunta": "¿Cuáles son las bases de tomas de corriente fijas utilizadas en las instalaciones receptoras de nueva construcción?",
-    "opciones": ["Las de figura ESB 10-5b y C1b de la norma UNE 20.315.", "Las de figura C2a, C3a y ESB 25-5a de la norma UNE 20.315.", "Las de figura ESB 10-5a y ESC 10-1a de la norma UNE 20.315."],
-    "respuesta": "Las de figura C2a, C3a y ESB 25-5a de la norma UNE 20.315." },
-
-  { "pregunta": "En vivienda, se instalará al menos un interruptor diferencial por cada:", 
-    "opciones": ["4 circuitos instalados", "3 circuitos instalados", "5 circuitos instalados"], 
-    "respuesta": "5 circuitos instalados" },
-
-  { "pregunta": "En alumbrado exterior, la tensión de contacto máxima admisible en partes accesibles será:", 
-    "opciones": ["50 V", "24 V", "50 V o 24 V en función del umbral del diferencial"], 
-    "respuesta": "24 V" },
-
-  { 
-  "pregunta": "En un edificio de viviendas, ¿cuál es la caída máxima de tensión permitida en la Línea General de Alimentación respecto a la tensión nominal?", 
-  "opciones": ["1,5 %", "0,5 %", "2 %"], 
-  "respuesta": "0,5 %" },
 
 
-  { "pregunta": "En redes de tierra de alumbrado exterior debe colocarse un electrodo cada:", 
-    "opciones": ["5 soportes de luminarias", "3 soportes de luminarias", "7 soportes de luminarias"], 
-    "respuesta": "5 soportes de luminarias" },
 
-  { "pregunta": "Las modificaciones o reparaciones de una instalación requerirán cumplir el reglamento cuando afecten a más del:", 
-    "opciones": ["45% de la potencia instalada", "50% de la potencia instalada", "20% de la potencia instalada"], 
-    "respuesta": "50% de la potencia instalada" },
 
-  { "pregunta": "Las dimensiones mínimas del local de centralización de contadores son:", 
-    "opciones": ["Altura ≥ 2,30 m y anchura mínima en paredes ocupadas por contadores ≥ 1,50 m", "Altura ≥ 2,20 m y anchura ≥ 1,00 m", "Altura ≥ 2,70 m y anchura ≥ 2,00 m"], 
-    "respuesta": "Altura ≥ 2,30 m y anchura mínima en paredes ocupadas por contadores ≥ 1,50 m" },
 
-  { "pregunta": "La unidad que contiene el embarrado de protección y bornes de salida en una centralización de contadores es:", 
-    "opciones": ["Unidad funcional de mando", "Unidad funcional de embarrado general y fusibles de seguridad", "Unidad funcional de embarrado de protección y bornes de salida"], 
-    "respuesta": "Unidad funcional de embarrado de protección y bornes de salida" },
 
-  { "pregunta": "Para dispositivos de control de tensión por defecto, la toma de tierra auxiliar debe:", 
-    "opciones": ["Ser eléctricamente independiente de elementos metálicos puestos a tierra", "Estar unida eléctricamente a todos los elementos metálicos puestos a tierra", "Conectarse al conductor de protección o a los elementos conectados a él"], 
-    "respuesta": "Ser eléctricamente independiente de elementos metálicos puestos a tierra" },
 
-  { "pregunta": "En redes de alimentación de alumbrado exterior, la sección mínima exigida es:", 
-    "opciones": ["6 mm² en subterráneas, 4 mm² en aéreas y 1,5 mm² en control y auxiliares", "6 mm² en subterráneas, 6 mm² en aéreas y 2,5 mm² en control y auxiliares", "6 mm² en subterráneas, 4 mm² en aéreas y 2,5 mm² en control y auxiliares"], 
-    "respuesta": "6 mm² en subterráneas, 4 mm² en aéreas y 2,5 mm² en control y auxiliares" },
 
-  { "pregunta": "El número de circuitos independientes en viviendas es:", 
-    "opciones": ["Electrificación básica y elevada: 5 y 12", "Electrificación baja y alta: 6 y 12", "Electrificación básica y elevada: según necesidad"], 
-    "respuesta": "Electrificación básica y elevada: 5 y 12" },
 
-  { "pregunta": "En el alumbrado de evacuación, la iluminancia mínima en equipos de protección contra incendios y cuadros de distribución de alumbrado debe ser:", 
-    "opciones": ["1 lux", "5 lux", "0,5 lux"], 
-    "respuesta": "5 lux" }];
 
     /* ===== Estado ===== */
     let preguntasAleatorias = [];
@@ -208,11 +492,14 @@
     let seleccionUsuario = null;
     let respondido = false;
 
-    // Tiempo
-    const DURACION_SEG = 120 * 60; // 120 minutos
-    let inicioTiempo = null;
-    let intervaloTiempo = null;
-    let tiempoAgotado = false;
+// Tiempo del examen
+const DURACION_MIN = 120;          // Duración total en minutos (2 horas)
+const DURACION_SEG = DURACION_MIN * 60;
+
+let inicioTiempo = null;
+let intervaloTiempo = null;
+let tiempoAgotado = false;
+
 
     /* ===== Utilidades ===== */
     const mezclar = (arr) => { for (let i = arr.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
@@ -227,10 +514,12 @@
 
     function calcularPuntuacion(){
       const total = preguntasAleatorias.length;
-      const puntos = aciertos - 0.5 * errores; // penalización
-      const porcentaje = clamp0((puntos / total) * 100);
-      const apto = porcentaje >= 70;
-      return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), puntos, porcentaje, apto };
+      const penalizacion = Math.floor(errores / 2);
+      const validasNetas = Math.max(0, aciertos - penalizacion);
+      const puntos = validasNetas * 0.5;
+      const porcentaje = clamp0((validasNetas / total) * 100);
+      const apto = porcentaje >= 80;
+      return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
     }
 
     /* ===== Render ===== */
@@ -251,6 +540,7 @@
       const ss = fmt2(restantes%60);
 
       const { puntos } = calcularPuntuacion();
+      const totalPuntos = preguntasAleatorias.length * 0.5;
 
       const relojClass =
         restantes <= 60 ? 'text-red-700' :
@@ -261,7 +551,7 @@
         <span>Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
         <span class="text-green-600">Aciertos: ${aciertos}</span>
         <span class="text-red-600">Fallos: ${errores}</span>
-        <span>Puntos: ${puntos.toFixed(2)}</span>
+        <span>Puntos: ${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</span>
         <span class="font-mono ${relojClass}">⏳ ${mm}:${ss}</span>`;
 
       if (restantes === 0 && !tiempoAgotado){
@@ -293,12 +583,15 @@
       seleccionUsuario=null; respondido=false;
       document.getElementById("pregunta").textContent = q.pregunta;
       renderOpciones(q.opciones);
+
       document.getElementById("acciones").innerHTML =
         `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
-           <span>Elige una respuesta (teclas 1–3 y Enter).</span>
+           <span>Elige una respuesta (teclas 1–4 y Enter).</span>
            <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
          </div>`;
-      setProgreso(); actualizarContador();
+
+      setProgreso();
+      actualizarContador();
     }
 
     function seleccionarOpcion(opcion){
@@ -309,7 +602,9 @@
         if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
       });
       const btn = document.getElementById('btn-contestar');
-      btn.disabled=false; btn.classList.remove('opacity-50','cursor-not-allowed'); btn.onclick=verificarRespuesta;
+      btn.disabled=false;
+      btn.classList.remove('opacity-50','cursor-not-allowed');
+      btn.onclick=verificarRespuesta;
     }
 
     function verificarRespuesta(){
@@ -321,19 +616,45 @@
       document.querySelectorAll("#opciones .opcion").forEach(b=>{
         b.disabled=true; b.classList.remove('ring','ring-yellow-300');
         const val=b.dataset.valor;
-        if (val===actual.respuesta){ b.classList.add('bg-green-600','hover:bg-green-700'); b.innerHTML=`✅ <span class="font-semibold">${val}</span>`; }
-        else if (val===seleccionUsuario && !ok){ b.classList.add('bg-red-600','hover:bg-red-700'); b.innerHTML=`❌ <span class="font-semibold">${val}</span>`; }
-        else { b.classList.add('bg-blue-500'); }
+        if (val===actual.respuesta){
+          b.classList.add('bg-green-600','hover:bg-green-700');
+          b.innerHTML=`✅ <span class="font-semibold">${val}</span>`;
+        } else if (val===seleccionUsuario && !ok){
+          b.classList.add('bg-red-600','hover:bg-red-700');
+          b.innerHTML=`❌ <span class="font-semibold">${val}</span>`;
+        } else {
+          b.classList.add('bg-blue-500');
+        }
       });
 
       ok ? aciertos++ : errores++;
-      historial.push({pregunta:actual.pregunta, opciones:actual.opciones, correcta:actual.respuesta, elegida:seleccionUsuario});
 
+      historial.push({
+        pregunta:actual.pregunta,
+        opciones:actual.opciones,
+        correcta:actual.respuesta,
+        elegida:seleccionUsuario,
+        explicacion:actual.explicacion
+      });
+
+      /* === NUEVO: mostrar la explicación debajo del botón === */
       document.getElementById("acciones").innerHTML =
-        `<div class="mt-4 flex items-center justify-end gap-3">
-           <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">Siguiente</button>
+        `<div class="mt-4 flex flex-col gap-3">
+
+           <div class="flex items-center justify-end">
+             <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">
+               Siguiente
+             </button>
+           </div>
+
+           <div id="explicacion" class="text-sm text-slate-700 bg-slate-100 border-l-4 border-blue-600 p-3 rounded-md">
+             ${actual.explicacion || "Sin referencia disponible"}
+           </div>
+
          </div>`;
-      actualizarContador(); setProgreso();
+
+      actualizarContador();
+      setProgreso();
     }
 
     const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
@@ -345,12 +666,15 @@
     }
 
     function abrirModalFin(){
-      const { total, respondidas, enBlanco, puntos, porcentaje, apto } = calcularPuntuacion();
+      const { total, respondidas, enBlanco, penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
       const modal = document.getElementById('modal-fin');
+      const totalPuntos = total * 0.5;
       document.getElementById('modal-resumen').innerHTML = `
         <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
         <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
-        <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${total}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas</p>
+        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong></p>
+        <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
         <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
       `;
       modal.classList.remove('hidden');
@@ -364,34 +688,68 @@
       const mm = fmt2(Math.floor(transcurrido/60));
       const ss = fmt2(transcurrido%60);
 
-      const { puntos, porcentaje, apto } = calcularPuntuacion();
+      const { penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
 
       const detalle = historial.map(h=>`
         <div class='mb-2 border border-slate-200 rounded-lg p-3'>
           <p class='font-semibold mb-2'>${h.pregunta}</p>
           <div class='flex flex-wrap gap-2'>
             ${h.opciones.map(op=>{
-              if (op===h.elegida && op===h.correcta) return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
-              if (op===h.elegida && op!==h.correcta) return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
-              if (op===h.correcta && op!==h.elegida) return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              if (op===h.elegida && op===h.correcta)
+                return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op===h.elegida && op!==h.correcta)
+                return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op===h.correcta && op!==h.elegida)
+                return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
               return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
             }).join('')}
           </div>
-        </div>`).join('');
+          <div class='mt-2 text-sm text-slate-600 bg-slate-100 border-l-4 border-blue-600 p-2 rounded-md'>
+            📘 Explicación: ${h.explicacion}
+          </div>
+        </div>
+      `).join('');
+
+      const totalPuntos = total * 0.5;
 
       document.getElementById("test").innerHTML = `
         <div class="space-y-3">
-          <h2 class="text-2xl font-extrabold">Resultado del test <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">(${apto?'APTO ✅':'NO APTO ❌'})</span></h2>
-          <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Total: ${total}</p>
-          <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span> • Puntuación: <strong>${puntos.toFixed(2)} / ${total}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+          <h2 class="text-2xl font-extrabold">Resultado del test 
+            <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">
+              (${apto?'APTO ✅':'NO APTO ❌'})
+            </span>
+          </h2>
+
+          <p class="text-slate-700">
+            Aciertos: <strong class="text-green-700">${aciertos}</strong> • 
+            Fallos: <strong class="text-red-700">${errores}</strong> • 
+            Penalización: <strong>-${penalizacion}</strong>
+          </p>
+
+          <p class="text-slate-700">
+            Válidas netas: <strong>${validasNetas}</strong> / ${total} • 
+            Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> 
+            (<strong>${porcentaje.toFixed(2)}%</strong>)
+          </p>
+
+          <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span></p>
+
           <hr class="my-3 border-slate-200">
+
           <h3 class="text-lg font-bold">Detalle de preguntas</h3>
-          <div class="max-h-[50vh] overflow-auto pr-1">${detalle}</div>
+
+          <div class="max-h-[50vh] overflow-auto pr-1">
+            ${detalle}
+          </div>
         </div>
 
         <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
-          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
-          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">Volver al inicio</a>
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">
+            Volver a intentar
+          </button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">
+            Volver al inicio
+          </a>
         </div>`;
     }
 
@@ -400,8 +758,14 @@
       if (tiempoAgotado) return;
       if (respondido){ if (e.key==='Enter') siguientePregunta(); return; }
       const map={'1':0,'2':1,'3':2,'4':3};
-      if (map[e.key]!==undefined){ const b=document.querySelectorAll('#opciones .opcion')[map[e.key]]; if (b) b.click(); }
-      if (e.key==='Enter'){ const b=document.getElementById('btn-contestar'); if (b && !b.disabled) b.click(); }
+      if (map[e.key]!==undefined){
+        const b=document.querySelectorAll('#opciones .opcion')[map[e.key]];
+        if (b) b.click();
+      }
+      if (e.key==='Enter'){
+        const b=document.getElementById('btn-contestar');
+        if (b && !b.disabled) b.click();
+      }
     }
 
     window.onload = ()=>{
@@ -412,6 +776,7 @@
       document.addEventListener('keydown', handleKey);
     };
   </script>
+
 </head>
 
 <body class="bg-gray-100 text-gray-900 p-4">
@@ -426,7 +791,7 @@
       </div>
     </div>
 
-    <h1 class="text-3xl font-extrabold mb-3 text-center">Examen Test REBT</h1>
+    <h1 class="text-3xl font-extrabold mb-3 text-center">TEST REBT</h1>
     <p id="pregunta" class="mb-4 text-lg text-center"></p>
 
     <div id="opciones" class="flex flex-col gap-3"></div>
@@ -434,7 +799,7 @@
   </div>
 
   <div class="mt-6 text-center">
-    <a href="Test_completos_REBT.html" class="inline-block bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">Cancelar</a>
+    <a href="Test_por_ITC_del_REBT.html" class="inline-block bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">Cancelar</a>
   </div>
 
   <!-- Modal Tiempo Agotado -->
@@ -448,5 +813,6 @@
       </div>
     </div>
   </div>
+
 </body>
 </html>
