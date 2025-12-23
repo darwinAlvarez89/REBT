@@ -5,19 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Examen Test REBT</title>
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RSH4ZW3VT2');
+  </script>
 
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-RSH4ZW3VT2');
-</script>
-
-  
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -28,49 +24,466 @@
   </style>
 
   <script>
-    /* ===== Banco de preguntas ===== */
-    const preguntas = [
-      { pregunta: "¿Cuál es el objetivo principal del REBT?", opciones: ["Regular la producción de energía eléctrica", "Asegurar la eficiencia energética", "Garantizar la seguridad de personas y bienes", "Controlar la comercialización de equipos eléctricos"], respuesta: "Garantizar la seguridad de personas y bienes" },
-      { pregunta: "¿Qué tipo de instalaciones regula el REBT?", opciones: ["Instalaciones de media y alta tensión", "Instalaciones eléctricas en baja tensión", "Solo instalaciones domésticas", "Instalaciones industriales exclusivamente"], respuesta: "Instalaciones eléctricas en baja tensión" },
-      { pregunta: "¿Qué documento debe acompañar siempre a la instalación para su puesta en servicio?", opciones: ["El presupuesto", "El certificado de garantía", "El Certificado de Instalación Eléctrica", "La factura de compra"], respuesta: "El Certificado de Instalación Eléctrica" },
-      { pregunta: "¿Qué artículo del REBT trata sobre la seguridad de las instalaciones?", opciones: ["Artículo 3", "Artículo 5", "Artículo 7", "Artículo 14"], respuesta: "Artículo 14" },
-      { pregunta: "¿Quién es responsable del mantenimiento de una instalación eléctrica?", opciones: ["El instalador", "El titular de la instalación", "La compañía eléctrica", "El fabricante del equipo"], respuesta: "El titular de la instalación" },
-      { pregunta: "¿Con qué frecuencia deben realizarse inspecciones periódicas en instalaciones que requieren inspección inicial?", opciones: ["Cada 10 años", "Cada 5 años", "Cada 3 años", "Nunca"], respuesta: "Cada 5 años" },
-      { pregunta: "Según el REBT, ¿cuál es la finalidad de la protección diferencial?", opciones: ["Evitar la sobretensión", "Proteger frente a sobrecargas", "Detectar fugas de corriente", "Regular la potencia"], respuesta: "Detectar fugas de corriente" },
-      { pregunta: "¿Qué artículo trata sobre la puesta a tierra?", opciones: ["Artículo 12", "Artículo 17", "Artículo 15", "Artículo 20"], respuesta: "Artículo 17" },
-      { pregunta: "¿Cuál es el documento legal que aprueba el REBT?", opciones: ["RD 840/1999", "RD 842/2002", "RD 846/2005", "RD 800/2001"], respuesta: "RD 842/2002" },
-      { pregunta: "¿Cuál es el contenido mínimo de un proyecto eléctrico?", opciones: ["Plano y factura", "Plano y memoria técnica", "Factura y manual de usuario", "Croquis y garantías"], respuesta: "Plano y memoria técnica" },
-      { pregunta: "En un edificio hay cuatro vivienda con IGA de 25 A, tres viviendas con IGA de 40 A y dos viviendas con IGA de 32 A. ¿Cuál es la potencia total prevista para estas viviendas según el REBT?", opciones: ["57.745 W", "56.611 W", "39.640 W", "42.800 W"], respuesta: "56.611 W" },
-      { pregunta: "Un circuito tiene dos resistencias de 10 Ω y 5 Ω en serie, y en paralelo con ellas hay dos resistencias de 20 Ω y 20 Ω. Si la tensión total es de 230 V, ¿cuál es la potencia total aproximada consumida por el circuito?", opciones: ["8820 W", "7865 W", "8815 W", "8934 W"], respuesta: "8815 W" },
-      { pregunta: "Según el REBT ¿quién puede ser empresa instaladora en baja tensión?", opciones: ["Solo personas jurídicas", "Solo personas físicas", "Cualquier persona física o jurídica que cumpla los requisitos y presente declaración responsable", "Solo empresas públicas"], respuesta: "Cualquier persona física o jurídica que cumpla los requisitos y presente declaración responsable" },
-      { pregunta: "¿Qué documento se requiere para instalaciones con potencia superior a 50 kW?", opciones: ["Presupuesto", "Memoria técnica", "Proyecto", "Factura"], respuesta: "Proyecto" },
-      { pregunta: "¿Qué instalaciones precisan de inspección inicial obligatoria?", opciones: ["Viviendas", "Locales comerciales con potencia <10 kW", "Instalaciones en locales de pública concurrencia", "Acometidas"], respuesta: "Instalaciones en locales de pública concurrencia" },
-      { pregunta: "¿Cuál es el esquema de conexión del neutro y masas más común en zonas urbanas?", opciones: ["IT", "TN-C", "TT", "TN-S"], respuesta: "TT" },
-      { pregunta: "¿Cuál es el valor máximo permitido de resistencia de puesta a tierra en esquemas TT?", opciones: ["20 ohmios", "10 ohmios", "Depende de la sensibilidad del diferencial", "Siempre menor de 1 ohmio"], respuesta: "Depende de la sensibilidad del diferencial" },
-      { pregunta: "Según el REBT, ¿qué coeficiente de simultaneidad se aplica a 5 viviendas?", opciones: ["3,8", "4,6", "5,4", "6,2"], respuesta: "4,6" },
-      { pregunta: "¿Qué potencia mínima debe preverse para una vivienda con electrificación básica?", opciones: ["3.450 W", "5.750 W", "7.360 W", "9.200 W"], respuesta: "5.750 W" },
-      { pregunta: "¿Cuál es la sección mínima de los conductores de la Línea General de Alimentación?", opciones: ["2,5 mm²", "4 mm²", "6 mm²", "10 mm²"], respuesta: "10 mm²" },
-      { pregunta: "¿Dónde debe instalarse la Caja General de Protección (CGP)?", opciones: ["Dentro del cuadro general", "En el interior de la vivienda", "En el límite de propiedad con acceso desde vía pública", "Dentro del armario de contadores"], respuesta: "En el límite de propiedad con acceso desde vía pública" },
-      { pregunta: "¿Qué función cumple el Interruptor de Control de Potencia (ICP)?", opciones: ["Evitar sobretensiones", "Controlar la energía consumida", "Controlar que no se sobrepase la potencia contratada", "Proteger frente a cortocircuitos"], respuesta: "Controlar que no se sobrepase la potencia contratada" },
-      { pregunta: "En viviendas, ¿cuántos circuitos debe haber como mínimo?", opciones: ["3", "4", "5", "6"], respuesta: "5" },
-      { pregunta: "¿Cuál es el tipo de tubo obligatorio en zonas comunes de edificios?", opciones: ["Libre de halógenos", "PVC normal", "Aluminio", "Acero galvanizado"], respuesta: "Libre de halógenos" },
-      { pregunta: "¿Cuál debe ser la sección mínima del conductor de protección en una instalación monofásica si los conductores de fase tienen una sección de 16 mm²?", opciones: ["4 mm²", "10 mm²", "16 mm²", "2,5 mm²"], respuesta: "16 mm²" },
-      { pregunta: "¿Qué tipo de receptor requiere dispositivos de arranque estrella-triángulo?", opciones: ["Resistencias", "Motores", "Lámparas", "Transformadores"], respuesta: "Motores" },
-      { pregunta: "¿A partir de qué potencia los motores deben tener limitada la intensidad de arranque?", opciones: ["0,5 kW", "0,75 kW", "1,5 kW", "2 kW"], respuesta: "0,75 kW" },
-      { pregunta: "¿Qué tipo de lámparas tienen mayor eficiencia energética?", opciones: ["Incandescentes", "Halógenas", "LED", "Fluorescentes"], respuesta: "LED" },
-      { pregunta: "¿Dónde debe instalarse el Interruptor General Automático (IGA)?", opciones: ["Junto al contador", "En la CGP", "En el cuadro de mando y protección de la vivienda", "Al inicio de la acometida"], respuesta: "En el cuadro de mando y protección de la vivienda" },
-      { pregunta: "¿Qué elemento debe tener un alumbrado de emergencia?", opciones: ["Solo bombillas LED", "Fuente autónoma o batería", "Interruptor manual", "Transformador de aislamiento"], respuesta: "Fuente autónoma o batería" },
-      { pregunta: "¿Qué sensibilidad debe tener un interruptor diferencial en un baño?", opciones: ["500 mA", "300 mA", "100 mA", "30 mA"], respuesta: "30 mA" },
-      { pregunta: "¿Qué elemento de protección se utiliza contra sobretensiones transitorias?", opciones: ["ICP", "Magnetotérmico", "SPD", "Fusible"], respuesta: "SPD" },
-      { pregunta: "En locales húmedos, ¿qué tipo de instalación es adecuada?", opciones: ["Cables al aire", "Conducción empotrada", "Canaleta abierta", "Instalación vista"], respuesta: "Conducción empotrada" },
-      { pregunta: "¿Cuál es el color del conductor de protección?", opciones: ["Negro", "Azul", "Verde y amarillo", "Marrón"], respuesta: "Verde y amarillo" },
-      { pregunta: "¿Qué conductor debe interconectar las masas metálicas y la puesta a tierra?", opciones: ["Fase", "Neutro", "Conductor de protección (PE)", "Conductor de servicio"], respuesta: "Conductor de protección (PE)" },
-      { pregunta: "¿Qué debe incluir una memoria técnica de diseño?", opciones: ["Croquis y factura", "Planos y características técnicas", "Presupuesto y manual de uso", "Solo listado de materiales"], respuesta: "Planos y características técnicas" },
-      { pregunta: "¿Qué tipo de protección se emplea frente a contacto directo?", opciones: ["Diferencial", "Envolventes o barreras", "Interruptor horario", "Fusible"], respuesta: "Envolventes o barreras" },
-      { pregunta: "¿En qué ITC se especifica la instalación de contadores?", opciones: ["ITC-BT-12", "ITC-BT-14", "ITC-BT-16", "ITC-BT-22"], respuesta: "ITC-BT-16" },
-      { pregunta: "¿Qué documento justifica la legalidad de una instalación al finalizar?", opciones: ["Proyecto", "Contrato", "Certificado de instalación", "Manual del usuario"], respuesta: "Certificado de instalación" },
-      { pregunta: "¿Qué elemento protege de sobreintensidades?", opciones: ["ICP", "Diferencial", "Magnetotérmico", "Limitador de tensión"], respuesta: "Magnetotérmico" }
-    ];
+    /* ===== Banco de preguntas + explicaciones ===== */
+    const 
+    
+
+
+
+
+
+   preguntas = [
+    {
+      "pregunta": "Según el REBT, ¿cuál es el objeto del Reglamento Electrotécnico para Baja Tensión?",
+      "opciones": [
+        "Establecer las condiciones técnicas y garantías de las instalaciones eléctricas de baja tensión para preservar la seguridad, el funcionamiento normal y la eficiencia económica",
+        "Fijar los precios de la energía eléctrica en baja tensión",
+        "Regular únicamente las instalaciones de alta tensión",
+        "Determinar la potencia contratada de los usuarios"
+      ],
+      "respuesta": "Establecer las condiciones técnicas y garantías de las instalaciones eléctricas de baja tensión para preservar la seguridad, el funcionamiento normal y la eficiencia económica",
+      "explicacion": "Artículo 1: «El presente Reglamento tiene por objeto establecer las condiciones técnicas y garantías que deben reunir las instalaciones eléctricas conectadas a una fuente de suministro en los límites de baja tensión, con la finalidad de preservar la seguridad de las personas y los bienes, asegurar el normal funcionamiento de dichas instalaciones y contribuir a la fiabilidad técnica y a la eficiencia económica»."
+    },
+    {
+      "pregunta": "Según el REBT, ¿qué instalaciones están incluidas en su campo de aplicación y cuáles son los límites de tensión nominal?",
+      "opciones": [
+        "Instalaciones que distribuyan, generen para consumo propio o sean receptoras de electricidad con tensiones nominales ≤1000 V en corriente alterna y ≤1500 V en corriente continua",
+        "Únicamente las instalaciones domésticas, sin límites de tensión",
+        "Solo las redes de telecomunicaciones, con tensión inferior a 24 V",
+        "Todas las instalaciones eléctricas con tensiones superiores a 1 kV"
+      ],
+      "respuesta": "Instalaciones que distribuyan, generen para consumo propio o sean receptoras de electricidad con tensiones nominales ≤1000 V en corriente alterna y ≤1500 V en corriente continua",
+      "explicacion": "Artículo 2: El reglamento se aplica a las instalaciones que distribuyen la energía eléctrica, a las generadoras para consumo propio y a las receptoras, siempre que sus tensiones nominales sean iguales o inferiores a 1000 V en corriente alterna y 1500 V en corriente continua."
+    },
+    {
+      "pregunta": "Según el REBT, ¿cuáles son los valores de la ‘tensión usual’ en instalaciones de baja tensión?",
+      "opciones": [
+        "Corriente alterna: 50 < U ≤ 500 V; corriente continua: 75 < U ≤ 750 V",
+        "Corriente alterna: U ≤ 50 V; corriente continua: U ≤ 75 V",
+        "Corriente alterna: 500 < U ≤ 1000 V; corriente continua: 750 < U ≤ 1500 V",
+        "Corriente alterna: U > 1000 V; corriente continua: U > 1500 V"
+      ],
+      "respuesta": "Corriente alterna: 50 < U ≤ 500 V; corriente continua: 75 < U ≤ 750 V",
+      "explicacion": "Artículo 4, punto 1: El REBT clasifica las tensiones de baja tensión y señala que la ‘tensión usual’ corresponde, en corriente alterna, a valores eficaces entre 50 V y 500 V, y en corriente continua a valores medios entre 75 V y 750 V."
+    },
+    {
+      "pregunta": "Según el REBT, ¿cuál es la frecuencia empleada habitualmente en las redes de baja tensión?",
+      "opciones": [
+        "50 Hz",
+        "60 Hz",
+        "25 Hz",
+        "75 Hz"
+      ],
+      "respuesta": "50 Hz",
+      "explicacion": "Artículo 4, punto 4: El reglamento establece que la frecuencia empleada en la red será de 50 Hz y únicamente se podrá utilizar otra frecuencia previa autorización motivada del órgano competente."
+    },
+    {
+      "pregunta": "Según el REBT, ¿qué porcentaje de la potencia total contratada define el suministro de socorro?",
+      "opciones": [
+        "15 % de la potencia total contratada",
+        "25 % de la potencia total contratada",
+        "50 % de la potencia total contratada",
+        "75 % de la potencia total contratada"
+      ],
+      "respuesta": "15 % de la potencia total contratada",
+      "explicacion": "Artículo 10, apartado 1.a: El REBT define el suministro de socorro como aquel dedicado a mantener los servicios indispensables de la instalación receptora, con una potencia mínima equivalente al 15 % del total contratado para el suministro normal."
+    },
+    {
+      "pregunta": "Según el REBT, ¿qué tipo de suministro complementario puede mantener un servicio mayor del 50 % de la potencia total contratada?",
+      "opciones": [
+        "Suministro de socorro",
+        "Suministro de reserva",
+        "Suministro duplicado",
+        "Suministro normal"
+      ],
+      "respuesta": "Suministro duplicado",
+      "explicacion": "Artículo 10, apartado 1.c: El reglamento indica que el suministro duplicado es aquel capaz de mantener un servicio mayor del 50 % de la potencia total contratada para el suministro normal."
+    },
+    {
+      "pregunta": "Según el REBT, ¿qué locales se consideran de características especiales?",
+      "opciones": [
+        "Locales con atmósfera húmeda, presencia de gases o polvos y los dedicados a la reparación de automóviles",
+        "Cualquier vivienda de uso residencial",
+        "Oficinas con climatización normal",
+        "Locales administrativos sin riesgo particular"
+      ],
+      "respuesta": "Locales con atmósfera húmeda, presencia de gases o polvos y los dedicados a la reparación de automóviles",
+      "explicacion": "Artículo 11: El REBT recoge que son locales de características especiales aquellos que presentan atmósfera húmeda, gases o polvos de materias no inflamables o combustibles, temperaturas muy elevadas o muy bajas, los que se dedican a la conservación o reparación de automóviles, los afectos a la producción o distribución de energía eléctrica, instalaciones con tensiones especiales y otras en las que sea necesario mantener las instalaciones en condiciones distintas a las normales."
+    },
+    {
+      "pregunta": "Según el REBT, ¿cómo se define una empresa instaladora en baja tensión?",
+      "opciones": [
+        "Persona física o jurídica que realiza, mantiene o repara instalaciones eléctricas de baja tensión, habiendo presentado la declaración responsable",
+        "Cualquier persona que comercializa equipos eléctricos de baja tensión",
+        "Únicamente el técnico titulado competente que redacta proyectos",
+        "El organismo de control que inspecciona las instalaciones"
+      ],
+      "respuesta": "Persona física o jurídica que realiza, mantiene o repara instalaciones eléctricas de baja tensión, habiendo presentado la declaración responsable",
+      "explicacion": "ITC-BT-03, punto 2.1: El reglamento define la empresa instaladora en baja tensión como la persona física o jurídica que realiza, mantiene o repara instalaciones eléctricas en el ámbito del REBT y que ha presentado la correspondiente declaración responsable de inicio de actividad."
+    },
+    {
+      "pregunta": "Según el REBT, ¿qué trabajos pueden realizar las empresas de la categoría básica?",
+      "opciones": [
+        "Realizar, mantener y reparar todas las instalaciones eléctricas de baja tensión que no se reserven a la categoría especialista",
+        "Únicamente instalaciones de iluminación exterior",
+        "Exclusivamente instalaciones domésticas de menos de 10 kW",
+        "Instalaciones de alta tensión"
+      ],
+      "respuesta": "Realizar, mantener y reparar todas las instalaciones eléctricas de baja tensión que no se reserven a la categoría especialista",
+      "explicacion": "ITC-BT-03, punto 3.1: Las empresas instaladoras de categoría básica podrán realizar, mantener y reparar las instalaciones eléctricas de baja tensión en edificios, industrias e infraestructuras, siempre que dichas instalaciones no estén reservadas a la categoría especialista."
+    },
+    {
+      "pregunta": "Según el REBT, ¿cuál de las siguientes instalaciones no se incluye entre las que puede realizar la categoría especialista?",
+      "opciones": [
+        "Quirófanos y salas de intervención",
+        "Instalaciones de lámparas de descarga en alta tensión",
+        "Instalaciones generadoras de baja tensión de potencia ≥10 kW",
+        "Instalaciones de viviendas unifamiliares convencionales"
+      ],
+      "respuesta": "Instalaciones de viviendas unifamiliares convencionales",
+      "explicacion": "ITC-BT-03, punto 3.2: La categoría especialista puede realizar, además de las instalaciones propias de la categoría básica, sistemas de automatización y gestión técnica de la energía, sistemas de control distribuido, supervisión y adquisición de datos, quirófanos, lámparas de descarga en alta tensión y generadores de baja tensión de potencia igual o superior a 10 kW. Las viviendas unifamiliares convencionales no figuran entre las instalaciones reservadas a la categoría especialista."
+    },
+    {
+      "pregunta": "Según el REBT, ¿quién debe redactar y firmar el proyecto cuando se requiere proyecto para una instalación?",
+      "opciones": [
+        "Un técnico titulado competente, responsable de que el proyecto cumpla la normativa",
+        "Cualquier empleado de la empresa suministradora",
+        "El propietario de la instalación sin requisitos",
+        "Un organismo de control acreditado"
+      ],
+      "respuesta": "Un técnico titulado competente, responsable de que el proyecto cumpla la normativa",
+      "explicacion": "ITC-BT-04, punto 2.1: Cuando una instalación requiere proyecto, éste debe ser redactado y firmado por un técnico titulado competente, quien será directamente responsable de que el proyecto se adapte a las disposiciones reglamentarias."
+    },
+    {
+      "pregunta": "Según el REBT, ¿a partir de qué potencia instalada las instalaciones industriales precisan la elaboración de un proyecto?",
+      "opciones": [
+        "Potencia instalada superior a 20 kW",
+        "Potencia instalada superior a 10 kW",
+        "Potencia instalada superior a 50 kW",
+        "Sin límite de potencia"
+      ],
+      "respuesta": "Potencia instalada superior a 20 kW",
+      "explicacion": "ITC-BT-04, punto 3.1: Las instalaciones industriales, en general, precisan la elaboración de un proyecto cuando la potencia instalada es superior a 20 kW."
+    },
+    {
+      "pregunta": "Según el REBT, ¿quién debe realizar las verificaciones previas a la puesta en servicio de las instalaciones de baja tensión?",
+      "opciones": [
+        "La empresa instaladora que ejecuta la instalación",
+        "El titular de la instalación",
+        "El organismo de control",
+        "La empresa suministradora de energía"
+      ],
+      "respuesta": "La empresa instaladora que ejecuta la instalación",
+      "explicacion": "ITC-BT-05, punto 2.1: Las verificaciones previas a la puesta en servicio deberán ser realizadas por las empresas instaladoras que ejecuten las instalaciones."
+    },
+    {
+      "pregunta": "Según el REBT, ¿qué instalaciones de alumbrado exterior quedan excluidas de sus prescripciones?",
+      "opciones": [
+        "Instalaciones de alumbrado de fuentes luminosas y piscinas cuando son autónomas",
+        "Alumbrado de parques y jardines",
+        "Alumbrado de carreteras y travesías urbanas",
+        "Alumbrado de plazas públicas"
+      ],
+      "respuesta": "Instalaciones de alumbrado de fuentes luminosas y piscinas cuando son autónomas",
+      "explicacion": "ITC-BT-09, punto 1: Se excluyen las instalaciones de fuentes luminosas, piscinas y semáforos o balizamientos cuando son totalmente autónomas."
+    },
+    {
+      "pregunta": "Según el REBT, ¿qué factor de potencia deben alcanzar las instalaciones de alumbrado exterior?",
+      "opciones": [
+        "Igual o superior a 0,90",
+        "Igual o superior a 0,75",
+        "Igual o superior a 0,50",
+        "No se exige factor de potencia mínimo"
+      ],
+      "respuesta": "Igual o superior a 0,90",
+      "explicacion": "ITC-BT-09, punto 2: Las instalaciones de alumbrado exterior deben incorporar dispositivos que aseguren un factor de potencia igual o superior a 0,90 en cualquier momento de su funcionamiento."
+    },
+    {
+      "pregunta": "Según el REBT, ¿cuál es la caída de tensión máxima permitida entre el origen y cualquier punto de una instalación de alumbrado exterior?",
+      "opciones": [
+        "3 % de la tensión nominal",
+        "5 % de la tensión nominal",
+        "10 % de la tensión nominal",
+        "No se exige limitar la caída de tensión"
+      ],
+      "respuesta": "3 % de la tensión nominal",
+      "explicacion": "ITC-BT-09, punto 2: El reglamento limita la caída de tensión entre el origen de la instalación y cualquier punto de la misma al 3 % de la tensión nominal."
+    },
+    {
+      "pregunta": "Según el REBT, ¿cuál es la sección mínima del conductor neutro en las redes subterráneas de alumbrado exterior?",
+      "opciones": [
+        "6 mm²",
+        "4 mm²",
+        "2,5 mm²",
+        "10 mm²"
+      ],
+      "respuesta": "6 mm²",
+      "explicacion": "ITC-BT-09, punto 5: Las redes subterráneas de alumbrado exterior deben tener conductores neutrales con una sección mínima de 6 mm²; en redes aéreas esta sección puede ser de 4 mm²."
+    },
+    {
+      "pregunta": "Según el REBT, ¿cuál es la potencia mínima de electrificación básica que debe preverse por vivienda?",
+      "opciones": [
+        "5750 W a 230 V",
+        "9200 W a 230 V",
+        "3000 W a 125 V",
+        "12000 W a 400 V"
+      ],
+      "respuesta": "5750 W a 230 V",
+      "explicacion": "ITC-BT-10, punto 3.2: El reglamento establece que para cada vivienda se debe prever una electrificación básica con una potencia mínima de 5750 W a 230 V."
+    },
+    {
+      "pregunta": "Según el REBT, ¿qué potencia mínima debe preverse por vivienda en la electrificación elevada?",
+      "opciones": [
+        "9200 W a 230 V",
+        "5750 W a 230 V",
+        "4200 W a 230 V",
+        "12000 W a 400 V"
+      ],
+      "respuesta": "9200 W a 230 V",
+      "explicacion": "ITC-BT-10, punto 3.3: Para viviendas con electrificación elevada (por ejemplo, superficie superior a 160 m², calefacción eléctrica, aire acondicionado o infraestructura para recarga de vehículos eléctricos) se debe prever una potencia mínima de 9200 W a 230 V."
+    },
+    {
+      "pregunta": "Según el REBT, ¿qué elemento no forma parte de la instalación de enlace?",
+      "opciones": [
+        "La caja general de protección",
+        "La línea general de alimentación",
+        "El transformador de distribución de la red pública",
+        "Las derivaciones individuales"
+      ],
+      "respuesta": "El transformador de distribución de la red pública",
+      "explicacion": "ITC-BT-12, punto 1: La instalación de enlace comprende la caja general de protección, la línea general de alimentación, los elementos para la ubicación de los contadores, las derivaciones individuales, el interruptor de control de potencia y los dispositivos generales e individuales de mando y protección; no incluye el transformador de distribución de la red pública."
+    },
+    {
+      "pregunta": "Según el REBT, ¿a quién corresponde la propiedad y el mantenimiento de las instalaciones de enlace?",
+      "opciones": [
+        "Al titular o titulares de la instalación receptora",
+        "A la empresa suministradora",
+        "Al organismo de control",
+        "Al Ayuntamiento correspondiente"
+      ],
+      "respuesta": "Al titular o titulares de la instalación receptora",
+      "explicacion": "ITC-BT-12, punto 1: El reglamento indica que las instalaciones de enlace son propiedad del usuario o de los usuarios y que su conservación y mantenimiento corresponden a dichos titulares."
+    },
+    {
+      "pregunta": "Según el REBT, ¿dónde debe instalarse la caja general de protección de un edificio?",
+      "opciones": [
+        "En la fachada o en un lugar de fácil acceso desde la vía pública",
+        "En el interior de cada vivienda",
+        "En la cubierta del edificio",
+        "Sólo en el cuarto de contadores"
+      ],
+      "respuesta": "En la fachada o en un lugar de fácil acceso desde la vía pública",
+      "explicacion": "ITC-BT-13, punto 1: La caja general de protección debe situarse en la fachada del edificio o en un lugar fácilmente accesible tanto para la empresa distribuidora como para el usuario."
+    },
+    {
+      "pregunta": "Según el REBT, ¿qué dispositivos de protección deben alojarse en la caja general de protección?",
+      "opciones": [
+        "Fusibles en los conductores de fase y una conexión de neutro desmontable colocada a la izquierda",
+        "Sólo interruptores automáticos magnetotérmicos",
+        "Únicamente un interruptor diferencial",
+        "Un transformador reductor y un contador"
+      ],
+      "respuesta": "Fusibles en los conductores de fase y una conexión de neutro desmontable colocada a la izquierda",
+      "explicacion": "ITC-BT-13, punto 2: La caja general de protección debe contener dispositivos de protección formados por fusibles instalados en los conductores de fase y una conexión de neutro desmontable situada en el lado izquierdo."
+    },
+    {
+      "pregunta": "Según el REBT, ¿qué conductor debe incluirse siempre en la línea general de alimentación?",
+      "opciones": [
+        "El conductor de protección (tierra)",
+        "Únicamente los conductores de fase",
+        "Sólo el conductor neutro",
+        "No es obligatorio incluir ningún conductor adicional"
+      ],
+      "respuesta": "El conductor de protección (tierra)",
+      "explicacion": "ITC-BT-14, punto 1: La línea general de alimentación debe comprender siempre el conductor de protección, además de los conductores de fase y neutro que correspondan al esquema de la instalación."
+    },
+    {
+      "pregunta": "Según el REBT, ¿cómo debe diseñarse el recorrido de la línea general de alimentación?",
+      "opciones": [
+        "Lo más corto y recto posible",
+        "Con tramos largos y desviaciones frecuentes",
+        "En cualquier configuración mientras haya espacio",
+        "Exclusivamente en galerías subterráneas públicas"
+      ],
+      "respuesta": "Lo más corto y recto posible",
+      "explicacion": "ITC-BT-14, punto 1: El reglamento indica que el trazado de la línea general de alimentación será lo más corto y recto posible, salvo que las exigencias constructivas obliguen a otra disposición."
+    },
+    {
+      "pregunta": "Según el REBT, para prever futuras ampliaciones, ¿qué condición debe cumplir la instalación de la línea general de alimentación?",
+      "opciones": [
+        "Disponer de espacio suficiente para duplicar la sección de los conductores",
+        "No admitir ninguna ampliación",
+        "Permitir disminuir la sección de los conductores a la mitad",
+        "No es necesario prever ampliaciones"
+      ],
+      "respuesta": "Disponer de espacio suficiente para duplicar la sección de los conductores",
+      "explicacion": "ITC-BT-14, punto 1: En las canalizaciones de la línea general de alimentación debe preverse la posibilidad de ampliación de hasta el 100 % de la sección de los conductores, es decir, debe haber espacio suficiente para duplicar la sección actual."
+    },
+    {
+      "pregunta": "Según el REBT, ¿qué sistemas de instalación están permitidos para la línea general de alimentación?",
+      "opciones": [
+        "Conductores instalados en tubos o canales protectoras que cumplan las normas aplicables",
+        "Únicamente cables aéreos sin protección",
+        "Sólo canalizaciones prefabricadas empotradas en el suelo de las viviendas",
+        "Instalar cables sin ningún tipo de canalización"
+      ],
+      "respuesta": "Conductores instalados en tubos o canales protectoras que cumplan las normas aplicables",
+      "explicacion": "ITC-BT-14, punto 1: La línea general de alimentación puede realizarse mediante conductores colocados en el interior de tubos, canales protectoras o sistemas prefabricados de canales, siempre que cumplan las prescripciones establecidas por el REBT."
+    },
+    {
+      "pregunta": "Según el REBT, ¿cuál es la clase mínima de protección IP/IK exigida para armarios de contadores instalados al exterior?",
+      "opciones": [
+        "IP43 IK09",
+        "IP40 IK09",
+        "IP55 IK10",
+        "IP30 IK07"
+      ],
+      "respuesta": "IP43 IK09",
+      "explicacion": "ITC-BT-16, punto 1: Los armarios, módulos o paneles destinados a alojar contadores deben tener una protección mínima de IP40 IK09 en interiores y de IP43 IK09 cuando se instalen al exterior."
+    },
+    {
+      "pregunta": "Según el REBT, ¿qué protección debe disponer cada derivación individual antes del contador?",
+      "opciones": [
+        "Fusibles de seguridad instalados antes del contador",
+        "Un interruptor diferencial de 30 mA",
+        "Únicamente un interruptor magnetotérmico",
+        "Ninguna protección es necesaria antes del contador"
+      ],
+      "respuesta": "Fusibles de seguridad instalados antes del contador",
+      "explicacion": "ITC-BT-16, punto 2: Cada derivación individual debe disponer de su propia protección mediante fusibles de seguridad instalados antes del contador, con objeto de proteger la derivación y el aparato de medida."
+    },
+    {
+      "pregunta": "Según el REBT, ¿dónde deben situarse los dispositivos generales e individuales de mando y protección en las viviendas?",
+      "opciones": [
+        "Próximos a la puerta de entrada de la vivienda y nunca en dormitorios o cuartos de baño",
+        "En cualquier habitación de la vivienda",
+        "En el tejado del edificio",
+        "Junto al cuadro de contadores en zonas comunes"
+      ],
+      "respuesta": "Próximos a la puerta de entrada de la vivienda y nunca en dormitorios o cuartos de baño",
+      "explicacion": "ITC-BT-17, punto 2: Los dispositivos generales e individuales de mando y protección se situarán a la entrada de las viviendas o locales, en lugar accesible, y en viviendas no podrán ubicarse en dormitorios ni cuartos de baño."
+    },
+    {
+      "pregunta": "Según el REBT, ¿qué equipo no figura entre los dispositivos obligatorios de mando y protección?",
+      "opciones": [
+        "Interruptor automático general con protección contra sobrecargas y cortocircuitos",
+        "Interruptor diferencial general para la protección contra contactos indirectos",
+        "Interruptores automáticos para la protección de cada circuito",
+        "Un transformador de aislamiento para toda la instalación"
+      ],
+      "respuesta": "Un transformador de aislamiento para toda la instalación",
+      "explicacion": "ITC-BT-17, punto 2: Entre los dispositivos obligatorios se encuentran: un interruptor automático general con protección contra sobrecargas y cortocircuitos, un interruptor diferencial general (salvo que existan diferenciales individuales), y interruptores automáticos para cada circuito. No se contempla la instalación de un transformador de aislamiento como dispositivo obligatorio."
+    },
+    {
+      "pregunta": "Según el REBT, ¿a qué altura deben instalarse los dispositivos de mando y protección en las viviendas?",
+      "opciones": [
+        "Entre 1,4 m y 2 m sobre el suelo",
+        "Entre 2,5 m y 3 m sobre el suelo",
+        "A ras de suelo (0 m)",
+        "A una altura inferior a 1 m"
+      ],
+      "respuesta": "Entre 1,4 m y 2 m sobre el suelo",
+      "explicacion": "ITC-BT-17, punto 2: En viviendas, la altura de instalación de los dispositivos de mando y protección debe estar comprendida entre 1,4 m y 2 m respecto al nivel del suelo."
+    },
+    {
+      "pregunta": "Según el REBT, ¿qué poder de corte mínimo debe tener el interruptor automático general?",
+      "opciones": [
+        "4,5 kA",
+        "1,5 kA",
+        "10 kA",
+        "0,5 kA"
+      ],
+      "respuesta": "4,5 kA",
+      "explicacion": "ITC-BT-17, punto 2: El interruptor automático general debe tener un poder de corte nominal no inferior a 4,5 kA para asegurar la desconexión frente a cortocircuitos."
+    },
+    {
+      "pregunta": "Según el REBT, ¿cuál es el propósito principal de la instalación de puesta a tierra?",
+      "opciones": [
+        "Limitar la tensión de las masas metálicas con relación a tierra y asegurar la actuación de los dispositivos de protección",
+        "Mejorar la estética de la instalación",
+        "Conseguir una distribución uniforme de la tensión en los cables",
+        "Proporcionar energía de reserva a la instalación"
+      ],
+      "respuesta": "Limitar la tensión de las masas metálicas con relación a tierra y asegurar la actuación de los dispositivos de protección",
+      "explicacion": "ITC-BT-18, punto 1: La instalación de puesta a tierra tiene por objeto limitar la tensión de las masas metálicas respecto de la tierra, asegurar el funcionamiento de los dispositivos de protección y reducir el riesgo de contactos directos e indirectos."
+    },
+    {
+      "pregunta": "Según el REBT, ¿qué materiales pueden emplearse para los conductores en las instalaciones interiores?",
+      "opciones": [
+        "Cobre o aluminio, y deben ir siempre aislados salvo cuando estén sobre aisladores",
+        "Únicamente cobre",
+        "Únicamente aluminio",
+        "Acero galvanizado"
+      ],
+      "respuesta": "Cobre o aluminio, y deben ir siempre aislados salvo cuando estén sobre aisladores",
+      "explicacion": "ITC-BT-19, punto 1: Los conductores de las instalaciones interiores deben ser de cobre o aluminio y estar siempre aislados, salvo cuando discurran sobre aisladores."
+    },
+    {
+      "pregunta": "Según el REBT, ¿cuál es la caída de tensión máxima permitida en un circuito de iluminación de una instalación interior de vivienda?",
+      "opciones": [
+        "3 % de la tensión nominal",
+        "5 % de la tensión nominal",
+        "10 % de la tensión nominal",
+        "No existe límite"
+      ],
+      "respuesta": "3 % de la tensión nominal",
+      "explicacion": "ITC-BT-19, punto 2: En instalaciones interiores o receptoras se deberá asegurar que la caída de tensión no supere el 3 % de la tensión nominal en circuitos de iluminación de viviendas."
+    },
+    {
+      "pregunta": "Según el REBT, ¿cómo se identifica el conductor de protección (tierra) en una instalación interior?",
+      "opciones": [
+        "Mediante colores verde y amarillo",
+        "Con color azul claro",
+        "Con color negro",
+        "No tiene color específico"
+      ],
+      "respuesta": "Mediante colores verde y amarillo",
+      "explicacion": "ITC-BT-19, punto 3: Los conductores deben identificarse por colores: el conductor de protección se identificará mediante los colores verde y amarillo."
+    },
+    {
+      "pregunta": "Según el REBT, ¿en qué condiciones pueden instalarse en un mismo tubo circuitos de muy baja tensión junto con circuitos de energía eléctrica?",
+      "opciones": [
+        "Cuando todos los conductores tengan aislamiento adecuado para la tensión más elevada o dispongan de compartimientos separados",
+        "Siempre, sin ninguna condición",
+        "Solo si los conductores son de cobre",
+        "Nunca, está prohibido en cualquier circunstancia"
+      ],
+      "respuesta": "Cuando todos los conductores tengan aislamiento adecuado para la tensión más elevada o dispongan de compartimientos separados",
+      "explicacion": "ITC-BT-20, punto 1: Los circuitos de muy baja tensión pueden compartir conductos con circuitos de energía eléctrica únicamente cuando todos los conductores están aislados para la tensión más elevada presente o se disponen compartimientos separados dentro de la canalización."
+    },
+    {
+      "pregunta": "Según el REBT, ¿contra qué deben protegerse los circuitos eléctricos?",
+      "opciones": [
+        "Contra sobrecargas, cortocircuitos y sobretensiones de origen atmosférico",
+        "Sólo contra sobrecargas",
+        "Únicamente contra cortocircuitos",
+        "No es necesaria protección específica"
+      ],
+      "respuesta": "Contra sobrecargas, cortocircuitos y sobretensiones de origen atmosférico",
+      "explicacion": "ITC-BT-22, punto 1: Cada circuito debe protegerse contra sobrecargas, cortocircuitos y las consecuencias de las sobretensiones de origen atmosférico."
+    },
+    {
+      "pregunta": "Según el REBT, ¿dónde debe situarse el dispositivo de protección contra cortocircuitos en un circuito?",
+      "opciones": [
+        "En el origen de cada circuito",
+        "En el extremo final del circuito",
+        "En cualquier punto intermedio del circuito",
+        "No es necesario instalarlo"
+      ],
+      "respuesta": "En el origen de cada circuito",
+      "explicacion": "ITC-BT-22, punto 2: Los dispositivos de protección contra cortocircuitos (como interruptores automáticos o fusibles) deben situarse en el origen de cada circuito; se admite un único dispositivo para varios circuitos sólo cuando cada uno disponga de protección individual contra sobrecargas."
+    }
+  ];
+
+
+
+
+
+
+
+
+
+
 
     /* ===== Estado ===== */
     let preguntasAleatorias = [];
@@ -79,11 +492,14 @@
     let seleccionUsuario = null;
     let respondido = false;
 
-    // Tiempo
-    const DURACION_SEG = 120 * 60; // 120 minutos
-    let inicioTiempo = null;
-    let intervaloTiempo = null;
-    let tiempoAgotado = false;
+// Tiempo del examen
+const DURACION_MIN = 120;          // Duración total en minutos (2 horas)
+const DURACION_SEG = DURACION_MIN * 60;
+
+let inicioTiempo = null;
+let intervaloTiempo = null;
+let tiempoAgotado = false;
+
 
     /* ===== Utilidades ===== */
     const mezclar = (arr) => { for (let i = arr.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
@@ -98,10 +514,12 @@
 
     function calcularPuntuacion(){
       const total = preguntasAleatorias.length;
-      const puntos = aciertos - 0.5 * errores; // penalización
-      const porcentaje = clamp0((puntos / total) * 100);
-      const apto = porcentaje >= 70;
-      return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), puntos, porcentaje, apto };
+      const penalizacion = Math.floor(errores / 2);
+      const validasNetas = Math.max(0, aciertos - penalizacion);
+      const puntos = validasNetas * 0.5;
+      const porcentaje = clamp0((validasNetas / total) * 100);
+      const apto = porcentaje >= 80;
+      return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
     }
 
     /* ===== Render ===== */
@@ -122,6 +540,7 @@
       const ss = fmt2(restantes%60);
 
       const { puntos } = calcularPuntuacion();
+      const totalPuntos = preguntasAleatorias.length * 0.5;
 
       const relojClass =
         restantes <= 60 ? 'text-red-700' :
@@ -132,7 +551,7 @@
         <span>Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
         <span class="text-green-600">Aciertos: ${aciertos}</span>
         <span class="text-red-600">Fallos: ${errores}</span>
-        <span>Puntos: ${puntos.toFixed(2)}</span>
+        <span>Puntos: ${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</span>
         <span class="font-mono ${relojClass}">⏳ ${mm}:${ss}</span>`;
 
       if (restantes === 0 && !tiempoAgotado){
@@ -164,12 +583,15 @@
       seleccionUsuario=null; respondido=false;
       document.getElementById("pregunta").textContent = q.pregunta;
       renderOpciones(q.opciones);
+
       document.getElementById("acciones").innerHTML =
         `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
            <span>Elige una respuesta (teclas 1–4 y Enter).</span>
            <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
          </div>`;
-      setProgreso(); actualizarContador();
+
+      setProgreso();
+      actualizarContador();
     }
 
     function seleccionarOpcion(opcion){
@@ -180,7 +602,9 @@
         if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
       });
       const btn = document.getElementById('btn-contestar');
-      btn.disabled=false; btn.classList.remove('opacity-50','cursor-not-allowed'); btn.onclick=verificarRespuesta;
+      btn.disabled=false;
+      btn.classList.remove('opacity-50','cursor-not-allowed');
+      btn.onclick=verificarRespuesta;
     }
 
     function verificarRespuesta(){
@@ -192,19 +616,45 @@
       document.querySelectorAll("#opciones .opcion").forEach(b=>{
         b.disabled=true; b.classList.remove('ring','ring-yellow-300');
         const val=b.dataset.valor;
-        if (val===actual.respuesta){ b.classList.add('bg-green-600','hover:bg-green-700'); b.innerHTML=`✅ <span class="font-semibold">${val}</span>`; }
-        else if (val===seleccionUsuario && !ok){ b.classList.add('bg-red-600','hover:bg-red-700'); b.innerHTML=`❌ <span class="font-semibold">${val}</span>`; }
-        else { b.classList.add('bg-blue-500'); }
+        if (val===actual.respuesta){
+          b.classList.add('bg-green-600','hover:bg-green-700');
+          b.innerHTML=`✅ <span class="font-semibold">${val}</span>`;
+        } else if (val===seleccionUsuario && !ok){
+          b.classList.add('bg-red-600','hover:bg-red-700');
+          b.innerHTML=`❌ <span class="font-semibold">${val}</span>`;
+        } else {
+          b.classList.add('bg-blue-500');
+        }
       });
 
       ok ? aciertos++ : errores++;
-      historial.push({pregunta:actual.pregunta, opciones:actual.opciones, correcta:actual.respuesta, elegida:seleccionUsuario});
 
+      historial.push({
+        pregunta:actual.pregunta,
+        opciones:actual.opciones,
+        correcta:actual.respuesta,
+        elegida:seleccionUsuario,
+        explicacion:actual.explicacion
+      });
+
+      /* === NUEVO: mostrar la explicación debajo del botón === */
       document.getElementById("acciones").innerHTML =
-        `<div class="mt-4 flex items-center justify-end gap-3">
-           <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">Siguiente</button>
+        `<div class="mt-4 flex flex-col gap-3">
+
+           <div class="flex items-center justify-end">
+             <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">
+               Siguiente
+             </button>
+           </div>
+
+           <div id="explicacion" class="text-sm text-slate-700 bg-slate-100 border-l-4 border-blue-600 p-3 rounded-md">
+             ${actual.explicacion || "Sin referencia disponible"}
+           </div>
+
          </div>`;
-      actualizarContador(); setProgreso();
+
+      actualizarContador();
+      setProgreso();
     }
 
     const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
@@ -216,12 +666,15 @@
     }
 
     function abrirModalFin(){
-      const { total, respondidas, enBlanco, puntos, porcentaje, apto } = calcularPuntuacion();
+      const { total, respondidas, enBlanco, penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
       const modal = document.getElementById('modal-fin');
+      const totalPuntos = total * 0.5;
       document.getElementById('modal-resumen').innerHTML = `
         <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
         <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
-        <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${total}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas</p>
+        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong></p>
+        <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
         <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
       `;
       modal.classList.remove('hidden');
@@ -235,34 +688,68 @@
       const mm = fmt2(Math.floor(transcurrido/60));
       const ss = fmt2(transcurrido%60);
 
-      const { puntos, porcentaje, apto } = calcularPuntuacion();
+      const { penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
 
       const detalle = historial.map(h=>`
         <div class='mb-2 border border-slate-200 rounded-lg p-3'>
           <p class='font-semibold mb-2'>${h.pregunta}</p>
           <div class='flex flex-wrap gap-2'>
             ${h.opciones.map(op=>{
-              if (op===h.elegida && op===h.correcta) return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
-              if (op===h.elegida && op!==h.correcta) return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
-              if (op===h.correcta && op!==h.elegida) return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              if (op===h.elegida && op===h.correcta)
+                return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op===h.elegida && op!==h.correcta)
+                return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op===h.correcta && op!==h.elegida)
+                return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
               return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
             }).join('')}
           </div>
-        </div>`).join('');
+          <div class='mt-2 text-sm text-slate-600 bg-slate-100 border-l-4 border-blue-600 p-2 rounded-md'>
+            📘 Explicación: ${h.explicacion}
+          </div>
+        </div>
+      `).join('');
+
+      const totalPuntos = total * 0.5;
 
       document.getElementById("test").innerHTML = `
         <div class="space-y-3">
-          <h2 class="text-2xl font-extrabold">Resultado del test <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">(${apto?'APTO ✅':'NO APTO ❌'})</span></h2>
-          <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Total: ${total}</p>
-          <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span> • Puntuación: <strong>${puntos.toFixed(2)} / ${total}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+          <h2 class="text-2xl font-extrabold">Resultado del test 
+            <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">
+              (${apto?'APTO ✅':'NO APTO ❌'})
+            </span>
+          </h2>
+
+          <p class="text-slate-700">
+            Aciertos: <strong class="text-green-700">${aciertos}</strong> • 
+            Fallos: <strong class="text-red-700">${errores}</strong> • 
+            Penalización: <strong>-${penalizacion}</strong>
+          </p>
+
+          <p class="text-slate-700">
+            Válidas netas: <strong>${validasNetas}</strong> / ${total} • 
+            Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> 
+            (<strong>${porcentaje.toFixed(2)}%</strong>)
+          </p>
+
+          <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span></p>
+
           <hr class="my-3 border-slate-200">
+
           <h3 class="text-lg font-bold">Detalle de preguntas</h3>
-          <div class="max-h-[50vh] overflow-auto pr-1">${detalle}</div>
+
+          <div class="max-h-[50vh] overflow-auto pr-1">
+            ${detalle}
+          </div>
         </div>
 
         <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
-          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
-          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">Volver al inicio</a>
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">
+            Volver a intentar
+          </button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">
+            Volver al inicio
+          </a>
         </div>`;
     }
 
@@ -271,8 +758,14 @@
       if (tiempoAgotado) return;
       if (respondido){ if (e.key==='Enter') siguientePregunta(); return; }
       const map={'1':0,'2':1,'3':2,'4':3};
-      if (map[e.key]!==undefined){ const b=document.querySelectorAll('#opciones .opcion')[map[e.key]]; if (b) b.click(); }
-      if (e.key==='Enter'){ const b=document.getElementById('btn-contestar'); if (b && !b.disabled) b.click(); }
+      if (map[e.key]!==undefined){
+        const b=document.querySelectorAll('#opciones .opcion')[map[e.key]];
+        if (b) b.click();
+      }
+      if (e.key==='Enter'){
+        const b=document.getElementById('btn-contestar');
+        if (b && !b.disabled) b.click();
+      }
     }
 
     window.onload = ()=>{
@@ -283,6 +776,7 @@
       document.addEventListener('keydown', handleKey);
     };
   </script>
+
 </head>
 
 <body class="bg-gray-100 text-gray-900 p-4">
@@ -297,7 +791,7 @@
       </div>
     </div>
 
-    <h1 class="text-3xl font-extrabold mb-3 text-center">Examen Test REBT</h1>
+    <h1 class="text-3xl font-extrabold mb-3 text-center">TEST REBT</h1>
     <p id="pregunta" class="mb-4 text-lg text-center"></p>
 
     <div id="opciones" class="flex flex-col gap-3"></div>
@@ -305,7 +799,7 @@
   </div>
 
   <div class="mt-6 text-center">
-    <a href="Test_completos_REBT.html" class="inline-block bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">Cancelar</a>
+    <a href="Test_por_ITC_del_REBT.html" class="inline-block bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">Cancelar</a>
   </div>
 
   <!-- Modal Tiempo Agotado -->
@@ -319,7 +813,6 @@
       </div>
     </div>
   </div>
+
 </body>
 </html>
-
-
