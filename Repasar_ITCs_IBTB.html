@@ -2,13 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <title>Lista de ITCs REBT – Reglamento Electrotécnico de Baja Tensión Online</title>
-    <meta name="description" content="Consulta el listado completo de las 44 Instrucciones Técnicas Complementarias (ITC) del REBT. Guía de estudio profesional con audio y modo lectura." />
-    <meta name="keywords" content="lista ITC REBT, instrucciones tecnicas complementarias, reglamento baja tension, estudio REBT online" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://app-rebt.es/lista-itc.html" />
+    <meta name="description" content="Consulta el listado completo de las 44 ITCs del REBT. Guía profesional con audio y modo lectura ajustable." />
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
     <script>
@@ -18,22 +15,13 @@
         gtag('config', 'G-RSH4ZW3VT2');
     </script>
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Lista ITCs REBT",
-      "description": "Listado completo de las 44 ITCs del REBT para estudio y consulta profesional."
-    }
-    </script>
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = { darkMode: 'class' }
     </script>
     <style>
-        body { font-family: 'Inter', sans-serif; margin: 0; transition: background-color 0.3s ease; }
+        body { font-family: 'Inter', sans-serif; margin: 0; transition: background-color 0.3s ease; overflow-x: hidden; }
         .bg-master {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
             background-image: url('img/fondo.png'); background-size: cover; background-position: center; background-attachment: fixed;
@@ -53,8 +41,10 @@
         .itc-row { transition: all 0.2s ease; border-bottom: 1px solid rgba(128, 128, 128, 0.1); }
         .itc-row:hover, .reading-active { background-color: rgba(59, 130, 246, 0.25); border-left: 4px solid #3b82f6; }
         
-        .itc-number { color: #3b82f6; font-weight: 800; min-width: 85px; }
-        input[type=range] { cursor: pointer; }
+        .itc-number { color: #3b82f6; font-weight: 800; min-width: 75px; }
+        
+        /* Ajuste slider para que no se rompa en móviles mini */
+        input[type=range] { cursor: pointer; min-width: 60px; }
     </style>
 </head>
 <body class="min-h-screen pb-20 light text-slate-900 dark:text-white">
@@ -62,33 +52,33 @@
     <div class="bg-master"></div>
     <div class="bg-overlay"></div>
 
-    <main class="max-w-5xl mx-auto px-6 relative z-10">
+    <main class="max-w-5xl mx-auto px-4 md:px-6 relative z-10">
         
-        <header class="pt-12 pb-10">
-            <div class="flex flex-col gap-6">
+        <header class="pt-8 md:pt-12 pb-10">
+            <div class="flex flex-col gap-5">
                 <div>
-                    <h1 class="text-3xl md:text-4xl font-black tracking-tight">
+                    <h1 class="text-2xl md:text-4xl font-black tracking-tight">
                         ITCs – <span class="text-blue-600">Categoría Básica</span>
                     </h1>
-                    <p class="text-slate-600 dark:text-slate-400 mt-1 font-medium italic text-sm text-balance">Escucha y repasa las 44 Instrucciones Técnicas.</p>
+                    <p class="text-slate-600 dark:text-slate-400 mt-1 font-medium italic text-xs md:text-sm">Control de audio y estudio ajustable.</p>
                 </div>
                 
-                <div class="flex flex-row items-center gap-4 bg-white/40 dark:bg-slate-900/40 p-3 rounded-2xl border border-white/20 backdrop-blur shadow-sm w-fit">
+                <div class="flex flex-row items-center justify-between gap-2 md:gap-4 bg-white/50 dark:bg-slate-900/50 p-2 md:p-3 rounded-2xl border border-white/20 backdrop-blur shadow-sm w-full md:w-fit">
                     
-                    <button onclick="toggleAudio()" id="audioBtn" class="flex-shrink-0 px-4 py-2 rounded-xl bg-blue-600 text-white border border-blue-500 shadow-md transition-all hover:scale-105 active:scale-95 flex items-center gap-2">
-                        <svg id="play-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
-                        <span class="text-[11px] font-bold uppercase tracking-wider" id="audioText">Escuchar</span>
+                    <button onclick="toggleAudio()" id="audioBtn" class="flex-shrink-0 flex items-center justify-center gap-2 px-3 md:px-4 py-2 rounded-xl bg-blue-600 text-white border border-blue-500 shadow-md transition-all hover:scale-105 active:scale-95">
+                        <svg id="play-icon" class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+                        <span class="hidden xs:block text-[10px] md:text-[11px] font-bold uppercase tracking-wider" id="audioText">Escuchar</span>
                     </button>
 
-                    <div class="flex items-center gap-3 px-3 py-1 bg-slate-200/50 dark:bg-slate-800/50 rounded-lg">
-                        <span class="hidden sm:inline text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase">Velocidad</span>
-                        <input type="range" id="speedRange" min="0.8" max="2.0" step="0.1" value="1.2" class="w-20 md:w-28 accent-blue-600">
-                        <span id="speedValue" class="text-[11px] font-black text-blue-600 w-8 text-center">1.2x</span>
+                    <div class="flex-1 flex items-center gap-2 md:gap-3 px-2 md:px-3 py-1 bg-slate-200/50 dark:bg-slate-800/50 rounded-lg min-w-0">
+                        <span class="hidden sm:inline text-[9px] md:text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase">Voz</span>
+                        <input type="range" id="speedRange" min="0.8" max="2.0" step="0.1" value="1.2" class="w-full md:w-28 accent-blue-600">
+                        <span id="speedValue" class="text-[10px] md:text-[11px] font-black text-blue-600 w-7 text-center">1.2x</span>
                     </div>
 
-                    <button onclick="toggleDarkMode()" class="flex-shrink-0 p-2 rounded-xl bg-white/80 dark:bg-slate-800/80 text-slate-700 dark:text-yellow-400 border border-slate-300 dark:border-slate-700 shadow-sm transition-transform active:scale-90">
-                        <svg id="moon-icon" class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-                        <svg id="sun-icon" class="w-5 h-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path></svg>
+                    <button onclick="toggleDarkMode()" class="flex-shrink-0 p-2 md:p-2.5 rounded-xl bg-white/80 dark:bg-slate-800/80 text-slate-700 dark:text-yellow-400 border border-slate-300 dark:border-slate-700 shadow-sm transition-transform active:scale-90">
+                        <svg id="moon-icon" class="w-4 h-4 md:w-5 md:h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                        <svg id="sun-icon" class="w-4 h-4 md:w-5 md:h-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path></svg>
                     </button>
                 </div>
             </div>
@@ -100,19 +90,19 @@
                     <h2 class="font-bold uppercase text-xs tracking-widest">Empresas e instalaciones</h2>
                 </div>
                 <div class="divide-y divide-slate-400/10 dark:divide-white/5">
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 03. Empresas instaladoras en baja tensión."><span class="itc-number text-sm">ITC-BT-03:</span><span class="text-sm md:text-base">Empresas instaladoras en baja tensión</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 04. Documentación y puesta en servicio de las instalaciones."><span class="itc-number text-sm">ITC-BT-04:</span><span class="text-sm md:text-base">Documentación y puesta en servicio de las instalaciones</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 05. Verificaciones e inspecciones."><span class="itc-number text-sm">ITC-BT-05:</span><span class="text-sm md:text-base">Verificaciones e inspecciones</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 03. Empresas instaladoras en baja tensión."><span class="itc-number text-sm">ITC-BT-03:</span><span class="text-sm md:text-base">Empresas instaladoras en baja tensión</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 04. Documentación y puesta en servicio de las instalaciones."><span class="itc-number text-sm">ITC-BT-04:</span><span class="text-sm md:text-base">Documentación y puesta en servicio de las instalaciones</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 05. Verificaciones e inspecciones."><span class="itc-number text-sm">ITC-BT-05:</span><span class="text-sm md:text-base">Verificaciones e inspecciones</span></div>
                 </div>
             </section>
 
             <section class="category-card" data-speech-group="Conexión del neutro, masas y alumbrado exterior.">
                 <div class="bg-slate-200/30 dark:bg-slate-900/40 px-6 py-4 border-b border-slate-400/10 dark:border-white/10 text-slate-800 dark:text-slate-200">
-                    <h2 class="font-bold uppercase text-xs tracking-widest">Conexión del neutro, masas y alumbrado exterior</h2>
+                    <h2 class="font-bold uppercase text-xs tracking-widest text-balance">Conexión del neutro, masas y alumbrado exterior</h2>
                 </div>
                 <div class="divide-y divide-slate-400/10 dark:divide-white/5">
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 08. Sistemas de conexión del neutro y de las masas en redes de distribución de energía eléctrica."><span class="itc-number text-sm">ITC-BT-08:</span><span class="text-sm md:text-base">Sistemas de conexión del neutro y de las masas en redes de distribución de energía eléctrica</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 09. Instalaciones de alumbrado exterior."><span class="itc-number text-sm">ITC-BT-09:</span><span class="text-sm md:text-base">Instalaciones de alumbrado exterior</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 08. Sistemas de conexión del neutro y de las masas en redes de distribución de energía eléctrica."><span class="itc-number text-sm">ITC-BT-08:</span><span class="text-sm md:text-base">Sistemas de conexión del neutro y de las masas en redes de distribución de energía eléctrica</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 09. Instalaciones de alumbrado exterior."><span class="itc-number text-sm">ITC-BT-09:</span><span class="text-sm md:text-base">Instalaciones de alumbrado exterior</span></div>
                 </div>
             </section>
 
@@ -121,13 +111,13 @@
                     <h2 class="font-bold uppercase text-xs tracking-widest text-balance">Previsión de cargas e instalaciones de enlace</h2>
                 </div>
                 <div class="divide-y divide-slate-400/10 dark:divide-white/5">
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 10. Previsión de cargas para suministros en baja tensión."><span class="itc-number text-sm">ITC-BT-10:</span><span class="text-sm">Previsión de cargas para suministros en baja tensión</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 12. Instalaciones de enlace. Esquemas."><span class="itc-number text-sm">ITC-BT-12:</span><span class="text-sm">Instalaciones de enlace. Esquemas</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 13. Instalaciones de enlace. Cajas generales de protección."><span class="itc-number text-sm">ITC-BT-13:</span><span class="text-sm">Instalaciones de enlace. Cajas generales de protección</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 14. Instalaciones de enlace. Línea general de alimentación."><span class="itc-number text-sm">ITC-BT-14:</span><span class="text-sm">Instalaciones de enlace. Línea general de alimentación</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 15. Instalaciones de enlace. Derivaciones individuales."><span class="itc-number text-sm">ITC-BT-15:</span><span class="text-sm">Instalaciones de enlace. Derivaciones individuales</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 16. Instalaciones de enlace. Contadores: ubicación y sistemas de instalación."><span class="itc-number text-sm">ITC-BT-16:</span><span class="text-sm">Instalaciones de enlace. Contadores: ubicación y sistemas de instalación</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 17. Instalaciones de enlace. Dispositivos generales de mando y protección."><span class="itc-number text-sm">ITC-BT-17:</span><span class="text-sm">Instalaciones de enlace. Dispositivos generales de mando y protección. ICP</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 10. Previsión de cargas para suministros en baja tensión."><span class="itc-number text-sm">ITC-BT-10:</span><span class="text-sm">Previsión de cargas para suministros en baja tensión</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 12. Instalaciones de enlace. Esquemas."><span class="itc-number text-sm">ITC-BT-12:</span><span class="text-sm">Instalaciones de enlace. Esquemas</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 13. Instalaciones de enlace. Cajas generales de protección."><span class="itc-number text-sm">ITC-BT-13:</span><span class="text-sm">Instalaciones de enlace. Cajas generales de protección</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 14. Instalaciones de enlace. Línea general de alimentación."><span class="itc-number text-sm">ITC-BT-14:</span><span class="text-sm">Instalaciones de enlace. Línea general de alimentación</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 15. Instalaciones de enlace. Derivaciones individuales."><span class="itc-number text-sm">ITC-BT-15:</span><span class="text-sm">Instalaciones de enlace. Derivaciones individuales</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 16. Instalaciones de enlace. Contadores: ubicación y sistemas de instalación."><span class="itc-number text-sm">ITC-BT-16:</span><span class="text-sm text-balance">Contadores: ubicación y sistemas de instalación</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 17. Instalaciones de enlace. Dispositivos generales de mando y protección e ICP."><span class="itc-number text-sm">ITC-BT-17:</span><span class="text-sm text-balance">Dispositivos generales e individuales de mando y protección. ICP</span></div>
                 </div>
             </section>
 
@@ -136,16 +126,16 @@
                     <h2 class="font-bold uppercase text-xs tracking-widest text-balance">Puesta a tierra e instalaciones interiores</h2>
                 </div>
                 <div class="divide-y divide-slate-400/10 dark:divide-white/5">
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 18. Instalaciones de puesta a tierra."><span class="itc-number text-sm">ITC-BT-18:</span><span class="text-sm">Instalaciones de puesta a tierra</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 19. Instalaciones interiores o receptoras. Prescripciones generales."><span class="itc-number text-sm">ITC-BT-19:</span><span class="text-sm">Instalaciones interiores o receptoras. Prescripciones generales</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 20. Instalaciones interiores o receptoras. Sistemas de instalación."><span class="itc-number text-sm">ITC-BT-20:</span><span class="text-sm">Instalaciones interiores o receptoras. Sistemas de instalación</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 21. Instalaciones interiores o receptoras. Tubos y canales protectoras."><span class="itc-number text-sm">ITC-BT-21:</span><span class="text-sm">Instalaciones interiores o receptoras. Tubos y canales protectoras</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 22. Instalaciones interiores o receptoras. Protección contra sobreintensidades."><span class="itc-number text-sm">ITC-BT-22:</span><span class="text-sm">Instalaciones interiores o receptoras. Protección contra sobreintensidades</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 23. Instalaciones interiores o receptoras. Protección contra sobretensiones."><span class="itc-number text-sm">ITC-BT-23:</span><span class="text-sm">Instalaciones interiores o receptoras. Protección contra sobretensiones</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 24. Instalaciones interiores o receptoras. Protección contra los contactos directos e indirectos."><span class="itc-number text-sm">ITC-BT-24:</span><span class="text-sm text-balance">Instalaciones interiores o receptoras. Protección contra contactos directos e indirectos</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 25. Instalaciones interiores en viviendas. Número de circuitos y características."><span class="itc-number text-sm">ITC-BT-25:</span><span class="text-sm">Viviendas. Número de circuitos y características</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 26. Instalaciones interiores en viviendas. Prescripciones generales de instalación."><span class="itc-number text-sm">ITC-BT-26:</span><span class="text-sm">Viviendas. Prescripciones generales de instalación</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 27. Instalaciones interiores en viviendas. Locales con bañera o ducha."><span class="itc-number text-sm">ITC-BT-27:</span><span class="text-sm">Viviendas. Locales con bañera o ducha</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 18. Instalaciones de puesta a tierra."><span class="itc-number text-sm">ITC-BT-18:</span><span class="text-sm">Instalaciones de puesta a tierra</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 19. Instalaciones interiores o receptoras. Prescripciones generales."><span class="itc-number text-sm">ITC-BT-19:</span><span class="text-sm">Instalaciones interiores o receptoras. Prescripciones generales</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 20. Instalaciones interiores o receptoras. Sistemas de instalación."><span class="itc-number text-sm">ITC-BT-20:</span><span class="text-sm">Instalaciones interiores o receptoras. Sistemas de instalación</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 21. Instalaciones interiores o receptoras. Tubos y canales protectoras."><span class="itc-number text-sm">ITC-BT-21:</span><span class="text-sm">Instalaciones interiores o receptoras. Tubos y canales protectoras</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 22. Instalaciones interiores o receptoras. Protección contra sobreintensidades."><span class="itc-number text-sm">ITC-BT-22:</span><span class="text-sm">Instalaciones interiores o receptoras. Protección contra sobreintensidades</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 23. Instalaciones interiores o receptoras. Protección contra sobretensiones."><span class="itc-number text-sm">ITC-BT-23:</span><span class="text-sm">Instalaciones interiores o receptoras. Protección contra sobretensiones</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 24. Instalaciones interiores o receptoras. Protección contra los contactos directos e indirectos."><span class="itc-number text-sm">ITC-BT-24:</span><span class="text-sm text-balance">Protección contra los contactos directos e indirectos</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 25. Instalaciones interiores en viviendas. Número de circuitos y características."><span class="itc-number text-sm">ITC-BT-25:</span><span class="text-sm">Instalaciones interiores en viviendas. Número de circuitos y características</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 26. Instalaciones interiores en viviendas. Prescripciones generales de instalación."><span class="itc-number text-sm">ITC-BT-26:</span><span class="text-sm">Instalaciones interiores en viviendas. Prescripciones generales de instalación</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 27. Instalaciones interiores en viviendas. Locales con bañera o ducha."><span class="itc-number text-sm">ITC-BT-27:</span><span class="text-sm">Instalaciones interiores en viviendas. Locales con bañera o ducha</span></div>
                 </div>
             </section>
 
@@ -154,20 +144,20 @@
                     <h2 class="font-bold uppercase text-xs tracking-widest text-balance">Locales y entornos especiales</h2>
                 </div>
                 <div class="divide-y divide-slate-400/10 dark:divide-white/5">
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 28. Instalaciones en locales de pública concurrencia."><span class="itc-number text-sm">ITC-BT-28:</span><span class="text-sm">Instalaciones en locales de pública concurrencia</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 30. Instalaciones en locales de características especiales."><span class="itc-number text-sm">ITC-BT-30:</span><span class="text-sm">Instalaciones en locales de características especiales</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 31. Instalaciones con fines especiales. Piscinas y fuentes."><span class="itc-number text-sm">ITC-BT-31:</span><span class="text-sm">Instalaciones con fines especiales. Piscinas y fuentes</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 32. Instalaciones con fines especiales. Máquinas de elevación y transporte."><span class="itc-number text-sm">ITC-BT-32:</span><span class="text-sm">Máquinas de elevación y transporte</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 33. Instalaciones provisionales y temporales de obras."><span class="itc-number text-sm">ITC-BT-33:</span><span class="text-sm">Instalaciones provisionales y temporales de obras</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 34. Instalaciones con fines especiales. Ferias y stands."><span class="itc-number text-sm">ITC-BT-34:</span><span class="text-sm">Instalaciones con fines especiales. Ferias y stands</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 35. Instalaciones con fines especiales. Establecimientos agrícolas y hortícolas."><span class="itc-number text-sm">ITC-BT-35:</span><span class="text-sm">Establecimientos agrícolas y hortícolas</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 36. Instalaciones a muy baja tensión."><span class="itc-number text-sm">ITC-BT-36:</span><span class="text-sm">Instalaciones a muy baja tensión</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 37. Instalaciones a tensiones especiales."><span class="itc-number text-sm">ITC-BT-37:</span><span class="text-sm">Instalaciones a tensiones especiales</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 39. Instalaciones con fines especiales. Cercas eléctricas para ganado."><span class="itc-number text-sm">ITC-BT-39:</span><span class="text-sm text-balance">Instalaciones con fines especiales. Cercas eléctricas para ganado</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 41. Instalaciones eléctricas en caravanas y parques de caravanas."><span class="itc-number text-sm">ITC-BT-41:</span><span class="text-sm">Caravanas y parques de caravanas</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 42. Instalaciones eléctricas en puertos y marinas para barcos de recreo."><span class="itc-number text-sm">ITC-BT-42:</span><span class="text-sm text-balance">Instalaciones eléctricas en puertos y marinas</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 50. Instalaciones eléctricas en locales con saunas."><span class="itc-number text-sm">ITC-BT-50:</span><span class="text-sm">Locales con radiadores para saunas</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 52. Infraestructura para la recarga de vehículos eléctricos."><span class="itc-number text-sm font-bold text-blue-600">ITC-BT-52:</span><span class="text-sm font-bold">Recarga de vehículos eléctricos</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 28. Instalaciones en locales de pública concurrencia."><span class="itc-number text-sm">ITC-BT-28:</span><span class="text-sm">Instalaciones en locales de pública concurrencia</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 30. Instalaciones en locales de características especiales."><span class="itc-number text-sm">ITC-BT-30:</span><span class="text-sm">Instalaciones en locales de características especiales</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 31. Instalaciones con fines especiales. Piscinas y fuentes."><span class="itc-number text-sm">ITC-BT-31:</span><span class="text-sm">Instalaciones con fines especiales. Piscinas y fuentes</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 32. Instalaciones con fines especiales. Máquinas de elevación y transporte."><span class="itc-number text-sm">ITC-BT-32:</span><span class="text-sm">Instalaciones con fines especiales. Máquinas de elevación y transporte</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 33. Instalaciones provisionales y temporales de obras."><span class="itc-number text-sm">ITC-BT-33:</span><span class="text-sm text-balance">Instalaciones provisionales y temporales de obras</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 34. Instalaciones con fines especiales. Ferias y stands."><span class="itc-number text-sm">ITC-BT-34:</span><span class="text-sm">Instalaciones con fines especiales. Ferias y stands</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 35. Instalaciones con fines especiales. Establecimientos agrícolas y hortícolas."><span class="itc-number text-sm">ITC-BT-35:</span><span class="text-sm">Establecimientos agrícolas y hortícolas</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 36. Instalaciones a muy baja tensión."><span class="itc-number text-sm">ITC-BT-36:</span><span class="text-sm">Instalaciones a muy baja tensión</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 37. Instalaciones a tensiones especiales."><span class="itc-number text-sm">ITC-BT-37:</span><span class="text-sm">Instalaciones a tensiones especiales</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 39. Instalaciones con fines especiales. Cercas eléctricas para ganado."><span class="itc-number text-sm">ITC-BT-39:</span><span class="text-sm text-balance">Instalaciones con fines especiales. Cercas eléctricas para ganado</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 41. Instalaciones eléctricas en caravanas y parques de caravanas."><span class="itc-number text-sm">ITC-BT-41:</span><span class="text-sm">Instalaciones eléctricas en caravanas y parques de caravanas</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 42. Instalaciones eléctricas en puertos y marinas para barcos de recreo."><span class="itc-number text-sm">ITC-BT-42:</span><span class="text-sm text-balance">Instalaciones eléctricas en puertos y marinas para barcos de recreo</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 50. Instalaciones eléctricas en locales que contienen radiadores para saunas."><span class="itc-number text-sm">ITC-BT-50:</span><span class="text-sm">Instalaciones eléctricas en locales con saunas</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 52. Infraestructura para la recarga de vehículos eléctricos."><span class="itc-number text-sm font-bold text-blue-600">ITC-BT-52:</span><span class="text-sm font-bold text-balance">Infraestructura para la recarga de vehículos eléctricos</span></div>
                 </div>
             </section>
 
@@ -176,13 +166,13 @@
                     <h2 class="font-bold uppercase text-xs tracking-widest">Instalación de receptores</h2>
                 </div>
                 <div class="divide-y divide-slate-400/10 dark:divide-white/5">
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 43. Instalación de receptores. Prescripciones generales."><span class="itc-number text-sm">ITC-BT-43:</span><span class="text-sm">Instalación de receptores. Prescripciones generales</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 44. Instalación de receptores. Receptores para alumbrado."><span class="itc-number text-sm">ITC-BT-44:</span><span class="text-sm">Instalación de receptores. Receptores para alumbrado</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 45. Instalación de receptores. Aparatos de caldeo."><span class="itc-number text-sm">ITC-BT-45:</span><span class="text-sm">Instalación de receptores. Aparatos de caldeo</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 46. Instalación de receptores. Cables y folios radiantes en viviendas."><span class="itc-number text-sm">ITC-BT-46:</span><span class="text-sm">Cables y folios radiantes en viviendas</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 47. Instalación de receptores. Motores."><span class="itc-number text-sm">ITC-BT-47:</span><span class="text-sm">Instalación de receptores. Motores</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 48. Instalación de receptores. Transformadores, autotransformadores y condensadores."><span class="itc-number text-sm text-balance">ITC-BT-48:</span><span class="text-sm text-balance">Transformadores, autotransformadores y condensadores</span></div>
-                    <div class="itc-row px-6 py-4 flex gap-4" data-speech="ITC BT 49. Instalaciones eléctricas en muebles."><span class="itc-number text-sm">ITC-BT-49:</span><span class="text-sm">Instalaciones eléctricas en muebles</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 43. Instalación de receptores. Prescripciones generales."><span class="itc-number text-sm">ITC-BT-43:</span><span class="text-sm">Instalación de receptores. Prescripciones generales</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 44. Instalación de receptores. Receptores para alumbrado."><span class="itc-number text-sm">ITC-BT-44:</span><span class="text-sm">Instalación de receptores. Receptores para alumbrado</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 45. Instalación de receptores. Aparatos de caldeo."><span class="itc-number text-sm">ITC-BT-45:</span><span class="text-sm">Instalación de receptores. Aparatos de caldeo</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 46. Instalación de receptores. Cables y folios radiantes en viviendas."><span class="itc-number text-sm">ITC-BT-46:</span><span class="text-sm">Instalación de receptores. Cables y folios radiantes</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 47. Instalación de receptores. Motores."><span class="itc-number text-sm">ITC-BT-47:</span><span class="text-sm">Instalación de receptores. Motores</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 48. Instalación de receptores. Transformadores, autotransformadores y condensadores."><span class="itc-number text-sm text-balance">ITC-BT-48:</span><span class="text-sm text-balance">Transformadores, autotransformadores, condensadores</span></div>
+                    <div class="itc-row px-4 md:px-6 py-4 flex gap-4" data-speech="ITC BT 49. Instalaciones eléctricas en muebles."><span class="itc-number text-sm">ITC-BT-49:</span><span class="text-sm">Instalaciones eléctricas en muebles</span></div>
                 </div>
             </section>
 
@@ -190,7 +180,7 @@
                 <div class="bg-slate-200/30 dark:bg-slate-900/40 px-6 py-4 border-b border-slate-400/10 dark:border-white/10 text-slate-800 dark:text-slate-200">
                     <h2 class="font-bold uppercase text-xs tracking-widest">Generación de energía</h2>
                 </div>
-                <div class="px-6 py-4 flex gap-4 itc-row" data-speech="ITC BT 40. Instalaciones generadoras de baja tensión.">
+                <div class="px-4 md:px-6 py-4 flex gap-4 itc-row" data-speech="ITC BT 40. Instalaciones generadoras de baja tensión.">
                     <span class="itc-number text-sm">ITC-BT-40:</span>
                     <span class="text-sm md:text-base">Instalaciones generadoras de baja tensión</span>
                 </div>
@@ -198,7 +188,7 @@
         </div>
     </main>
 
-    <a href="Landing_Test_REBT_ITC.html" class="fixed bottom-8 left-8 w-12 h-12 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center shadow-2xl transition-all hover:scale-110 active:scale-95 z-50">
+    <a href="Landing_Test_REBT_ITC.html" class="fixed bottom-6 left-6 w-12 h-12 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center shadow-2xl transition-all hover:scale-110 active:scale-95 z-50">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
     </a>
 
@@ -216,20 +206,22 @@
         let isReading = false;
         let itemsToRead = [];
         let currentIndex = 0;
+        let wakeLock = null;
 
         const speedInput = document.getElementById('speedRange');
         const speedDisplay = document.getElementById('speedValue');
-
         speedInput.oninput = () => { speedDisplay.innerText = speedInput.value + "x"; };
 
-        function toggleAudio() {
-            if (isReading) { stopReading(); } else { startReading(); }
+        async function requestWakeLock() {
+            try { if ('wakeLock' in navigator) { wakeLock = await navigator.wakeLock.request('screen'); }
+            } catch (err) { console.log(err.name); }
         }
 
-        function startReading() {
-            isReading = true;
-            currentIndex = 0;
-            itemsToRead = [];
+        function toggleAudio() { if (isReading) { stopReading(); } else { startReading(); } }
+
+        async function startReading() {
+            isReading = true; currentIndex = 0; itemsToRead = [];
+            await requestWakeLock();
 
             document.querySelectorAll('section, .itc-row').forEach(el => {
                 let text = el.getAttribute('data-speech-group') || el.getAttribute('data-speech');
@@ -242,33 +234,27 @@
         }
 
         function readNext() {
-            if (!isReading || currentIndex >= itemsToRead.length) {
-                stopReading();
-                return;
-            }
-
+            if (!isReading || currentIndex >= itemsToRead.length) { stopReading(); return; }
+            synth.cancel();
             const currentItem = itemsToRead[currentIndex];
             document.querySelectorAll('.reading-active').forEach(el => el.classList.remove('reading-active'));
             currentItem.element.classList.add('reading-active');
-            currentItem.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (!document.hidden) currentItem.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
             let utterance = new SpeechSynthesisUtterance(currentItem.text);
             utterance.lang = 'es-ES';
             utterance.rate = parseFloat(speedInput.value);
 
             utterance.onend = () => {
-                currentIndex++;
-                let pause = 400 / parseFloat(speedInput.value);
-                setTimeout(() => { if(isReading) readNext(); }, pause);
+                if (isReading) { currentIndex++; setTimeout(() => readNext(), 400 / parseFloat(speedInput.value)); }
             };
-
-            utterance.onerror = () => stopReading();
+            utterance.onerror = () => { if (isReading) { currentIndex++; readNext(); } };
             synth.speak(utterance);
         }
 
         function stopReading() {
-            isReading = false;
-            synth.cancel();
+            isReading = false; synth.cancel();
+            if (wakeLock) { wakeLock.release(); wakeLock = null; }
             document.querySelectorAll('.reading-active').forEach(el => el.classList.remove('reading-active'));
             document.getElementById('audioBtn').classList.replace('bg-red-600', 'bg-blue-600');
             document.getElementById('audioText').innerText = "Escuchar";
