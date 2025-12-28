@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Examen Test REBT 6</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RSH4ZW3VT2');
+  </script>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+
+  <script>
+    /* ===== Banco de preguntas + explicaciones ===== */
+  
+
+
+
+
+  const  preguntas = [
+  {
+    "pregunta": "Según el REBT, ¿qué se entiende por suministro de socorro?",
+    "opciones": [
+      "El que está limitado a una potencia receptora mínima equivalente al 15% del total contratado para el suministro normal",
+      "El dedicado a mantener un servicio restringido con una potencia mínima del 25% del total contratado",
+      "El capaz de mantener un servicio mayor del 50% de la potencia total contratada",
+      "El que proviene de una fuente de energía propia del usuario"
+    ],
+    "respuesta": "El que está limitado a una potencia receptora mínima equivalente al 15% del total contratado para el suministro normal",
+    "explicacion": "Artículo 10, apartado 1.B.a: «Suministro de socorro es el que está limitado a una potencia receptora mínima equivalente al 15% del total contratado para el suministro normal.»"
+  },
+  {
+    "pregunta": "Según el REBT, si las especificaciones particulares de una empresa distribuidora se aplican en más de una Comunidad Autónoma, ¿quién debe aprobarlas?",
+    "opciones": [
+      "Cada Comunidad Autónoma individualmente",
+      "El Ministerio de Industria, Comercio y Turismo",
+      "La Comisión Nacional de los Mercados y la Competencia",
+      "El operador del sistema"
+    ],
+    "respuesta": "El Ministerio de Industria, Comercio y Turismo",
+    "explicacion": "Artículo 14, apartado 2: «...deberán ser aprobadas y registradas por... el Ministerio de Industria, Comercio y Turismo, en caso de aplicarse en más de una comunidad autónoma.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cómo se define la tensión con relación a tierra en instalaciones de corriente continua con punto mediano puesto a tierra?",
+    "opciones": [
+      "La tensión nominal de la instalación",
+      "La tensión entre los dos conductores polares",
+      "La mitad de la tensión nominal",
+      "La tensión nominal dividida por raíz de 3"
+    ],
+    "respuesta": "La mitad de la tensión nominal",
+    "explicacion": "ITC-BT-01, Definición TENSIÓN CON RELACIÓN O RESPECTO A TIERRA: «– En instalaciones monofásicas o de corriente continua, con punto mediano puesto a tierra, a la mitad de la tensión nominal.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué característica define a una red posada sobre fachada?",
+    "opciones": [
+      "Los conductores se instalan con una tensión mecánica predeterminada",
+      "Los conductores aislados se instalan sin quedar sometidos a esfuerzos mecánicos, a excepción de su propio peso",
+      "Utiliza conductores desnudos sobre aisladores rígidos",
+      "Debe estar protegida siempre bajo tubo"
+    ],
+    "respuesta": "Los conductores aislados se instalan sin quedar sometidos a esfuerzos mecánicos, a excepción de su propio peso",
+    "explicacion": "ITC-BT-01, Definición RED POSADA: «Red posada, sobre fachada o muros, es aquella en que los conductores aislados se instalan sin quedar sometidos a esfuerzos mecánicos, a excepción de su propio peso.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué equipo de medida específico se exige como mínimo a las empresas instaladoras de categoría básica para verificar la sensibilidad de disparo de los interruptores diferenciales?",
+    "opciones": [
+      "Un multímetro con función de intensidad",
+      "Un equipo capaz de verificar la característica intensidad-tiempo",
+      "Un analizador de redes",
+      "Un medidor de impedancia de bucle"
+    ],
+    "respuesta": "Un equipo capaz de verificar la característica intensidad-tiempo",
+    "explicacion": "ITC-BT-03, Apéndice I, apartado 2.1.2: «– Equipo verificador de la sensibilidad de disparo de los interruptores diferenciales, capaz de verificar la característica intensidad-tiempo;»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué prohibición expresa se establece para las empresas instaladoras habilitadas respecto a los certificados de instalación?",
+    "opciones": [
+      "No pueden emitir certificados en papel",
+      "No podrán facilitar, ceder o enajenar certificados de instalación no realizadas por ella misma",
+      "No pueden cobrar por la emisión del certificado",
+      "No pueden firmar certificados de instalaciones de más de 100 kW"
+    ],
+    "respuesta": "No podrán facilitar, ceder o enajenar certificados de instalación no realizadas por ella misma",
+    "explicacion": "ITC-BT-03, apartado 5.9: «La empresa instaladora habilitada no podrá facilitar, ceder o enajenar certificados de instalación no realizadas por ella misma.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué instalación requiere proyecto para su ejecución según el grupo g)?",
+    "opciones": [
+      "Las de aparcamientos o estacionamientos que disponen de ventilación natural de más de 5 plazas",
+      "Las de aparcamientos o estacionamientos que requieren ventilación forzada, cualquiera que sea su ocupación",
+      "Las de garajes privados de una sola plaza",
+      "Las de aparcamientos al aire libre"
+    ],
+    "respuesta": "Las de aparcamientos o estacionamientos que requieren ventilación forzada, cualquiera que sea su ocupación",
+    "explicacion": "ITC-BT-04, apartado 3.1, cuadro grupo g: «g) Las de aparcamientos o estacionamientos que requieren ventilación forzada. Cualquiera que sea su ocupación.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué dato específico debe contener el Certificado de Instalación respecto a la potencia?",
+    "opciones": [
+      "La potencia máxima admisible de la acometida",
+      "La potencia prevista de la instalación",
+      "La potencia media consumida en la zona",
+      "La potencia reactiva estimada"
+    ],
+    "respuesta": "La potencia prevista de la instalación",
+    "explicacion": "ITC-BT-04, apartado 5.4.b: «b) la potencia prevista de la instalación;»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿a partir de qué potencia instalada deben ser objeto de inspección inicial los locales mojados?",
+    "opciones": [
+      "10 kW",
+      "25 kW",
+      "50 kW",
+      "100 kW"
+    ],
+    "respuesta": "25 kW",
+    "explicacion": "ITC-BT-05, apartado 4.1.d: «d) Locales mojados con potencia instalada superior a 25 kW.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué sucede si una instalación ya en servicio recibe una calificación de 'Negativa' en una inspección?",
+    "opciones": [
+      "Se le da un plazo de 6 meses para corregir los defectos",
+      "Se le emite Certificado negativo, que se remitirá inmediatamente al Órgano competente de la Comunidad Autónoma",
+      "Se permite el funcionamiento provisional bajo responsabilidad del titular",
+      "Se debe realizar una nueva inspección en 15 días"
+    ],
+    "respuesta": "Se le emite Certificado negativo, que se remitirá inmediatamente al Órgano competente de la Comunidad Autónoma",
+    "explicacion": "ITC-BT-05, apartado 5.2.3.b: «b) A las instalaciones ya en servicio se les emitirá Certificado negativo, que se remitirá inmediatamente al Órgano competente de la Comunidad Autónoma.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿con qué periodicidad deben inspeccionarse las instalaciones comunes de edificios de viviendas de potencia total instalada superior a 100 kW?",
+    "opciones": [
+      "Cada 2 años",
+      "Cada 4 años",
+      "Cada 5 años",
+      "Cada 10 años"
+    ],
+    "respuesta": "Cada 10 años",
+    "explicacion": "ITC-BT-05, apartado 4.2: «...y cada 10 años, las comunes de edificios de viviendas de potencia total instalada superior a 100 kW.»"
+  },
+  {
+    "pregunta": "Según el REBT, en las instalaciones existentes antes de su entrada en vigor, ¿qué criterios técnicos son aplicables en las inspecciones?",
+    "opciones": [
+      "Siempre los del Reglamento actual",
+      "Los correspondientes a la reglamentación con la que se aprobaron",
+      "Los de la norma UNE más reciente",
+      "Los que decida el inspector en cada caso"
+    ],
+    "respuesta": "Los correspondientes a la reglamentación con la que se aprobaron",
+    "explicacion": "Artículo 2, apartado 2.c: «...si bien los criterios técnicos aplicables en dichas inspecciones serán los correspondientes a la reglamentación con la que se aprobaron.»"
+  },
+  {
+    "pregunta": "Según el REBT, en una red aérea con esquema TN, ¿qué sección mínima debe tener el conductor neutro si los conductores de fase son de 25 mm²?",
+    "opciones": [
+      "16 mm²",
+      "25 mm²",
+      "35 mm²",
+      "10 mm²"
+    ],
+    "respuesta": "25 mm²",
+    "explicacion": "ITC-BT-08, apartado 2.a, Tabla 1: «Sección de los conductores de fase (mm2): 25. Sección nominal del conductor neutro (mm2) Redes aéreas: 25.»"
+  },
+  {
+    "pregunta": "Según el REBT, en redes subterráneas de alumbrado exterior, ¿a qué distancia mínima del nivel del suelo se colocará la cinta de señalización que advierte de la existencia de cables?",
+    "opciones": [
+      "0,05 m",
+      "0,10 m",
+      "0,20 m",
+      "0,40 m"
+    ],
+    "respuesta": "0,10 m",
+    "explicacion": "ITC-BT-09, apartado 5.2.1: «Se colocará una cinta de señalización que advierta de la existencia de cables de alumbrado exterior, situada a una distancia mínima del nivel del suelo de 0,10 m y a 0,25 m por encima del tubo.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuál es la fórmula para calcular el coeficiente de simultaneidad en un edificio con más de 21 viviendas (n > 21)?",
+    "opciones": [
+      "15,3 + (n-21)",
+      "15,3 + (n-21) * 0,5",
+      "14,8 + (n-21) * 0,5",
+      "n * 0,8"
+    ],
+    "respuesta": "15,3 + (n-21) * 0,5",
+    "explicacion": "ITC-BT-10, apartado 3.1, Tabla 1: «n>21: 15,3+(n-21).0,5»"
+  },
+  {
+  "pregunta": "Según el REBT, en una centralización de contadores distribuida en más de un lugar, ¿qué esquema de colocación debe utilizarse?",
+  "opciones": [
+    "Esquema 2.2.1",
+    "Esquema 2.2.2",
+    "Esquema 2.2.3",
+    "Esquema 2.3.1"
+  ],
+  "respuesta": "Esquema 2.2.3",
+  "explicacion": "ITC-BT-12, apartado 2.2.3: Este esquema se utilizará en edificios destinados a viviendas, edificios comerciales, de oficinas o destinados a una concentración de industrias donde la previsión de cargas haga aconsejable la centralización de contadores en más de un lugar o planta. Este esquema es de aplicación en el caso de centralización de contadores de forma distribuida mediante canalizaciones eléctricas prefabricadas, que cumplan lo establecido en la norma UNE-EN 60.439-2.»"
+},
+  {
+    "pregunta": "Según el REBT, cuando la acometida sea aérea, ¿a qué altura sobre el suelo podrán instalarse las cajas generales de protección en montaje superficial?",
+    "opciones": [
+      "Entre 2 m y 3 m",
+      "Entre 3 m y 4 m",
+      "Entre 2,5 m y 3,5 m",
+      "A cualquier altura superior a 2,5 m"
+    ],
+    "respuesta": "Entre 3 m y 4 m",
+    "explicacion": "ITC-BT-13, apartado 1.1: «Cuando la acometida sea aérea podrán instalarse en montaje superficial a una altura sobre el suelo comprendida entre 3 m y 4 m.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué sección mínima debe tener el conductor neutro de una línea general de alimentación si la sección de la fase es de 50 mm²?",
+    "opciones": [
+      "16 mm²",
+      "25 mm²",
+      "35 mm²",
+      "50 mm²"
+    ],
+    "respuesta": "25 mm²",
+    "explicacion": "ITC-BT-14, apartado 3, Tabla 1: «Secciones (mm2) FASE: 50. NEUTRO: 25.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuántos tubos de reserva se dispondrán en las derivaciones individuales?",
+    "opciones": [
+      "Uno por cada derivación individual",
+      "Uno por cada cinco derivaciones individuales",
+      "Uno por cada diez derivaciones individuales o fracción",
+      "No es obligatorio instalar tubos de reserva"
+    ],
+    "respuesta": "Uno por cada diez derivaciones individuales o fracción",
+    "explicacion": "ITC-BT-15, apartado 2: «En cualquier caso, se dispondrá de un tubo de reserva por cada diez derivaciones individuales o fracción...»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cómo se determinará la solución a adoptar para la colocación de equipos de medida en suministros industriales con medida indirecta?",
+    "opciones": [
+      "Será siempre individual",
+      "Se especificará en los requisitos particulares de la empresa suministradora",
+      "Mediante centralización obligatoria",
+      "A criterio exclusivo del instalador"
+    ],
+    "respuesta": "Se especificará en los requisitos particulares de la empresa suministradora",
+    "explicacion": "ITC-BT-16, apartado 2.1: «Para suministros industriales, comerciales o de servicios con medida indirecta... la solución a adoptar será la que se especifique en las requisitos particulares de la empresa suministradora...»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué grado de protección mínimo IP deben tener las envolventes de los cuadros de mando y protección?",
+    "opciones": [
+      "IP 20",
+      "IP 30",
+      "IP 40",
+      "IP 55"
+    ],
+    "respuesta": "IP 30",
+    "explicacion": "ITC-BT-17, apartado 1.2: «Las envolventes de los cuadros se ajustarán a las normas... con un grado de protección mínimo IP 30 según UNE 20.324...»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuál es la fórmula para determinar si la unión entre la puesta a tierra del edificio y la del centro de transformación es admisible?",
+    "opciones": [
+      "Vd = Id * Rt < Tensión de contacto máxima aplicada",
+      "Rt < 1 ohmio",
+      "Id < 1000 A",
+      "U0 < 50 V"
+    ],
+    "respuesta": "Vd = Id * Rt < Tensión de contacto máxima aplicada",
+    "explicacion": "ITC-BT-18, apartado 11: «...si el valor de la resistencia de puesta a tierra única es lo suficientemente baja para que se cumpla que... el valor de la tensión de defecto (Vd = Id * Rt) sea menor que la tensión de contacto máximo aplicada...»"
+  },
+  {
+    "pregunta": "Según el REBT, cuando se emplean tornillos de apriete para conexiones de conductores de varios alambres cableados, ¿a partir de qué sección se deben utilizar terminales adecuados?",
+    "opciones": [
+      "Superior a 2,5 mm²",
+      "Superior a 4 mm²",
+      "Superior a 6 mm²",
+      "Superior a 10 mm²"
+    ],
+    "respuesta": "Superior a 6 mm²",
+    "explicacion": "ITC-BT-19, apartado 2.11: «Si se trata de conductores de varios alambres cableados, las conexiones se realizarán de forma que la corriente se reparta por todos los alambres componentes y si el sistema adoptado es de tornillo de apriete entre una arandela metálica bajo su cabeza y una superficie metálica, los conductores de sección superior a 6 mm2 deberán conectarse por medio de terminales adecuados, de forma que las conexiones no queden sometidas a esfuerzos mecánicos»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué condición deben cumplir los cables o tubos instalados directamente en los huecos de la construcción?",
+    "opciones": [
+      "Deben ser armados",
+      "Deben ser no propagadores de la llama",
+      "Deben tener aislamiento de 1000 V",
+      "Deben ser libres de halógenos"
+    ],
+    "respuesta": "Deben ser no propagadores de la llama",
+    "explicacion": "ITC-BT-20, apartado 2.2.6: «Los cables o tubos podrán instalarse directamente en los huecos de la construcción con la condición de que sean no propagadores de la llama.»"
+  },
+  {
+    "pregunta": "Según el REBT, en el esquema TT, ¿cuándo se permite no prever detección de sobreintensidad en uno de los conductores de fase?",
+    "opciones": [
+      "Si el circuito es de alumbrado",
+      "Si existe aguas arriba una protección diferencial que corte todos los conductores de fase y no hay distribución de neutro",
+      "Si la sección del neutro es igual a la de fase",
+      "Nunca"
+    ],
+    "respuesta": "Si existe aguas arriba una protección diferencial que corte todos los conductores de fase y no hay distribución de neutro",
+    "explicacion": "ITC-BT-22, Tabla 1 Nota (4): «...la detección de sobreintensidad puede no estar prevista sobre uno de los conductores de fase, si existe sobre el mismo circuito aguas arriba, una protección diferencial que corte todos los conductores de fase y si no existe distribución del conductor de neutro...»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿a qué equipos se aplica la Categoría I de sobretensiones?",
+    "opciones": [
+      "A los equipos de distribución",
+      "A los electrodomésticos",
+      "A los equipos muy sensibles a las sobretensiones",
+      "A los contadores"
+    ],
+    "respuesta": "A los equipos muy sensibles a las sobretensiones",
+    "explicacion": "ITC-BT-23, apartado 2.2: «Se aplica a los equipos muy sensibles a las sobretensiones y que están destinados a ser conectados a la instalación eléctrica fija. En este caso, las medidas de protección se toman fuera de los equipos a proteger, ya sea en la instalación fija o entre la instalación fija y los equipos, con objeto de limitar las sobretensiones a un nivel específico. Ejemplo: ordenadores, equipos electrónicos muy sensibles, etc.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuál es la condición de protección por corte automático en esquema TT?",
+    "opciones": [
+      "Zs x Ia ≤ U0",
+      "RA x Ia ≤ U",
+      "Id x RA < 50V",
+      "Z x In < U"
+    ],
+    "respuesta": "RA x Ia ≤ U",
+    "explicacion": "ITC-BT-24, apartado 4.1.2: «RA x Ia ≤ U donde: RA es la suma de las resistencias de la toma de tierra y de los conductores de protección de las masas...»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuál es el número máximo de puntos de utilización para el circuito C2 en una vivienda?",
+    "opciones": [
+      "15",
+      "20",
+      "25",
+      "30"
+    ],
+    "respuesta": "20",
+    "explicacion": "ITC-BT-25, apartado 3, Tabla 1: «Circuito: C2. Máximo n.º de puntos de utilización: 20.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cómo deben estar conectadas las tomas de corriente en una misma habitación?",
+    "opciones": [
+      "A fases alternas para equilibrar carga",
+      "Deben estar conectadas a la misma fase",
+      "Es indiferente",
+      "Deben tener neutros independientes"
+    ],
+    "respuesta": "Deben estar conectadas a la misma fase",
+    "explicacion": "ITC-BT-26, apartado 7.2: «– Las tomas de corriente en una misma habitación deben estar conectadas a la misma fase.»"
+  },
+  {
+    "pregunta": "Según el REBT, en los volúmenes 0, 1 y 2 de locales con bañera o ducha, ¿se admiten cajas de conexión?",
+    "opciones": [
+      "Sí, sin restricciones",
+      "No se admiten, salvo para aparatos permitidos en esos volúmenes y con grado de protección IPX5",
+      "Solo en el volumen 2",
+      "Sí, si son estancas"
+    ],
+    "respuesta": "No se admiten, salvo para aparatos permitidos en esos volúmenes y con grado de protección IPX5",
+    "explicacion": "ITC-BT-27, apartado 3 (Requisitos bañeras hidromasaje, que extiende la prohibición general de empalmes salvo cajas IPX5): «No se admiten empalmes en los cables y canalizaciones que discurran por los volúmenes determinados... salvo si estos se realizan con cajas que cumplan el requisito anterior [IPX5].» (Nota: Para la norma general de volúmenes 0, 1 y 2 véase apartado 2.3 donde se prohíben cajas en 0, 1 y 2 salvo para alimentación de equipos permitidos)."
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuál es la intensidad nominal máxima de los interruptores automáticos que protegen las líneas de alumbrado de emergencia alimentados por fuente central?",
+    "opciones": [
+      "10 A",
+      "16 A",
+      "20 A",
+      "25 A"
+    ],
+    "respuesta": "10 A",
+    "explicacion": "ITC-BT-28, apartado 3.4.2: «Las líneas que alimentan directamente los circuitos individuales de los alumbrados de emergencia alimentados por fuente central, estarán protegidas por interruptores automáticos con una intensidad nominal de 10 A como máximo.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cómo deben instalarse los cables aislados con cubierta en el interior de canales aislantes en locales húmedos?",
+    "opciones": [
+      "Empotrados en la pared",
+      "Se instalarán en superficie y las conexiones se realizarán en el interior de cajas",
+      "No están permitidos en locales húmedos",
+      "Deben ir bajo tubo blindado"
+    ],
+    "respuesta": "Se instalarán en superficie y las conexiones se realizarán en el interior de cajas",
+    "explicacion": "ITC-BT-30, apartado 1.1.2: «Se instalarán en superficie y las conexiones, empalmes y derivaciones se realizarán en el interior de cajas.»"
+  },
+  {
+    "pregunta": "Según el REBT, en las piscinas, ¿qué se admite en la Zona 2 respecto a la protección?",
+    "opciones": [
+      "Solo MBTS a 12V",
+      "MBTS, corte automático por diferencial de 30 mA o separación eléctrica",
+      "Ningún equipo eléctrico",
+      "Cualquier equipo con IPX5"
+    ],
+    "respuesta": "MBTS, corte automático por diferencial de 30 mA o separación eléctrica",
+    "explicacion": "ITC-BT-31, apartado 2.2: «En la Zona 2... deben alimentarse por circuitos protegidos: – bien por MBTS... o – bien por desconexión automática... mediante un interruptor diferencial... 30 mA, o – por separación eléctrica...»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué medida de protección contra contactos directos se exige en las áreas de máquinas de elevación donde sólo se admite el acceso de personas con formación específica?",
+    "opciones": [
+      "Aislamiento de partes activas exclusivamente",
+      "Protección por puesta fuera de alcance por alejamiento",
+      "Barreras IP2X",
+      "Uso de MBTS"
+    ],
+    "respuesta": "Protección por puesta fuera de alcance por alejamiento",
+    "explicacion": "ITC-BT-32, apartado 3.1: «En las áreas donde sólo se admite el acceso de personas con formación específica, debe existir una protección por puesta fuera de alcance por alejamiento, para el caso de los cables o barras colectoras...»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué grado de protección mínimo deben tener las envolventes y tomas de corriente en instalaciones de obras que estén a la intemperie?",
+    "opciones": [
+      "IP44",
+      "IP45",
+      "IP55",
+      "IP65"
+    ],
+    "respuesta": "IP45",
+    "explicacion": "ITC-BT-33, apartado 5.1: «Las envolventes, aparamenta, las tomas de corriente y los elementos de la instalación que estén a la intemperie, deberán tener como mínimo un grado de protección IP45, según UNE 20324»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué grado de protección contra impactos IK deben tener las tomas de corriente instaladas en el suelo en instalaciones de ferias?",
+    "opciones": [
+      "IK 07",
+      "IK 08",
+      "IK 09",
+      "IK 10"
+    ],
+    "respuesta": "IK 10",
+    "explicacion": "ITC-BT-34, apartado 6.4.4: «Adicionalmente a los grados de protección indicados en 6.1, deberán tener un grado de protección contra el impacto IK 10...»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué requisito deben cumplir los conectores de circuitos MBTS?",
+    "opciones": [
+      "Deben ser de color rojo",
+      "No deben poder entrar en las bases de enchufe MBTP",
+      "Deben tener contacto de tierra",
+      "Deben ser triangulares"
+    ],
+    "respuesta": "No deben poder entrar en las bases de enchufe MBTP",
+    "explicacion": "ITC-BT-36, apartado 2.2: «– Los conectores de los circuitos MBTS, no deben poder entrar en las bases de enchufe MBTP.» y «Los conectores no deben poder entrar en las bases de toma de corriente alimentadas por otras tensiones.»"
+  },
+  {
+    "pregunta": "Según el REBT, en instalaciones a tensiones especiales, ¿dónde se permite la presencia de piezas desnudas bajo tensión no protegidas completamente contra contactos directos?",
+    "opciones": [
+      "En ningún caso",
+      "Únicamente en locales afectos a un servicio eléctrico, con acceso solo a personal cualificado",
+      "En instalaciones aéreas a más de 5 metros de altura",
+      "En laboratorios de ensayo"
+    ],
+    "respuesta": "Únicamente en locales afectos a un servicio eléctrico, con acceso solo a personal cualificado",
+    "explicacion": "ITC-BT-37, apartado 1: «La presencia de piezas desnudas bajo tensión... se permitirá únicamente en locales afectos a un servicio eléctrico, siempre que sólo personal cualificado tenga acceso al mismo.»"
+  },
+  {
+    "pregunta": "Según el REBT, en cercas eléctricas, ¿qué fuente de alimentación no se considera autónoma?",
+    "opciones": [
+      "La conectada a una red de distribución",
+      "Las pilas",
+      "Los acumuladores cargados por red pero desconectados de ella",
+      "Los generadores solares"
+    ],
+    "respuesta": "La conectada a una red de distribución",
+    "explicacion": "ITC-BT-39, apartado 2: «Conectados a baterías o acumuladores autónomos, es decir que no están destinados a ser conectados a una red de distribución de energía eléctrica.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué tipo de cable flexible se exige para la conexión a los barcos de recreo?",
+    "opciones": [
+      "H05VV-F",
+      "H07RN-F",
+      "RV-K",
+      "H07Z1-K"
+    ],
+    "respuesta": "H07RN-F",
+    "explicacion": "ITC-BT-42, apartado 4.3.3: «Un cable flexible tipo H07RN-F, unido de manera estable al barco de recreo mediante un conector, de acuerdo con las características indicadas en el apartado 4.3.2.»"
+  }
+];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* ===== Estado ===== */
+    let preguntasAleatorias = [];
+    let indice = 0, aciertos = 0, errores = 0;
+    let historial = [];
+    let seleccionUsuario = null;
+    let respondido = false;
+
+// Tiempo del examen
+const DURACION_MIN = 120;          // Duración total en minutos (2 horas)
+const DURACION_SEG = DURACION_MIN * 60;
+
+let inicioTiempo = null;
+let intervaloTiempo = null;
+let tiempoAgotado = false;
+
+
+    /* ===== Utilidades ===== */
+    const mezclar = (arr) => { for (let i = arr.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
+
+    function mezclarPreguntas(){
+      preguntasAleatorias = mezclar(preguntas.map(p=>({...p, opciones: mezclar([...p.opciones]) })));
+      indice=0; aciertos=0; errores=0; historial=[];
+    }
+
+    const fmt2 = (n) => String(n).padStart(2,'0');
+    const clamp0 = (x) => x < 0 ? 0 : x;
+
+    function calcularPuntuacion(){
+      const total = preguntasAleatorias.length;
+      const penalizacion = Math.floor(errores / 2);
+      const validasNetas = Math.max(0, aciertos - penalizacion);
+      const puntos = validasNetas * 0.5;
+      const porcentaje = clamp0((validasNetas / total) * 100);
+      const apto = porcentaje >= 80;
+      return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
+    }
+
+    /* ===== Render ===== */
+    function setProgreso(){
+      const total = preguntasAleatorias.length;
+      const pct = Math.round((indice/total)*100);
+      const bar = document.getElementById('progress-bar');
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+      document.getElementById('progress-txt').textContent = `${indice}/${total}`;
+    }
+
+    function actualizarContador(){
+      if (!inicioTiempo) return;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const restantes = Math.max(0, DURACION_SEG - transcurrido);
+      const mm = fmt2(Math.floor(restantes/60));
+      const ss = fmt2(restantes%60);
+
+      const { puntos } = calcularPuntuacion();
+      const totalPuntos = preguntasAleatorias.length * 0.5;
+
+      const relojClass =
+        restantes <= 60 ? 'text-red-700' :
+        restantes <= 5*60 ? 'text-orange-600' :
+        'text-blue-700';
+
+      document.getElementById("contador").innerHTML = `
+        <span>Cuestión: ${indice + 1}/${preguntasAleatorias.length}</span>
+        <span class="text-green-600">Aciertos: ${aciertos}</span>
+        <span class="text-red-600">Fallos: ${errores}</span>
+        <span>Puntos: ${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</span>
+        <span class="font-mono ${relojClass}">⏳ ${mm}:${ss}</span>`;
+
+      if (restantes === 0 && !tiempoAgotado){
+        tiempoAgotado = true;
+        clearInterval(intervaloTiempo);
+        deshabilitarInteraccion();
+        abrirModalFin();
+      }
+    }
+
+    function renderOpciones(opciones){
+      const cont = document.getElementById("opciones");
+      cont.innerHTML = "";
+      opciones.forEach((op, i)=>{
+        const btn = document.createElement("button");
+        btn.type="button";
+        btn.dataset.valor = op;
+        btn.className="opcion w-full text-left bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl shadow transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300";
+        btn.innerHTML = `<span class="font-semibold tracking-wide">${op}</span>`;
+        btn.onclick = ()=>seleccionarOpcion(op);
+        btn.setAttribute('aria-label',`Opción ${i+1}: ${op}`);
+        cont.appendChild(btn);
+      });
+    }
+
+    function cargarPregunta(){
+      if (indice>=preguntasAleatorias.length) return mostrarResumen();
+      const q = preguntasAleatorias[indice];
+      seleccionUsuario=null; respondido=false;
+      document.getElementById("pregunta").textContent = q.pregunta;
+      renderOpciones(q.opciones);
+
+      document.getElementById("acciones").innerHTML =
+        `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
+           <span>Elige una respuesta (teclas 1–4 y Enter).</span>
+           <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg">Contestar</button>
+         </div>`;
+
+      setProgreso();
+      actualizarContador();
+    }
+
+    function seleccionarOpcion(opcion){
+      if (respondido || tiempoAgotado) return;
+      seleccionUsuario = opcion;
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.classList.remove('ring','ring-yellow-300','translate-y-0.5');
+        if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
+      });
+      const btn = document.getElementById('btn-contestar');
+      btn.disabled=false;
+      btn.classList.remove('opacity-50','cursor-not-allowed');
+      btn.onclick=verificarRespuesta;
+    }
+
+    function verificarRespuesta(){
+      if (respondido || !seleccionUsuario || tiempoAgotado) return;
+      const actual = preguntasAleatorias[indice];
+      const ok = seleccionUsuario===actual.respuesta;
+      respondido = true;
+
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.disabled=true; b.classList.remove('ring','ring-yellow-300');
+        const val=b.dataset.valor;
+        if (val===actual.respuesta){
+          b.classList.add('bg-green-600','hover:bg-green-700');
+          b.innerHTML=`✅ <span class="font-semibold">${val}</span>`;
+        } else if (val===seleccionUsuario && !ok){
+          b.classList.add('bg-red-600','hover:bg-red-700');
+          b.innerHTML=`❌ <span class="font-semibold">${val}</span>`;
+        } else {
+          b.classList.add('bg-blue-500');
+        }
+      });
+
+      ok ? aciertos++ : errores++;
+
+      historial.push({
+        pregunta:actual.pregunta,
+        opciones:actual.opciones,
+        correcta:actual.respuesta,
+        elegida:seleccionUsuario,
+        explicacion:actual.explicacion
+      });
+
+      /* === NUEVO: mostrar la explicación debajo del botón === */
+      document.getElementById("acciones").innerHTML =
+        `<div class="mt-4 flex flex-col gap-3">
+
+           <div class="flex items-center justify-end">
+             <button onclick="siguientePregunta()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">
+               Siguiente
+             </button>
+           </div>
+
+           <div id="explicacion" class="text-sm text-slate-700 bg-slate-100 border-l-4 border-blue-600 p-3 rounded-md">
+             ${actual.explicacion || "Sin referencia disponible"}
+           </div>
+
+         </div>`;
+
+      actualizarContador();
+      setProgreso();
+    }
+
+    const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
+
+    function deshabilitarInteraccion(){
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{ b.disabled=true; });
+      document.getElementById('btn-contestar')?.setAttribute('disabled','true');
+      document.removeEventListener('keydown', handleKey);
+    }
+
+    function abrirModalFin(){
+      const { total, respondidas, enBlanco, penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+      const modal = document.getElementById('modal-fin');
+      const totalPuntos = total * 0.5;
+      document.getElementById('modal-resumen').innerHTML = `
+        <p class="text-slate-700">Respondidas: <strong>${respondidas}</strong> • En blanco: <strong>${enBlanco}</strong> • Total: ${total}</p>
+        <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong></p>
+        <p class="text-slate-700">Penalización aplicada: <strong>-${penalizacion}</strong> válidas</p>
+        <p class="text-slate-700">Válidas netas: <strong>${validasNetas}</strong></p>
+        <p class="text-slate-700">Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> (<strong>${porcentaje.toFixed(2)}%</strong>)</p>
+        <p class="${apto?'text-emerald-700':'text-red-700'} font-bold text-lg mt-1">${apto?'APTO ✅':'NO APTO ❌'}</p>
+      `;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function mostrarResumen(){
+      clearInterval(intervaloTiempo);
+      const total = preguntasAleatorias.length;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const mm = fmt2(Math.floor(transcurrido/60));
+      const ss = fmt2(transcurrido%60);
+
+      const { penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+
+      const detalle = historial.map(h=>`
+        <div class='mb-2 border border-slate-200 rounded-lg p-3'>
+          <p class='font-semibold mb-2'>${h.pregunta}</p>
+          <div class='flex flex-wrap gap-2'>
+            ${h.opciones.map(op=>{
+              if (op===h.elegida && op===h.correcta)
+                return `<span class='bg-green-100 text-green-900 px-2.5 py-1 rounded-md'>✅ ${op}</span>`;
+              if (op===h.elegida && op!==h.correcta)
+                return `<span class='bg-red-100 text-red-900 px-2.5 py-1 rounded-md'>❌ ${op}</span>`;
+              if (op===h.correcta && op!==h.elegida)
+                return `<span class='bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md'>✔ ${op}</span>`;
+              return `<span class='px-2.5 py-1 rounded-md bg-slate-50'>${op}</span>`;
+            }).join('')}
+          </div>
+          <div class='mt-2 text-sm text-slate-600 bg-slate-100 border-l-4 border-blue-600 p-2 rounded-md'>
+            📘 Explicación: ${h.explicacion}
+          </div>
+        </div>
+      `).join('');
+
+      const totalPuntos = total * 0.5;
+
+      document.getElementById("test").innerHTML = `
+        <div class="space-y-3">
+          <h2 class="text-2xl font-extrabold">Resultado del test 
+            <span class="${apto?'text-emerald-700':'text-red-700'} text-xl align-middle">
+              (${apto?'APTO ✅':'NO APTO ❌'})
+            </span>
+          </h2>
+
+          <p class="text-slate-700">
+            Aciertos: <strong class="text-green-700">${aciertos}</strong> • 
+            Fallos: <strong class="text-red-700">${errores}</strong> • 
+            Penalización: <strong>-${penalizacion}</strong>
+          </p>
+
+          <p class="text-slate-700">
+            Válidas netas: <strong>${validasNetas}</strong> / ${total} • 
+            Puntuación: <strong>${puntos.toFixed(2)} / ${totalPuntos.toFixed(2)}</strong> 
+            (<strong>${porcentaje.toFixed(2)}%</strong>)
+          </p>
+
+          <p class="text-slate-700">Tiempo empleado: <span class="font-mono">${mm}:${ss}</span></p>
+
+          <hr class="my-3 border-slate-200">
+
+          <h3 class="text-lg font-bold">Detalle de preguntas</h3>
+
+          <div class="max-h-[50vh] overflow-auto pr-1">
+            ${detalle}
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">
+            Volver a intentar
+          </button>
+          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">
+            Volver al inicio
+          </a>
+        </div>`;
+    }
+
+    /* ===== Atajos de teclado ===== */
+    function handleKey(e){
+      if (tiempoAgotado) return;
+      if (respondido){ if (e.key==='Enter') siguientePregunta(); return; }
+      const map={'1':0,'2':1,'3':2,'4':3};
+      if (map[e.key]!==undefined){
+        const b=document.querySelectorAll('#opciones .opcion')[map[e.key]];
+        if (b) b.click();
+      }
+      if (e.key==='Enter'){
+        const b=document.getElementById('btn-contestar');
+        if (b && !b.disabled) b.click();
+      }
+    }
+
+    window.onload = ()=>{
+      mezclarPreguntas();
+      inicioTiempo = Date.now();
+      cargarPregunta();
+      intervaloTiempo = setInterval(actualizarContador, 1000);
+      document.addEventListener('keydown', handleKey);
+    };
+  </script>
+
+</head>
+
+<body class="bg-gray-100 text-gray-900 p-4">
+  <div class="max-w-3xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-lg ring-1 ring-slate-100" id="test">
+    <div class="mb-4">
+      <div class="flex items-center justify-between text-sm text-slate-600 mb-2">
+        <p id="contador" class="font-semibold space-x-4"></p>
+        <span id="progress-txt" class="font-mono text-slate-500">0/0</span>
+      </div>
+      <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+        <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out" style="width:0%" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      </div>
+    </div>
+
+    <h1 class="text-3xl font-extrabold mb-3 text-center">TEST REBT</h1>
+    <p id="pregunta" class="mb-4 text-lg text-center"></p>
+
+    <div id="opciones" class="flex flex-col gap-3"></div>
+    <div id="acciones" class="mt-2"></div>
+  </div>
+
+  <div class="mt-6 text-center">
+    <a href="Test_completos_REBT.html" class="inline-block bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">Cancelar</a>
+  </div>
+
+  <!-- Modal Tiempo Agotado -->
+  <div id="modal-fin" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
+    <div class="bg-white rounded-2xl shadow-xl max-w-lg w-full p-6">
+      <h2 class="text-2xl font-extrabold mb-1">⏰ Tiempo agotado</h2>
+      <p class="text-slate-600 mb-4">Tu tiempo se ha agotado. Estos son tus resultados:</p>
+      <div id="modal-resumen" class="space-y-1 text-slate-800"></div>
+      <div class="mt-6 flex justify-end">
+        <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Volver a intentar</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
