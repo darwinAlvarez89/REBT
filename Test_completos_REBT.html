@@ -3,27 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <!-- Título enriquecido con palabras clave -->
+  
   <title>Test REBT online – Exámenes y cuestionarios del Reglamento Electrotécnico de Baja Tensión</title>
-  <!-- Descripción enfocada al SEO con términos de búsqueda habituales -->
   <meta name="description" content="Realiza tus test del Reglamento Electrotécnico de Baja Tensión (REBT) de forma online. Practica con cuestionarios por Instrucción Técnica Complementaria, por contenido y por articulado y realiza exámenes con corrección automática." />
-  <!-- Palabras clave para facilitar la indexación (no determinantes, pero aportan contexto) -->
   <meta name="keywords" content="test REBT, examen REBT, preguntas REBT, cuestionarios REBT, reglamento electrotécnico baja tensión, ITC, baja tensión" />
-  <!-- Indica a los bots que indexen y sigan los enlaces -->
   <meta name="robots" content="index, follow" />
-  <!-- Canonical para evitar contenido duplicado -->
   <link rel="canonical" href="https://app-rebt.es/" />
   
-  <!-- Metadatos sociales actualizados -->
   <meta property="og:title" content="Test REBT – Exámenes y cuestionarios online del REBT" />
   <meta property="og:description" content="Practica con nuestros cuestionarios del REBT organizados por ITC, por contenido y por el articulado. Realiza exámenes con corrección automática y aprende de forma eficiente." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://app-rebt.es/" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#0f172a" />
-  <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" />
-  <!-- Google tag (gtag.js) - seguimiento analítico -->
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -31,35 +25,40 @@
     gtag('js', new Date());
     gtag('config', 'G-RSH4ZW3VT2');
   </script>
-  <!-- TailwindCSS CDN para estilos -->
+
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Precarga de imagen de fondo para reducir parpadeos -->
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
+
   <link rel="preload" as="image" href="img/fondo.png">
-  <!-- Estilos en línea adicionales -->
+  
   <style>
-    body{
-      background:url('img/fondo.png');
-      background-size:cover;
-      background-position:center;
-      background-repeat:no-repeat;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
-    }
-    /* Clase utilitaria para ocultar contenido del layout pero accesible para lectores y robots */
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease, color 0.3s ease; }
+    
+    .bg-master { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background-image: url('img/fondo.png'); background-size: cover; background-position: center; background-attachment: fixed; }
+    .bg-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; transition: background-color 0.5s ease; }
+    
+    .light .bg-overlay { background-color: rgba(241, 245, 249, 0.85); }
+    .dark .bg-overlay { background-color: rgba(2, 6, 23, 0.92); }
+
+    .glass-card { backdrop-filter: blur(12px) saturate(160%); -webkit-backdrop-filter: blur(12px) saturate(160%); border: 1px solid; border-radius: 0.75rem; transition: all 0.2s ease-in-out; min-height: 58px; }
+    .light .glass-card { background: rgba(255, 255, 255, 0.5); border-color: rgba(255, 255, 255, 0.8); }
+    .dark .glass-card { background: rgba(30, 41, 59, 0.6); border-color: rgba(255, 255, 255, 0.1); }
+    .glass-card:hover { transform: translateY(-1px); border-color: #3b82f6; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15); }
+
+    .theme-toggle { position: fixed; top: 15px; right: 15px; z-index: 100; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border-radius: 10px; border: 1px solid; backdrop-filter: blur(10px); cursor: pointer; transition: all 0.3s ease; }
+    .light .theme-toggle { background: rgba(255, 255, 255, 0.6); color: #1e293b; border-color: rgba(0,0,0,0.1); }
+    .dark .theme-toggle { background: rgba(30, 41, 59, 0.6); color: #fbbf24; border-color: rgba(255,255,255,0.2); }
+
+    .btn-float { position: fixed; bottom: 20px; right: 20px; z-index: 100; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); border-radius: 50px; padding: 8px 15px; display: flex; align-items: center; gap: 6px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease; }
+    .light .btn-float { background: rgba(255, 255, 255, 0.9); color: #1e293b; }
+    .dark .btn-float { background: rgba(15, 23, 42, 0.9); color: #ffffff; border-color: rgba(255,255,255,0.1); }
+
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
   </style>
-  <!-- Datos estructurados JSON-LD describiendo la aplicación educativa -->
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -72,135 +71,95 @@
   }
   </script>
 </head>
-<body class="min-h-screen relative text-slate-900">
 
+<body class="min-h-screen antialiased light text-slate-900 dark:text-white">
+  <div class="bg-master"></div>
+  <div class="bg-overlay"></div>
 
-    <!-- 🔹 BOTÓN FLOTANTE AÑADIDO AQUÍ -->
-  <a href="Test_REBT_Completo_Basica.html" 
-     class="fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-md shadow-lg shadow-slate-900/20 
-            ring-1 ring-slate-300 hover:bg-slate-100 transition px-4 py-2 rounded-full 
-            flex items-center gap-2 text-slate-700 font-semibold">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+  <button onclick="toggleDarkMode()" class="theme-toggle shadow-sm" title="Cambiar modo">
+    <svg id="moon-icon" class="w-6 h-6 block dark:hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+    <svg id="sun-icon" class="w-6 h-6 hidden dark:block" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path></svg>
+  </button>
+
+  <a href="Test_REBT_Completo_Basica.html" class="btn-float group">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
     </svg>
-    Atrás
+    <span class="text-[10px] font-bold uppercase tracking-widest">Atrás</span>
   </a>
-  <!-- 🔹 FIN DEL BOTÓN FLOTANTE -->
 
-  
-  <!-- Capa oscura para mejorar contraste -->
-  <div class="absolute inset-0 bg-slate-900/60"></div>
-  
-  <main class="relative z-10 flex items-center justify-center min-h-screen p-6">
-    <section class="w-full max-w-4xl">
-      <!-- Tarjeta principal -->
-      <div class="backdrop-blur-md bg-white/90 rounded-2xl shadow-2xl shadow-slate-900/10 ring-1 ring-white/50 p-8 md:p-10">
-        <header class="text-center space-y-3 mb-8">
-          <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-800">
-            TEST del REBT <span aria-hidden="true">⚡</span>
-          </h1>
-          <p class="text-slate-600 text-base md:text-lg">
-           Refuerza tus conocimientos del <strong>Reglamento Electrotécnico de Baja Tensión</strong>.
-          </p>
-          <p class="text-slate-500 text-sm md:text-base">
-           Demuestra tu nivel con los test completos del REBT, cada uno consta 40 preguntas y un tiempo máximo de 120 minutos.
-          </p>
-        </header>
-
-        <!-- Texto descriptivo oculto al usuario pero indexable para SEO y accesible para lectores de pantalla -->
-        <div class="sr-only">
-          <h2>¿Qué es el REBT?</h2>
-          <p>El Reglamento Electrotécnico de Baja Tensión (REBT) establece las condiciones técnicas y garantías que deben cumplir las instalaciones eléctricas para asegurar la seguridad de las personas y el correcto funcionamiento de los equipos. Es una normativa clave para profesionales y estudiantes del ámbito eléctrico.</p>
-          <h3>Cómo utilizar esta plataforma</h3>
-          <p>En esta web encontrarás distintos tipos de cuestionarios para repasar y aprender. Los Test 1 y Test 2 están organizados por Instrucciones Técnicas Complementarias (ITC), ya sea por número o por contenido. También dispones de un Test del articulado para poner a prueba tus conocimientos sobre el texto completo del REBT. Finalmente, puedes realizar exámenes tipo test con corrección automática para evaluar tu progreso.</p>
-          <p>Todos los cuestionarios están diseñados para adaptarse a los distintos niveles de electrificación (básica, media y elevada) y cubren desde cálculos de cargas hasta requisitos de protección y seguridad. Con ellos podrás prepararte para exámenes oficiales o mejorar tus habilidades como instalador o técnico.</p>
-        </div>
-        <!-- Botonera: columna en móvil, 2 columnas en pantallas medianas -->
-        <nav class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mt-6">
-          
-        <!-- Examen test 1 -->
-          <a href="examen1.html" aria-label="Abrir Examen tipo test 1"
-             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold bg-emerald-600 text-white hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300 transition transform hover:-translate-y-0.5 active:translate-y-0">
-            <!-- icono check/certificado -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>Examen test 1</span>
-          </a>
-
-
-          <!-- Examen test 2 -->
-          <a href="examen2.html" aria-label="Abrir Examen tipo test 2"
-             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300 transition transform hover:-translate-y-0.5 active:translate-y-0"
-             style="background-color:#F97316;">
-            <!-- icono check/certificado -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>Examen test 2</span>           
-          </a>
-
-
-<!-- Examen test 3 -->
-          <a href="examen3.html" aria-label="Abrir Examen tipo test 3"
-             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300 transition transform hover:-translate-y-0.5 active:translate-y-0"
-             style="background-color:#1C4AC9;">
-            <!-- icono check/certificado -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>Examen test 3</span>           
-          </a>
-
-
-
-          <!-- Examen test 4 -->
-          <a href="examen4.html" aria-label="Abrir Examen tipo test 3"
-             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300 transition transform hover:-translate-y-0.5 active:translate-y-0"
-             style="background-color:#29BBD9;">
-            <!-- icono check/certificado -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>Examen test 4</span>           
-          </a>
-
-
-                    <!-- Examen test 5-->
-          <a href="examen5.html" aria-label="Abrir Examen tipo test 3"
-             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300 transition transform hover:-translate-y-0.5 active:translate-y-0"
-             style="background-color:#AD4EA8;">
-            <!-- icono check/certificado -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>Examen test 5</span>           
-          </a>
-
-
-                              <!-- Examen test 6-->
-          <a href="examen6.html" aria-label="Abrir Examen tipo test 3"
-             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300 transition transform hover:-translate-y-0.5 active:translate-y-0"
-             style="background-color:#EB3869;">
-            <!-- icono check/certificado -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>Examen test 6</span>           
-          </a>
-
-
-        </nav>
-        <!-- Pie -->
-        <div class="mt-8 text-center text-sm text-slate-500">
-          © <span id="y"></span> REBT • Aprende y practica
+  <main class="max-w-2xl mx-auto pt-10 pb-20 px-6 relative z-10">
+    <header class="mb-6 border-b border-slate-400/20 dark:border-white/10 pb-4 text-left">
+      <h1 class="text-xl md:text-2xl font-extrabold uppercase tracking-tight text-slate-900 dark:text-white">
+        Exámenes <span class="text-blue-600 dark:text-blue-400">REBT</span>
+      </h1>
+      <div class="mt-3 space-y-2">
+        <p class="text-[13px] md:text-sm font-medium text-slate-700 dark:text-slate-200 leading-relaxed">
+          Pon a prueba tus conocimientos y consolida tu aprendizaje con test completos diseñados según el <strong>Reglamento Electrotécnico de Baja Tensión</strong>.
+        </p>
+        <div class="flex flex-wrap gap-x-4 gap-y-1 text-[11px] md:text-[12px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 opacity-90">
+          <span class="flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path></svg>
+            40 Preguntas
+          </span>
+          <span class="flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 11-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+            120 Minutos
+          </span>
         </div>
       </div>
-    </section>
+    </header>
+
+    <div class="sr-only">
+      <h2>¿Qué es el REBT?</h2>
+      <p>El Reglamento Electrotécnico de Baja Tensión (REBT) establece las condiciones técnicas y garantías que deben cumplir las instalaciones eléctricas.</p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3">
+      <script>
+        const examenes = [
+          { id: 1, color: "text-emerald-500" },
+          { id: 2, color: "text-orange-500" },
+          { id: 3, color: "text-blue-600 dark:text-blue-400" },
+          { id: 4, color: "text-cyan-500" },
+          { id: 5, color: "text-purple-500" },
+          { id: 6, color: "text-pink-500" }
+        ];
+
+        examenes.forEach(ex => {
+          document.write(`
+            <a href="examen${ex.id}.html" class="glass-card flex items-center px-4 py-1 group">
+              <div class="flex items-center w-full">
+                <span class="text-2xl font-black ${ex.color} leading-none min-w-[24px] text-center">${ex.id}</span>
+                <span class="opacity-20 text-lg mx-2 dark:text-white">|</span>
+                <span class="flex-1 text-center text-[11px] font-bold uppercase tracking-widest text-slate-700 dark:text-slate-200 pr-8">
+                  Examen
+                </span>
+              </div>
+            </a>
+          `);
+        });
+      </script>
+    </div>
+
+    <footer class="mt-10 text-center border-t border-slate-400/20 dark:border-white/10 pt-5">
+      <p class="opacity-40 text-[9px] font-bold tracking-widest uppercase">
+        © <span id="year"></span> • Tu camino hacia el éxito profesional
+      </p>
+    </footer>
   </main>
+
   <script>
-    // Año dinámico para el pie de página
-    document.getElementById('y').textContent = new Date().getFullYear();
+    document.getElementById('year').textContent = new Date().getFullYear();
+    function toggleDarkMode() {
+        const body = document.body;
+        body.classList.toggle('light');
+        body.classList.toggle('dark');
+        localStorage.setItem('rebt-theme', body.classList.contains('dark') ? 'dark' : 'light');
+    }
+    const savedTheme = localStorage.getItem('rebt-theme') || 'light';
+    document.body.classList.add(savedTheme);
+    if(savedTheme === 'dark') document.body.classList.remove('light');
   </script>
 </body>
 </html>
