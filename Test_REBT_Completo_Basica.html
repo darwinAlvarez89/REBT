@@ -3,27 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <!-- Título enriquecido con palabras clave -->
+  
   <title>Test REBT online – Exámenes y cuestionarios del Reglamento Electrotécnico de Baja Tensión</title>
-  <!-- Descripción enfocada al SEO con términos de búsqueda habituales -->
   <meta name="description" content="Realiza tus test del Reglamento Electrotécnico de Baja Tensión (REBT) de forma online. Practica con cuestionarios por Instrucción Técnica Complementaria, por contenido y por articulado y realiza exámenes con corrección automática." />
-  <!-- Palabras clave para facilitar la indexación (no determinantes, pero aportan contexto) -->
   <meta name="keywords" content="test REBT, examen REBT, preguntas REBT, cuestionarios REBT, reglamento electrotécnico baja tensión, ITC, baja tensión" />
-  <!-- Indica a los bots que indexen y sigan los enlaces -->
   <meta name="robots" content="index, follow" />
-  <!-- Canonical para evitar contenido duplicado -->
   <link rel="canonical" href="https://app-rebt.es/" />
   
-  <!-- Metadatos sociales actualizados -->
   <meta property="og:title" content="Test REBT – Exámenes y cuestionarios online del REBT" />
   <meta property="og:description" content="Practica con nuestros cuestionarios del REBT organizados por ITC, por contenido y por el articulado. Realiza exámenes con corrección automática y aprende de forma eficiente." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://app-rebt.es/" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#0f172a" />
-  <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" />
-  <!-- Google tag (gtag.js) - seguimiento analítico -->
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -31,22 +25,69 @@
     gtag('js', new Date());
     gtag('config', 'G-RSH4ZW3VT2');
   </script>
-  <!-- TailwindCSS CDN para estilos -->
+
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Precarga de imagen de fondo para reducir parpadeos -->
-  <link rel="preload" as="image" href="img/fondo.png">
-  <!-- Estilos en línea adicionales -->
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalApplication",
+    "name": "Test REBT",
+    "url": "https://app-rebt.es/",
+    "operatingSystem": "Web",
+    "applicationCategory": "EducationalApplication",
+    "description": "Plataforma para practicar test del Reglamento Electrotécnico de Baja Tensión (REBT) con cuestionarios por ITC, contenido y articulado y exámenes online con corrección automática."
+  }
+  </script>
+
   <style>
-    body{
-      background:url('img/fondo.png');
-      background-size:cover;
-      background-position:center;
-      background-repeat:no-repeat;
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    
+    body { 
+      font-family: 'Inter', sans-serif; 
+      transition: background-color 0.3s ease, color 0.3s ease; 
     }
-    @media (prefers-reduced-motion: reduce) {
-      * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+
+    .bg-master { 
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; 
+      background-image: url('img/fondo.png'); background-size: cover; background-position: center; background-attachment: fixed; 
     }
-    /* Clase utilitaria para ocultar contenido del layout pero accesible para lectores y robots */
+    .bg-overlay { 
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
+      transition: background-color 0.5s ease; 
+    }
+    .light .bg-overlay { background-color: rgba(241, 245, 249, 0.85); }
+    .dark .bg-overlay { background-color: rgba(2, 6, 23, 0.92); }
+
+    .glass-card { 
+      backdrop-filter: blur(12px) saturate(160%); 
+      -webkit-backdrop-filter: blur(12px) saturate(160%); 
+      border: 1px solid; 
+      border-radius: 1.5rem; 
+      transition: all 0.3s ease; 
+    }
+    .light .glass-card { background: rgba(255, 255, 255, 0.5); border-color: rgba(255, 255, 255, 0.8); }
+    .dark .glass-card { background: rgba(30, 41, 59, 0.6); border-color: rgba(255, 255, 255, 0.1); }
+    
+    .glass-card:hover { 
+      transform: translateY(-4px); 
+      border-color: #3b82f6; 
+      box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2); 
+    }
+
+    .theme-toggle { 
+      position: fixed; top: 15px; right: 15px; z-index: 100; 
+      width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; 
+      border-radius: 10px; border: 1px solid; backdrop-filter: blur(10px); 
+      cursor: pointer; transition: all 0.3s ease; 
+    }
+    .light .theme-toggle { background: rgba(255, 255, 255, 0.6); color: #1e293b; border-color: rgba(0,0,0,0.1); }
+    .dark .theme-toggle { background: rgba(30, 41, 59, 0.6); color: #fbbf24; border-color: rgba(255,255,255,0.2); }
+
+    /* 🔹 CLASE SEO PARA CONTENIDO OCULTO */
     .sr-only {
       position: absolute;
       width: 1px;
@@ -59,98 +100,84 @@
       border: 0;
     }
   </style>
-  <!-- Datos estructurados JSON-LD describiendo la aplicación educativa -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "EducationalApplication",
-    "name": "Test REBT",
-    "url": "https://app-rebt.es/",
-    "operatingSystem": "Web",
-    "applicationCategory": "EducationalApplication",
-    "description": "Plataforma para practicar test del Reglamento Electrotécnico de Baja Tensión (REBT) con cuestionarios por ITC, contenido y articulado y exámenes online con corrección automática."
-  }
-  </script>
 </head>
-<body class="min-h-screen relative text-slate-900">
 
+<body class="min-h-screen antialiased light flex items-center justify-center p-4">
 
-  <!-- 🔹 BOTÓN FLOTANTE AÑADIDO AQUÍ -->
-  <a href="index.html" 
-     class="fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-md shadow-lg shadow-slate-900/20 
-            ring-1 ring-slate-300 hover:bg-slate-100 transition px-4 py-2 rounded-full 
-            flex items-center gap-2 text-slate-700 font-semibold">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-    </svg>
+  <div class="bg-master"></div>
+  <div class="bg-overlay"></div>
+
+  <button onclick="toggleDarkMode()" class="theme-toggle shadow-sm">
+    <svg id="moon-icon" class="w-6 h-6 block dark:hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+    <svg id="sun-icon" class="w-6 h-6 hidden dark:block" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path></svg>
+  </button>
+
+  <a href="index.html" class="fixed top-6 left-6 z-50 flex items-center gap-2 py-2 px-5 rounded-xl glass-card text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-white">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path d="M15 19l-7-7 7-7"/></svg>
     Inicio
   </a>
-  <!-- 🔹 FIN DEL BOTÓN FLOTANTE -->
 
+  <main class="w-full max-w-xl relative z-10">
+    <header class="text-center mb-10">
+      <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-2 text-slate-900 dark:text-white">
+        DOMINA EL <span class="text-blue-600 dark:text-blue-400">REBT</span> PASO A PASO
+      </h1>
+      <p class="text-slate-700 dark:text-slate-300 text-[12px] font-medium leading-relaxed max-w-md mx-auto">
+        Te recomendamos empezar practicando cada ITC por separado antes de lanzarte al examen completo.
+      </p>
+    </header>
 
+    <div class="sr-only">
+      <h2>¿Cómo utilizar esta plataforma?</h2>
+      <p>En esta web encontrarás distintos tipos de cuestionarios para repasar y aprender. Los tests están organizados por Instrucciones Técnicas Complementarias (ITC) para estudiar de forma progresiva.</p>
+    </div>
 
-  
-  <!-- Capa oscura para mejorar contraste -->
-  <div class="absolute inset-0 bg-slate-900/60"></div>
-  
-  <main class="relative z-10 flex items-center justify-center min-h-screen p-6">
-    <section class="w-full max-w-4xl">
-      <!-- Tarjeta principal -->
-      <div class="backdrop-blur-md bg-white/90 rounded-2xl shadow-2xl shadow-slate-900/10 ring-1 ring-white/50 p-8 md:p-10">
-        <header class="text-center space-y-3 mb-8">
-          <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-800">
-            TEST del REBT <span aria-hidden="true">⚡</span>
-          </h1>
-          <p class="text-slate-600 text-base md:text-lg">
-           Refuerza tus conocimientos del <strong>Reglamento Electrotécnico de Baja Tensión</strong>.
-          </p>
-          <p class="text-slate-500 text-sm md:text-base">
-            Selecciona entre tests por ITC para estudiar de forma progresiva o tests del REBT completo para evaluar tu dominio total del Reglamento.
-          </p>
-        </header>
-
-        <!-- Texto descriptivo oculto al usuario pero indexable para SEO y accesible para lectores de pantalla -->
-        <div class="sr-only">
-          <h2>¿Qué es el REBT?</h2>
-          <p>El Reglamento Electrotécnico de Baja Tensión (REBT) establece las condiciones técnicas y garantías que deben cumplir las instalaciones eléctricas para asegurar la seguridad de las personas y el correcto funcionamiento de los equipos. Es una normativa clave para profesionales y estudiantes del ámbito eléctrico.</p>
-          <h3>Cómo utilizar esta plataforma</h3>
-          <p>En esta web encontrarás distintos tipos de cuestionarios para repasar y aprender. Los Test 1 y Test 2 están organizados por Instrucciones Técnicas Complementarias (ITC), ya sea por número o por contenido. También dispones de un Test del articulado para poner a prueba tus conocimientos sobre el texto completo del REBT. Finalmente, puedes realizar exámenes tipo test con corrección automática para evaluar tu progreso.</p>
-          <p>Todos los cuestionarios están diseñados para adaptarse a los distintos niveles de electrificación (básica, media y elevada) y cubren desde cálculos de cargas hasta requisitos de protección y seguridad. Con ellos podrás prepararte para exámenes oficiales o mejorar tus habilidades como instalador o técnico.</p>
+    <nav class="space-y-4">
+      <a href="Test_por_ITC_del_REBT.html" class="glass-card group p-5 flex items-center gap-5">
+        <div class="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-lg font-black text-xl">
+          1
         </div>
-        <!-- Botonera: columna en móvil, 2 columnas en pantallas medianas -->
-        <nav class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mt-6">
-          
-          <!-- Test por ITCs -->
-          <a href="Test_por_ITC_del_REBT.html" aria-label="Abrir Test 1: ITC por Número"
-             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold bg-blue-600 text-white hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300 transition transform hover:-translate-y-0.5 active:translate-y-0">
-            <!-- icono lista -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
-            </svg>
-            <span>Test por ITC del REBT</span>
-          </a>
-          
-          <!-- Test del REBT Completo -->
-          <a href="Test_completos_REBT.html" aria-label="Abrir Test 2: ITC por Contenido"
-             class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300 transition transform hover:-translate-y-0.5 active:translate-y-0">
-            <!-- icono libro -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75c-1.5-1-3.5-1-5 0v10.5c1.5-1 3.5-1 5 0m0-10.5c1.5-1 3.5-1 5 0v10.5c-1.5-1-3.5-1-5 0m0-10.5v10.5" />
-            </svg>
-            <span>Test del REBT Completo</span>
-          </a>
-          
-        </nav>
-        <!-- Pie -->
-        <div class="mt-8 text-center text-sm text-slate-500">
-          © <span id="y"></span> REBT • Aprende y practica
+        <div class="flex-1">
+          <h3 class="font-bold text-lg leading-none mb-1 text-slate-900 dark:text-white">Empieza por cada ITC</h3>
+          <p class="text-[11px] md:text-xs text-slate-500 dark:text-slate-400 font-medium">Práctica específica para aprender y perfeccionar el manejo del reglamento poco a poco.</p>
         </div>
-      </div>
-    </section>
+      </a>
+
+      <a href="Test_completos_REBT.html" class="glass-card group p-5 flex items-center gap-5">
+        <div class="w-12 h-12 rounded-xl bg-slate-800 dark:bg-slate-700 flex items-center justify-center text-white shadow-lg font-black text-xl">
+          2
+        </div>
+        <div class="flex-1">
+          <h3 class="font-bold text-lg leading-none mb-1 text-slate-900 dark:text-white">Ponte a prueba con el REBT Completo</h3>
+          <p class="text-[11px] md:text-xs text-slate-500 dark:text-slate-400 font-medium">Cuando domines las ITC, realiza test de todo el reglamento para asegurar tu conocimiento total.</p>
+        </div>
+      </a>
+    </nav>
+
+    <footer class="mt-12 text-center border-t border-slate-400/20 dark:border-white/10 pt-6">
+      <p class="text-[9px] opacity-60 uppercase font-bold tracking-widest text-slate-500 dark:text-slate-400">
+        © <span id="year"></span> • Tu camino hacia el éxito profesional
+      </p>
+    </footer>
   </main>
+
   <script>
-    // Año dinámico para el pie de página
-    document.getElementById('y').textContent = new Date().getFullYear();
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    function toggleDarkMode() {
+      const body = document.body;
+      body.classList.toggle('light');
+      body.classList.toggle('dark');
+      localStorage.setItem('rebt-theme', body.classList.contains('dark') ? 'dark' : 'light');
+    }
+
+    if (localStorage.getItem('rebt-theme') === 'dark') {
+      document.body.classList.remove('light');
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+      document.body.classList.add('light');
+    }
   </script>
 </body>
 </html>
