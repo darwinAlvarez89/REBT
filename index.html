@@ -85,9 +85,9 @@
         </div>
     </header>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="flex flex-col lg:grid lg:grid-cols-3 gap-6">
       
-      <section class="lg:col-span-2 glass-card rounded-[2rem] p-6 md:p-8 shadow-2xl flex flex-col">
+      <section class="order-2 lg:order-1 lg:col-span-2 glass-card rounded-[2rem] p-6 md:p-8 shadow-2xl flex flex-col">
         
         <div class="mb-6">
             <div class="flex items-center justify-between mb-2">
@@ -143,7 +143,7 @@
         </div>
       </section>
 
-      <aside class="space-y-4">
+      <aside class="order-1 lg:order-2 space-y-4">
         <div class="bg-gradient-to-br from-blue-700 to-indigo-900 rounded-[2rem] p-6 text-white shadow-xl relative overflow-hidden">
             <div class="relative z-10">
                 <h4 class="font-bold text-sm mb-3 flex items-center gap-2 text-blue-300">
@@ -181,7 +181,7 @@
 
     <footer class="mt-8 text-center opacity-60">
         <p class="text-slate-500 text-[11px] font-medium tracking-wide">
-            © 2025 REBT
+            © <span id="year"></span> REBT
         </p>
     </footer>
 
@@ -192,4 +192,3 @@
   </script>
 </body>
 </html>
-
