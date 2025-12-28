@@ -29,457 +29,451 @@
     
 
 
+
+
+
 preguntas = [
-    {
-      "pregunta": "Según el REBT, ¿cuál es el límite de tensión nominal para que una instalación de corriente continua se considere de baja tensión?",
-      "opciones": [
-        "Igual o inferior a 1.000 voltios",
-        "Igual o inferior a 1.500 voltios",
-        "Superior a 1.000 voltios e inferior a 1.500 voltios",
-        "Igual o inferior a 500 voltios"
-      ],
-      "respuesta": "Igual o inferior a 1.500 voltios",
-      "explicacion": "Artículo 2. Campo de aplicación: «b) Corriente continua: Igual o inferior a 1.500 voltios.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿qué instalaciones se excluyen expresamente de la aplicación del Reglamento?",
-      "opciones": [
-        "Instalaciones en edificios de viviendas",
-        "Instalaciones de alumbrado público",
-        "Instalaciones y equipos de uso exclusivo en minas y sistemas de comunicación",
-        "Instalaciones de garajes de más de 5 plazas"
-      ],
-      "respuesta": "Instalaciones y equipos de uso exclusivo en minas y sistemas de comunicación",
-      "explicacion": "Artículo 2. Campo de aplicación. Punto 3: «Se excluyen de la aplicación de este Reglamento las instalaciones y equipos de uso exclusivo en minas, material de tracción eléctrica, automóviles, navíos, aeronaves, sistemas de comunicación, y los usos militares y demás instalaciones y equipos que sean objeto de reglamentación específica.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿quién es el responsable de que las instalaciones se mantengan en buen estado de funcionamiento mediante una utilización correcta?",
-      "opciones": [
-        "La empresa instaladora",
-        "El proyectista",
-        "El propietario o usuario de las mismas",
-        "La Administración Pública"
-      ],
-      "respuesta": "El propietario o usuario de las mismas",
-      "explicacion": "Artículo 20. Mantenimiento de las instalaciones: «Los propietarios o usuarios de las instalaciones deberán mantenerlas en buen estado de funcionamiento, mediante una utilización correcta de las mismas y una vigilancia de su estado de conservación...»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿cómo deben ser los equipos de seguridad en las instalaciones eléctricas?",
-      "opciones": [
-        "Elegidos libremente por el propietario",
-        "Homologados o certificados de acuerdo con la normativa vigente",
-        "Cualquier material que aísle la electricidad",
-        "No es obligatorio que estén certificados"
-      ],
-      "respuesta": "Homologados o certificados de acuerdo con la normativa vigente",
-      "explicacion": "Artículo 6. Equipos y materiales: «Los materiales y equipos utilizados en las instalaciones eléctricas de baja tensión deberán cumplir con las normas de seguridad que les sean de aplicación, estando debidamente homologados o certificados conforme a la normativa vigente.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿qué requisito debe cumplir una empresa para actuar como instaladora en baja tensión?",
-      "opciones": [
-        "Tener el carné de instalador únicamente",
-        "Estar inscrita en el Registro de Establecimientos Industriales de la Comunidad Autónoma",
-        "Tener una antigüedad mínima de 5 años en el sector",
-        "Estar autorizada por el Ministerio de Ciencia y Tecnología"
-      ],
-      "respuesta": "Estar inscrita en el Registro de Establecimientos Industriales de la Comunidad Autónoma",
-      "explicacion": "ITC-BT-03. Punto 1: «Las empresas instaladoras en baja tensión deberán estar inscritas en el correspondiente Registro de Establecimientos Industriales de la Comunidad Autónoma donde radique su sede social...»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿qué tipo de documentación es necesaria para la puesta en servicio de instalaciones que requieren proyecto?",
-      "opciones": [
-        "Solo una memoria técnica de diseño",
-        "Proyecto y Certificado de Instalación",
-        "Solo el pago de las tasas correspondientes",
-        "Un boceto de la instalación firmado por el usuario"
-      ],
-      "respuesta": "Proyecto y Certificado de Instalación",
-      "explicacion": "ITC-BT-04. Punto 1.1: «Las instalaciones que deban ser objeto de proyecto requerirán para su puesta en servicio la presentación del correspondiente Proyecto y del Certificado de Instalación...»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿con qué periodicidad deben ser objeto de inspección periódica los locales de pública concurrencia?",
-      "opciones": [
-        "Cada 10 años",
-        "Cada 2 años",
-        "Cada 5 años",
-        "Cada año"
-      ],
-      "respuesta": "Cada 5 años",
-      "explicacion": "ITC-BT-05. Punto 4.2: «Serán objeto de inspección periódica, cada 5 años, todas las instalaciones eléctricas de baja tensión que precisen inspección inicial, de acuerdo con el punto 4.1 de la presente instrucción (entre ellos, locales de pública concurrencia).»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿cuál es la función de las verificaciones previas a la puesta en servicio?",
-      "opciones": [
-        "Comprobar el coste de la obra",
-        "Comprobar que la instalación se ha realizado conforme al Reglamento y sus ITC",
-        "Verificar la estética del cableado",
-        "Medir el consumo de energía del edificio"
-      ],
-      "respuesta": "Comprobar que la instalación se ha realizado conforme al Reglamento y sus ITC",
-      "explicacion": "ITC-BT-05. Punto 1: «Las instalaciones eléctricas de baja tensión deberán ser objeto de verificación, previamente a su puesta en servicio... con el fin de comprobar que han sido ejecutadas de acuerdo con el presente Reglamento y sus Instrucciones Técnicas Complementarias.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿qué sistema de conexión del neutro y de las masas se define cuando el neutro de la fuente está puesto a tierra y las masas están conectadas a una tierra independiente?",
-      "opciones": [
-        "Esquema TN",
-        "Esquema IT",
-        "Esquema TT",
-        "Esquema TNC"
-      ],
-      "respuesta": "Esquema TT",
-      "explicacion": "ITC-BT-08. Punto 1.1: «Esquema TT: Tiene un punto de alimentación, generalmente el neutro, conectado directamente a tierra. Las masas de la instalación receptora están conectadas a una toma de tierra independiente de la toma de tierra de la alimentación.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿cuál es el factor de potencia mínimo permitido para las instalaciones de alumbrado exterior?",
-      "opciones": [
-        "0,85",
-        "0,90",
-        "0,80",
-        "0,95"
-      ],
-      "respuesta": "0,90",
-      "explicacion": "ITC-BT-09. Punto 5: «Las instalaciones de alumbrado exterior deberán tener un factor de potencia superior o igual a 0,90.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿cuál es la potencia mínima a considerar en la previsión de cargas para una vivienda de grado de electrificación básica?",
-      "opciones": [
-        "9.200 W",
-        "3.450 W",
-        "5.750 W",
-        "7.360 W"
-      ],
-      "respuesta": "5.750 W",
-      "explicacion": "ITC-BT-10. Punto 2.1: «Para viviendas con grado de electrificación básica, la potencia a prever no será inferior a 5.750 W a 230 V, independientemente de la potencia a contratar por el usuario.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿qué elemento marca el límite entre las instalaciones de la compañía eléctrica y las instalaciones de enlace de la propiedad?",
-      "opciones": [
-        "El contador de energía",
-        "La Caja General de Protección (CGP)",
-        "El cuadro general de mando y protección",
-        "La derivación individual"
-      ],
-      "respuesta": "La Caja General de Protección (CGP)",
-      "explicacion": "ITC-BT-13. Punto 1: «Las Cajas Generales de Protección (CGP) son las cajas que alojan los elementos de protección de la línea general de alimentación y señalan el principio de la propiedad de las instalaciones de los usuarios.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿por dónde deben discurrir preferentemente las Líneas Generales de Alimentación?",
-      "opciones": [
-        "Por el interior de los locales privados",
-        "Por zonas comunes y de uso público",
-        "Enterradas bajo el suelo de las viviendas",
-        "Por los conductos de ventilación"
-      ],
-      "respuesta": "Por zonas comunes y de uso público",
-      "explicacion": "ITC-BT-14. Punto 1: «La línea general de alimentación discurrirá siempre por lugares de uso común.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿cómo se define la Derivación Individual?",
-      "opciones": [
-        "La línea que une la red de distribución con la Caja General de Protección",
-        "La línea que une la Caja General de Protección con la centralización de contadores",
-        "La parte de la instalación que une el contador con el cuadro general de mando y protección del usuario",
-        "El conjunto de conductores que alimentan a todo el edificio"
-      ],
-      "respuesta": "La parte de la instalación que une el contador con el cuadro general de mando y protección del usuario",
-      "explicacion": "ITC-BT-15. Punto 1: «La derivación individual es la parte de la instalación que, partiendo de la línea general de alimentación (o directamente de la CGP en algunos casos), suministra energía eléctrica a un solo abonado.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿dónde se ubicarán los contadores en edificios de más de 12 plantas?",
-      "opciones": [
-        "Obligatoriamente en la planta baja",
-        "En una concentración por plantas o centralización única",
-        "En el exterior de cada vivienda exclusivamente",
-        "En la azotea del edificio"
-      ],
-      "respuesta": "En una concentración por plantas o centralización única",
-      "explicacion": "ITC-BT-16. Punto 2.2: «En edificios destinados a viviendas, los contadores podrán ubicarse en: ... c) En locales o armarios destinados a este fin, de forma centralizada en una o varias plantas.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿qué dispositivo es obligatorio situar al inicio de la instalación interior de una vivienda para protección contra contactos indirectos?",
-      "opciones": [
-        "El Interruptor de Control de Potencia (ICP)",
-        "Un interruptor diferencial de alta sensibilidad",
-        "Un fusible de 100 A",
-        "Un transformador de aislamiento"
-      ],
-      "respuesta": "Un interruptor diferencial de alta sensibilidad",
-      "explicacion": "ITC-BT-17. Punto 1.2: «Los dispositivos generales de mando y protección... comprenderán: ... b) Uno o varios interruptores diferenciales que garanticen la protección contra contactos indirectos de todos los circuitos...»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿cuál es el objetivo principal de las instalaciones de puesta a tierra?",
-      "opciones": [
-        "Mejorar el factor de potencia",
-        "Limitar la tensión de las masas metálicas respecto a tierra para seguridad de las personas",
-        "Evitar el consumo excesivo de electricidad",
-        "Aumentar la tensión de la instalación"
-      ],
-      "respuesta": "Limitar la tensión de las masas metálicas respecto a tierra para seguridad de las personas",
-      "explicacion": "ITC-BT-18. Punto 1: «Las puestas a tierra se establecen principalmente con objeto de limitar la tensión que, con respecto a tierra, puedan presentar en un momento dado las masas metálicas, asegurar la actuación de las protecciones y eliminar o reducir el riesgo que conlleva una avería en los materiales eléctricos utilizados.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿cuál es la sección mínima de los conductores de cobre en instalaciones interiores de viviendas para el circuito de alumbrado?",
-      "opciones": [
-        "2,5 mm²",
-        "1 mm²",
-        "1,5 mm²",
-        "4 mm²"
-      ],
-      "respuesta": "1,5 mm²",
-      "explicacion": "ITC-BT-19. Punto 2.2 / ITC-BT-25: «La sección mínima de los conductores de cobre será de 1,5 mm² para el circuito de iluminación (C1).»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿qué tipo de tubos deben utilizarse en canalizaciones empotradas en paredes?",
-      "opciones": [
-        "Tubos metálicos obligatoriamente",
-        "Tubos protectores que cumplan las características de resistencia al impacto y compresión especificadas",
-        "Cualquier tipo de manguera flexible",
-        "No es necesario el uso de tubos"
-      ],
-      "respuesta": "Tubos protectores que cumplan las características de resistencia al impacto y compresión especificadas",
-      "explicacion": "ITC-BT-21. Punto 2: «Para las canalizaciones empotradas, los tubos protectores serán de las características indicadas en la tabla 3... teniendo en cuenta que la resistencia a la compresión y al impacto deben ser adecuadas.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿cuál es el grado de protección mínimo (IP) exigido para los motores eléctricos situados en locales polvorientos?",
-      "opciones": [
-        "IP20",
-        "IP44",
-        "IP54 o superior",
-        "IP11"
-      ],
-      "respuesta": "IP54 o superior",
-      "explicacion": "ITC-BT-30. Punto 1 / ITC-BT-47: «En locales polvorientos, los motores deben tener un grado de protección mínimo IP 5X, y en casos de polvo inflamable, IP 6X.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿cuántos circuitos mínimos debe tener una vivienda con electrificación básica?",
-      "opciones": [
-        "3 circuitos",
-        "8 circuitos",
-        "5 circuitos",
-        "1 circuito"
-      ],
-      "respuesta": "5 circuitos",
-      "explicacion": "ITC-BT-25. Punto 2.3: «Grado de electrificación básica. Es la necesaria para la cobertura de las posibles necesidades primarias de utilización... con una dotación mínima de los siguientes circuitos: C1, C2, C3, C4 y C5.»"
-    },
-    {
-      "pregunta": "Según el REBT, en una bañera o ducha, ¿qué se entiende por Volumen 0?",
-      "opciones": [
-        "El espacio situado sobre la bañera hasta 2,25 metros",
-        "El interior del receptáculo de la bañera o plato de ducha",
-        "El área que rodea la bañera hasta 0,60 metros",
-        "Cualquier lugar del baño donde haya agua"
-      ],
-      "respuesta": "El interior del receptáculo de la bañera o plato de ducha",
-      "explicacion": "ITC-BT-27. Punto 2.1: «Volumen 0: Comprende el interior del receptáculo de la bañera o del plato de ducha.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿qué tipo de suministro es obligatorio en locales de pública concurrencia como hospitales o estadios?",
-      "opciones": [
-        "Suministro único",
-        "Suministros de reserva (socorro o duplicado)",
-        "Suministro mediante baterías exclusivamente",
-        "No hay requisitos especiales de suministro"
-      ],
-      "respuesta": "Suministros de reserva (socorro o duplicado)",
-      "explicacion": "ITC-BT-28. Punto 2: «Los locales de pública concurrencia deberán disponer de suministro de reserva para los servicios de seguridad...»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿qué se considera un local húmedo?",
-      "opciones": [
-        "Cualquier habitación con ventana",
-        "Aquel donde las condiciones ambientales se manifiestan en forma de condensación o manchas de humedad",
-        "Solo los cuartos de baño",
-        "Locales con temperatura superior a 40 grados"
-      ],
-      "respuesta": "Aquel donde las condiciones ambientales se manifiestan en forma de condensación o manchas de humedad",
-      "explicacion": "ITC-BT-30. Punto 1.1: «Locales húmedos son aquellos en los que las condiciones ambientales se manifiestan temporal o permanentemente en forma de condensación en el techo y paredes, manchas de moho o goteo de agua...»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿cuál es la tensión máxima permitida en el volumen 1 de una piscina para equipos de iluminación?",
-      "opciones": [
-        "230 V",
-        "12 V en corriente alterna o 30 V en corriente continua",
-        "50 V",
-        "24 V"
-      ],
-      "respuesta": "12 V en corriente alterna o 30 V en corriente continua",
-      "explicacion": "ITC-BT-31. Punto 3.2: «En los volúmenes 0 y 1, solo se permite la protección por Muy Baja Tensión de Seguridad (MBTS), con tensiones no superiores a 12 V en c.a. o 30 V en c.c.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿qué dispositivo de seguridad deben llevar las máquinas de elevación para evitar movimientos accidentales?",
-      "opciones": [
-        "Un voltímetro",
-        "Dispositivos de parada de emergencia",
-        "Un avisador acústico de música",
-        "Un interruptor de luz"
-      ],
-      "respuesta": "Dispositivos de parada de emergencia",
-      "explicacion": "ITC-BT-32. Punto 2: «Las máquinas de elevación y transporte dispondrán de dispositivos de parada de emergencia que corten la alimentación de todos los elementos de la máquina...»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿qué grado de protección mínimo deben tener los cuadros eléctricos en instalaciones de obras?",
-      "opciones": [
-        "IP20",
-        "IP43",
-        "IP44",
-        "IP67"
-      ],
-      "respuesta": "IP44",
-      "explicacion": "ITC-BT-33. Punto 4: «Los cuadros de distribución deberán tener un grado de protección mínimo IP44 según UNE 20.324.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿qué sensibilidad máxima deben tener los interruptores diferenciales que protegen las tomas de corriente en ferias y stands?",
-      "opciones": [
-        "300 mA",
-        "100 mA",
-        "30 mA",
-        "500 mA"
-      ],
-      "respuesta": "30 mA",
-      "explicacion": "ITC-BT-34. Punto 4: «Todos los circuitos destinados a tomas de corriente... deberán estar protegidos por interruptores diferenciales de corriente diferencial residual asignada no superior a 30 mA.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿qué tipo de cables son obligatorios en establecimientos agrícolas donde hay presencia de ganado?",
-      "opciones": [
-        "Cables desnudos",
-        "Cables con aislamiento de tensión asignada mínima 450/750 V",
-        "Solo mangueras de jardín",
-        "Cables planos de telefonía"
-      ],
-      "respuesta": "Cables con aislamiento de tensión asignada mínima 450/750 V",
-      "explicacion": "ITC-BT-35. Punto 3: «Los cables eléctricos utilizados serán de tensión asignada mínima 450/750 V y dispondrán de una cubierta adecuada contra la corrosión...»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿cuál es la tensión nominal máxima en Muy Baja Tensión de Seguridad (MBTS)?",
-      "opciones": [
-        "24 V",
-        "50 V en c.a. o 120 V en c.c.",
-        "230 V",
-        "100 V"
-      ],
-      "respuesta": "50 V en c.a. o 120 V en c.c.",
-      "explicacion": "ITC-BT-36. Punto 1: «La tensión nominal de estas instalaciones no podrá ser superior a 50 V en corriente alterna o 120 V en corriente continua (valores eficaces).»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿qué precaución principal se debe tomar con las cercas eléctricas para ganado?",
-      "opciones": [
-        "Deben estar conectadas a la red pública sin protección",
-        "No deben causar choques eléctricos peligrosos a las personas",
-        "Deben estar ocultas para que el ganado no las vea",
-        "No necesitan estar conectadas a tierra"
-      ],
-      "respuesta": "No deben causar choques eléctricos peligrosos a las personas",
-      "explicacion": "ITC-BT-39. Punto 1: «Las cercas eléctricas para ganado se instalarán de forma que no presenten peligro de choque eléctrico para las personas... debiendo cumplir con lo dispuesto en la norma UNE-EN 60.335-2-76.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿qué dispositivo es obligatorio en instalaciones generadoras interconectadas con la red para evitar el funcionamiento en isla?",
-      "opciones": [
-        "Un fusible de gran intensidad",
-        "Un sistema de protección de desconexión automática por falta de tensión de red",
-        "Un interruptor manual",
-        "Un contador bidireccional únicamente"
-      ],
-      "respuesta": "Un sistema de protección de desconexión automática por falta de tensión de red",
-      "explicacion": "ITC-BT-40. Punto 4.2: «Las instalaciones generadoras... dispondrán de un sistema de protección que desconecte el generador de la red en caso de falta de tensión en esta, para evitar el funcionamiento en isla.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿qué tipo de tomas de corriente deben instalarse en parques de caravanas?",
-      "opciones": [
-        "Tomas domésticas comunes",
-        "Tomas de corriente conformes a la norma UNE-EN 60.309-2 (tipo industrial)",
-        "Solo bornes de tornillo",
-        "Cualquier tipo que encaje"
-      ],
-      "respuesta": "Tomas de corriente conformes a la norma UNE-EN 60.309-2 (tipo industrial)",
-      "explicacion": "ITC-BT-41. Punto 4: «Las bases de toma de corriente cumplirán con la norma UNE-EN 60.309-2, debiendo ser de 2P + T, de 16 A de intensidad asignada.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿cuál es el grado de protección mínimo contra el agua para los equipos instalados en puertos y marinas?",
-      "opciones": [
-        "IPX0",
-        "IPX4",
-        "IPX5",
-        "IPX1"
-      ],
-      "respuesta": "IPX4",
-      "explicacion": "ITC-BT-42. Punto 4: «Los materiales instalados en el exterior... tendrán como mínimo un grado de protección IPX4.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿qué distancia mínima deben guardar los receptores de alumbrado respecto a materiales combustibles?",
-      "opciones": [
-        "La distancia que el fabricante indique o, en su defecto, una distancia segura según la potencia",
-        "10 metros",
-        "No importa la distancia",
-        "2 centímetros"
-      ],
-      "respuesta": "La distancia que el fabricante indique o, en su defecto, una distancia segura según la potencia",
-      "explicacion": "ITC-BT-44. Punto 3.1: «Los receptores para alumbrado se instalarán de forma que el calor que emitan no pueda incendiar los materiales combustibles próximos a ellos, respetando las distancias mínimas indicadas por el fabricante.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿cómo deben conectarse a la red los aparatos de caldeo de potencia superior a 3.500 W?",
-      "opciones": [
-        "Mediante una toma de corriente de 10 A",
-        "Mediante una conexión fija o bases de toma de corriente de intensidad adecuada",
-        "A través del circuito de alumbrado",
-        "Directamente a la acometida de la calle"
-      ],
-      "respuesta": "Mediante una conexión fija o bases de toma de corriente de intensidad adecuada",
-      "explicacion": "ITC-BT-45. Punto 1: «Los aparatos de caldeo de potencia superior a 3.500 W se conectarán a la red mediante una conexión fija o mediante bases de toma de corriente de intensidad adecuada.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿qué tipo de protección deben tener los motores eléctricos para evitar el arranque automático tras una caída de tensión, si esto supone un peligro?",
-      "opciones": [
-        "Un magnetotérmico común",
-        "Un dispositivo que impida el arranque automático tras la falta de tensión",
-        "Ninguna, deben arrancar siempre",
-        "Un diferencial de 300 mA"
-      ],
-      "respuesta": "Un dispositivo que impida el arranque automático tras la falta de tensión",
-      "explicacion": "ITC-BT-47. Punto 5: «Los motores cuya puesta en marcha automática después de una parada debida a una caída de tensión pueda presentar peligros, deberán estar provistos de un dispositivo que impida su nuevo arranque automático.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿qué resistencia de aislamiento mínima se exige a los muebles con instalación eléctrica integrada?",
-      "opciones": [
-        "0,5 MΩ",
-        "2 MΩ",
-        "1 MΩ",
-        "10 MΩ"
-      ],
-      "respuesta": "2 MΩ",
-      "explicacion": "ITC-BT-49. Punto 4: «La resistencia de aislamiento entre las partes activas y las partes metálicas accesibles no será inferior a 2 MΩ.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿qué grado de protección mínimo contra el agua deben tener los receptores eléctricos en locales con saunas?",
-      "opciones": [
-        "IPX0",
-        "IPX4",
-        "IPX2",
-        "IPX1"
-      ],
-      "respuesta": "IPX4",
-      "explicacion": "ITC-BT-50. Punto 4: «Los materiales eléctricos tendrán un grado de protección mínimo IPX4.»"
-    },
-    {
-      "pregunta": "Según el REBT, ¿cuál es el factor de simultaneidad a aplicar para el cálculo de la potencia de la infraestructura de recarga de vehículos eléctricos en un garaje comunitario con gestión de carga?",
-      "opciones": [
-        "1,0 (100%)",
-        "0,3 (30%)",
-        "El que resulte de la aplicación de la tabla 1 de la ITC-BT-52 (según el sistema de gestión)",
-        "0,5 (50%)"
-      ],
-      "respuesta": "El que resulte de la aplicación de la tabla 1 de la ITC-BT-52 (según el sistema de gestión)",
-      "explicacion": "ITC-BT-52. Punto 4.1: «Para el cálculo de la potencia a prever... el factor de simultaneidad se determinará según la tabla 1, en función de si existe o no un sistema de control de carga.»"
-    }
+  {
+    "pregunta": "Según el REBT, ¿cuál es el objeto primordial de establecer las condiciones técnicas y garantías en las instalaciones eléctricas?",
+    "opciones": [
+      "Preservar la seguridad de las personas y los bienes",
+      "Garantizar el menor consumo de energía posible",
+      "Obligar al uso de materiales de fabricación nacional",
+      "Establecer un sistema de tarifas único para todo el país"
+    ],
+    "respuesta": "Preservar la seguridad de las personas y los bienes",
+    "explicacion": "Artículo 1: «El presente Reglamento tiene por objeto establecer las condiciones técnicas y garantías que deben reunir las instalaciones eléctricas conectadas a una fuente de suministro en los límites de baja tensión, con la finalidad de: a) Preservar la seguridad de las personas y los bienes.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué se entiende por una instalación de muy baja tensión en corriente alterna?",
+    "opciones": [
+      "La que tiene una tensión nominal igual o inferior a 24 V",
+      "La que tiene una tensión nominal igual o inferior a 50 V",
+      "La que tiene una tensión nominal igual o inferior a 75 V",
+      "La que tiene una tensión nominal igual o inferior a 127 V"
+    ],
+    "respuesta": "La que tiene una tensión nominal igual o inferior a 50 V",
+    "explicacion": "Artículo 4, punto 1: «Muy baja tensión. Corriente alterna (Valor eficaz): Un ≤ 50V»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuál es la frecuencia empleada habitualmente en la red?",
+    "opciones": [
+      "40 Hz",
+      "50 Hz",
+      "60 Hz",
+      "100 Hz"
+    ],
+    "respuesta": "50 Hz",
+    "explicacion": "Artículo 4, punto 4: «La frecuencia empleada en la red será de 50 Hz.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué se considera como conductores activos en corriente alterna?",
+    "opciones": [
+      "Únicamente los conductores de fase",
+      "Los conductores de fase y el conductor neutro",
+      "Los conductores de fase y el de protección",
+      "Solo el conductor neutro"
+    ],
+    "respuesta": "Los conductores de fase y el conductor neutro",
+    "explicacion": "ITC-BT-01: «Se consideran como conductores activos en toda instalación los destinados normalmente a la transmisión de la energía eléctrica. Esta consideración se aplica a los conductores de fase y al conductor neutro en corriente alterna...»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cómo se definen los interruptores diferenciales de alta sensibilidad?",
+    "opciones": [
+      "Cuando su valor de sensibilidad es igual o inferior a 10 mA",
+      "Cuando su valor de sensibilidad es igual o inferior a 30 mA",
+      "Cuando su valor de sensibilidad es igual o inferior a 300 mA",
+      "Cuando su valor de sensibilidad es exactamente de 500 mA"
+    ],
+    "respuesta": "Cuando su valor de sensibilidad es igual o inferior a 30 mA",
+    "explicacion": "ITC-BT-01: «ALTA SENSIBILIDAD. Se consideran los interruptores diferenciales como de alta sensibilidad cuando el valor de esta es igual o inferior a 30 mA.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué cuantía mínima por siniestro debe cubrir el seguro de responsabilidad civil para una empresa instaladora de categoría básica?",
+    "opciones": [
+      "300.000 euros",
+      "600.000 euros",
+      "900.000 euros",
+      "1.200.000 euros"
+    ],
+    "respuesta": "600.000 euros",
+    "explicacion": "ITC-BT-03, punto 5.8.c: «Haber suscrito un seguro de responsabilidad civil profesional u otra garantía equivalente que cubra los daños que puedan provocar en la prestación del servicio por una cuantía mínima de 600.000 euros por siniestro para la categoría básica...»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué instalaciones de carácter temporal para maquinaria de obras requieren la elaboración de proyecto?",
+    "opciones": [
+      "Todas las instalaciones de obras",
+      "Las que tengan una potencia prevista superior a 10 kW",
+      "Las que tengan una potencia prevista superior a 20 kW",
+      "Las que tengan una potencia prevista superior a 50 kW"
+    ],
+    "respuesta": "Las que tengan una potencia prevista superior a 50 kW",
+    "explicacion": "ITC-BT-04, punto 3.1, tabla grupo d: «– De carácter temporal para alimentación de maquinaria de obras en construcción. Límite: P > 50 kW.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿quién es el responsable de que el proyecto de una instalación se adapte a las disposiciones reglamentarias?",
+    "opciones": [
+      "La empresa suministradora de energía",
+      "El propietario de la finca",
+      "El técnico titulado competente que lo redacta y firma",
+      "El ayuntamiento de la localidad"
+    ],
+    "respuesta": "El técnico titulado competente que lo redacta y firma",
+    "explicacion": "ITC-BT-04, punto 2.1: «Cuando se precise proyecto, de acuerdo con lo establecido en el apartado 3, éste deberá ser redactado y firmado por técnico titulado competente, quien será directamente responsable de que el mismo se adapte a las disposiciones reglamentarias.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿con qué periodicidad deben ser objeto de inspección periódica las instalaciones de locales de pública concurrencia?",
+    "opciones": [
+      "Cada año",
+      "Cada 2 años",
+      "Cada 5 años",
+      "Cada 10 años"
+    ],
+    "respuesta": "Cada 5 años",
+    "explicacion": "ITC-BT-05, punto 4.2: «Serán objeto de inspecciones periódicas, cada 5 años, todas las instalaciones eléctricas en baja tensión que precisaron inspección inicial...» (Los locales de pública concurrencia precisan inspección inicial según 4.1.b)"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuándo se califica una inspección como negativa?",
+    "opciones": [
+      "Cuando no se han corregido defectos leves de la inspección anterior",
+      "Cuando se detecta al menos un defecto grave",
+      "Cuando se observa, al menos, un defecto muy grave",
+      "Cuando el titular no presenta el esquema unifilar"
+    ],
+    "respuesta": "Cuando se observa, al menos, un defecto muy grave",
+    "explicacion": "ITC-BT-05, punto 5.2.3: «Negativa: Cuando se observe, al menos, un defecto muy grave.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué se considera un defecto muy grave en una inspección?",
+    "opciones": [
+      "Aquel que perturba el funcionamiento de la instalación",
+      "Todo aquél que constituye un peligro inmediato para la seguridad de las personas o los bienes",
+      "La falta de identificación de los conductores neutro y de protección",
+      "La carencia del número de circuitos mínimos estipulados"
+    ],
+    "respuesta": "Todo aquél que constituye un peligro inmediato para la seguridad de las personas o los bienes",
+    "explicacion": "ITC-BT-05, punto 6.1: «Defecto Muy Grave. Es todo aquél que la razón o la experiencia determina que constituye un peligro inmediato para la seguridad de las personas o los bienes.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuál es el plazo máximo para corregir los defectos en una instalación ya en servicio calificada como condicionada?",
+    "opciones": [
+      "15 días",
+      "1 mes",
+      "6 meses",
+      "1 año"
+    ],
+    "respuesta": "6 meses",
+    "explicacion": "ITC-BT-05, punto 5.2.2.b: «A las instalaciones ya en servicio se les fijará un plazo para proceder a su corrección, que no podrá superar los 6 meses.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué caracteriza al esquema de distribución tipo TN-S?",
+    "opciones": [
+      "El conductor neutro y el de protección están combinados en todo el esquema",
+      "El conductor neutro y el de protección son distintos en todo el esquema",
+      "Las masas están conectadas a una toma de tierra separada de la alimentación",
+      "No existe ningún punto de la alimentación conectado a tierra"
+    ],
+    "respuesta": "El conductor neutro y el de protección son distintos en todo el esquema",
+    "explicacion": "ITC-BT-08, punto 1.1: «Esquema TN-S: En el que el conductor neutro y el de protección son distintos en todo el esquema (figura 1)»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuál es el valor máximo de la potencia aparente mínima en VA para calcular las líneas de alimentación de lámparas de descarga?",
+    "opciones": [
+      "1,25 veces la potencia en vatios de las lámparas",
+      "1,5 veces la potencia en vatios de las lámparas",
+      "1,8 veces la potencia en vatios de las lámparas",
+      "2 veces la potencia en vatios de las lámparas"
+    ],
+    "respuesta": "1,8 veces la potencia en vatios de las lámparas",
+    "explicacion": "ITC-BT-09, punto 3: «Como consecuencia, la potencia aparente mínima en VA, se considerará 1,8 veces la potencia en vatios de las lámparas o tubos de descarga.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuál es la carga mínima a prever por local en edificios comerciales o de oficinas?",
+    "opciones": [
+      "2.300 W a 230 V",
+      "3.000 W a 230 V",
+      "3.450 W a 230 V",
+      "5.750 W a 230 V"
+    ],
+    "respuesta": "3.450 W a 230 V",
+    "explicacion": "ITC-BT-10, punto 3.3: «Se calculará considerando un mínimo de 100 W por metro cuadrado y planta, con un mínimo por local de 3450 W a 230 V y coeficiente de simultaneidad 1.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué elementos componen básicamente las instalaciones de enlace?",
+    "opciones": [
+      "Solo la acometida y los receptores",
+      "CGP, LGA, CC, DI, ICP y DGMP",
+      "Transformador, red de distribución y contadores",
+      "La red de distribución pública y el cuadro de mandos"
+    ],
+    "respuesta": "CGP, LGA, CC, DI, ICP y DGMP",
+    "explicacion": "ITC-BT-12, punto 1.2: «Partes que constituyen las instalaciones de enlace: – Caja General de Protección (CGP), – Línea General de Alimentación (LGA), – Elementos para la Ubicación de Contadores (CC), – Derivación Individual (DI), – Caja para Interruptor de Control de Potencia (ICP), – Dispositivos Generales de Mando y Protección (DGMP)»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿dónde se instalarán preferentemente las cajas generales de protección?",
+    "opciones": [
+      "En el interior de la vivienda",
+      "En el cuarto de contadores",
+      "Sobre las fachadas exteriores de los edificios",
+      "En el centro de transformación"
+    ],
+    "respuesta": "Sobre las fachadas exteriores de los edificios",
+    "explicacion": "ITC-BT-13, punto 1.1: «Se instalarán preferentemente sobre las fachadas exteriores de los edificios, en lugares de libre y permanente acceso.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuál es la caída de tensión máxima permitida para líneas generales de alimentación destinadas a contadores totalmente centralizados?",
+    "opciones": [
+      "0,5%",
+      "1%",
+      "1,5%",
+      "3%"
+    ],
+    "respuesta": "0,5%",
+    "explicacion": "ITC-BT-14, punto 3: «La caída de tensión máxima permitida será: – Para líneas generales de alimentación destinadas a contadores totalmente centralizados: 0,5 por 100.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuál es el diámetro exterior nominal mínimo de los tubos en derivaciones individuales?",
+    "opciones": [
+      "20 mm",
+      "25 mm",
+      "32 mm",
+      "40 mm"
+    ],
+    "respuesta": "32 mm",
+    "explicacion": "ITC-BT-15, punto 2: «En las mencionadas condiciones de instalación, los diámetros exteriores nominales mínimos de los tubos en derivaciones individuales serán de 32 mm.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿a qué altura debe situarse el cuadrante de lectura del aparato de medida situado más alto en una concentración de contadores?",
+    "opciones": [
+      "Máximo 1,50 m",
+      "Máximo 1,80 m",
+      "Máximo 2,00 m",
+      "Sin límite de altura"
+    ],
+    "respuesta": "Máximo 1,80 m",
+    "explicacion": "ITC-BT-16, punto 3: «La colocación de la concentración de contadores, se realizará de tal forma que... el cuadrante de lectura del aparato de medida situado más alto, no supere el 1,80 m.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué poder de corte mínimo debe tener el interruptor general automático de una vivienda?",
+    "opciones": [
+      "3.000 A",
+      "4.500 A",
+      "6.000 A",
+      "10.000 A"
+    ],
+    "respuesta": "4.500 A",
+    "explicacion": "ITC-BT-17, punto 1.3: «El interruptor general automático de corte omnipolar tendrá poder de corte suficiente para la intensidad de cortocircuito que pueda producirse en el punto de su instalación, de 4.500 A como mínimo.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuál es la profundidad mínima de enterramiento para las tomas de tierra?",
+    "opciones": [
+      "0,30 m",
+      "0,50 m",
+      "0,80 m",
+      "1,00 m"
+    ],
+    "respuesta": "0,50 m",
+    "explicacion": "ITC-BT-18, punto 3.1: «El tipo y la profundidad de enterramiento de las tomas de tierra deben ser tales que... La profundidad nunca será inferior a 0,50 m.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué tensión de ensayo en corriente continua se aplica para medir la resistencia de aislamiento en instalaciones de tensión nominal inferior o igual a 500 V?",
+    "opciones": [
+      "250 V",
+      "500 V",
+      "1000 V",
+      "1500 V"
+    ],
+    "respuesta": "500 V",
+    "explicacion": "ITC-BT-19, punto 2.9, tabla: «Inferior o igual a 500 V, excepto caso anterior: Tensión de ensayo en corriente continua (v) 500. Resistencia de aislamiento (MΩ) ≥ 0,5.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cómo se deben instalar los tubos que atraviesan un elemento constructivo que separa dos locales de humedades muy diferentes?",
+    "opciones": [
+      "Siempre en línea recta y totalmente sellados",
+      "De modo que se impida la entrada de agua en el local menos húmedo, curvándolos hacia el más húmedo",
+      "Deben ser obligatoriamente metálicos",
+      "No se permite atravesar elementos constructivos con tubos"
+    ],
+    "respuesta": "De modo que se impida la entrada de agua en el local menos húmedo, curvándolos hacia el más húmedo",
+    "explicacion": "ITC-BT-20, punto 3: «– Si se utilizan tubos no obturados para atravesar un elemento constructivo que separe dos locales de humedades marcadamente diferentes, se dispondrán de modo que se impida la entrada y acumulación de agua en el local menos húmedo, curvándolos convenientemente en su extremo hacia el local más húmedo.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿a qué equipos se aplica la Categoría II de sobretensiones?",
+    "opciones": [
+      "A equipos muy sensibles como ordenadores",
+      "A equipos destinados a conectarse a una instalación eléctrica fija, como electrodomésticos",
+      "A materiales que forman parte de la instalación fija, como armarios de distribución",
+      "A equipos que se conectan en el origen de la instalación, como contadores"
+    ],
+    "respuesta": "A equipos destinados a conectarse a una instalación eléctrica fija, como electrodomésticos",
+    "explicacion": "ITC-BT-23, punto 2.2: «Categoría II. Se aplica a los equipos destinados a conectarse a una instalación eléctrica fija. Ejemplo: electrodomésticos, herramientas portátiles y otros equipos similares.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué valor tiene la tensión límite convencional en corriente alterna para condiciones normales?",
+    "opciones": [
+      "12 V",
+      "24 V",
+      "50 V",
+      "110 V"
+    ],
+    "respuesta": "50 V",
+    "explicacion": "ITC-BT-24, punto 4.1: «La tensión límite convencional es igual a 50 V, valor eficaz en corriente alterna, en condiciones normales.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuántos circuitos mínimos de distribución interna tiene una vivienda con electrificación básica?",
+    "opciones": [
+      "3 circuitos",
+      "4 circuitos",
+      "5 circuitos",
+      "6 circuitos"
+    ],
+    "respuesta": "5 circuitos",
+    "explicacion": "ITC-BT-25, punto 2.3.1: «Electrificación básica. Circuitos independientes: C1, C2, C3, C4, C5.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué color de aislamiento identifica al conductor de protección?",
+    "opciones": [
+      "Azul claro",
+      "Marrón",
+      "Negro",
+      "Amarillo-verde"
+    ],
+    "respuesta": "Amarillo-verde",
+    "explicacion": "ITC-BT-26, punto 6.2: «Al conductor de protección se le identificará por el doble color amarillo-verde.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuál es la caída de tensión máxima permitida en el arranque de un motor para ascensores desde el dispositivo general de protección?",
+    "opciones": [
+      "3 %",
+      "5 %",
+      "10 %",
+      "15 %"
+    ],
+    "respuesta": "5 %",
+    "explicacion": "ITC-BT-32, punto 2: «Las canalizaciones que vayan desde el dispositivo general de protección al equipo eléctrico de elevación o de accionamiento deberán estar dimensionadas de manera que el arranque del motor no provoque una caída de tensión superior al 5 %.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuál es la tensión límite convencional para contactos indirectos en instalaciones de obras con esquema TT?",
+    "opciones": [
+      "24 V",
+      "50 V",
+      "100 V",
+      "230 V"
+    ],
+    "respuesta": "24 V",
+    "explicacion": "ITC-BT-33, punto 4.2: «Cuando la protección de las personas contra los contactos indirectos está asegurada por corte automático de la alimentación, según esquema de alimentación TT, la tensión límite convencional no debe ser superior a 24 V de valor eficaz en corriente alterna...»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué valor no debe exceder la tensión nominal en corriente continua para instalaciones de Muy Baja Tensión de Seguridad (MBTS)?",
+    "opciones": [
+      "24 V",
+      "50 V",
+      "75 V",
+      "150 V"
+    ],
+    "respuesta": "75 V",
+    "explicacion": "ITC-BT-36, punto 1: «Las instalaciones a Muy Baja Tensión de Seguridad comprenden aquellas cuya tensión nominal no excede de 50 V en c.a. ó 75 V en c.c...»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué tensión nominal mínima deben tener los cables empleados en instalaciones a tensiones especiales?",
+    "opciones": [
+      "450/750 V",
+      "750 V",
+      "1000 V",
+      "1500 V"
+    ],
+    "respuesta": "1000 V",
+    "explicacion": "ITC-BT-37, punto 1: «Los cables empleados serán siempre de tensión nominal no inferior a 1 000 V.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué indicación mínima deben llevar los carteles de aviso en cercas eléctricas?",
+    "opciones": [
+      "PELIGRO ELÉCTRICO",
+      "CERCA ELÉCTRICA",
+      "ALTA TENSIÓN",
+      "CUIDADO GANADO"
+    ],
+    "respuesta": "CERCA ELÉCTRICA",
+    "explicacion": "ITC-BT-39, punto 3: «Los carteles llevarán la indicación «CERCA ELÉCTRICA» escrito sobre un triángulo equilátero de base horizontal con letras negras sobre fondo amarillo.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿en qué tiempo máximo deben actuar las protecciones de mínima tensión de un generador cuando la tensión llegue al 85% de su valor asignado?",
+    "opciones": [
+      "0,1 segundos",
+      "0,5 segundos",
+      "1 segundo",
+      "2 segundos"
+    ],
+    "respuesta": "0,5 segundos",
+    "explicacion": "ITC-BT-40, punto 7: «De mínima tensión instantáneos... actuarán, en un tiempo inferior a 0,5 segundos, a partir de que la tensión llegue al 85% de su valor asignado.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿cuál es la longitud máxima permitida para los cables flexibles de conexión a los barcos de recreo?",
+    "opciones": [
+      "10 m",
+      "15 m",
+      "25 m",
+      "50 m"
+    ],
+    "respuesta": "25 m",
+    "explicacion": "ITC-BT-42, punto 4.3.3: «La longitud de los cables no debe ser superior a 25 m. El cable no debe tener ninguna conexión intermedia o empalme en toda su longitud.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué equipos se consideran receptores de Clase III?",
+    "opciones": [
+      "Aquellos con aislamiento reforzado",
+      "Los previstos para ser alimentados a muy baja tensión de seguridad",
+      "Los que tienen conexión obligatoria a tierra",
+      "Cualquier electrodoméstico de uso común"
+    ],
+    "respuesta": "Los previstos para ser alimentados a muy baja tensión de seguridad",
+    "explicacion": "ITC-BT-43, punto 2.2, tabla 1: «Clase III. Equipos previstos para ser alimentados a muy baja tensión de seguridad (MBTS)»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué carga mínima prevista en VA se considera para receptores con lámparas de descarga?",
+    "opciones": [
+      "1,25 veces la potencia en vatios",
+      "1,5 veces la potencia en vatios",
+      "1,8 veces la potencia en vatios",
+      "2,5 veces la potencia en vatios"
+    ],
+    "respuesta": "1,8 veces la potencia en vatios",
+    "explicacion": "ITC-BT-44, punto 3.1: «Para receptores con lámparas de descarga, la carga mínima prevista en voltiamperios será de 1,8 veces la potencia en vatios de las lámparas.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿a qué valor máximo se debe regular el dispositivo de protección contra sobrecargas en aparatos de soldadura eléctrica por arco?",
+    "opciones": [
+      "100 % de la intensidad nominal",
+      "150 % de la intensidad nominal",
+      "200 % de la intensidad nominal",
+      "300 % de la intensidad nominal"
+    ],
+    "respuesta": "200 % de la intensidad nominal",
+    "explicacion": "ITC-BT-45, punto 3.3.d: «Cada aparato llevará incorporado... un dispositivo de protección contra sobrecargas, regulado, como máximo, al 200 % de la intensidad nominal de su alimentación...»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿con qué factor se debe multiplicar la intensidad a plena carga para dimensionar los conductores de un solo motor?",
+    "opciones": [
+      "1,10",
+      "1,25",
+      "1,50",
+      "2,00"
+    ],
+    "respuesta": "1,25",
+    "explicacion": "ITC-BT-47, punto 3.1: «Los conductores de conexión que alimentan a un solo motor deben estar dimensionados para una intensidad del 125 % de la intensidad a plena carga del motor.»"
+  },
+  {
+    "pregunta": "Según el REBT, ¿qué caída de tensión máxima admisible se establece para cualquier circuito de recarga de vehículos eléctricos desde su origen hasta el punto de recarga?",
+    "opciones": [
+      "1 %",
+      "3 %",
+      "5 %",
+      "10 %"
+    ],
+    "respuesta": "5 %",
+    "explicacion": "ITC-BT-52, punto 5: «La caída de tensión máxima admisible en cualquier circuito desde su origen hasta el punto de recarga no será superior al 5 %.»"
+  }
 ];
-
-
-
-   
-
-
-
-
-
 
 
 
@@ -817,4 +811,3 @@ let tiempoAgotado = false;
 
 </body>
 </html>
-
