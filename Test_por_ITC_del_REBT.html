@@ -3,25 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <!-- Título enriquecido con palabras clave -->
+  
   <title>Test REBT online – Exámenes y cuestionarios del Reglamento Electrotécnico de Baja Tensión</title>
-  <!-- Descripción enfocada al SEO con términos de búsqueda habituales -->
-  <meta name="description" content="Realiza tus test del Reglamento Electrotécnico de Baja Tensión (REBT) de forma online. Practica con cuestionarios por Instrucción Técnica Complementaria, por contenido y por articulado y realiza exámenes con corrección automática." />
-  <!-- Palabras clave -->
+  <meta name="description" content="Realiza tus test del Reglamento Electrotécnico de Baja Tensión (REBT) de forma online. Practica con cuestionarios por Instrucción Técnica Complementaria y articulado." />
   <meta name="keywords" content="test REBT, examen REBT, preguntas REBT, cuestionarios REBT, reglamento electrotécnico baja tensión, ITC, baja tensión" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://app-rebt.es/" />
   
-  <!-- OG -->
   <meta property="og:title" content="Test REBT – Exámenes y cuestionarios online del REBT" />
-  <meta property="og:description" content="Practica con nuestros cuestionarios del REBT organizados por ITC, por contenido y por el articulado. Realiza exámenes con corrección automática y aprende de forma eficiente." />
+  <meta property="og:description" content="Practica con nuestros cuestionarios del REBT organizados por ITC y articulado. Realiza exámenes con corrección automática." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://app-rebt.es/" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#0f172a" />
   <link rel="icon" href="/favicon.ico" />
 
-  <!-- Google tag -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -30,34 +26,30 @@
     gtag('config', 'G-RSH4ZW3VT2');
   </script>
 
-  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preload" as="image" href="img/fondo.png">
-
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
+  
   <style>
-    body{
-      background:url('img/fondo.png');
-      background-size:cover;
-      background-position:center;
-      background-repeat:no-repeat;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
-    }
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease, color 0.3s ease; }
+    .bg-master { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background-image: url('img/fondo.png'); background-size: cover; background-position: center; background-attachment: fixed; }
+    .bg-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; transition: background-color 0.5s ease; }
+    .light .bg-overlay { background-color: rgba(241, 245, 249, 0.85); }
+    .dark .bg-overlay { background-color: rgba(2, 6, 23, 0.92); }
+    .glass-card { backdrop-filter: blur(12px) saturate(160%); -webkit-backdrop-filter: blur(12px) saturate(160%); border: 1px solid; border-radius: 0.75rem; transition: all 0.2s ease-in-out; min-height: 58px; }
+    .light .glass-card { background: rgba(255, 255, 255, 0.5); border-color: rgba(255, 255, 255, 0.8); }
+    .dark .glass-card { background: rgba(30, 41, 59, 0.6); border-color: rgba(255, 255, 255, 0.1); }
+    .glass-card:hover { transform: translateY(-1px); border-color: #3b82f6; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15); }
+    .theme-toggle { position: fixed; top: 15px; right: 15px; z-index: 100; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border-radius: 10px; border: 1px solid; backdrop-filter: blur(10px); cursor: pointer; transition: all 0.3s ease; }
+    .light .theme-toggle { background: rgba(255, 255, 255, 0.6); color: #1e293b; border-color: rgba(0,0,0,0.1); }
+    .dark .theme-toggle { background: rgba(30, 41, 59, 0.6); color: #fbbf24; border-color: rgba(255,255,255,0.2); }
+    .btn-float { position: fixed; bottom: 20px; right: 20px; z-index: 100; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); border-radius: 50px; padding: 8px 15px; display: flex; align-items: center; gap: 6px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease; }
+    .light .btn-float { background: rgba(255, 255, 255, 0.9); color: #1e293b; }
+    .dark .btn-float { background: rgba(15, 23, 42, 0.9); color: #ffffff; border-color: rgba(255,255,255,0.1); }
   </style>
 
-  <!-- Datos estructurados -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -66,452 +58,104 @@
     "url": "https://app-rebt.es/",
     "operatingSystem": "Web",
     "applicationCategory": "EducationalApplication",
-    "description": "Plataforma para practicar test del Reglamento Electrotécnico de Baja Tensión (REBT) con cuestionarios por ITC, contenido y articulado y exámenes online con corrección automática."
+    "description": "Plataforma para practicar test del Reglamento Electrotécnico de Baja Tensión (REBT)."
   }
   </script>
 </head>
 
-<body class="min-h-screen relative text-slate-900">
+<body class="min-h-screen antialiased light text-slate-900 dark:text-white">
+  <div class="bg-master"></div>
+  <div class="bg-overlay"></div>
 
-  <!-- 🔹 BOTÓN FLOTANTE AÑADIDO AQUÍ -->
-  <a href="Test_REBT_Completo_Basica.html" 
-     class="fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-md shadow-lg shadow-slate-900/20 
-            ring-1 ring-slate-300 hover:bg-slate-100 transition px-4 py-2 rounded-full 
-            flex items-center gap-2 text-slate-700 font-semibold">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+  <button onclick="toggleDarkMode()" class="theme-toggle shadow-sm" title="Cambiar modo">
+    <svg id="moon-icon" class="w-6 h-6 block dark:hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+    <svg id="sun-icon" class="w-6 h-6 hidden dark:block" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path></svg>
+  </button>
+
+  <a href="Test_REBT_Completo_Basica.html" class="btn-float group">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
     </svg>
-    Atrás
+    <span class="text-[10px] font-bold uppercase tracking-widest">Atrás</span>
   </a>
-  <!-- 🔹 FIN DEL BOTÓN FLOTANTE -->
 
-
-  <!-- Capa oscura -->
-  <div class="absolute inset-0 bg-slate-900/60"></div>
-  
-  <main class="relative z-10 flex items-center justify-center min-h-screen p-6">
-    <section class="w-full max-w-4xl">
-      <div class="backdrop-blur-md bg-white/90 rounded-2xl shadow-2xl shadow-slate-900/10 ring-1 ring-white/50 p-8 md:p-10">
-
-        <header class="text-center space-y-3 mb-8">
-          <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-800">
-            TEST REBT (IBTB)<span aria-hidden="true">⚡</span>
-          </h1>
-          <p class="text-slate-600 text-base md:text-lg">
-           Refuerza tus conocimientos del <strong>Reglamento Electrotécnico de Baja Tensión</strong>.
-          </p>
-          <p class="text-slate-500 text-sm md:text-base">
-            Test enfocados en cada ITC dispones de 60 minutos para responder 20 preguntas y consolidar tus conocimientos.
-          </p>
-        </header>
-
-        <div class="sr-only">
-          <h2>¿Qué es el REBT?</h2>
-          <p>El Reglamento Electrotécnico de Baja Tensión (REBT) establece las condiciones técnicas y garantías que deben cumplir las instalaciones eléctricas.</p>
-        </div>
-
-        <nav class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mt-6">
-
-          <!-- Examenes -->
-          <a href="Test_Articulado.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white transition hover:brightness-90"
-             style="background-color:#6B6B6B;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>Articulado</span>           
-          </a>
-
-          <a href="Test_ITC_BT_03_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#00B527;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-03</span>           
-          </a>
-
-          <a href="Test_ITC_BT_04_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#A35512;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2-2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-04</span>           
-          </a>
-
-          <a href="Test_ITC_BT_05_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#610D58;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2-2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-05</span>           
-          </a>
-
-          <a href="Test_ITC_BT_08_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#435C13;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-08</span>           
-          </a>
-
-          <a href="Test_ITC_BT_09_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#245791;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-09</span>           
-          </a>
-
-          <a href="Test_ITC_BT_10_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#AD1010;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-10</span>           
-          </a>
-
-          <a href="Test_ITC_BT_12_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#A65508;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-12</span>           
-          </a>
-
-          <a href="Test_ITC_BT_13_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#87007E;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-13</span>           
-          </a>
-
-          <a href="Test_ITC_BT_14_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#F7822D;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-14</span>           
-          </a>
-
-          <a href="Test_ITC_BT_15_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#D1004D;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-15</span>           
-          </a>
-
-
-           <a href="Test_ITC_BT_16_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#43571D;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-16</span>           
-          </a>
-
-
-
-           <a href="Test_ITC_BT_17_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#233175;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-17</span>           
-          </a>
-
-            
-          <a href="Test_ITC_BT_18_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#8F1313;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-18</span>           
-          </a>
-
-          
-          <a href="Test_ITC_BT_19_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#13912C;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-19</span>           
-          </a>
-
-
-           <a href="Test_ITC_BT_20_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#2AAFE8;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-20</span>           
-          </a>
-
-
-          <a href="Test_ITC_BT_21_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#86248F;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-21</span>           
-          </a>
-
-
-            <a href="Test_ITC_BT_22_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#ED7013;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-22</span>           
-          </a>
-
-
-           <a href="Test_ITC_BT_23_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#D6005E;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-23</span>           
-          </a>
-
-
-          <a href="Test_ITC_BT_24_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#2E6126;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-24</span>           
-          </a>
-
-
-          <a href="Test_ITC_BT_25_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#19008A;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-25</span>           
-          </a>
-
-
-          <a href="Test_ITC_BT_26_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#9E0000;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-26</span>           
-          </a>
-
-
-          <a href="Test_ITC_BT_27_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#357A49;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-27</span>           
-          </a>
-
-
-          <a href="Test_ITC_BT_28_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#854305;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-28</span>           
-          </a>
-
-          
-          <a href="Test_ITC_BT_30_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#EB7610;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-30</span>           
-          </a>
-
-
-          <a href="Test_ITC_BT_31_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#DE0762;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-31</span>           
-          </a>
-
-          
-          <a href="Test_ITC_BT_32_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#334A00;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-32</span>           
-          </a>
-
-          <a href="Test_ITC_BT_33_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#193A78;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-33</span>           
-          </a>
-
-          
-          <a href="Test_ITC_BT_34_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#940000;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-34</span>           
-          </a>
-
-          <a href="Test_ITC_BT_35_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#3FA147;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-35</span>           
-          </a>
-
-
-          <a href="Test_ITC_BT_36_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#A66500;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-36</span>           
-          </a>          
-
-          <a href="Test_ITC_BT_37_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#7A3576;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-37</span>           
-          </a>         
-
-          
-          <a href="Test_ITC_BT_39_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#CC1D7D;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-39</span>           
-          </a>   
-
-          <a href="Test_ITC_BT_40_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#707A2D;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-40</span>           
-          </a>         
-
-          <a href="Test_ITC_BT_41_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#27448F;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-41</span>           
-          </a>      
-          
-
-          <a href="Test_ITC_BT_42_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#8F2A27;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-42</span>           
-          </a>      
-
-          <a href="Test_ITC_BT_43_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#269E56;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-43</span>           
-          </a>      
-
-          <a href="Test_ITC_BT_44_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#875B1A;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-44</span>           
-          </a>      
-
-
-          <a href="Test_ITC_BT_45_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#78136F;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-45</span>           
-          </a>                
-
-
-          <a href="Test_ITC_BT_46_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#F08F11;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-46</span>           
-          </a>      
-
-          <a href="Test_ITC_BT_47_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#F24663;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-47</span>           
-          </a>   
-
-
-          <a href="Test_ITC_BT_48_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#648723;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-48</span>           
-          </a>    
-
-          <a href="Test_ITC_BT_49_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#4560CC;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-49</span>           
-          </a>   
-
-          <a href="Test_ITC_BT_50_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#A63C3E;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-50</span>           
-          </a>   
-          
-          <a href="Test_ITC_BT_52_REBT.html" class="group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 text-lg font-semibold text-white hover:brightness-90"
-             style="background-color:#C4741A;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2z" />
-            </svg>
-            <span>ITC-BT-52</span>        
-          </a>   
-
-          
-          
-        </nav>
-
-        <div class="mt-8 text-center text-sm text-slate-500">
-          © <span id="y"></span> REBT • Aprende y practica
-        </div>
-
+  <main class="max-w-4xl mx-auto pt-8 pb-20 px-4 relative z-10">
+    <header class="mb-5 border-b border-slate-400/20 dark:border-white/10 pb-3 text-left">
+      <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+        TEST REBT <span class="text-blue-600 dark:text-blue-400">(IBTB)</span>
+      </h1>
+      <div class="mt-2 space-y-1">
+        <p class="text-slate-700 dark:text-slate-200 text-[13px] md:text-sm font-semibold leading-tight">
+            Refuerza tus conocimientos del Reglamento Electrotécnico de Baja Tensión.
+        </p>
+        <p class="text-slate-500 dark:text-slate-400 text-[11px] md:text-[12px] italic leading-tight">
+            Test enfocados en cada ITC. Dispones de 60 min. para responder 20 preguntas y consolidar tus conocimientos.
+        </p>
       </div>
-    </section>
+    </header>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
+      <a href="Test_Articulado.html" class="glass-card flex items-center justify-center px-2 py-1 group text-center">
+        <span class="text-[10px] font-medium text-blue-600 dark:text-blue-400 leading-tight uppercase tracking-wide">Articulado</span>
+      </a>
+
+      <script>
+        const itcTitles = {
+          3: "Empresas instaladoras BT", 4: "Documentación y puesta", 5: "Verificaciones e insp.", 
+          8: "Conexión neutro y masas", 9: "Alumbrado exterior", 10: "Previsión de cargas", 
+          12: "Esquemas", 13: "CGP", 14: "LGA", 15: "Derivación individual", 16: "Contadores", 
+          17: "CGMP + ICP", 18: "Puesta a tierra", 19: "Prescripciones generales.", 20: "Sistemas instalación", 
+          21: "Tubos y canales", 22: "Sobreintensidades", 23: "Sobretensiones", 24: "CD y CI", 
+          25: "Vivienda. Nº circuitos", 26: "Viviendas general", 27: "Bañera o duchas", 
+          28: "Loc. pública conc.", 30: "Locales especiales", 31: "Piscinas y fuentes", 
+          32: "Máquinas elevación", 33: "Provisionales de obra", 34: "Ferias y stands", 
+          35: "Agro y hortícolas", 36: "Muy baja tensión", 37: "Tensiones especiales", 
+          39: "Cercas eléctricas", 40: "Generadoras", 41: "Caravanas", 42: "Puertos y marinas", 
+          43: "Receptores generalidades", 44: "Receptores alumbrado", 45: "Aparatos caldeo", 
+          46: "Cables y folios radiantes", 47: "Motores", 48: "Transformadores", 49: "Muebles", 
+          50: "Saunas", 52: "Vehículo Eléctrico"
+        };
+        
+        Object.keys(itcTitles).forEach(num => {
+          const id = num < 10 ? '0' + num : num;
+          document.write(`
+            <a href="Test_ITC_BT_${id}_REBT.html" class="glass-card flex items-center px-2 py-1 group">
+              <div class="flex items-center gap-2 w-full">
+                <div class="flex flex-col items-center min-w-[28px]">
+                  <span class="text-[7px] font-extrabold text-blue-600 dark:text-blue-400 opacity-80 leading-none mb-0.5">ITC</span>
+                  <span class="text-lg font-black text-slate-900 dark:text-white leading-none">${id}</span>
+                </div>
+                <span class="text-blue-600 dark:text-blue-400 opacity-20 text-lg">|</span>
+                <span class="text-[10px] font-medium text-blue-600 dark:text-blue-400 leading-tight">
+                  ${itcTitles[num]}
+                </span>
+              </div>
+            </a>
+          `);
+        });
+      </script>
+    </div>
+
+    <footer class="mt-10 text-center border-t border-slate-400/20 dark:border-white/10 pt-5">
+      <p class="opacity-50 text-[9px] font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400">
+        © <span id="year"></span> REBT Online • IBTB Academy
+      </p>
+    </footer>
   </main>
 
   <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
+    document.getElementById('year').textContent = new Date().getFullYear();
+    function toggleDarkMode() {
+        const body = document.body;
+        body.classList.toggle('light');
+        body.classList.toggle('dark');
+        localStorage.setItem('rebt-theme', body.classList.contains('dark') ? 'dark' : 'light');
+    }
+    if (localStorage.getItem('rebt-theme') === 'dark') {
+        document.body.classList.replace('light', 'dark');
+    } else {
+        document.body.classList.add('light');
+    }
   </script>
-
 </body>
 </html>
