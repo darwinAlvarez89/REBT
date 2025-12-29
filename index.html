@@ -10,33 +10,12 @@
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://app-rebt.es/" />
   
-  <meta property="og:title" content="Test REBT – Exámenes y cuestionarios online del REBT" />
-  <meta property="og:description" content="Practica con nuestros cuestionarios del REBT organizados por ITC, por contenido y por el articulado. Realiza exámenes con corrección automática y aprende de forma eficiente." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://app-rebt.es/" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="theme-color" content="#020617" />
-  
-  <link rel="icon" href="/favicon.ico" />
-
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);} 
     gtag('js', new Date());
     gtag('config', 'G-RSH4ZW3VT2');
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "EducationalApplication",
-    "name": "Test REBT",
-    "url": "https://app-rebt.es/",
-    "operatingSystem": "Web",
-    "applicationCategory": "EducationalApplication",
-    "description": "Plataforma para practicar test del Reglamento Electrotécnico de Baja Tensión (REBT) con cuestionarios por ITC, contenido y articulado y exámenes online con corrección automática."
-  }
   </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -121,7 +100,7 @@
 
         <div class="mt-auto p-4 bg-slate-50 rounded-2xl border border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p class="text-slate-600 text-[11px] font-medium leading-tight">
-                ¿Sugerencias o aportes? <br> <span class="text-slate-400 font-normal">informacion.rebt@gmail.com</span>
+                ¿Sugerencias o reportes? <br> <span class="text-slate-400 font-normal">informacion.rebt@gmail.com</span>
             </p>
             <a href="mailto:informacion.rebt@gmail.com" class="text-blue-600 font-bold text-xs hover:underline decoration-2 underline-offset-4">Escríbenos</a>
         </div>
@@ -129,20 +108,18 @@
 
       <aside class="space-y-4 w-full">
         <div class="glass-card rounded-[2rem] p-5 border-t-4 border-blue-600 shadow-xl overflow-hidden">
-            <h3 class="text-blue-600 font-bold text-[10px] mb-3 tracking-widest uppercase italic">Como Estudiar el REBT</h3>
-            <video controls class="w-full rounded-2xl shadow-md bg-black aspect-video">
-                <source src="img/Video.mp4" type="video/mp4">
+            <h3 class="text-blue-600 font-bold text-[10px] mb-3 tracking-widest uppercase italic">Estudiar el REBT</h3>
+            <video id="videoTutorial" controls class="w-full rounded-2xl shadow-md bg-black aspect-video">
+                <source src="Video.mp4" type="video/mp4">
             </video>
         </div>
 
         <div class="glass-card rounded-[2rem] p-5 border-t-4 border-blue-600 shadow-xl">
             <h3 class="text-blue-600 font-bold text-[10px] mb-3 tracking-widest uppercase italic">¿Sabías que...?</h3>
-            
             <div class="space-y-4">
                 <p class="text-slate-600 text-[11px] leading-relaxed">
                     El REBT actual fue aprobado por el <strong>Real Decreto 842/2002</strong> y entró en vigor el <strong>2 de agosto</strong>. Mantenerse actualizado es vital para garantizar la <strong>seguridad eléctrica</strong>.
                 </p>
-
                 <div class="flex flex-row gap-2">
                     <a href="glosarioSiglas.html" class="flex-1 group flex items-center justify-center gap-1.5 p-2 rounded-xl hover:bg-blue-50 transition-all border border-slate-100 text-slate-700">
                         <div class="w-5 h-5 rounded bg-blue-100 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all">
@@ -171,7 +148,28 @@
   </main>
 
   <script>
+    // 1. Año automático
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // 2. Rastreo de Video para Google Analytics
+    const miVideo = document.getElementById('videoTutorial');
+    
+    if (miVideo) {
+      // Detecta cuando el usuario pulsa Play
+      miVideo.addEventListener('play', function() {
+        gtag('event', 'video_start', {
+          'video_title': 'Tutorial REBT Principal',
+          'video_current_time': miVideo.currentTime
+        });
+      });
+
+      // Detecta cuando el usuario termina de ver el video
+      miVideo.addEventListener('ended', function() {
+        gtag('event', 'video_complete', {
+          'video_title': 'Tutorial REBT Principal'
+        });
+      });
+    }
   </script>
 </body>
 </html>
