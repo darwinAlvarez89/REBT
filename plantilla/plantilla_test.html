@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* === ESTILO PROFESIONAL LIMPIO (Versión Gold) === */
+    /* === ESTILO PROFESIONAL LIMPIO (Versión Platinum) === */
     body { 
         font-family: 'Inter', sans-serif; 
         background-color: #f3f4f6; 
@@ -103,7 +103,6 @@
         }
 
         try {
-            // Carga archivo normal (JSON)
             const response = await fetch('../Data/base_datos_rebt.json');
             if (!response.ok) throw new Error("Error de conexión con la base de datos.");
             const todas = await response.json();
@@ -115,7 +114,6 @@
                 
                 if (itc.includes("CALCULO")) return false;
                 
-                // Aceptamos "ARTICULADO" o "ARTICULOS"
                 if (testIdActual === "ARTICULADO" || testIdActual === "ARTICULOS") {
                     return itc.startsWith("ARTICULO");
                 }
@@ -184,16 +182,15 @@
         cont.appendChild(btn);
       });
 
-      // Resetear Área de Acciones
+      // === CAMBIO: BOTÓN COMPACTO Y DERECHA ===
       const area = document.getElementById("area-acciones");
       area.innerHTML = `
-        <div class="flex flex-col gap-2 mt-4 text-sm text-gray-400 text-center" id="hint-text">
-            <span>Elige una respuesta para continuar</span>
+        <div class="flex justify-end mt-2">
+            <button id="btn-accion" disabled onclick="verificarRespuesta()" 
+                class="px-8 py-2.5 rounded-lg font-bold text-white bg-gray-300 cursor-not-allowed transition-all shadow-none text-sm">
+                Contestar
+            </button>
         </div>
-        <button id="btn-accion" disabled onclick="verificarRespuesta()" 
-            class="w-full py-3.5 mt-2 rounded-xl font-bold text-white bg-gray-300 cursor-not-allowed transition-all shadow-none">
-            Contestar
-        </button>
       `;
 
       guardarProgreso();
@@ -215,10 +212,9 @@
       });
 
       const btn = document.getElementById('btn-accion');
-      document.getElementById('hint-text').style.display = 'none';
       btn.disabled = false;
-      // Botón Azul
-      btn.className = "w-full py-3.5 mt-2 rounded-xl font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md hover:shadow-lg transition-all transform active:scale-[0.98]";
+      // Botón Azul Compacto
+      btn.className = "px-8 py-2.5 rounded-lg font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md hover:shadow-lg transition-all transform active:scale-[0.98] text-sm";
     }
 
     function verificarRespuesta(){
@@ -242,7 +238,6 @@
 
       if (esCorrecta) aciertos++; else errores++;
       
-      // Guardar historial
       historial.push({ 
           pregunta: actual.pregunta, 
           opciones: actual.opciones, 
@@ -255,10 +250,18 @@
       
       guardarProgreso();
 
-      // CAMBIO AQUÍ: Se ha quitado el span de "Ref"
+      // === CAMBIO: EXPLICACIÓN DEBAJO Y BOTÓN SIGUIENTE COMPACTO ===
       document.getElementById("area-acciones").innerHTML = `
          <div class="fade-in w-full mt-2">
-            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-4 text-sm text-slate-700 shadow-sm">
+            <div class="flex justify-end mb-4">
+                <button id="btn-siguiente" onclick="siguientePregunta()" 
+                    class="px-8 py-2.5 rounded-lg font-bold text-white bg-slate-800 hover:bg-slate-900 shadow-lg transition-all flex items-center justify-center gap-2 text-sm">
+                    Siguiente
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                </button>
+            </div>
+
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm text-slate-700 shadow-sm">
                 <div class="flex flex-wrap items-center gap-2 mb-2 pb-2 border-b border-slate-200">
                     <strong class="text-xs text-slate-800">${actual.itc}</strong>
                     <span class="text-slate-300">|</span>
@@ -266,18 +269,15 @@
                 </div>
                 <div class="leading-relaxed text-slate-600">${actual.explicacion || "Sin explicación adicional."}</div>
             </div>
-
-            <button id="btn-siguiente" onclick="siguientePregunta()" 
-                class="w-full py-3.5 rounded-xl font-bold text-white bg-slate-800 hover:bg-slate-900 shadow-lg transition-all flex items-center justify-center gap-2">
-                Siguiente Pregunta
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-            </button>
          </div>
       `;
 
       const btnSig = document.getElementById('btn-siguiente');
       btnSig.focus();
-      setTimeout(() => { btnSig.scrollIntoView({ behavior: "smooth", block: "center" }); }, 100);
+      // Scroll para asegurar que se ve la explicación si es larga
+      setTimeout(() => { 
+          document.getElementById('area-acciones').scrollIntoView({ behavior: "smooth", block: "nearest" }); 
+      }, 100);
       actualizarEstado();
     }
 
@@ -320,8 +320,6 @@
         borrarProgreso();
         const total = preguntasDelExamen.length;
         const nota = Math.max(0, (aciertos - (errores/2)) * (10/total));
-        
-        // Aprobado con 7
         const apto = nota >= 7;
 
         const htmlHistorial = historial.map((h, i) => {
