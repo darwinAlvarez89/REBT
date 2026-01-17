@@ -103,19 +103,24 @@
         }
 
         try {
-            // CORRECCIÓN: Volvemos a leer el archivo JSON normal que ya tienes
+            // Carga archivo normal (JSON) o encriptado (TXT) según prefieras. 
+            // Aquí dejo el JSON para que te funcione ya mismo.
             const response = await fetch('../Data/base_datos_rebt.json');
-            
-            if (!response.ok) throw new Error(`No se encuentra el archivo de datos (Error ${response.status}).`);
-            
+            if (!response.ok) throw new Error("Error de conexión con la base de datos.");
             const todas = await response.json();
 
             // 1. FILTRADO
             let filtradas = todas.filter(p => {
                 if(!p.itc) return false;
                 const itc = p.itc.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '');
+                
                 if (itc.includes("CALCULO")) return false;
-                if (testIdActual === "ARTICULOS") return itc.startsWith("ARTICULO");
+                
+                // AQUÍ ESTÁ EL CAMBIO: Aceptamos "ARTICULADO" o "ARTICULOS"
+                if (testIdActual === "ARTICULADO" || testIdActual === "ARTICULOS") {
+                    return itc.startsWith("ARTICULO");
+                }
+                
                 return itc.includes(testIdActual);
             });
 
@@ -144,8 +149,7 @@
     }
 
     function renderizarUI(rawId) {
-        let titulo = rawId.toUpperCase();
-        if (testIdActual === "ARTICULOS") titulo = "Articulado General";
+        // Esta función ya no es crítica porque el título se gestiona en cargarPregunta
     }
 
     /* --- UI Render --- */
@@ -155,8 +159,14 @@
       const q = preguntasDelExamen[indice];
       seleccionUsuario = null; respondido = false;
 
-      // Título Dinámico
-      document.getElementById("itc-title").textContent = q.itc || "TEST REBT";
+      // === CORRECCIÓN DEL TÍTULO ===
+      // Si estamos en modo "ARTICULADO", forzamos ese título siempre.
+      // Si estamos en una ITC normal, mostramos la ITC de la pregunta.
+      let tituloMostrar = q.itc;
+      if (testIdActual === "ARTICULADO" || testIdActual === "ARTICULOS") {
+          tituloMostrar = "ARTICULADO";
+      }
+      document.getElementById("itc-title").textContent = tituloMostrar;
 
       // Texto Pregunta
       document.getElementById("texto-pregunta").textContent = q.pregunta;
@@ -200,6 +210,7 @@
 
       document.querySelectorAll("#contenedor-opciones button").forEach(b => {
         if (b.dataset.valor === opcion) {
+            // Seleccionado: Azul corporativo
             b.className = "w-full text-left py-3.5 px-4 mb-2.5 rounded-xl border-2 border-blue-600 bg-blue-50/50 text-blue-900 font-medium flex items-start gap-3 shadow-sm transform scale-[1.01] transition-all";
         } else {
             b.className = "w-full text-left py-3.5 px-4 mb-2.5 rounded-xl border border-gray-200 bg-white opacity-60 hover:opacity-100 transition-all text-gray-600 flex items-start gap-3";
@@ -209,6 +220,7 @@
       const btn = document.getElementById('btn-accion');
       document.getElementById('hint-text').style.display = 'none';
       btn.disabled = false;
+      // Botón Azul
       btn.className = "w-full py-3.5 mt-2 rounded-xl font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md hover:shadow-lg transition-all transform active:scale-[0.98]";
     }
 
@@ -233,7 +245,6 @@
 
       if (esCorrecta) aciertos++; else errores++;
       
-      // Guardar historial
       historial.push({ 
           pregunta: actual.pregunta, 
           opciones: actual.opciones, 
@@ -311,7 +322,7 @@
         borrarProgreso();
         const total = preguntasDelExamen.length;
         const nota = Math.max(0, (aciertos - (errores/2)) * (10/total));
-        const apto = nota >= 7; // Aprobado con 7 o más
+        const apto = nota >= 7;
 
         const htmlHistorial = historial.map((h, i) => {
             const opcionesHTML = h.opciones.map(op => {
