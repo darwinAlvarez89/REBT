@@ -103,8 +103,7 @@
         }
 
         try {
-            // Carga archivo normal (JSON) o encriptado (TXT) según prefieras. 
-            // Aquí dejo el JSON para que te funcione ya mismo.
+            // Carga archivo normal (JSON)
             const response = await fetch('../Data/base_datos_rebt.json');
             if (!response.ok) throw new Error("Error de conexión con la base de datos.");
             const todas = await response.json();
@@ -116,7 +115,7 @@
                 
                 if (itc.includes("CALCULO")) return false;
                 
-                // AQUÍ ESTÁ EL CAMBIO: Aceptamos "ARTICULADO" o "ARTICULOS"
+                // Aceptamos "ARTICULADO" o "ARTICULOS"
                 if (testIdActual === "ARTICULADO" || testIdActual === "ARTICULOS") {
                     return itc.startsWith("ARTICULO");
                 }
@@ -149,7 +148,7 @@
     }
 
     function renderizarUI(rawId) {
-        // Esta función ya no es crítica porque el título se gestiona en cargarPregunta
+        // Título gestionado dinámicamente
     }
 
     /* --- UI Render --- */
@@ -159,9 +158,7 @@
       const q = preguntasDelExamen[indice];
       seleccionUsuario = null; respondido = false;
 
-      // === CORRECCIÓN DEL TÍTULO ===
-      // Si estamos en modo "ARTICULADO", forzamos ese título siempre.
-      // Si estamos en una ITC normal, mostramos la ITC de la pregunta.
+      // CORRECCIÓN DEL TÍTULO
       let tituloMostrar = q.itc;
       if (testIdActual === "ARTICULADO" || testIdActual === "ARTICULOS") {
           tituloMostrar = "ARTICULADO";
@@ -245,6 +242,7 @@
 
       if (esCorrecta) aciertos++; else errores++;
       
+      // Guardar historial
       historial.push({ 
           pregunta: actual.pregunta, 
           opciones: actual.opciones, 
@@ -322,6 +320,8 @@
         borrarProgreso();
         const total = preguntasDelExamen.length;
         const nota = Math.max(0, (aciertos - (errores/2)) * (10/total));
+        
+        // Aprobado con 7
         const apto = nota >= 7;
 
         const htmlHistorial = historial.map((h, i) => {
@@ -432,7 +432,7 @@
 
 <body>
 
-    <main id="main-card" class="w-full max-w-md bg-white rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] overflow-hidden border border-gray-100 flex flex-col relative max-h-[90vh]">
+    <main id="main-card" class="w-full max-w-2xl bg-white rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] overflow-hidden border border-gray-100 flex flex-col relative max-h-[90vh]">
 
         <header class="stats-header px-5 py-3 border-b border-gray-100 bg-white flex-shrink-0 flex justify-between items-center text-xs font-medium text-gray-500">
             <div>
