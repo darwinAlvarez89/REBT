@@ -13,11 +13,13 @@
     gtag('config', 'G-RSH4ZW3VT2');
   </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* === ESTILO PROFESIONAL COMPACTO (Versión Final) === */
+    /* === ESTILO PROFESIONAL LIMPIO (Versión Final con Efectos) === */
     body { 
         font-family: 'Inter', sans-serif; 
         background-color: #f3f4f6; 
@@ -27,18 +29,25 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 0.5rem; /* Padding reducido en body */
+        padding: 0.5rem;
     }
 
     .fade-in { animation: fadeIn 0.3s ease-out forwards; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* Efecto IA Luminoso */
+    /* Efecto IA Luminoso (Botón Siguiente) */
     @keyframes pulse-blue-glow {
         0%, 100% { box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.5), 0 2px 4px -1px rgba(59, 130, 246, 0.25); }
         50% { box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.7), 0 8px 10px -6px rgba(59, 130, 246, 0.5); }
     }
     .btn-attention { animation: pulse-blue-glow 2s infinite ease-in-out; }
+
+    /* Efecto Latido para "No te rindas" */
+    @keyframes heartbeat {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+    .animate-heartbeat { animation: heartbeat 1.5s infinite ease-in-out; }
 
     .hide-scroll::-webkit-scrollbar { display: none; }
     .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
@@ -91,6 +100,25 @@
             } catch (e) { console.error(e); }
         }
         return false;
+    }
+
+    /* --- Efectos Visuales --- */
+    function lanzarFuegosArtificiales() {
+        var duration = 3 * 1000;
+        var animationEnd = Date.now() + duration;
+        var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
+
+        function randomInRange(min, max) { return Math.random() * (max - min) + min; }
+
+        var interval = setInterval(function() {
+            var timeLeft = animationEnd - Date.now();
+
+            if (timeLeft <= 0) { return clearInterval(interval); }
+
+            var particleCount = 50 * (timeLeft / duration);
+            confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+            confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+        }, 250);
     }
 
     /* --- Inicio --- */
@@ -164,7 +192,7 @@
       }
       document.getElementById("itc-title").textContent = tituloMostrar;
 
-      // Texto Pregunta (Tamaño reducido a 15px y márgenes ajustados)
+      // Texto Pregunta
       document.getElementById("texto-pregunta").textContent = q.pregunta;
 
       // Opciones
@@ -173,7 +201,6 @@
 
       q.opciones.forEach((op, i)=>{
         const btn = document.createElement("button");
-        // Opciones más compactas: py-3, mb-2, text-sm (14px)
         btn.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 hover:border-blue-300 transition-all text-sm font-medium text-gray-700 flex items-start gap-3 group shadow-sm active:scale-[0.99]";
         btn.dataset.valor = op;
         btn.onclick = ()=>seleccionarOpcion(op);
@@ -206,7 +233,6 @@
 
       document.querySelectorAll("#contenedor-opciones button").forEach(b => {
         if (b.dataset.valor === opcion) {
-            // Azul corporativo
             b.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border-2 border-blue-600 bg-blue-50/50 text-blue-900 font-medium flex items-start gap-3 shadow-sm transform scale-[1.01] transition-all text-sm";
         } else {
             b.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border border-gray-200 bg-white opacity-60 hover:opacity-100 transition-all text-gray-600 flex items-start gap-3 text-sm";
@@ -215,7 +241,6 @@
 
       const btn = document.getElementById('btn-accion');
       btn.disabled = false;
-      // Botón Azul Compacto
       btn.className = "px-6 py-2 rounded-lg font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md hover:shadow-lg transition-all transform active:scale-[0.98] text-xs tracking-wide uppercase";
     }
 
@@ -252,7 +277,6 @@
       
       guardarProgreso();
 
-      // EXPLICACIÓN COMPACTA (Text-xs) Y BOTÓN AZUL BRILLANTE
       document.getElementById("area-acciones").innerHTML = `
          <div class="fade-in w-full mt-2">
             <div class="flex justify-end mb-3">
@@ -276,7 +300,6 @@
 
       const btnSig = document.getElementById('btn-siguiente');
       btnSig.focus();
-      // Scroll suave
       setTimeout(() => { 
           document.getElementById('area-acciones').scrollIntoView({ behavior: "smooth", block: "nearest" }); 
       }, 100);
@@ -324,6 +347,11 @@
         const nota = Math.max(0, (aciertos - (errores/2)) * (10/total));
         const apto = nota >= 7;
 
+        // Disparar confeti si es apto
+        if (apto) {
+            lanzarFuegosArtificiales();
+        }
+
         const htmlHistorial = historial.map((h, i) => {
             const opcionesHTML = h.opciones.map(op => {
                 let clase = "text-slate-400 border-slate-100 bg-white";
@@ -353,13 +381,8 @@
                             ${h.correcta === h.elegida ? 'CORRECTA' : 'INCORRECTA'}
                         </span>
                     </div>
-                    
                     <p class="text-sm font-bold text-gray-800 mb-3 leading-snug">${h.pregunta}</p>
-                    
-                    <div class="mb-3 pl-1 border-l-2 border-slate-100">
-                        ${opcionesHTML}
-                    </div>
-
+                    <div class="mb-3 pl-1 border-l-2 border-slate-100">${opcionesHTML}</div>
                     <div class="text-xs bg-slate-50 p-2.5 rounded-lg text-slate-600 border border-slate-100">
                         <strong class="block mb-1 text-slate-800 text-[10px] uppercase tracking-wide">Explicación:</strong>
                         <span class="font-semibold text-blue-700">${h.itc} | Pto: ${h.punto}</span><br>
@@ -369,12 +392,19 @@
             `;
         }).join('');
 
+        // Icono y Mensaje dinámico
+        const iconoFinal = apto ? '🎉' : '💪';
+        const tituloFinal = apto ? '¡Aprobado!' : '¡No te rindas!';
+        const animacionIcono = apto ? '' : 'animate-heartbeat';
+        const subtituloFinal = apto ? '¡Has demostrado un gran nivel!' : 'Estás cerca, sigue intentándolo.';
+
         document.getElementById('contenedor-test').innerHTML = `
             <div class="text-center py-6 fade-in">
-                <div class="inline-block p-4 rounded-full ${apto ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'} mb-3 shadow-sm">
-                    <span class="text-4xl block">${apto ? '🏆' : '📚'}</span>
+                <div class="inline-block p-4 rounded-full ${apto ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'} mb-3 shadow-sm ${animacionIcono}">
+                    <span class="text-4xl block">${iconoFinal}</span>
                 </div>
-                <h2 class="text-2xl font-bold text-gray-900 mb-1">${apto ? '¡Aprobado!' : 'No Apto'}</h2>
+                <h2 class="text-2xl font-bold text-gray-900 mb-1">${tituloFinal}</h2>
+                <p class="text-gray-500 text-xs mb-1">${subtituloFinal}</p>
                 <p class="text-gray-500 text-sm mb-6">Nota final: <strong class="text-gray-900 text-lg">${nota.toFixed(2)}</strong> / 10</p>
                 
                 <div class="flex justify-center gap-3 mb-8">
