@@ -103,11 +103,11 @@
         }
 
         try {
-            // CORRECCIÓN SEGURIDAD: Carga archivo ofuscado txt
+            // Carga archivo ofuscado txt
             const response = await fetch('../Data/rebt_data.txt');
             if (!response.ok) throw new Error("Error de conexión con la base de datos.");
             
-            // Decodificación Base64 para seguridad básica
+            // Decodificación Base64
             const textEncoded = await response.text();
             const jsonString = decodeURIComponent(escape(atob(textEncoded)));
             const todas = JSON.parse(jsonString);
@@ -235,10 +235,10 @@
 
       if (esCorrecta) aciertos++; else errores++;
       
-      // GUARDAR HISTORIAL CON TODAS LAS OPCIONES
+      // Guardar historial
       historial.push({ 
           pregunta: actual.pregunta, 
-          opciones: actual.opciones, // Guardamos todas las opciones para mostrarlas al final
+          opciones: actual.opciones, 
           correcta: actual.respuesta, 
           elegida: seleccionUsuario, 
           itc: actual.itc,
@@ -313,22 +313,19 @@
         borrarProgreso();
         const total = preguntasDelExamen.length;
         const nota = Math.max(0, (aciertos - (errores/2)) * (10/total));
-        const apto = nota >= 5;
+        
+        // --- CAMBIO SOLICITADO: APTO >= 7.00 ---
+        const apto = nota >= 7;
 
-        // RENDERIZADO DETALLADO DEL HISTORIAL
         const htmlHistorial = historial.map((h, i) => {
-            // Generar HTML de las opciones con marcas visuales
             const opcionesHTML = h.opciones.map(op => {
                 let clase = "text-slate-400 border-slate-100 bg-white";
                 let icon = "";
                 
-                // Lógica de colores para el resumen
                 if (op === h.correcta) {
-                    // Si es la correcta -> VERDE
                     clase = "text-emerald-700 bg-emerald-50 border-emerald-200 font-medium";
                     icon = "✅";
                 } else if (op === h.elegida && op !== h.correcta) {
-                    // Si el usuario eligió esta y está mal -> ROJA
                     clase = "text-red-700 bg-red-50 border-red-200 line-through decoration-red-400";
                     icon = "❌";
                 }
