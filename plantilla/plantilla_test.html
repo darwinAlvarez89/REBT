@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="h-full">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
@@ -14,32 +14,74 @@
   </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #334155; }
-    
-    /* Evitar selección accidental en móviles */
-    button { -webkit-tap-highlight-color: transparent; user-select: none; }
-    
-    /* Transiciones suaves */
-    .smooth-transition { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
-    
-    /* Animación de entrada */
-    @keyframes slideIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
+    /* === DISEÑO PREMIUM GLASSMORPHISM === */
+    body { 
+        font-family: 'Inter', sans-serif; 
+        /* Fondo degradado profundo y tecnológico */
+        background: radial-gradient(ellipse at top, #1e293b, #0f172a);
+        color: #e2e8f0; /* Texto claro */
+        min-height: 100vh;
     }
-    .animate-slide-in { animation: slideIn 0.3s ease-out forwards; }
+    
+    /* Panel de cristal principal */
+    .glass-panel {
+        background-color: rgba(255, 255, 255, 0.05); /* Muy transparente */
+        backdrop-filter: blur(16px); /* Efecto de desenfoque de fondo */
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil brillante */
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); /* Sombra profunda */
+    }
+
+    /* Botones de opción estilo cristal */
+    .option-glass {
+        background-color: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+    .option-glass:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-1px);
+    }
+
+    /* Selección activa con brillo azul */
+    .option-selected {
+        background-color: rgba(59, 130, 246, 0.15) !important; /* Azul transparente */
+        border: 1px solid rgba(96, 165, 250, 0.6) !important; /* Borde azul brillante */
+        box-shadow: 0 0 15px rgba(59, 130, 246, 0.3); /* Resplandor */
+    }
+
+    /* Botón de acción principal gradiente */
+    .btn-gradient {
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+    }
+    .btn-gradient:hover {
+        background: linear-gradient(135deg, #60a5fa, #3b82f6);
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+    }
+
+    /* Utilidades */
+    button { -webkit-tap-highlight-color: transparent; user-select: none; }
+    .smooth-transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .animate-slide-in { animation: slideIn 0.4s ease-out forwards; }
+    @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Scrollbar oscura para el historial */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
   </style>
 
   <script>
-    /* ===== CONFIGURACIÓN GLOBAL ===== */
+    /* ===== LOGICA (INTACTA CON PERSISTENCIA) ===== */
     let preguntasDelExamen = [];
     const PREGUNTAS_POR_TEST = 20;
-    const DURACION_SEG = 60 * 60; // 1 hora
+    const DURACION_SEG = 60 * 60;
 
-    // Variables de Estado
     let indice = 0, aciertos = 0, errores = 0;
     let historial = [];
     let seleccionUsuario = null;
@@ -52,10 +94,7 @@
     /* ===== SISTEMA DE PERSISTENCIA (AUTO-GUARDADO) ===== */
     function guardarProgreso() {
         if (!testIdActual) return;
-        const estado = {
-            preguntasDelExamen, indice, aciertos, errores, historial, 
-            inicioTiempo, respondido, seleccionUsuario, testIdActual
-        };
+        const estado = { preguntasDelExamen, indice, aciertos, errores, historial, inicioTiempo, respondido, seleccionUsuario, testIdActual };
         localStorage.setItem('rebt_session_' + testIdActual, JSON.stringify(estado));
     }
 
@@ -68,7 +107,6 @@
         if (guardado) {
             try {
                 const estado = JSON.parse(guardado);
-                // Restauramos solo si es válido y no ha terminado
                 if (estado.indice < estado.preguntasDelExamen.length) {
                     preguntasDelExamen = estado.preguntasDelExamen;
                     indice = estado.indice;
@@ -76,31 +114,23 @@
                     errores = estado.errores;
                     historial = estado.historial;
                     inicioTiempo = estado.inicioTiempo;
-                    // Si se recargó con la pregunta respondida pero no avanzada, reseteamos el paso actual visualmente
-                    // para evitar inconsistencias visuales, o forzamos avanzar si ya estaba guardado.
-                    // Por simplicidad, al recargar, permitimos responder la actual de nuevo si no se había dado a siguiente.
                     respondido = false; 
                     seleccionUsuario = null;
                     return true;
                 }
-            } catch (e) { console.error("Error al restaurar sesión", e); }
+            } catch (e) { console.error("Error restauración", e); }
         }
         return false;
     }
 
-    /* ===== INICIO DE LA APLICACIÓN ===== */
+    /* ===== INICIO ===== */
     async function iniciarAplicacion() {
         const params = new URLSearchParams(window.location.search);
         let testIdRaw = params.get('id');
-
         if (!testIdRaw) { mostrarError("No se ha especificado el test."); return; }
-
-        // Normalizamos ID
         testIdActual = testIdRaw.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '');
 
-        // 1. Intentar cargar sesión anterior
         if (cargarProgreso(testIdActual)) {
-            console.log("Sesión restaurada.");
             renderizarInterfazBase(testIdRaw);
             cargarPregunta();
             intervaloTiempo = setInterval(actualizarEstado, 1000);
@@ -108,13 +138,11 @@
             return;
         }
 
-        // 2. Si no hay sesión, cargar JSON
         try {
             const response = await fetch('../Data/base_datos_rebt.json');
-            if (!response.ok) throw new Error("No se encuentra la base de datos.");
+            if (!response.ok) throw new Error("Base de datos no encontrada.");
             const todasLasPreguntas = await response.json();
 
-            // Filtros
             const preguntasFiltradas = todasLasPreguntas.filter(p => {
                 if(!p.itc) return false;
                 const itcJson = p.itc.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '');
@@ -125,13 +153,12 @@
 
             if (preguntasFiltradas.length === 0) { mostrarError(`Sin preguntas para: ${testIdRaw}`); return; }
 
-            // Generar nuevo examen
             const mezcladas = mezclar(preguntasFiltradas);
             preguntasDelExamen = mezcladas.slice(0, PREGUNTAS_POR_TEST);
             preguntasDelExamen = preguntasDelExamen.map(p => ({ ...p, opciones: mezclar([...p.opciones]) }));
 
             inicioTiempo = Date.now();
-            guardarProgreso(); // Guardamos el estado inicial
+            guardarProgreso();
 
             renderizarInterfazBase(testIdRaw);
             cargarPregunta();
@@ -155,41 +182,38 @@
       if (indice >= preguntasDelExamen.length) return mostrarResumen();
       
       const q = preguntasDelExamen[indice];
-      seleccionUsuario = null; 
-      respondido = false;
+      seleccionUsuario = null; respondido = false;
 
-      // Renderizar Texto Pregunta
       document.getElementById("texto-pregunta").textContent = q.pregunta;
       
-      // Renderizar Opciones
       const cont = document.getElementById("contenedor-opciones");
       cont.innerHTML = "";
       
       q.opciones.forEach((op, i)=>{
         const btn = document.createElement("button");
-        btn.className = "opcion group w-full text-left p-4 rounded-lg border border-slate-200 bg-white hover:border-blue-400 hover:shadow-sm smooth-transition mb-3 flex items-start gap-3";
+        // Aplicamos clase base 'option-glass'
+        btn.className = "option-glass group w-full text-left p-4 rounded-xl mb-3 flex items-start gap-4";
         btn.dataset.valor = op;
         btn.onclick = ()=>seleccionarOpcion(op);
         
         const letra = ['A','B','C','D'][i];
+        // Diseño de la letra con fondo oscuro
         btn.innerHTML = `
-            <div class="flex-shrink-0 w-6 h-6 rounded-md bg-slate-100 text-slate-500 font-bold text-xs flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors mt-0.5">${letra}</div>
-            <div class="text-sm text-slate-700 leading-snug">${op}</div>
+            <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-slate-800/50 text-slate-400 font-bold text-sm flex items-center justify-center border border-white/10 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-500 transition-all">${letra}</div>
+            <div class="text-[15px] text-slate-200 leading-snug pt-1">${op}</div>
         `;
         cont.appendChild(btn);
       });
 
-      // Resetear acciones
+      // Resetear botón de acción
       document.getElementById("area-acciones").innerHTML = `
         <button id="btn-accion" disabled onclick="verificarRespuesta()" 
-            class="w-full py-3.5 rounded-lg font-semibold text-white bg-slate-200 cursor-not-allowed smooth-transition shadow-sm">
+            class="w-full py-4 rounded-xl font-bold text-slate-500 bg-slate-800/50 cursor-not-allowed smooth-transition border border-white/5">
             Confirmar Respuesta
         </button>
       `;
 
-      // Guardamos estado actual
       guardarProgreso();
-      
       window.scrollTo({ top: 0, behavior: 'smooth' });
       actualizarEstado();
     }
@@ -198,22 +222,22 @@
       if (respondido || tiempoAgotado) return;
       seleccionUsuario = opcion;
 
-      // Actualizar UI Opciones
-      document.querySelectorAll(".opcion").forEach(b => {
+      document.querySelectorAll("#contenedor-opciones button").forEach(b => {
         const badge = b.querySelector('div:first-child');
         if (b.dataset.valor === opcion) {
-            b.className = "opcion w-full text-left p-4 rounded-lg border-2 border-blue-600 bg-blue-50/50 mb-3 flex items-start gap-3 shadow-sm";
-            badge.className = "flex-shrink-0 w-6 h-6 rounded-md bg-blue-600 text-white font-bold text-xs flex items-center justify-center mt-0.5";
+            // Aplicar estilo de selección brillante
+            b.className = "option-glass option-selected group w-full text-left p-4 rounded-xl mb-3 flex items-start gap-4 transform scale-[1.01]";
+            badge.className = "flex-shrink-0 w-8 h-8 rounded-lg bg-blue-600 text-white font-bold text-sm flex items-center justify-center border border-blue-400 shadow-lg shadow-blue-500/20";
         } else {
-            b.className = "opcion w-full text-left p-4 rounded-lg border border-slate-200 bg-white opacity-70 hover:opacity-100 mb-3 flex items-start gap-3";
-            badge.className = "flex-shrink-0 w-6 h-6 rounded-md bg-slate-100 text-slate-500 font-bold text-xs flex items-center justify-center mt-0.5";
+            b.className = "option-glass group w-full text-left p-4 rounded-xl mb-3 flex items-start gap-4 opacity-60 hover:opacity-100";
+            badge.className = "flex-shrink-0 w-8 h-8 rounded-lg bg-slate-800/50 text-slate-400 font-bold text-sm flex items-center justify-center border border-white/10";
         }
       });
 
-      // Activar botón (AZUL)
+      // Activar botón con gradiente
       const btn = document.getElementById('btn-accion');
       btn.disabled = false;
-      btn.className = "w-full py-3.5 rounded-lg font-semibold text-white bg-blue-600 hover:bg-blue-700 hover:shadow-md smooth-transition transform active:scale-[0.98]";
+      btn.className = "w-full py-4 rounded-xl font-bold text-white btn-gradient smooth-transition transform hover:-translate-y-1 active:scale-[0.98]";
       btn.innerHTML = "Confirmar Respuesta";
     }
 
@@ -223,46 +247,43 @@
       const actual = preguntasDelExamen[indice];
       const esCorrecta = seleccionUsuario === actual.respuesta;
 
-      // Mostrar Resultados Visuales
-      document.querySelectorAll(".opcion").forEach(b => {
-        b.disabled = true;
-        b.style.cursor = "default";
+      document.querySelectorAll("#contenedor-opciones button").forEach(b => {
+        b.disabled = true; b.style.cursor = "default";
         const val = b.dataset.valor;
         const badge = b.querySelector('div:first-child');
 
+        // Estilos de corrección (Cristal Verde / Rojo)
         if (val === actual.respuesta) {
-            b.className = "opcion w-full text-left p-4 rounded-lg border border-emerald-500 bg-emerald-50 mb-3 flex items-start gap-3";
-            badge.className = "flex-shrink-0 w-6 h-6 rounded-md bg-emerald-500 text-white font-bold text-xs flex items-center justify-center mt-0.5";
+            b.className = "w-full text-left p-4 rounded-xl mb-3 flex items-start gap-4 bg-emerald-500/20 border border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]";
+            badge.className = "flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-600 text-white font-bold text-sm flex items-center justify-center";
             badge.innerHTML = "✓";
         } else if (val === seleccionUsuario && !esCorrecta) {
-            b.className = "opcion w-full text-left p-4 rounded-lg border border-red-500 bg-red-50 mb-3 flex items-start gap-3";
-            badge.className = "flex-shrink-0 w-6 h-6 rounded-md bg-red-500 text-white font-bold text-xs flex items-center justify-center mt-0.5";
+            b.className = "w-full text-left p-4 rounded-xl mb-3 flex items-start gap-4 bg-red-500/20 border border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.2)]";
+            badge.className = "flex-shrink-0 w-8 h-8 rounded-lg bg-red-600 text-white font-bold text-sm flex items-center justify-center";
             badge.innerHTML = "✕";
         } else {
-            b.className = "opcion w-full text-left p-4 rounded-lg border border-slate-100 bg-slate-50 opacity-40 mb-3 flex items-start gap-3";
+            b.className = "option-glass group w-full text-left p-4 rounded-xl mb-3 flex items-start gap-4 opacity-30";
         }
       });
 
       if (esCorrecta) aciertos++; else errores++;
       historial.push({ ...actual, elegida: seleccionUsuario, correcta: esCorrecta });
-
-      // Guardamos progreso tras responder
       guardarProgreso();
 
-      // Mostrar Explicación y Botón Siguiente
+      // Explicación en panel de cristal oscuro
       document.getElementById("area-acciones").innerHTML = `
          <div class="animate-slide-in w-full">
-            <div class="bg-slate-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-4 text-sm text-slate-600 shadow-sm">
-                <div class="flex items-center gap-2 mb-1">
-                    <span class="text-[10px] font-bold uppercase tracking-wide text-blue-700 bg-blue-100 px-1.5 py-0.5 rounded">Explicación</span>
-                    <span class="font-semibold text-xs text-slate-500">${actual.itc}</span>
+            <div class="bg-slate-900/50 border-l-4 border-blue-500 p-5 rounded-r-xl mb-5 text-sm text-slate-300 shadow-inner backdrop-blur-sm">
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="text-[10px] font-bold uppercase tracking-wide text-blue-300 bg-blue-900/30 px-2 py-0.5 rounded border border-blue-800">Explicación</span>
+                    <span class="font-semibold text-xs text-blue-400">${actual.itc}</span>
                 </div>
-                <div class="leading-relaxed text-slate-700">${actual.explicacion || "Sin explicación disponible."}</div>
+                <div class="leading-relaxed">${actual.explicacion || "Sin explicación disponible."}</div>
             </div>
             <button id="btn-siguiente" onclick="siguientePregunta()" 
-                class="w-full py-3.5 rounded-lg font-semibold text-white bg-slate-800 hover:bg-slate-900 shadow-lg hover:shadow-xl smooth-transition flex items-center justify-center gap-2">
+                class="w-full py-4 rounded-xl font-bold text-white bg-slate-800 hover:bg-slate-700 border border-white/10 shadow-lg hover:shadow-xl smooth-transition flex items-center justify-center gap-2">
                 Siguiente Pregunta
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
             </button>
          </div>
       `;
@@ -270,7 +291,6 @@
       const btnSig = document.getElementById('btn-siguiente');
       btnSig.focus();
       if(window.innerWidth < 640) btnSig.scrollIntoView({behavior: "smooth", block: "center"});
-      
       actualizarEstado();
     }
 
@@ -287,12 +307,10 @@
       const restantes = Math.max(0, DURACION_SEG - transcurrido);
       
       const pct = (indice / total) * 100;
+      // Barra de progreso con brillo azul
       document.getElementById('barra-progreso').style.width = `${pct}%`;
 
-      document.getElementById('stats-texto').innerHTML = `
-        <span class="font-semibold text-slate-700">P. ${indice + 1}</span><span class="text-slate-400">/${total}</span>
-      `;
-      
+      document.getElementById('stats-texto').innerHTML = `<span class="font-bold text-white">${indice + 1}</span><span class="text-slate-400">/${total}</span>`;
       document.getElementById('stats-aciertos').innerText = aciertos;
       document.getElementById('stats-fallos').innerText = errores;
       
@@ -307,64 +325,70 @@
       }
     }
 
+    /* ===== PANTALLAS FINALES (Diseño Oscuro) ===== */
     function finalizarTest(){
         clearInterval(intervaloTiempo);
-        borrarProgreso(); // Test terminado, borramos la sesión guardada
+        borrarProgreso();
 
         const total = preguntasDelExamen.length;
         const nota = Math.max(0, (aciertos - (errores/2)) * (10/total));
         const apto = nota >= 5;
 
-        // Renderizado del historial
         const htmlHistorial = historial.map((h, i) => `
-            <div class="mb-3 p-4 bg-white rounded-lg border border-slate-100 shadow-sm">
-                <div class="flex justify-between items-start mb-2">
-                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wide bg-slate-50 px-2 py-1 rounded">Pregunta ${i+1}</span>
-                    <span class="text-xs font-bold ${h.correcta ? 'text-emerald-600' : 'text-red-600'}">${h.correcta ? 'CORRECTA' : 'INCORRECTA'}</span>
+            <div class="mb-4 p-4 bg-white/5 rounded-xl border border-white/10 shadow-sm text-left">
+                <div class="flex justify-between items-start mb-3">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wide bg-slate-800/50 px-2 py-1 rounded border border-white/5">Pregunta ${i+1}</span>
+                    <span class="text-xs font-black tracking-wider ${h.correcta ? 'text-emerald-500 drop-shadow-[0_0_5px_rgba(16,185,129,0.5)]' : 'text-red-500 drop-shadow-[0_0_5px_rgba(239,68,68,0.5)]'}">${h.correcta ? 'CORRECTA' : 'INCORRECTA'}</span>
                 </div>
-                <p class="text-sm font-semibold text-slate-800 mb-3">${h.pregunta}</p>
-                <div class="space-y-1 mb-3">
+                <p class="text-[15px] font-semibold text-slate-200 mb-4 leading-snug">${h.pregunta}</p>
+                <div class="space-y-2 mb-4">
                     ${h.opciones.map(op => {
-                        let style = "text-slate-400";
+                        let style = "text-slate-400 p-2 rounded bg-white/5 border border-transparent";
                         let icon = "";
-                        if (op === h.correcta) { style = "text-emerald-600 font-bold"; icon = "✓"; }
-                        else if (op === h.elegida && !h.correcta) { style = "text-red-500 line-through"; icon = "✕"; }
-                        return `<div class="text-xs flex justify-between ${style}"><span>${op}</span><span>${icon}</span></div>`;
+                        if (op === h.correcta) { style = "text-emerald-400 font-bold p-2 rounded bg-emerald-500/10 border border-emerald-500/30 shadow-[inset_0_0_10px_rgba(16,185,129,0.1)]"; icon = "✓"; }
+                        else if (op === h.elegida && !h.correcta) { style = "text-red-400 line-through p-2 rounded bg-red-500/10 border border-red-500/30"; icon = "✕"; }
+                        return `<div class="text-xs flex justify-between items-center ${style}"><span>${op}</span><span class="font-bold">${icon}</span></div>`;
                     }).join('')}
                 </div>
-                <div class="text-xs bg-blue-50 text-blue-800 p-2 rounded border-l-2 border-blue-400">
+                <div class="text-xs bg-blue-900/20 text-blue-300 p-3 rounded-lg border-l-2 border-blue-500/50 leading-relaxed">
                     ${h.explicacion}
                 </div>
             </div>
         `).join('');
 
         document.getElementById('contenedor-test').innerHTML = `
-            <div class="text-center py-6 animate-slide-in">
-                <div class="mb-4">
-                    <span class="text-5xl">${apto ? '🏆' : '📚'}</span>
+            <div class="text-center py-8 animate-slide-in">
+                <div class="mb-6 relative inline-block">
+                    <div class="absolute inset-0 rounded-full blur-xl opacity-50 ${apto ? 'bg-emerald-500' : 'bg-red-500'}"></div>
+                    <div class="relative w-24 h-24 rounded-full ${apto ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/50' : 'bg-red-500/20 text-red-400 border-red-500/50'} flex items-center justify-center text-5xl shadow-2xl border-2 mx-auto">
+                        ${apto ? '🏆' : '⚠️'}
+                    </div>
                 </div>
-                <h2 class="text-2xl font-bold text-slate-800 mb-1">${apto ? '¡Enhorabuena!' : 'Sigue practicando'}</h2>
-                <p class="text-slate-500 text-sm mb-6">Has obtenido una nota de <strong class="text-slate-900 text-lg">${nota.toFixed(2)}</strong> sobre 10</p>
+                <h2 class="text-3xl font-black text-white mb-2 tracking-tight">${apto ? '¡Enhorabuena!' : 'Sigue practicando'}</h2>
+                <p class="text-slate-400 text-sm mb-8">Has obtenido una nota de <strong class="text-white text-2xl mx-1">${nota.toFixed(2)}</strong> sobre 10</p>
                 
-                <div class="flex justify-center gap-2 mb-8">
-                    <div class="bg-emerald-50 px-4 py-2 rounded-lg border border-emerald-100 text-center w-24">
-                        <div class="text-xl font-bold text-emerald-600">${aciertos}</div>
-                        <div class="text-[10px] font-bold text-emerald-800 uppercase tracking-wide">Bien</div>
+                <div class="flex justify-center gap-3 mb-10">
+                    <div class="bg-emerald-500/10 px-5 py-3 rounded-2xl border border-emerald-500/30 text-center w-28 backdrop-blur-sm">
+                        <div class="text-2xl font-bold text-emerald-400 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]">${aciertos}</div>
+                        <div class="text-[10px] font-bold text-emerald-300 uppercase tracking-wider opacity-80">Aciertos</div>
                     </div>
-                    <div class="bg-red-50 px-4 py-2 rounded-lg border border-red-100 text-center w-24">
-                        <div class="text-xl font-bold text-red-600">${errores}</div>
-                        <div class="text-[10px] font-bold text-red-800 uppercase tracking-wide">Mal</div>
+                    <div class="bg-red-500/10 px-5 py-3 rounded-2xl border border-red-500/30 text-center w-28 backdrop-blur-sm">
+                        <div class="text-2xl font-bold text-red-400 drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]">${errores}</div>
+                        <div class="text-[10px] font-bold text-red-300 uppercase tracking-wider opacity-80">Fallos</div>
                     </div>
                 </div>
 
-                <div class="flex gap-3 mb-8">
-                    <button onclick="location.reload()" class="flex-1 py-3 bg-blue-600 text-white rounded-lg font-semibold shadow-md hover:shadow-lg smooth-transition">Repetir Test</button>
-                    <a href="/" class="flex-1 py-3 bg-white border border-slate-200 text-slate-600 rounded-lg font-semibold hover:bg-slate-50 smooth-transition flex items-center justify-center">Salir</a>
+                <div class="flex flex-col gap-4 mb-10">
+                    <button onclick="location.reload()" class="w-full py-4 rounded-xl font-bold text-white btn-gradient shadow-lg hover:shadow-blue-500/50 smooth-transition transform hover:-translate-y-1">Repetir Test</button>
+                    <a href="/" class="w-full py-4 rounded-xl font-bold text-slate-300 bg-white/5 border border-white/10 hover:bg-white/10 smooth-transition flex items-center justify-center">Salir al Inicio</a>
                 </div>
 
-                <div class="text-left border-t border-slate-100 pt-6">
-                    <h3 class="font-bold text-slate-700 text-sm uppercase mb-4 tracking-wide">Corrección Detallada</h3>
-                    <div class="max-h-96 overflow-y-auto pr-1 custom-scrollbar">
+                <div class="text-left border-t border-white/10 pt-8">
+                    <h3 class="font-bold text-slate-300 text-sm uppercase mb-6 tracking-widest flex items-center gap-2">
+                        <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                        Corrección Detallada
+                    </h3>
+                    <div class="max-h-[500px] overflow-y-auto pr-2 custom-scroll">
                         ${htmlHistorial}
                     </div>
                 </div>
@@ -375,11 +399,11 @@
 
     function mostrarError(msg) {
         document.getElementById('contenedor-test').innerHTML = `
-            <div class="text-center py-12">
-                <div class="text-slate-300 text-5xl mb-4">⚠️</div>
-                <h3 class="text-lg font-bold text-slate-800 mb-2">Error de carga</h3>
-                <p class="text-slate-500 text-sm mb-6 max-w-xs mx-auto">${msg}</p>
-                <a href="/" class="text-blue-600 font-semibold text-sm hover:underline">Volver al inicio</a>
+            <div class="text-center py-16">
+                <div class="text-red-400 text-6xl mb-6 opacity-80">⚡</div>
+                <h3 class="text-xl font-bold text-white mb-3">Error de conexión</h3>
+                <p class="text-slate-400 text-sm mb-8 max-w-xs mx-auto leading-relaxed">${msg}</p>
+                <a href="/" class="px-6 py-3 rounded-full bg-white/10 text-white font-semibold text-sm hover:bg-white/20 border border-white/10 transition-all">Volver al inicio</a>
             </div>`;
     }
 
@@ -393,7 +417,7 @@
         }
         const map = {'1':0,'2':1,'3':2,'4':3};
         if(map[e.key] !== undefined && !respondido){
-             const btns = document.querySelectorAll('.opcion');
+             const btns = document.querySelectorAll('.option-glass');
              if(btns[map[e.key]]) btns[map[e.key]].click();
         }
     }
@@ -402,43 +426,44 @@
   </script>
 </head>
 
-<body class="min-h-screen flex items-center justify-center p-3 md:p-6">
+<body class="min-h-screen flex items-center justify-center p-4 md:p-6">
 
-    <div class="w-full max-w-lg bg-white rounded-2xl shadow-xl shadow-slate-200/50 overflow-hidden border border-slate-100" id="tarjeta-principal">
+    <div class="glass-panel w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 relative z-10" id="tarjeta-principal">
         
-        <div class="w-full h-1 bg-slate-100">
-            <div id="barra-progreso" class="h-full bg-blue-600 transition-all duration-500 ease-out" style="width: 0%"></div>
+        <div class="w-full h-1 bg-slate-800/50">
+            <div id="barra-progreso" class="h-full bg-blue-500 transition-all duration-500 ease-out shadow-[0_0_15px_rgba(59,130,246,0.8)] relative" style="width: 0%">
+                <div class="absolute right-0 top-0 h-full w-4 bg-white/30 blur-[4px]"></div> </div>
         </div>
 
-        <div id="info-bar" class="px-5 py-3 border-b border-slate-50 flex items-center justify-between bg-white">
-            <div id="stats-texto" class="text-xs">
-                <span class="text-slate-400">Cargando...</span>
+        <div id="info-bar" class="px-5 py-4 border-b border-white/5 flex items-center justify-between bg-white/5 backdrop-blur-md">
+            <div id="stats-texto" class="text-xs flex items-baseline gap-1 font-medium">
+                <span class="text-slate-500 animate-pulse">Cargando...</span>
             </div>
-            <div class="flex gap-3 text-xs font-medium">
-                <span class="text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100 flex items-center gap-1">✓ <span id="stats-aciertos">0</span></span>
-                <span class="text-red-600 bg-red-50 px-2 py-0.5 rounded border border-red-100 flex items-center gap-1">✕ <span id="stats-fallos">0</span></span>
-                <span class="text-slate-600 bg-slate-50 px-2 py-0.5 rounded border border-slate-100 font-mono w-14 text-center" id="timer-display">00:00</span>
+            <div class="flex gap-3 text-xs font-bold">
+                <span class="text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20 flex items-center gap-1 shadow-[0_0_10px_rgba(16,185,129,0.1)]">✓ <span id="stats-aciertos">0</span></span>
+                <span class="text-red-400 bg-red-500/10 px-2.5 py-1 rounded-md border border-red-500/20 flex items-center gap-1 shadow-[0_0_10px_rgba(239,68,68,0.1)]">✕ <span id="stats-fallos">0</span></span>
+                <span class="text-slate-300 bg-white/5 px-2.5 py-1 rounded-md border border-white/10 font-mono w-16 text-center tracking-wider" id="timer-display">00:00</span>
             </div>
         </div>
 
-        <div id="contenedor-test" class="p-5 md:p-6 relative min-h-[400px]">
+        <div id="contenedor-test" class="p-6 md:p-8 relative min-h-[450px]">
             
-            <h1 id="header-title" class="text-center text-[10px] font-bold tracking-[0.2em] text-slate-400 uppercase mb-6 mt-1">
+            <h1 id="header-title" class="text-center text-[10px] font-black tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-500 uppercase mb-8 mt-2 opacity-80">
                 TEST REBT
             </h1>
 
-            <div id="texto-pregunta" class="text-base font-semibold text-slate-800 mb-6 text-center leading-relaxed">
+            <div id="texto-pregunta" class="text-[17px] font-bold text-white mb-8 text-center leading-relaxed drop-shadow-sm">
                 ...
             </div>
 
-            <div id="contenedor-opciones" class="space-y-2 mb-6"></div>
+            <div id="contenedor-opciones" class="space-y-3 mb-8"></div>
 
             <div id="area-acciones" class="mt-auto"></div>
         
         </div>
 
-        <div class="bg-slate-50 py-2 text-center border-t border-slate-50">
-            <p class="text-[9px] text-slate-400 font-medium">APP-REBT.ES</p>
+        <div class="bg-white/5 py-3 text-center border-t border-white/5 backdrop-blur-md">
+            <p class="text-[9px] text-slate-500 font-bold tracking-[0.2em] uppercase opacity-70">APP-REBT.ES • Professional Suite</p>
         </div>
     </div>
 
