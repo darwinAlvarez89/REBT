@@ -255,11 +255,11 @@
       
       guardarProgreso();
 
+      // CAMBIO AQUÍ: Se ha quitado el span de "Ref"
       document.getElementById("area-acciones").innerHTML = `
          <div class="fade-in w-full mt-2">
             <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-4 text-sm text-slate-700 shadow-sm">
                 <div class="flex flex-wrap items-center gap-2 mb-2 pb-2 border-b border-slate-200">
-                    <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide">Ref</span>
                     <strong class="text-xs text-slate-800">${actual.itc}</strong>
                     <span class="text-slate-300">|</span>
                     <span class="text-xs font-medium text-slate-500">Punto: <strong>${actual.punto || "-"}</strong></span>
@@ -432,7 +432,7 @@
 
 <body>
 
-    <main id="main-card" class="w-full max-w-2xl bg-white rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] overflow-hidden border border-gray-100 flex flex-col relative max-h-[90vh]">
+    <main id="main-card" class="w-full max-w-3xl bg-white rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] overflow-hidden border border-gray-100 flex flex-col relative max-h-[90vh]">
 
         <header class="stats-header px-5 py-3 border-b border-gray-100 bg-white flex-shrink-0 flex justify-between items-center text-xs font-medium text-gray-500">
             <div>
@@ -456,7 +456,7 @@
                 <h1 id="itc-title" class="text-xl font-bold text-gray-900 uppercase tracking-tight">CARGANDO...</h1>
             </div>
 
-            <div id="texto-pregunta" class="text-[17px] font-medium text-gray-800 leading-relaxed mb-6 text-center text-balance">
+            <div id="texto-pregunta" class="text-[17px] font-medium text-gray-800 leading-relaxed mb-6">
                 ...
             </div>
 
