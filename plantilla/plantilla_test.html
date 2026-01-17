@@ -33,6 +33,15 @@
     .fade-in { animation: fadeIn 0.3s ease-out forwards; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
+    /* Animación de resplandor para el botón Siguiente */
+    @keyframes pulse-blue-glow {
+        0%, 100% { box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.5), 0 2px 4px -1px rgba(59, 130, 246, 0.25); }
+        50% { box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.7), 0 8px 10px -6px rgba(59, 130, 246, 0.5); }
+    }
+    .btn-attention {
+        animation: pulse-blue-glow 2s infinite ease-in-out;
+    }
+
     .hide-scroll::-webkit-scrollbar { display: none; }
     .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -182,7 +191,7 @@
         cont.appendChild(btn);
       });
 
-      // === CAMBIO: BOTÓN COMPACTO Y DERECHA ===
+      // === BOTÓN COMPACTO Y DERECHA ===
       const area = document.getElementById("area-acciones");
       area.innerHTML = `
         <div class="flex justify-end mt-2">
@@ -250,12 +259,12 @@
       
       guardarProgreso();
 
-      // === CAMBIO: EXPLICACIÓN DEBAJO Y BOTÓN SIGUIENTE COMPACTO ===
+      // === CAMBIO: BOTÓN SIGUIENTE AZUL CON EFECTO LUMINOSO ===
       document.getElementById("area-acciones").innerHTML = `
          <div class="fade-in w-full mt-2">
             <div class="flex justify-end mb-4">
                 <button id="btn-siguiente" onclick="siguientePregunta()" 
-                    class="px-8 py-2.5 rounded-lg font-bold text-white bg-slate-800 hover:bg-slate-900 shadow-lg transition-all flex items-center justify-center gap-2 text-sm">
+                    class="px-8 py-2.5 rounded-lg font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-lg transition-all flex items-center justify-center gap-2 text-sm btn-attention">
                     Siguiente
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                 </button>
@@ -274,7 +283,6 @@
 
       const btnSig = document.getElementById('btn-siguiente');
       btnSig.focus();
-      // Scroll para asegurar que se ve la explicación si es larga
       setTimeout(() => { 
           document.getElementById('area-acciones').scrollIntoView({ behavior: "smooth", block: "nearest" }); 
       }, 100);
@@ -430,7 +438,7 @@
 
 <body>
 
-    <main id="main-card" class="w-full max-w-3xl bg-white rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] overflow-hidden border border-gray-100 flex flex-col relative max-h-[90vh]">
+    <main id="main-card" class="w-full max-w-3xl bg-white rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] overflow-hidden border border-gray-100 border-t-[6px] border-t-blue-600 flex flex-col relative max-h-[90vh]">
 
         <header class="stats-header px-5 py-3 border-b border-gray-100 bg-white flex-shrink-0 flex justify-between items-center text-xs font-medium text-gray-500">
             <div>
