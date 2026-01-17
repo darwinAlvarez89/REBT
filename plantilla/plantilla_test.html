@@ -136,7 +136,7 @@
             <span class="text-[10px] md:text-xs font-semibold text-slate-400 uppercase tracking-wider hidden sm:block">Selecciona una opción</span>
             <button id="btn-contestar" disabled onclick="verificarRespuesta()" 
                 class="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-200 text-slate-400 font-bold cursor-not-allowed transition-all shadow-sm text-sm md:text-base">
-                Confirmar Respuesta
+                Responder
             </button>
          </div>
       `;
@@ -167,7 +167,7 @@
       const btn = document.getElementById('btn-contestar');
       btn.disabled = false;
       btn.className = "w-full sm:w-auto px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold transition-all shadow-md transform active:scale-95 text-sm md:text-base";
-      btn.innerHTML = "Confirmar Respuesta";
+      btn.innerHTML = "Responder";
     }
 
     function verificarRespuesta(){
