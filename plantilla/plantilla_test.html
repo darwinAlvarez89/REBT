@@ -91,7 +91,7 @@
         const params = new URLSearchParams(window.location.search);
         let testIdRaw = params.get('id');
         if (!testIdRaw) { mostrarError("No se ha seleccionado ningún test."); return; }
-        
+
         testIdActual = testIdRaw.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '');
 
         if (cargarProgreso(testIdActual)) {
@@ -103,9 +103,14 @@
         }
 
         try {
-            const response = await fetch('../Data/base_datos_rebt.json');
+            // CORRECCIÓN SEGURIDAD: Carga archivo ofuscado txt
+            const response = await fetch('../Data/rebt_data.txt');
             if (!response.ok) throw new Error("Error de conexión con la base de datos.");
-            const todas = await response.json();
+            
+            // Decodificación Base64 para seguridad básica
+            const textEncoded = await response.text();
+            const jsonString = decodeURIComponent(escape(atob(textEncoded)));
+            const todas = JSON.parse(jsonString);
 
             // 1. FILTRADO
             let filtradas = todas.filter(p => {
@@ -118,8 +123,7 @@
 
             if (filtradas.length === 0) { mostrarError("No hay preguntas disponibles para este tema."); return; }
 
-            // 2. DEDUPLICACIÓN (Capa de seguridad anti-repetidas)
-            // Eliminamos preguntas que tengan exactamente el mismo texto
+            // 2. DEDUPLICACIÓN
             const unicas = filtradas.filter((pregunta, index, self) =>
                 index === self.findIndex((t) => (
                     t.pregunta === pregunta.pregunta
@@ -149,7 +153,7 @@
     /* --- UI Render --- */
     function cargarPregunta(){
       if (indice >= preguntasDelExamen.length) return finalizarTest();
-      
+
       const q = preguntasDelExamen[indice];
       seleccionUsuario = null; respondido = false;
 
@@ -158,17 +162,17 @@
 
       // Texto Pregunta
       document.getElementById("texto-pregunta").textContent = q.pregunta;
-      
+
       // Opciones
       const cont = document.getElementById("contenedor-opciones");
       cont.innerHTML = "";
-      
+
       q.opciones.forEach((op, i)=>{
         const btn = document.createElement("button");
         btn.className = "w-full text-left py-3.5 px-4 mb-2.5 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 hover:border-blue-300 transition-all text-[15px] font-medium text-gray-700 flex items-start gap-3 group shadow-sm active:scale-[0.99]";
         btn.dataset.valor = op;
         btn.onclick = ()=>seleccionarOpcion(op);
-        
+
         btn.innerHTML = `
             <span class="leading-snug">${op}</span>
         `;
@@ -230,7 +234,18 @@
       });
 
       if (esCorrecta) aciertos++; else errores++;
-      historial.push({ ...actual, elegida: seleccionUsuario, correcta: esCorrecta });
+      
+      // GUARDAR HISTORIAL CON TODAS LAS OPCIONES
+      historial.push({ 
+          pregunta: actual.pregunta, 
+          opciones: actual.opciones, // Guardamos todas las opciones para mostrarlas al final
+          correcta: actual.respuesta, 
+          elegida: seleccionUsuario, 
+          itc: actual.itc,
+          punto: actual.punto,
+          explicacion: actual.explicacion 
+      });
+      
       guardarProgreso();
 
       document.getElementById("area-acciones").innerHTML = `
@@ -252,7 +267,7 @@
             </button>
          </div>
       `;
-      
+
       const btnSig = document.getElementById('btn-siguiente');
       btnSig.focus();
       setTimeout(() => { btnSig.scrollIntoView({ behavior: "smooth", block: "center" }); }, 100);
@@ -270,14 +285,14 @@
       const total = preguntasDelExamen.length;
       const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
       const restantes = Math.max(0, DURACION_SEG - transcurrido);
-      
+
       const pct = (indice / total) * 100;
       document.getElementById('progress-bar').style.width = `${pct}%`;
 
       document.getElementById('stats-cuestion').innerText = `${indice + 1}/${total}`;
       document.getElementById('stats-aciertos').innerText = aciertos;
       document.getElementById('stats-fallos').innerText = errores;
-      
+
       const nota = Math.max(0, (aciertos - (errores/2)) * (10/total));
       document.getElementById('stats-puntos').innerText = nota.toFixed(2);
 
@@ -300,19 +315,55 @@
         const nota = Math.max(0, (aciertos - (errores/2)) * (10/total));
         const apto = nota >= 5;
 
-        const htmlHistorial = historial.map((h, i) => `
-            <div class="mb-4 pb-4 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0">
-                <div class="flex justify-between items-start mb-1">
-                    <span class="text-[10px] font-bold text-gray-400 uppercase bg-gray-50 px-2 py-0.5 rounded">#${i+1}</span>
-                    <span class="text-[10px] font-bold ${h.correcta ? 'text-emerald-600' : 'text-red-600'}">${h.correcta ? 'CORRECTA' : 'FALLO'}</span>
+        // RENDERIZADO DETALLADO DEL HISTORIAL
+        const htmlHistorial = historial.map((h, i) => {
+            // Generar HTML de las opciones con marcas visuales
+            const opcionesHTML = h.opciones.map(op => {
+                let clase = "text-slate-400 border-slate-100 bg-white";
+                let icon = "";
+                
+                // Lógica de colores para el resumen
+                if (op === h.correcta) {
+                    // Si es la correcta -> VERDE
+                    clase = "text-emerald-700 bg-emerald-50 border-emerald-200 font-medium";
+                    icon = "✅";
+                } else if (op === h.elegida && op !== h.correcta) {
+                    // Si el usuario eligió esta y está mal -> ROJA
+                    clase = "text-red-700 bg-red-50 border-red-200 line-through decoration-red-400";
+                    icon = "❌";
+                }
+
+                return `
+                    <div class="text-xs p-2 rounded border ${clase} flex justify-between items-center mb-1">
+                        <span>${op}</span>
+                        <span>${icon}</span>
+                    </div>
+                `;
+            }).join('');
+
+            return `
+                <div class="mb-6 pb-4 border-b border-gray-100 last:border-0">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase bg-gray-50 px-2 py-0.5 rounded">#${i+1}</span>
+                        <span class="text-[10px] font-bold ${h.correcta === h.elegida ? 'text-emerald-600' : 'text-red-600'}">
+                            ${h.correcta === h.elegida ? 'CORRECTA' : 'INCORRECTA'}
+                        </span>
+                    </div>
+                    
+                    <p class="text-sm font-bold text-gray-800 mb-3 leading-snug">${h.pregunta}</p>
+                    
+                    <div class="mb-3 pl-1 border-l-2 border-slate-100">
+                        ${opcionesHTML}
+                    </div>
+
+                    <div class="text-xs bg-slate-50 p-3 rounded-lg text-slate-600 border border-slate-100">
+                        <strong class="block mb-1 text-slate-800 text-[10px] uppercase tracking-wide">Explicación:</strong>
+                        <span class="font-semibold text-blue-700">${h.itc} | Pto: ${h.punto}</span><br>
+                        ${h.explicacion}
+                    </div>
                 </div>
-                <p class="text-sm font-semibold text-gray-800 mb-2 mt-1 leading-snug">${h.pregunta}</p>
-                <div class="text-xs bg-slate-50 p-3 rounded-lg text-slate-600 border border-slate-100">
-                    <strong class="block mb-1 text-slate-800">${h.itc} | Pto: ${h.punto}</strong>
-                    ${h.explicacion}
-                </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
 
         document.getElementById('contenedor-test').innerHTML = `
             <div class="text-center py-6 fade-in">
@@ -339,12 +390,12 @@
 
                 <div class="flex gap-3 mb-8">
                     <button onclick="location.reload()" class="flex-1 py-3 bg-blue-600 text-white rounded-xl font-bold shadow-md hover:bg-blue-700 transition-all">Repetir</button>
-                    <a href="/" class="flex-1 py-3 bg-white border border-gray-200 text-gray-600 rounded-xl font-bold hover:bg-gray-50 transition-all flex items-center justify-center">Salir</a>
+                    <a href="../Test_por_ITC_del_REBT.html" class="flex-1 py-3 bg-white border border-gray-200 text-gray-600 rounded-xl font-bold hover:bg-gray-50 transition-all flex items-center justify-center">Salir</a>
                 </div>
 
                 <div class="text-left border-t border-gray-100 pt-6">
                     <h3 class="font-bold text-gray-400 text-xs uppercase mb-4 tracking-widest text-center">Revisión Completa</h3>
-                    <div class="max-h-80 overflow-y-auto pr-1 hide-scroll bg-white">
+                    <div class="max-h-96 overflow-y-auto pr-1 hide-scroll bg-white">
                         ${htmlHistorial}
                     </div>
                 </div>
@@ -355,7 +406,7 @@
     }
 
     function mostrarError(msg) {
-        document.getElementById('contenedor-test').innerHTML = `<div class="text-center py-10 text-red-500 text-sm font-medium">${msg}<br><a href="/" class="underline mt-2 block text-gray-500">Volver</a></div>`;
+        document.getElementById('contenedor-test').innerHTML = `<div class="text-center py-10 text-red-500 text-sm font-medium">${msg}<br><a href="../Test_por_ITC_del_REBT.html" class="underline mt-2 block text-gray-500">Volver</a></div>`;
     }
 
     function handleKey(e){
@@ -378,7 +429,7 @@
 <body>
 
     <main id="main-card" class="w-full max-w-md bg-white rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] overflow-hidden border border-gray-100 flex flex-col relative max-h-[90vh]">
-        
+
         <header class="stats-header px-5 py-3 border-b border-gray-100 bg-white flex-shrink-0 flex justify-between items-center text-xs font-medium text-gray-500">
             <div>
                 Cuestión: <strong class="text-gray-900" id="stats-cuestion">0/0</strong>
@@ -396,7 +447,7 @@
         </div>
 
         <div id="contenedor-test" class="p-6 overflow-y-auto hide-scroll flex-1 relative">
-            
+
             <div id="header-title-container" class="text-center mb-6">
                 <h1 id="itc-title" class="text-xl font-bold text-gray-900 uppercase tracking-tight">CARGANDO...</h1>
             </div>
@@ -413,7 +464,7 @@
     </main>
 
     <div class="mt-6">
-        <a href="Test_por_ITC_del_REBT.html" class="px-6 py-2.5 bg-slate-700 hover:bg-slate-800 text-white text-sm font-semibold rounded-lg shadow-lg transition-all">
+        <a href="../Test_por_ITC_del_REBT.html" class="px-6 py-2.5 bg-slate-700 hover:bg-slate-800 text-white text-sm font-semibold rounded-lg shadow-lg transition-all">
             Cancelar
         </a>
     </div>
