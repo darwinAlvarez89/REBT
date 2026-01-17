@@ -16,7 +16,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    /* Accesibilidad: reduce animaciones si el usuario lo prefiere */
+    /* Accesibilidad */
     @media (prefers-reduced-motion: reduce) {
       * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     }
@@ -36,6 +36,7 @@
     let intervaloTiempo = null;
     const DURACION_SEG = 60 * 60; // 1 hora de tiempo límite
 
+    /* ===== FUNCIÓN PRINCIPAL DE CARGA ===== */
     async function iniciarAplicacion() {
         const params = new URLSearchParams(window.location.search);
         
@@ -43,12 +44,11 @@
         let testIdRaw = params.get('id');
         
         if (!testIdRaw) {
-            mostrarError("No se ha especificado ninguna ITC en la dirección web (ej: ?id=ITC-BT-20).");
+            mostrarError("Error: No has especificado el test.<br>Usa <b>?id=ARTICULOS</b> para el reglamento general<br>o <b>?id=ITC-BT-XX</b> para una instrucción técnica.");
             return;
         }
 
-        // Normalizar para búsquedas: Mayúsculas, sin tildes y sin espacios
-        // Ejemplo: "Artículo 12" -> "ARTICULO12"
+        // Normalizamos ID de la URL (Mayúsculas, sin tildes, sin espacios)
         const testId = testIdRaw.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '');
 
         try {
@@ -60,16 +60,32 @@
             
             const todasLasPreguntas = await response.json();
             
-            // 3. FILTRADO INTELIGENTE (Ignorando tildes y espacios)
+            // 3. FILTRADO INTELIGENTE
             const preguntasFiltradas = todasLasPreguntas.filter(p => {
+                // A) Protección: Si la pregunta no tiene ITC definida, la saltamos
                 if(!p.itc) return false;
-                // Normalizamos también el dato del JSON para comparar peras con peras
+
+                // Normalizamos la ITC de la pregunta (Mayúsculas, sin tildes, sin espacios)
                 const itcJson = p.itc.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '');
+
+                // B) REGLA: OMITIR CÁLCULOS
+                // Si la columna ITC contiene la palabra "CALCULO", la ignoramos siempre.
+                if (itcJson.includes("CALCULO")) return false;
+
+                // C) REGLA: MODO "ARTÍCULOS" (GENERAL)
+                // Si el usuario pidió ?id=ARTICULOS, cogemos todo lo que empiece por "ARTICULO"
+                // (Esto abarca Artículo 1, Artículo 2... hasta el 29)
+                if (testId === "ARTICULOS") {
+                    return itcJson.startsWith("ARTICULO");
+                }
+
+                // D) REGLA: MODO ITC ESPECÍFICA
+                // Si pidió una ITC concreta (ej: ITC-BT-19), buscamos coincidencia exacta dentro del string
                 return itcJson.includes(testId);
             });
 
             if (preguntasFiltradas.length === 0) {
-                mostrarError(`No se encontraron preguntas para: <strong>${testIdRaw}</strong>.<br>Asegúrate de que la columna 'ITC' en tu Excel/JSON coincida.`);
+                mostrarError(`No se encontraron preguntas válidas (sin cálculos) para: <strong>${testIdRaw}</strong>.`);
                 return;
             }
 
@@ -85,8 +101,13 @@
             }));
 
             // 5. INICIAR LA INTERFAZ
-            document.getElementById('titulo-h1').textContent = `Test: ${testIdRaw.toUpperCase()}`;
-            document.getElementById('subtitulo').textContent = `Examen generado con ${preguntasDelExamen.length} preguntas aleatorias.`;
+            // Título personalizado según el modo
+            let titulo = testId === "ARTICULOS" 
+                ? "Reglamento General (Arts. 1-29)" 
+                : testIdRaw.toUpperCase();
+
+            document.getElementById('titulo-h1').textContent = titulo;
+            document.getElementById('subtitulo').textContent = `Test generado con ${preguntasDelExamen.length} preguntas aleatorias.`;
             
             inicioTiempo = Date.now();
             intervaloTiempo = setInterval(actualizarContador, 1000);
