@@ -17,10 +17,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* === ESTILO PROFESIONAL LIMPIO === */
+    /* === ESTILO PROFESIONAL LIMPIO (Versión Gold) === */
     body { 
         font-family: 'Inter', sans-serif; 
-        background-color: #f3f4f6; /* Fondo gris suave estándar */
+        background-color: #f3f4f6; 
         color: #1f2937;
         min-height: 100vh;
         display: flex;
@@ -30,20 +30,17 @@
         padding: 1rem;
     }
 
-    /* Animación de entrada suave */
     .fade-in { animation: fadeIn 0.3s ease-out forwards; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* Scrollbar invisible para limpieza visual */
     .hide-scroll::-webkit-scrollbar { display: none; }
     .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* Evitar selección en botones táctiles */
     button { -webkit-tap-highlight-color: transparent; user-select: none; }
   </style>
 
   <script>
-    /* ===== LÓGICA COMPLETA CON PERSISTENCIA ===== */
+    /* ===== LÓGICA ROBUSTA ===== */
     let preguntasDelExamen = [];
     const PREGUNTAS_POR_TEST = 20;
     const DURACION_SEG = 60 * 60;
@@ -57,19 +54,19 @@
     let tiempoAgotado = false;
     let testIdActual = "";
 
-    /* --- Sistema de Guardado (LocalStorage) --- */
+    /* --- Persistencia --- */
     function guardarProgreso() {
         if (!testIdActual) return;
         const estado = { preguntasDelExamen, indice, aciertos, errores, historial, inicioTiempo, respondido, seleccionUsuario, testIdActual };
-        localStorage.setItem('rebt_pro_v1_' + testIdActual, JSON.stringify(estado));
+        localStorage.setItem('rebt_pro_gold_' + testIdActual, JSON.stringify(estado));
     }
 
     function borrarProgreso() {
-        if (testIdActual) localStorage.removeItem('rebt_pro_v1_' + testIdActual);
+        if (testIdActual) localStorage.removeItem('rebt_pro_gold_' + testIdActual);
     }
 
     function cargarProgreso(id) {
-        const guardado = localStorage.getItem('rebt_pro_v1_' + id);
+        const guardado = localStorage.getItem('rebt_pro_gold_' + id);
         if (guardado) {
             try {
                 const estado = JSON.parse(guardado);
@@ -89,7 +86,7 @@
         return false;
     }
 
-    /* --- Inicialización --- */
+    /* --- Inicio --- */
     async function iniciarAplicacion() {
         const params = new URLSearchParams(window.location.search);
         let testIdRaw = params.get('id');
@@ -97,7 +94,6 @@
         
         testIdActual = testIdRaw.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '');
 
-        // 1. Intentar cargar sesión guardada
         if (cargarProgreso(testIdActual)) {
             renderizarUI(testIdRaw);
             cargarPregunta();
@@ -106,13 +102,13 @@
             return;
         }
 
-        // 2. Cargar nueva sesión
         try {
             const response = await fetch('../Data/base_datos_rebt.json');
             if (!response.ok) throw new Error("Error de conexión con la base de datos.");
             const todas = await response.json();
 
-            const filtradas = todas.filter(p => {
+            // 1. FILTRADO
+            let filtradas = todas.filter(p => {
                 if(!p.itc) return false;
                 const itc = p.itc.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '');
                 if (itc.includes("CALCULO")) return false;
@@ -122,12 +118,21 @@
 
             if (filtradas.length === 0) { mostrarError("No hay preguntas disponibles para este tema."); return; }
 
-            const mezcladas = mezclar(filtradas);
+            // 2. DEDUPLICACIÓN (Capa de seguridad anti-repetidas)
+            // Eliminamos preguntas que tengan exactamente el mismo texto
+            const unicas = filtradas.filter((pregunta, index, self) =>
+                index === self.findIndex((t) => (
+                    t.pregunta === pregunta.pregunta
+                ))
+            );
+
+            // 3. MEZCLA Y CORTE
+            const mezcladas = mezclar(unicas);
             preguntasDelExamen = mezcladas.slice(0, PREGUNTAS_POR_TEST);
             preguntasDelExamen = preguntasDelExamen.map(p => ({ ...p, opciones: mezclar([...p.opciones]) }));
 
             inicioTiempo = Date.now();
-            guardarProgreso(); // Guardar inicio
+            guardarProgreso();
             renderizarUI(testIdRaw);
             cargarPregunta();
             intervaloTiempo = setInterval(actualizarEstado, 1000);
@@ -139,20 +144,19 @@
     function renderizarUI(rawId) {
         let titulo = rawId.toUpperCase();
         if (testIdActual === "ARTICULOS") titulo = "Articulado General";
-        // El título se actualiza dinámicamente en cada pregunta según su ITC
     }
 
-    /* --- Lógica Visual --- */
+    /* --- UI Render --- */
     function cargarPregunta(){
       if (indice >= preguntasDelExamen.length) return finalizarTest();
       
       const q = preguntasDelExamen[indice];
       seleccionUsuario = null; respondido = false;
 
-      // Actualizar Título Dinámico (ITC Actual)
+      // Título Dinámico
       document.getElementById("itc-title").textContent = q.itc || "TEST REBT";
 
-      // Pregunta
+      // Texto Pregunta
       document.getElementById("texto-pregunta").textContent = q.pregunta;
       
       // Opciones
@@ -161,7 +165,6 @@
       
       q.opciones.forEach((op, i)=>{
         const btn = document.createElement("button");
-        // Estilo base limpio (blanco con borde gris suave)
         btn.className = "w-full text-left py-3.5 px-4 mb-2.5 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 hover:border-blue-300 transition-all text-[15px] font-medium text-gray-700 flex items-start gap-3 group shadow-sm active:scale-[0.99]";
         btn.dataset.valor = op;
         btn.onclick = ()=>seleccionarOpcion(op);
@@ -172,7 +175,7 @@
         cont.appendChild(btn);
       });
 
-      // Botón Acción (Azul)
+      // Resetear Área de Acciones
       const area = document.getElementById("area-acciones");
       area.innerHTML = `
         <div class="flex flex-col gap-2 mt-4 text-sm text-gray-400 text-center" id="hint-text">
@@ -193,18 +196,14 @@
       if (respondido || tiempoAgotado) return;
       seleccionUsuario = opcion;
 
-      // Highlight visual
       document.querySelectorAll("#contenedor-opciones button").forEach(b => {
         if (b.dataset.valor === opcion) {
-            // Seleccionado: Azul corporativo suave
             b.className = "w-full text-left py-3.5 px-4 mb-2.5 rounded-xl border-2 border-blue-600 bg-blue-50/50 text-blue-900 font-medium flex items-start gap-3 shadow-sm transform scale-[1.01] transition-all";
         } else {
-            // No seleccionado
             b.className = "w-full text-left py-3.5 px-4 mb-2.5 rounded-xl border border-gray-200 bg-white opacity-60 hover:opacity-100 transition-all text-gray-600 flex items-start gap-3";
         }
       });
 
-      // Activar botón (AZUL REAL)
       const btn = document.getElementById('btn-accion');
       document.getElementById('hint-text').style.display = 'none';
       btn.disabled = false;
@@ -222,10 +221,8 @@
         const val = b.dataset.valor;
 
         if (val === actual.respuesta) {
-            // Correcta: Verde solido
             b.className = "w-full text-left py-3.5 px-4 mb-2.5 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-semibold flex items-start gap-3 shadow-sm";
         } else if (val === seleccionUsuario && !esCorrecta) {
-            // Error: Rojo solido
             b.className = "w-full text-left py-3.5 px-4 mb-2.5 rounded-xl border-2 border-red-500 bg-red-50 text-red-900 font-semibold flex items-start gap-3 shadow-sm";
         } else {
             b.className = "w-full text-left py-3.5 px-4 mb-2.5 rounded-xl border border-gray-100 bg-white opacity-40 text-gray-400 flex items-start gap-3";
@@ -236,7 +233,6 @@
       historial.push({ ...actual, elegida: seleccionUsuario, correcta: esCorrecta });
       guardarProgreso();
 
-      // MOSTRAR EXPLICACIÓN (CON DATOS ITC Y PUNTO)
       document.getElementById("area-acciones").innerHTML = `
          <div class="fade-in w-full mt-2">
             <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-4 text-sm text-slate-700 shadow-sm">
@@ -246,7 +242,6 @@
                     <span class="text-slate-300">|</span>
                     <span class="text-xs font-medium text-slate-500">Punto: <strong>${actual.punto || "-"}</strong></span>
                 </div>
-                
                 <div class="leading-relaxed text-slate-600">${actual.explicacion || "Sin explicación adicional."}</div>
             </div>
 
@@ -260,17 +255,13 @@
       
       const btnSig = document.getElementById('btn-siguiente');
       btnSig.focus();
-      // Scroll automático suave para ver explicación en móviles
-      setTimeout(() => {
-          btnSig.scrollIntoView({ behavior: "smooth", block: "center" });
-      }, 100);
-      
+      setTimeout(() => { btnSig.scrollIntoView({ behavior: "smooth", block: "center" }); }, 100);
       actualizarEstado();
     }
 
     const siguientePregunta = () => { if(!tiempoAgotado){ indice++; cargarPregunta(); } };
 
-    /* --- Utilidades --- */
+    /* --- Utils --- */
     const mezclar = (arr) => arr.sort(() => Math.random() - 0.5);
     const fmt2 = (n) => String(n).padStart(2,'0');
 
@@ -283,12 +274,10 @@
       const pct = (indice / total) * 100;
       document.getElementById('progress-bar').style.width = `${pct}%`;
 
-      // Actualizar cabecera detallada
       document.getElementById('stats-cuestion').innerText = `${indice + 1}/${total}`;
       document.getElementById('stats-aciertos').innerText = aciertos;
       document.getElementById('stats-fallos').innerText = errores;
       
-      // Puntos
       const nota = Math.max(0, (aciertos - (errores/2)) * (10/total));
       document.getElementById('stats-puntos').innerText = nota.toFixed(2);
 
@@ -303,7 +292,7 @@
       }
     }
 
-    /* --- Pantalla Final --- */
+    /* --- Final --- */
     function finalizarTest(){
         clearInterval(intervaloTiempo);
         borrarProgreso();
@@ -361,7 +350,6 @@
                 </div>
             </div>
         `;
-        // Ocultar cabecera de stats al finalizar
         document.querySelector('.stats-header').style.display = 'none';
         document.getElementById('header-title-container').style.display = 'none';
     }
