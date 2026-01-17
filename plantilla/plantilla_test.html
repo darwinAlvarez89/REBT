@@ -52,9 +52,10 @@
         const testId = testIdRaw.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '');
 
         try {
-            // Cargar JSON desde la carpeta Data
-            const response = await fetch('/Data/base_datos_rebt.json'); 
-            if (!response.ok) throw new Error("No se pudo conectar con la base de datos.");
+            // CORRECCIÓN AQUÍ: Usamos ".." para salir de la carpeta plantilla y buscar Data
+            const response = await fetch('../Data/base_datos_rebt.json'); 
+            
+            if (!response.ok) throw new Error(`Error ${response.status}: No se encuentra el archivo de datos.`);
             
             const todasLasPreguntas = await response.json();
 
@@ -70,7 +71,7 @@
             });
 
             if (preguntasFiltradas.length === 0) {
-                mostrarError(`No hay preguntas disponibles para: ${testIdRaw}`);
+                mostrarError(`No hay preguntas disponibles en la base de datos para: ${testIdRaw}`);
                 return;
             }
 
@@ -84,7 +85,7 @@
                 opciones: mezclar([...p.opciones]) 
             }));
 
-            // Configurar Título (Corrección solicitada)
+            // Configurar Título
             let tituloWeb = testIdRaw.toUpperCase();
             if (testId === "ARTICULOS") {
                 tituloWeb = "Articulado del REBT";
@@ -99,8 +100,8 @@
             document.addEventListener('keydown', handleKey);
 
         } catch (error) {
-            console.error(error);
-            mostrarError("Error cargando el test. Intenta recargar.");
+            console.error("Detalle del error:", error);
+            mostrarError(`Error cargando el test: ${error.message}<br>Verifica que el archivo JSON esté en la carpeta Data.`);
         }
     }
 
