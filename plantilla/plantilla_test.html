@@ -103,14 +103,12 @@
         }
 
         try {
-            // Carga archivo ofuscado txt
-            const response = await fetch('../Data/rebt_data.txt');
-            if (!response.ok) throw new Error("Error de conexión con la base de datos.");
+            // CORRECCIÓN: Volvemos a leer el archivo JSON normal que ya tienes
+            const response = await fetch('../Data/base_datos_rebt.json');
             
-            // Decodificación Base64
-            const textEncoded = await response.text();
-            const jsonString = decodeURIComponent(escape(atob(textEncoded)));
-            const todas = JSON.parse(jsonString);
+            if (!response.ok) throw new Error(`No se encuentra el archivo de datos (Error ${response.status}).`);
+            
+            const todas = await response.json();
 
             // 1. FILTRADO
             let filtradas = todas.filter(p => {
@@ -313,9 +311,7 @@
         borrarProgreso();
         const total = preguntasDelExamen.length;
         const nota = Math.max(0, (aciertos - (errores/2)) * (10/total));
-        
-        // --- CAMBIO SOLICITADO: APTO >= 7.00 ---
-        const apto = nota >= 7;
+        const apto = nota >= 7; // Aprobado con 7 o más
 
         const htmlHistorial = historial.map((h, i) => {
             const opcionesHTML = h.opciones.map(op => {
