@@ -3,58 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>Examen Test REBT Premium</title>
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-RSH4ZW3VT2');
-  </script>
+  <title>Examen Test REBT Pro</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* Diseño Base */
+    /* === ESTILO GENERAL === */
     body { 
         font-family: 'Inter', sans-serif; 
-        background-color: #f3f4f6;
-        /* Fondo Abstracto Premium "Apple Style" */
+        background-color: #0f172a; /* Slate 900 */
+        /* Fondo Profesional Azul Ingeniero */
         background-image: 
-            radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-            radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
-            radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
-        background-attachment: fixed;
-        background-size: cover;
+            radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 70%);
+        color: #1e293b;
         height: 100vh;
-        overflow: hidden; /* Evita scroll en el body */
+        overflow: hidden; /* El body no hace scroll, lo hace la tarjeta */
     }
 
-    /* Scrollbar invisible pero funcional para las opciones */
+    /* Scroll invisible pero funcional */
+    .custom-scroll { -webkit-overflow-scrolling: touch; }
     .custom-scroll::-webkit-scrollbar { width: 4px; }
     .custom-scroll::-webkit-scrollbar-track { background: transparent; }
-    .custom-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 10px; }
     
-    /* Animaciones */
+    /* Efecto Cristal (Glassmorphism) */
     .glass-panel {
-        background: rgba(255, 255, 255, 0.85); /* Blanco translúcido */
-        backdrop-filter: blur(20px); /* Efecto cristal */
-        -webkit-backdrop-filter: blur(20px);
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-        border: 1px solid rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
     }
-    
-    .fade-in-up { animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* Efecto botón presionado */
-    button:active { transform: scale(0.98); }
+    /* Animaciones */
+    .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Selección de texto deshabilitada para sensación de App */
+    .no-select { user-select: none; -webkit-user-select: none; }
   </style>
 
   <script>
-    /* ===== LÓGICA (Misma lógica robusta, diseño nuevo) ===== */
+    /* ===== LÓGICA DE NEGOCIO ===== */
     let preguntasDelExamen = [];
     const PREGUNTAS_POR_TEST = 20;
 
@@ -72,12 +62,13 @@
         const params = new URLSearchParams(window.location.search);
         let testIdRaw = params.get('id');
 
-        if (!testIdRaw) { mostrarError("Test no especificado."); return; }
+        if (!testIdRaw) { mostrarError("No se ha especificado el test."); return; }
         const testId = testIdRaw.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '');
 
         try {
+            // RUTA DE DATOS (Relativa)
             const response = await fetch('../Data/base_datos_rebt.json');
-            if (!response.ok) throw new Error("Error de conexión.");
+            if (!response.ok) throw new Error("No se pudo cargar la base de datos.");
             const todasLasPreguntas = await response.json();
 
             const preguntasFiltradas = todasLasPreguntas.filter(p => {
@@ -103,49 +94,51 @@
             intervaloTiempo = setInterval(actualizarEstado, 1000);
             document.addEventListener('keydown', handleKey);
 
-        } catch (error) { mostrarError("Error al cargar el test."); }
+        } catch (error) { mostrarError("Error de conexión. Revisa la carpeta Data."); }
     }
 
-    /* ===== UI LOGIC ===== */
+    /* ===== INTERFAZ ===== */
     function cargarPregunta(){
-      if (indice >= preguntasDelExamen.length) return mostrarResumen();
+      if (indice >= preguntasDelExamen.length) return finalizarTest();
       
       const q = preguntasDelExamen[indice];
       seleccionUsuario = null; respondido = false;
 
-      // Pregunta
+      // Resetear interfaz
+      document.getElementById("explicacion-area").classList.add("hidden");
+      document.getElementById("explicacion-area").innerHTML = "";
+      
+      // 1. Pregunta
       document.getElementById("question-text").textContent = q.pregunta;
       
-      // Opciones
+      // 2. Opciones
       const cont = document.getElementById("options-container");
       cont.innerHTML = "";
       
       q.opciones.forEach((op, i)=>{
         const btn = document.createElement("button");
-        // Diseño de opción "Apple List Item"
-        btn.className = "group w-full text-left p-4 mb-3 rounded-2xl bg-white/50 hover:bg-white border border-transparent hover:border-blue-200 transition-all duration-200 shadow-sm flex items-start gap-3 backdrop-blur-sm";
+        btn.className = "group w-full text-left p-4 mb-3 rounded-2xl bg-white border border-slate-200 hover:border-blue-400 transition-all shadow-sm flex items-start gap-3 relative overflow-hidden active:scale-[0.99]";
         btn.onclick = ()=>seleccionarOpcion(op, btn);
         
         const letra = ['A','B','C','D'][i];
         btn.innerHTML = `
-            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center text-xs font-bold text-slate-500 group-hover:text-blue-600 transition-colors border border-slate-100 ring-badge">
+            <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-500 group-hover:bg-blue-600 group-hover:text-white transition-colors ring-badge">
                 ${letra}
             </div>
-            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">${op}</span>
+            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed z-10">${op}</span>
         `;
         cont.appendChild(btn);
       });
 
-      // Resetear botón de acción
-      const actionArea = document.getElementById("action-area");
-      actionArea.innerHTML = `
-        <button id="btn-main" disabled onclick="verificarRespuesta()" 
-            class="w-full py-4 rounded-2xl font-bold text-white shadow-lg transition-all duration-300
-                   bg-slate-300 cursor-not-allowed opacity-70 blur-[1px]">
-            Selecciona una opción
-        </button>
-      `;
+      // 3. Botón Principal (Estado inicial)
+      const btnMain = document.getElementById("btn-main");
+      btnMain.textContent = "Confirmar Respuesta";
+      btnMain.disabled = true;
+      btnMain.className = "w-full py-4 rounded-xl font-bold text-slate-400 bg-slate-200 cursor-not-allowed transition-all shadow-none";
+      btnMain.onclick = verificarRespuesta;
 
+      // Scroll arriba suave
+      document.getElementById("card-content").scrollTo({ top: 0, behavior: 'smooth' });
       actualizarEstado();
     }
 
@@ -153,22 +146,21 @@
       if (respondido || tiempoAgotado) return;
       seleccionUsuario = opcion;
 
-      // Reset visual
+      // Reset visual de todas las opciones
       document.querySelectorAll("#options-container button").forEach(b => {
-        b.className = "group w-full text-left p-4 mb-3 rounded-2xl bg-white/40 border border-transparent transition-all shadow-sm flex items-start gap-3 opacity-60 hover:opacity-100";
-        b.querySelector('.ring-badge').className = "flex-shrink-0 w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center text-xs font-bold text-slate-400 border border-slate-100 ring-badge";
+        b.className = "group w-full text-left p-4 mb-3 rounded-2xl bg-white border border-slate-200 opacity-60 flex items-start gap-3";
+        b.querySelector('.ring-badge').className = "flex-shrink-0 w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-400 ring-badge";
       });
 
-      // Active visual (Estilo iOS Selection)
-      btnElement.className = "w-full text-left p-4 mb-3 rounded-2xl bg-white border-2 border-blue-500 shadow-md flex items-start gap-3 transform scale-[1.01] z-10 opacity-100";
-      btnElement.querySelector('.ring-badge').className = "flex-shrink-0 w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold shadow-sm";
+      // Estilo Activo (Seleccionado)
+      btnElement.className = "group w-full text-left p-4 mb-3 rounded-2xl bg-blue-50 border-2 border-blue-600 shadow-md flex items-start gap-3 opacity-100 transform scale-[1.01]";
+      btnElement.querySelector('.ring-badge').className = "flex-shrink-0 w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center text-xs font-bold shadow-sm";
 
-      // Activar botón principal
-      const btnMain = document.getElementById('btn-main');
+      // Habilitar botón confirmar
+      const btnMain = document.getElementById("btn-main");
       btnMain.disabled = false;
-      btnMain.textContent = "Confirmar Respuesta";
-      // Gradiente Apple Blue
-      btnMain.className = "w-full py-4 rounded-2xl font-bold text-white shadow-blue-500/30 shadow-lg transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 transform hover:-translate-y-0.5";
+      // Estilo Apple Blue Gradient
+      btnMain.className = "w-full py-4 rounded-xl font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:-translate-y-0.5 transition-all transform cursor-pointer";
     }
 
     function verificarRespuesta(){
@@ -177,7 +169,7 @@
       const actual = preguntasDelExamen[indice];
       const esCorrecta = seleccionUsuario === actual.respuesta;
 
-      // Colorear respuestas
+      // 1. Colorear respuestas
       const botones = document.getElementById("options-container").children;
       for (let btn of botones) {
           btn.disabled = true;
@@ -185,14 +177,14 @@
           const badge = btn.querySelector('.ring-badge');
 
           if (texto === actual.respuesta) {
-              // Correcta (Verde iOS)
+              // CORRECTA (Verde)
               btn.className = "w-full text-left p-4 mb-3 rounded-2xl bg-emerald-50 border-2 border-emerald-500 shadow-sm flex items-start gap-3 opacity-100";
-              badge.className = "flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold";
+              badge.className = "flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-500 text-white flex items-center justify-center text-xs font-bold";
               badge.innerHTML = "✓";
           } else if (texto === seleccionUsuario && !esCorrecta) {
-              // Error (Rojo iOS)
+              // ERROR (Rojo)
               btn.className = "w-full text-left p-4 mb-3 rounded-2xl bg-red-50 border-2 border-red-500 shadow-sm flex items-start gap-3 opacity-100";
-              badge.className = "flex-shrink-0 w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center text-xs font-bold";
+              badge.className = "flex-shrink-0 w-8 h-8 rounded-lg bg-red-500 text-white flex items-center justify-center text-xs font-bold";
               badge.innerHTML = "✕";
           } else {
               btn.style.opacity = "0.4";
@@ -202,22 +194,30 @@
       if (esCorrecta) aciertos++; else errores++;
       historial.push({ ...actual, elegida: seleccionUsuario, correcta: esCorrecta });
 
-      // Cambiar botón a Siguiente
-      const actionArea = document.getElementById("action-area");
-      actionArea.innerHTML = `
-        <div class="fade-in-up">
-            <div class="bg-white/80 backdrop-blur-sm border border-blue-100 p-3 rounded-xl mb-3 text-sm text-slate-700 shadow-sm">
-                <strong class="text-blue-700 text-xs uppercase tracking-wider block mb-1">💡 ${actual.itc}</strong>
-                ${actual.explicacion}
+      // 2. MOSTRAR EXPLICACIÓN (Ahora en el cuerpo principal, no en el footer)
+      const divExp = document.getElementById("explicacion-area");
+      divExp.innerHTML = `
+        <div class="fade-in bg-slate-50 border-l-4 border-indigo-500 p-4 rounded-r-xl shadow-sm">
+            <div class="flex items-center gap-2 mb-2">
+                <span class="bg-indigo-100 text-indigo-700 text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-wide">Explicación</span>
+                <span class="text-xs font-bold text-slate-500">${actual.itc}</span>
             </div>
-            <button id="btn-next" onclick="siguientePregunta()" 
-                class="w-full py-4 rounded-2xl font-bold text-white shadow-lg bg-slate-900 hover:bg-black transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
-                Siguiente Pregunta ➝
-            </button>
+            <p class="text-sm text-slate-700 leading-relaxed">${actual.explicacion}</p>
         </div>
       `;
-      // Auto-scroll al botón si es necesario
-      document.getElementById('btn-next').scrollIntoView({ behavior: 'smooth', block: 'end' });
+      divExp.classList.remove("hidden");
+
+      // 3. CAMBIAR BOTÓN A "SIGUIENTE"
+      const btnMain = document.getElementById("btn-main");
+      btnMain.textContent = "Siguiente Pregunta ➝";
+      btnMain.className = "w-full py-4 rounded-xl font-bold text-white bg-slate-900 hover:bg-black shadow-lg transition-all";
+      btnMain.onclick = siguientePregunta;
+
+      // 4. Auto-scroll para que se vea la explicación si está abajo
+      setTimeout(() => {
+          divExp.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 100);
+
       actualizarEstado();
     }
 
@@ -230,21 +230,16 @@
     function actualizarEstado(){
       if (!inicioTiempo) return;
       const total = preguntasDelExamen.length;
-      
       const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
       const restantes = Math.max(0, DURACION_SEG - transcurrido);
-      const mm = fmt2(Math.floor(restantes/60));
-      const ss = fmt2(restantes%60);
-
-      // Barra progreso
+      
       const pct = ((indice + (respondido ? 1 : 0)) / total) * 100;
       document.getElementById('progress-fill').style.width = `${pct}%`;
 
-      // Texto Stats
       document.getElementById('stats-q').innerText = `${indice + 1}/${total}`;
       document.getElementById('stats-ok').innerText = aciertos;
       document.getElementById('stats-ko').innerText = errores;
-      document.getElementById('timer-display').innerText = `${mm}:${ss}`;
+      document.getElementById('timer-display').innerText = `${fmt2(Math.floor(restantes/60))}:${fmt2(restantes%60)}`;
 
       if (restantes === 0 && !tiempoAgotado){
         tiempoAgotado = true;
@@ -253,57 +248,60 @@
       }
     }
 
-    /* ===== FIN ===== */
-    function mostrarResumen() { finalizarTest(); }
-    
-    function finalizarTest(){
+    /* ===== FIN DE TEST ===== */
+    function finalizarTest() { mostrarResumen(); }
+
+    function mostrarResumen(){
         clearInterval(intervaloTiempo);
         const total = preguntasDelExamen.length;
         const nota = Math.max(0, (aciertos - (errores/2)) * (10/total));
         const apto = nota >= 5;
 
+        // Ocultar cabecera y footer
+        document.getElementById('header-bar').style.display = 'none';
+        document.getElementById('footer-bar').style.display = 'none';
+
         const container = document.getElementById('card-content');
         container.innerHTML = `
-            <div class="text-center py-4 fade-in-up h-full flex flex-col justify-center">
-                <div class="mb-4 inline-flex p-4 rounded-full ${apto ? 'bg-emerald-100' : 'bg-red-100'} shadow-sm mx-auto">
-                    <span class="text-5xl">${apto ? '🎉' : '😓'}</span>
+            <div class="fade-in flex flex-col items-center justify-center min-h-full py-6">
+                <div class="w-24 h-24 rounded-full ${apto ? 'bg-emerald-100 text-emerald-600' : 'bg-red-100 text-red-600'} flex items-center justify-center text-6xl shadow-inner mb-6">
+                    ${apto ? '🏆' : '⚠️'}
                 </div>
-                <h2 class="text-3xl font-black text-slate-800 mb-1">${apto ? 'APTO' : 'NO APTO'}</h2>
-                <p class="text-slate-500 mb-6">Nota Final: <strong class="text-2xl text-slate-900">${nota.toFixed(2)}</strong></p>
                 
-                <div class="grid grid-cols-3 gap-3 mb-6">
-                    <div class="bg-emerald-50 p-3 rounded-2xl border border-emerald-100">
-                        <div class="text-xl font-bold text-emerald-600">${aciertos}</div>
-                        <div class="text-[10px] text-emerald-800 uppercase font-bold">Bien</div>
+                <h2 class="text-4xl font-black text-slate-800 mb-2">${apto ? '¡APTO!' : 'NO APTO'}</h2>
+                <div class="text-slate-500 mb-8 font-medium">Nota final: <span class="text-2xl text-slate-900 font-bold">${nota.toFixed(2)}</span> / 10</div>
+                
+                <div class="grid grid-cols-3 gap-4 w-full mb-8">
+                    <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-100 text-center">
+                        <div class="text-2xl font-bold text-emerald-600">${aciertos}</div>
+                        <div class="text-[10px] uppercase font-bold text-emerald-800 tracking-wider">Aciertos</div>
                     </div>
-                    <div class="bg-red-50 p-3 rounded-2xl border border-red-100">
-                        <div class="text-xl font-bold text-red-600">${errores}</div>
-                        <div class="text-[10px] text-red-800 uppercase font-bold">Mal</div>
+                    <div class="bg-red-50 p-4 rounded-2xl border border-red-100 text-center">
+                        <div class="text-2xl font-bold text-red-600">${errores}</div>
+                        <div class="text-[10px] uppercase font-bold text-red-800 tracking-wider">Fallos</div>
                     </div>
-                    <div class="bg-white p-3 rounded-2xl border border-slate-200">
-                        <div class="text-xl font-bold text-slate-600">${total-(aciertos+errores)}</div>
-                        <div class="text-[10px] text-slate-500 uppercase font-bold">Blanco</div>
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center">
+                        <div class="text-2xl font-bold text-slate-600">${total-(aciertos+errores)}</div>
+                        <div class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Blanco</div>
                     </div>
                 </div>
 
-                <div class="flex flex-col gap-3">
-                    <button onclick="location.reload()" class="w-full py-3 bg-slate-900 text-white rounded-xl font-bold shadow-lg">Intentar de nuevo</button>
-                    <a href="/" class="w-full py-3 bg-white border border-slate-200 text-slate-600 rounded-xl font-bold">Volver al inicio</a>
+                <div class="w-full space-y-3">
+                    <button onclick="location.reload()" class="w-full py-4 bg-slate-900 text-white rounded-xl font-bold shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">Repetir Test</button>
+                    <a href="/" class="block w-full py-4 bg-white border-2 border-slate-200 text-slate-600 text-center rounded-xl font-bold hover:bg-slate-50 transition-all">Volver al Inicio</a>
                 </div>
             </div>
         `;
-        document.getElementById('header-bar').style.display = 'none';
-        document.getElementById('action-area').style.display = 'none';
     }
 
     function mostrarError(msg) {
-        document.body.innerHTML = `<div class="flex h-screen items-center justify-center text-white p-6 text-center font-bold">${msg}<br><a href="/" class="underline mt-4 block">Volver</a></div>`;
+        document.body.innerHTML = `<div class="flex h-screen items-center justify-center text-white p-6 text-center font-bold font-mono">${msg}<br><a href="/" class="underline mt-4 block opacity-80">Volver</a></div>`;
     }
 
     function handleKey(e){
         if(tiempoAgotado) return;
         if(e.key === 'Enter') {
-            const btn = document.querySelector('#action-area button');
+            const btn = document.getElementById('btn-main');
             if(btn && !btn.disabled) btn.click();
         }
         const map = {'1':0,'2':1,'3':2,'4':3};
@@ -319,39 +317,44 @@
 
 <body class="flex items-center justify-center p-4">
 
-    <main class="glass-panel w-full max-w-2xl rounded-[2rem] flex flex-col max-h-[92vh] h-full shadow-2xl relative overflow-hidden transition-all duration-500">
+    <main class="glass-panel w-full max-w-2xl h-[90vh] rounded-[32px] flex flex-col relative overflow-hidden ring-1 ring-white/40 shadow-2xl transition-all">
         
-        <header id="header-bar" class="flex-shrink-0 bg-white/60 backdrop-blur-md border-b border-white/50 px-6 py-4 z-20">
-            <div class="flex justify-between items-center mb-2">
-                <span id="header-title" class="text-[10px] font-black tracking-widest text-slate-400 uppercase">TEST REBT</span>
-                <span id="timer-display" class="font-mono text-sm font-bold text-slate-700 bg-white/80 px-2 py-1 rounded-md shadow-sm border border-slate-100">00:00</span>
+        <header id="header-bar" class="flex-shrink-0 bg-white/70 backdrop-blur-md border-b border-slate-100 px-6 py-4 z-20">
+            <div class="flex justify-between items-center mb-3">
+                <span id="header-title" class="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">CARGANDO...</span>
+                <span id="timer-display" class="font-mono text-sm font-bold text-slate-700 bg-white px-3 py-1 rounded-lg border border-slate-200 shadow-sm">00:00</span>
             </div>
             
-            <div class="w-full h-1.5 bg-slate-200/50 rounded-full overflow-hidden mb-3">
-                <div id="progress-fill" class="h-full bg-blue-500 rounded-full transition-all duration-500" style="width: 0%"></div>
+            <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden mb-3">
+                <div id="progress-fill" class="h-full bg-blue-600 rounded-full transition-all duration-500 shadow-[0_0_10px_rgba(37,99,235,0.5)]" style="width: 0%"></div>
             </div>
 
-            <div class="flex justify-between text-xs font-medium text-slate-500">
-                <div class="flex items-center gap-3">
-                    <span>Preg: <strong class="text-slate-800" id="stats-q">0/0</strong></span>
+            <div class="flex justify-between text-xs font-semibold text-slate-400 select-none">
+                <div class="flex items-center gap-1">
+                    <span>Pregunta</span> <strong class="text-slate-800 text-sm ml-1" id="stats-q">0/0</strong>
                 </div>
-                <div class="flex items-center gap-3">
-                    <span class="text-emerald-600">✓ <span id="stats-ok">0</span></span>
-                    <span class="text-red-500">✕ <span id="stats-ko">0</span></span>
+                <div class="flex items-center gap-4">
+                    <span class="text-emerald-600 flex items-center gap-1">✓ <span id="stats-ok" class="text-sm">0</span></span>
+                    <span class="text-red-500 flex items-center gap-1">✕ <span id="stats-ko" class="text-sm">0</span></span>
                 </div>
             </div>
         </header>
 
-        <section id="card-content" class="flex-1 overflow-y-auto custom-scroll p-6 relative z-10">
-            <h2 id="question-text" class="text-lg md:text-xl font-bold text-slate-800 leading-snug mb-6">
-                Cargando pregunta...
-            </h2>
-            <div id="options-container" class="pb-4">
-                </div>
+        <section id="card-content" class="flex-1 overflow-y-auto custom-scroll p-6 md:p-8 relative scroll-smooth">
+            <h2 id="question-text" class="text-xl font-bold text-slate-800 leading-snug mb-8 no-select">...</h2>
+            
+            <div id="options-container" class="space-y-3 pb-4 no-select"></div>
+
+            <div id="explicacion-area" class="mt-6 hidden pb-2"></div>
+            
+            <div class="h-24"></div> 
         </section>
 
-        <footer id="action-area" class="flex-shrink-0 p-6 bg-white/80 backdrop-blur-xl border-t border-white/50 z-20">
-             </footer>
+        <footer id="footer-bar" class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-white via-white/90 to-transparent z-30">
+             <button id="btn-main" class="w-full py-4 rounded-xl font-bold text-slate-400 bg-slate-200 shadow-none">
+                Cargando...
+             </button>
+        </footer>
 
     </main>
 
