@@ -23,7 +23,7 @@
 
   <script>
     /* ===== VARIABLES GLOBALES ===== */
-    let preguntasDelExamen = []; // Se llenará desde la Base de Datos
+    let preguntasDelExamen = []; 
     const PREGUNTAS_POR_TEST = 20;
     
     // Estado del test
@@ -48,26 +48,24 @@
             return;
         }
 
-        // Normalizamos ID (Mayúsculas, sin tildes, sin espacios)
         const testId = testIdRaw.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '');
 
         try {
-            // CORRECCIÓN AQUÍ: Usamos ".." para salir de la carpeta plantilla y buscar Data
+            // Ruta relativa: Sale de 'plantilla' (..) y entra en 'Data'
             const response = await fetch('../Data/base_datos_rebt.json'); 
             
             if (!response.ok) throw new Error(`Error ${response.status}: No se encuentra el archivo de datos.`);
             
             const todasLasPreguntas = await response.json();
 
-            // Filtrado Inteligente
+            // Filtrado
             const preguntasFiltradas = todasLasPreguntas.filter(p => {
                 if(!p.itc) return false;
                 const itcJson = p.itc.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '');
 
-                // Filtros
-                if (itcJson.includes("CALCULO")) return false; // Omitir cálculos
-                if (testId === "ARTICULOS") return itcJson.startsWith("ARTICULO"); // Modo General
-                return itcJson.includes(testId); // Modo ITC específica
+                if (itcJson.includes("CALCULO")) return false; 
+                if (testId === "ARTICULOS") return itcJson.startsWith("ARTICULO"); 
+                return itcJson.includes(testId); 
             });
 
             if (preguntasFiltradas.length === 0) {
@@ -75,17 +73,16 @@
                 return;
             }
 
-            // Preparar examen (Barajar y cortar)
+            // Preparar examen
             const mezcladas = mezclar(preguntasFiltradas);
             preguntasDelExamen = mezcladas.slice(0, PREGUNTAS_POR_TEST);
             
-            // Barajar opciones dentro de cada pregunta
             preguntasDelExamen = preguntasDelExamen.map(p => ({
                 ...p, 
                 opciones: mezclar([...p.opciones]) 
             }));
 
-            // Configurar Título
+            // Título
             let tituloWeb = testIdRaw.toUpperCase();
             if (testId === "ARTICULOS") {
                 tituloWeb = "Articulado del REBT";
@@ -93,19 +90,20 @@
 
             document.getElementById('titulo-h1').textContent = tituloWeb;
 
-            // Iniciar Lógica
+            // Iniciar
             inicioTiempo = Date.now();
-            cargarPregunta();
+            // IMPORTANTE: Primero cargamos la pregunta para que existan los elementos DOM
+            cargarPregunta(); 
             intervaloTiempo = setInterval(actualizarContador, 1000);
             document.addEventListener('keydown', handleKey);
 
         } catch (error) {
             console.error("Detalle del error:", error);
-            mostrarError(`Error cargando el test: ${error.message}<br>Verifica que el archivo JSON esté en la carpeta Data.`);
+            mostrarError(`Error técnico: ${error.message}<br>Revisa la consola (F12) para más detalles.`);
         }
     }
 
-    /* ===== 2. LÓGICA DEL TEST (ESTILO ORIGINAL) ===== */
+    /* ===== 2. LÓGICA DEL TEST ===== */
     
     function cargarPregunta(){
       if (indice >= preguntasDelExamen.length) return mostrarResumen();
@@ -117,7 +115,6 @@
       document.getElementById("pregunta").textContent = q.pregunta;
       renderOpciones(q.opciones);
 
-      // Botón Contestar (Estado Inicial: Deshabilitado)
       document.getElementById("acciones").innerHTML =
         `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
            <span>Elige una respuesta (teclas 1–4 y Enter).</span>
@@ -135,32 +132,27 @@
         const btn = document.createElement("button");
         btn.type="button";
         btn.dataset.valor = op;
-        // CLASES ORIGINALES (Azul intenso, diseño de tarjeta)
         btn.className="opcion w-full text-left bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl shadow transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300";
         btn.innerHTML = `<span class="font-semibold tracking-wide">${op}</span>`;
         btn.onclick = ()=>seleccionarOpcion(op);
-        btn.setAttribute('aria-label',`Opción ${i+1}: ${op}`);
         cont.appendChild(btn);
       });
     }
 
     function seleccionarOpcion(opcion){
       if (respondido || tiempoAgotado) return;
-      
       seleccionUsuario = opcion;
       
-      // Feedback visual de selección (Anillo amarillo)
       document.querySelectorAll("#opciones .opcion").forEach(b=>{
         b.classList.remove('ring','ring-yellow-300','translate-y-0.5');
         if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
       });
 
-      // Habilitar botón Contestar
       const btn = document.getElementById('btn-contestar');
       if(btn){
           btn.disabled=false;
           btn.classList.remove('opacity-50','cursor-not-allowed');
-          btn.onclick=verificarRespuesta; // Asignar función al clic
+          btn.onclick=verificarRespuesta; 
       }
     }
 
@@ -171,7 +163,6 @@
       const ok = seleccionUsuario === actual.respuesta;
       respondido = true;
 
-      // Colorear respuestas (Verde/Rojo)
       document.querySelectorAll("#opciones .opcion").forEach(b=>{
         b.disabled=true; 
         b.classList.remove('ring','ring-yellow-300');
@@ -184,13 +175,12 @@
           b.classList.add('bg-red-600','hover:bg-red-700');
           b.innerHTML=`❌ <span class="font-semibold">${val}</span>`;
         } else {
-          b.classList.add('bg-blue-500', 'opacity-50'); // Atenuar las no seleccionadas
+          b.classList.add('bg-blue-500', 'opacity-50'); 
         }
       });
 
       ok ? aciertos++ : errores++;
 
-      // Guardar en historial
       historial.push({
         pregunta: actual.pregunta,
         opciones: actual.opciones,
@@ -200,7 +190,6 @@
         referencia: `${actual.itc} - Punto ${actual.punto}`
       });
 
-      // Mostrar Explicación y Botón Siguiente
       document.getElementById("acciones").innerHTML =
         `<div class="mt-4 flex flex-col gap-3 animate-fade-in-up">
            <div class="flex items-center justify-end">
@@ -214,16 +203,14 @@
            </div>
          </div>`;
       
-       // Enfocar botón siguiente para accesibilidad
        document.getElementById("btn-siguiente")?.focus();
-
-      actualizarContador();
-      setProgreso();
+       actualizarContador();
+       setProgreso();
     }
 
     const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
 
-    /* ===== UTILIDADES Y CÁLCULOS ===== */
+    /* ===== UTILIDADES ===== */
     const mezclar = (arr) => { for (let i = arr.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
     const fmt2 = (n) => String(n).padStart(2,'0');
     const clamp0 = (x) => x < 0 ? 0 : x;
@@ -231,13 +218,11 @@
     function calcularPuntuacion(){
       const total = preguntasDelExamen.length;
       if(total === 0) return { total:0, puntos:0, porcentaje:0 };
-      
       const penalizacion = Math.floor(errores / 2);
       const validasNetas = Math.max(0, aciertos - penalizacion);
-      const puntos = validasNetas * 0.5; // Ajustar según tu criterio (ej: 1 punto por neta)
+      const puntos = validasNetas * 0.5; 
       const porcentaje = clamp0((validasNetas / total) * 100);
-      const apto = porcentaje >= 50; // Criterio del 50%
-      
+      const apto = porcentaje >= 50; 
       return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
     }
 
@@ -245,9 +230,16 @@
       const total = preguntasDelExamen.length;
       const pct = total > 0 ? Math.round((indice/total)*100) : 0;
       const bar = document.getElementById('progress-bar');
-      bar.style.width = pct + '%';
-      bar.setAttribute('aria-valuenow', pct);
-      document.getElementById('progress-txt').textContent = `${indice}/${total}`;
+      const txt = document.getElementById('progress-txt');
+      
+      // PROTECCIÓN CONTRA EL ERROR NULL
+      if(bar) {
+          bar.style.width = pct + '%';
+          bar.setAttribute('aria-valuenow', pct);
+      }
+      if(txt) {
+          txt.textContent = `${indice + 1}/${total}`;
+      }
     }
 
     function actualizarContador(){
@@ -257,18 +249,17 @@
       const mm = fmt2(Math.floor(restantes/60));
       const ss = fmt2(restantes%60);
 
-      const { puntos } = calcularPuntuacion();
-      const totalPuntos = preguntasDelExamen.length * 0.5; // O la base máxima que uses
-
       const relojClass = restantes <= 60 ? 'text-red-700' : restantes <= 300 ? 'text-orange-600' : 'text-blue-700';
 
-      document.getElementById("contador").innerHTML = `
-        <div class="flex flex-wrap gap-2 md:gap-4 text-xs md:text-sm">
-            <span>P.: ${indice + 1}/${preguntasDelExamen.length}</span>
-            <span class="text-green-600 font-bold">OK: ${aciertos}</span>
-            <span class="text-red-600 font-bold">KO: ${errores}</span>
-            <span class="font-mono font-bold ${relojClass} ml-auto">⏳ ${mm}:${ss}</span>
-        </div>`;
+      const elContador = document.getElementById("contador");
+      if(elContador){
+          elContador.innerHTML = `
+            <div class="flex flex-wrap gap-2 md:gap-4 text-xs md:text-sm">
+                <span class="text-green-600 font-bold">OK: ${aciertos}</span>
+                <span class="text-red-600 font-bold">KO: ${errores}</span>
+                <span class="font-mono font-bold ${relojClass} ml-auto">⏳ ${mm}:${ss}</span>
+            </div>`;
+      }
 
       if (restantes === 0 && !tiempoAgotado){
         tiempoAgotado = true;
@@ -292,8 +283,6 @@
     function abrirModalFin(){
       const { total, respondidas, enBlanco, penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
       const modal = document.getElementById('modal-fin');
-      
-      // Cálculos para mostrar nota sobre 10
       const notaSobre10 = (validasNetas / total) * 10;
       
       document.getElementById('modal-resumen').innerHTML = `
@@ -315,22 +304,18 @@
     function mostrarResumen(){
       clearInterval(intervaloTiempo);
       const total = preguntasDelExamen.length;
-      const { penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
-      
-      // Nota sobre 10
+      const { penalizacion, validasNetas, apto } = calcularPuntuacion();
       const notaSobre10 = (validasNetas / total) * 10;
 
-      // Renderizar historial
       const detalle = historial.map((h, idx)=>`
         <div class='mb-4 border border-slate-200 rounded-lg p-4 shadow-sm bg-white'>
           <p class='font-bold text-slate-800 mb-3'><span class="text-blue-600">#${idx+1}</span> ${h.pregunta}</p>
           <div class='flex flex-col gap-2'>
             ${h.opciones.map(op=>{
-              let style = "bg-slate-50 border border-slate-200 text-slate-600"; // Defecto
-              if (op===h.correcta) style = "bg-green-100 border-green-300 text-green-900 font-bold"; // Correcta
-              else if (op===h.elegida && op!==h.correcta) style = "bg-red-100 border-red-300 text-red-900 line-through"; // Fallo usuario
+              let style = "bg-slate-50 border border-slate-200 text-slate-600"; 
+              if (op===h.correcta) style = "bg-green-100 border-green-300 text-green-900 font-bold"; 
+              else if (op===h.elegida && op!==h.correcta) style = "bg-red-100 border-red-300 text-red-900 line-through"; 
               
-              // Iconos
               let icon = "";
               if(op===h.correcta) icon = "✅";
               if(op===h.elegida && op!==h.correcta) icon = "❌";
@@ -355,17 +340,13 @@
                 ${apto?'APTO ✅':'NO APTO ❌'}
               </div>
               <p class="text-4xl font-bold text-slate-800">${notaSobre10.toFixed(2)} <span class="text-lg text-slate-500 font-normal">/ 10</span></p>
-              <p class="text-sm text-slate-500 mt-2">Válidas netas: ${validasNetas} (Penalización: -${penalizacion})</p>
           </div>
-
           <hr class="border-slate-200">
-
           <h3 class="text-xl font-bold text-slate-800">Revisión del Examen</h3>
           <div class="max-h-[60vh] overflow-auto pr-2 space-y-2 custom-scrollbar">
             ${detalle}
           </div>
         </div>
-
         <div class="flex flex-wrap items-center justify-center gap-4 mt-8">
           <button onclick="window.location.reload()" class="bg-slate-900 hover:bg-black text-white px-6 py-3 rounded-xl font-bold shadow-lg transform hover:-translate-y-0.5 transition">
             🔄 Repetir Test
@@ -376,16 +357,12 @@
         </div>`;
     }
 
-    /* ===== ATAJOS DE TECLADO ===== */
     function handleKey(e){
       if (tiempoAgotado) return;
       if (e.key === 'Enter') {
-          // Si ya respondió, Enter pasa a la siguiente
           if (respondido) { siguientePregunta(); return; }
-          // Si no ha respondido pero ya eligió, Enter contesta
           if (seleccionUsuario && !respondido) { verificarRespuesta(); return; }
       }
-      
       const map = {'1':0,'2':1,'3':2,'4':3};
       if (map[e.key]!==undefined && !respondido){
         const b = document.querySelectorAll('#opciones .opcion')[map[e.key]];
@@ -395,15 +372,16 @@
 
     window.onload = iniciarAplicacion;
   </script>
-
 </head>
 
 <body class="bg-gray-100 text-gray-900 p-4 min-h-screen flex flex-col items-center">
   
   <div class="max-w-3xl w-full bg-white p-6 md:p-8 rounded-2xl shadow-lg ring-1 ring-slate-100 mb-8" id="test">
+    
     <div class="mb-6">
-      <div class="flex items-center justify-between text-sm text-slate-600 mb-2" id="contador">
-        <span>Cargando datos...</span>
+      <div class="flex items-center justify-between text-sm text-slate-600 mb-2">
+        <div id="contador" class="font-semibold space-x-2">Cargando...</div>
+        <span id="progress-txt" class="font-mono text-slate-500">0/0</span>
       </div>
       <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
         <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out" style="width:0%" role="progressbar"></div>
@@ -425,12 +403,10 @@
     <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 text-center animate-fade-in-up">
       <div class="text-5xl mb-4">⏰</div>
       <h2 class="text-2xl font-extrabold mb-2 text-slate-800">¡Tiempo Agotado!</h2>
-      <p class="text-slate-500 mb-6">El tiempo del examen ha finalizado. Aquí tienes tu resumen:</p>
-      
+      <p class="text-slate-500 mb-6">El tiempo del examen ha finalizado.</p>
       <div id="modal-resumen" class="bg-slate-50 p-4 rounded-xl border border-slate-100 mb-6"></div>
-      
       <button onclick="mostrarResumen(); document.getElementById('modal-fin').classList.add('hidden');" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-bold shadow-lg transition">
-        Ver corrección detallada
+        Ver corrección
       </button>
     </div>
   </div>
