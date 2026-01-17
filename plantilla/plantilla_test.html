@@ -16,346 +16,423 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    /* Accesibilidad */
     @media (prefers-reduced-motion: reduce) {
       * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     }
   </style>
 
   <script>
-    /* ===== LÓGICA DE BASE DE DATOS ===== */
-    let preguntasDelExamen = [];
-    const PREGUNTAS_POR_TEST = 20; // Número de preguntas por examen
-
-    /* ===== Variables de Estado ===== */
+    /* ===== VARIABLES GLOBALES ===== */
+    let preguntasDelExamen = []; // Se llenará desde la Base de Datos
+    const PREGUNTAS_POR_TEST = 20;
+    
+    // Estado del test
     let indice = 0, aciertos = 0, errores = 0;
     let historial = [];
     let seleccionUsuario = null;
     let respondido = false;
+
+    // Tiempo
+    const DURACION_SEG = 60 * 60; // 60 minutos
     let inicioTiempo = null;
     let intervaloTiempo = null;
-    const DURACION_SEG = 60 * 60; // 1 hora de tiempo límite
+    let tiempoAgotado = false;
 
-    /* ===== FUNCIÓN PRINCIPAL DE CARGA ===== */
+    /* ===== 1. CARGA DE BASE DE DATOS Y FILTRADO ===== */
     async function iniciarAplicacion() {
         const params = new URLSearchParams(window.location.search);
-        
-        // 1. OBTENER ID DE LA URL
         let testIdRaw = params.get('id');
-        
+
         if (!testIdRaw) {
-            mostrarError("Error: No has especificado el test.<br>Usa <b>?id=ARTICULOS</b> para el reglamento general<br>o <b>?id=ITC-BT-XX</b> para una instrucción técnica.");
+            mostrarError("No se ha especificado el test (ej: ?id=ITC-BT-20).");
             return;
         }
 
-        // Normalizamos ID de la URL (Mayúsculas, sin tildes, sin espacios)
+        // Normalizamos ID (Mayúsculas, sin tildes, sin espacios)
         const testId = testIdRaw.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '');
 
         try {
-            // 2. CARGAR LA BASE DE DATOS
-            // La barra / al principio indica que busque en la raíz del dominio
+            // Cargar JSON desde la carpeta Data
             const response = await fetch('/Data/base_datos_rebt.json'); 
-            
-            if (!response.ok) throw new Error(`No se pudo leer el archivo de datos. Verifica que la carpeta 'Data' exista en la raíz.`);
+            if (!response.ok) throw new Error("No se pudo conectar con la base de datos.");
             
             const todasLasPreguntas = await response.json();
-            
-            // 3. FILTRADO INTELIGENTE
-            const preguntasFiltradas = todasLasPreguntas.filter(p => {
-                // A) Protección: Si la pregunta no tiene ITC definida, la saltamos
-                if(!p.itc) return false;
 
-                // Normalizamos la ITC de la pregunta (Mayúsculas, sin tildes, sin espacios)
+            // Filtrado Inteligente
+            const preguntasFiltradas = todasLasPreguntas.filter(p => {
+                if(!p.itc) return false;
                 const itcJson = p.itc.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '');
 
-                // B) REGLA: OMITIR CÁLCULOS
-                // Si la columna ITC contiene la palabra "CALCULO", la ignoramos siempre.
-                if (itcJson.includes("CALCULO")) return false;
-
-                // C) REGLA: MODO "ARTÍCULOS" (GENERAL)
-                // Si el usuario pidió ?id=ARTICULOS, cogemos todo lo que empiece por "ARTICULO"
-                // (Esto abarca Artículo 1, Artículo 2... hasta el 29)
-                if (testId === "ARTICULOS") {
-                    return itcJson.startsWith("ARTICULO");
-                }
-
-                // D) REGLA: MODO ITC ESPECÍFICA
-                // Si pidió una ITC concreta (ej: ITC-BT-19), buscamos coincidencia exacta dentro del string
-                return itcJson.includes(testId);
+                // Filtros
+                if (itcJson.includes("CALCULO")) return false; // Omitir cálculos
+                if (testId === "ARTICULOS") return itcJson.startsWith("ARTICULO"); // Modo General
+                return itcJson.includes(testId); // Modo ITC específica
             });
 
             if (preguntasFiltradas.length === 0) {
-                mostrarError(`No se encontraron preguntas válidas (sin cálculos) para: <strong>${testIdRaw}</strong>.`);
+                mostrarError(`No hay preguntas disponibles para: ${testIdRaw}`);
                 return;
             }
 
-            // 4. BARAJAR Y SELECCIONAR
+            // Preparar examen (Barajar y cortar)
             const mezcladas = mezclar(preguntasFiltradas);
-            // Cogemos 20 o las que haya si son menos
             preguntasDelExamen = mezcladas.slice(0, PREGUNTAS_POR_TEST);
-
-            // Mezclar opciones internas de cada pregunta
+            
+            // Barajar opciones dentro de cada pregunta
             preguntasDelExamen = preguntasDelExamen.map(p => ({
-                ...p,
-                opciones: mezclar([...p.opciones])
+                ...p, 
+                opciones: mezclar([...p.opciones]) 
             }));
 
-            // 5. INICIAR LA INTERFAZ
-            // Título personalizado según el modo
-            let titulo = testId === "ARTICULOS" 
-                ? "Reglamento General (Arts. 1-29)" 
-                : testIdRaw.toUpperCase();
+            // Configurar Título (Corrección solicitada)
+            let tituloWeb = testIdRaw.toUpperCase();
+            if (testId === "ARTICULOS") {
+                tituloWeb = "Articulado del REBT";
+            }
 
-            document.getElementById('titulo-h1').textContent = titulo;
-            document.getElementById('subtitulo').textContent = `Test generado con ${preguntasDelExamen.length} preguntas aleatorias.`;
-            
+            document.getElementById('titulo-h1').textContent = tituloWeb;
+
+            // Iniciar Lógica
             inicioTiempo = Date.now();
-            intervaloTiempo = setInterval(actualizarContador, 1000);
             cargarPregunta();
+            intervaloTiempo = setInterval(actualizarContador, 1000);
             document.addEventListener('keydown', handleKey);
 
         } catch (error) {
             console.error(error);
-            mostrarError("Error crítico: " + error.message);
+            mostrarError("Error cargando el test. Intenta recargar.");
         }
     }
 
-    /* ===== Utilidades ===== */
-    const mezclar = (arr) => { 
-        for (let i = arr.length-1; i>0; i--) { 
-            const j = Math.floor(Math.random()*(i+1)); 
-            [arr[i],arr[j]]=[arr[j],arr[i]]; 
-        } 
-        return arr; 
-    };
-
-    function mostrarError(msg) {
-        document.getElementById('test-container').innerHTML = `
-            <div class="text-center text-red-600 p-10">
-                <h2 class="text-2xl font-bold">⚠️ Atención</h2>
-                <p class="mt-2">${msg}</p>
-                <a href="/" class="mt-6 inline-block bg-slate-700 text-white px-6 py-2 rounded-lg hover:bg-slate-800 transition">Volver al inicio</a>
-            </div>`;
-    }
-
-    /* ===== Lógica del Test ===== */
+    /* ===== 2. LÓGICA DEL TEST (ESTILO ORIGINAL) ===== */
+    
     function cargarPregunta(){
-      if (indice >= preguntasDelExamen.length) return finalizarTest();
+      if (indice >= preguntasDelExamen.length) return mostrarResumen();
       
       const q = preguntasDelExamen[indice];
       seleccionUsuario = null; 
       respondido = false;
 
       document.getElementById("pregunta").textContent = q.pregunta;
-      
-      // Renderizar Opciones
+      renderOpciones(q.opciones);
+
+      // Botón Contestar (Estado Inicial: Deshabilitado)
+      document.getElementById("acciones").innerHTML =
+        `<div class="flex items-center justify-between mt-4 text-sm text-slate-500">
+           <span>Elige una respuesta (teclas 1–4 y Enter).</span>
+           <button disabled id="btn-contestar" class="opacity-50 cursor-not-allowed bg-slate-800 text-white px-4 py-2 rounded-lg transition-all">Contestar</button>
+         </div>`;
+
+      setProgreso();
+      actualizarContador();
+    }
+
+    function renderOpciones(opciones){
       const cont = document.getElementById("opciones");
       cont.innerHTML = "";
-      q.opciones.forEach((op, i) => {
+      opciones.forEach((op, i)=>{
         const btn = document.createElement("button");
-        // Estilos de los botones
-        btn.className = "opcion w-full text-left bg-white border-2 border-slate-200 hover:border-blue-500 hover:bg-blue-50 text-slate-800 px-5 py-4 rounded-xl shadow-sm transition-all group outline-none focus:ring-2 focus:ring-blue-400";
+        btn.type="button";
         btn.dataset.valor = op;
-        // Estructura del botón con letra A,B,C,D
-        btn.innerHTML = `
-            <div class="flex items-center gap-3">
-                <span class="bg-slate-200 text-slate-600 min-w-[2rem] h-8 flex items-center justify-center rounded-full font-bold group-hover:bg-blue-600 group-hover:text-white transition">
-                    ${['A','B','C','D'][i]}
-                </span> 
-                <span>${op}</span>
-            </div>`;
-        btn.onclick = () => seleccionar(op, btn);
+        // CLASES ORIGINALES (Azul intenso, diseño de tarjeta)
+        btn.className="opcion w-full text-left bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl shadow transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300";
+        btn.innerHTML = `<span class="font-semibold tracking-wide">${op}</span>`;
+        btn.onclick = ()=>seleccionarOpcion(op);
+        btn.setAttribute('aria-label',`Opción ${i+1}: ${op}`);
         cont.appendChild(btn);
       });
+    }
 
-      // Ocultar elementos de "siguiente"
-      document.getElementById("btn-next").classList.add("hidden");
-      document.getElementById("explicacion-box").classList.add("hidden");
+    function seleccionarOpcion(opcion){
+      if (respondido || tiempoAgotado) return;
       
-      actualizarBarra();
+      seleccionUsuario = opcion;
+      
+      // Feedback visual de selección (Anillo amarillo)
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.classList.remove('ring','ring-yellow-300','translate-y-0.5');
+        if (b.dataset.valor===opcion) b.classList.add('ring','ring-yellow-300','translate-y-0.5');
+      });
+
+      // Habilitar botón Contestar
+      const btn = document.getElementById('btn-contestar');
+      if(btn){
+          btn.disabled=false;
+          btn.classList.remove('opacity-50','cursor-not-allowed');
+          btn.onclick=verificarRespuesta; // Asignar función al clic
+      }
     }
 
-    function seleccionar(valor, btnElement) {
-        if (respondido) return;
-        respondido = true;
-        seleccionUsuario = valor;
-        const actual = preguntasDelExamen[indice];
-        const esCorrecta = valor === actual.respuesta;
+    function verificarRespuesta(){
+      if (respondido || !seleccionUsuario || tiempoAgotado) return;
+      
+      const actual = preguntasDelExamen[indice];
+      const ok = seleccionUsuario === actual.respuesta;
+      respondido = true;
 
-        // Marcar opciones (Verde/Rojo)
-        document.querySelectorAll(".opcion").forEach(b => {
-            b.disabled = true;
-            b.classList.remove("hover:border-blue-500", "hover:bg-blue-50"); // Quitar hover
-            
-            if (b.dataset.valor === actual.respuesta) {
-                // La correcta siempre se marca en verde
-                b.classList.remove("bg-white", "border-slate-200");
-                b.classList.add("bg-green-100", "border-green-500", "ring-1", "ring-green-500");
-            } else if (b.dataset.valor === valor && !esCorrecta) {
-                // Si fallaste, la tuya se marca en rojo
-                b.classList.remove("bg-white", "border-slate-200");
-                b.classList.add("bg-red-100", "border-red-500");
-            }
-        });
-
-        if (esCorrecta) aciertos++; else errores++;
+      // Colorear respuestas (Verde/Rojo)
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{
+        b.disabled=true; 
+        b.classList.remove('ring','ring-yellow-300');
+        const val=b.dataset.valor;
         
-        // Guardar historial
-        historial.push({ ...actual, elegida: valor, correcta: esCorrecta });
+        if (val === actual.respuesta){
+          b.classList.add('bg-green-600','hover:bg-green-700');
+          b.innerHTML=`✅ <span class="font-semibold">${val}</span>`;
+        } else if (val === seleccionUsuario && !ok){
+          b.classList.add('bg-red-600','hover:bg-red-700');
+          b.innerHTML=`❌ <span class="font-semibold">${val}</span>`;
+        } else {
+          b.classList.add('bg-blue-500', 'opacity-50'); // Atenuar las no seleccionadas
+        }
+      });
 
-        // Mostrar explicación
-        const box = document.getElementById("explicacion-box");
-        box.innerHTML = `
-            <div class="font-bold text-blue-800 mb-1 flex items-center gap-2">
-                ℹ️ ${actual.itc} <span class="text-slate-400">|</span> Punto ${actual.punto}
-            </div>
-            <div class="text-slate-700 leading-relaxed">${actual.explicacion || "Sin explicación disponible."}</div>
-        `;
-        box.classList.remove("hidden");
-        
-        // Mostrar botón siguiente
-        const btnNext = document.getElementById("btn-next");
-        btnNext.classList.remove("hidden");
-        btnNext.focus(); // Foco automático para facilitar navegación con teclado
+      ok ? aciertos++ : errores++;
 
-        actualizarBarra();
+      // Guardar en historial
+      historial.push({
+        pregunta: actual.pregunta,
+        opciones: actual.opciones,
+        correcta: actual.respuesta,
+        elegida: seleccionUsuario,
+        explicacion: actual.explicacion,
+        referencia: `${actual.itc} - Punto ${actual.punto}`
+      });
+
+      // Mostrar Explicación y Botón Siguiente
+      document.getElementById("acciones").innerHTML =
+        `<div class="mt-4 flex flex-col gap-3 animate-fade-in-up">
+           <div class="flex items-center justify-end">
+             <button onclick="siguientePregunta()" id="btn-siguiente" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow font-bold">
+               Siguiente
+             </button>
+           </div>
+           <div id="explicacion" class="text-sm text-slate-700 bg-slate-100 border-l-4 border-blue-600 p-3 rounded-md">
+             <strong class="block mb-1 text-blue-800">ℹ️ ${actual.itc} | Punto ${actual.punto}</strong>
+             ${actual.explicacion || "Sin explicación detallada."}
+           </div>
+         </div>`;
+      
+       // Enfocar botón siguiente para accesibilidad
+       document.getElementById("btn-siguiente")?.focus();
+
+      actualizarContador();
+      setProgreso();
     }
 
-    function siguiente() {
-        indice++;
-        cargarPregunta();
+    const siguientePregunta = ()=>{ if (!tiempoAgotado){ indice++; cargarPregunta(); } };
+
+    /* ===== UTILIDADES Y CÁLCULOS ===== */
+    const mezclar = (arr) => { for (let i = arr.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
+    const fmt2 = (n) => String(n).padStart(2,'0');
+    const clamp0 = (x) => x < 0 ? 0 : x;
+
+    function calcularPuntuacion(){
+      const total = preguntasDelExamen.length;
+      if(total === 0) return { total:0, puntos:0, porcentaje:0 };
+      
+      const penalizacion = Math.floor(errores / 2);
+      const validasNetas = Math.max(0, aciertos - penalizacion);
+      const puntos = validasNetas * 0.5; // Ajustar según tu criterio (ej: 1 punto por neta)
+      const porcentaje = clamp0((validasNetas / total) * 100);
+      const apto = porcentaje >= 50; // Criterio del 50%
+      
+      return { total, respondidas: aciertos+errores, enBlanco: total-(aciertos+errores), penalizacion, validasNetas, puntos, porcentaje, apto };
     }
 
-    function finalizarTest() {
+    function setProgreso(){
+      const total = preguntasDelExamen.length;
+      const pct = total > 0 ? Math.round((indice/total)*100) : 0;
+      const bar = document.getElementById('progress-bar');
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', pct);
+      document.getElementById('progress-txt').textContent = `${indice}/${total}`;
+    }
+
+    function actualizarContador(){
+      if (!inicioTiempo) return;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const restantes = Math.max(0, DURACION_SEG - transcurrido);
+      const mm = fmt2(Math.floor(restantes/60));
+      const ss = fmt2(restantes%60);
+
+      const { puntos } = calcularPuntuacion();
+      const totalPuntos = preguntasDelExamen.length * 0.5; // O la base máxima que uses
+
+      const relojClass = restantes <= 60 ? 'text-red-700' : restantes <= 300 ? 'text-orange-600' : 'text-blue-700';
+
+      document.getElementById("contador").innerHTML = `
+        <div class="flex flex-wrap gap-2 md:gap-4 text-xs md:text-sm">
+            <span>P.: ${indice + 1}/${preguntasDelExamen.length}</span>
+            <span class="text-green-600 font-bold">OK: ${aciertos}</span>
+            <span class="text-red-600 font-bold">KO: ${errores}</span>
+            <span class="font-mono font-bold ${relojClass} ml-auto">⏳ ${mm}:${ss}</span>
+        </div>`;
+
+      if (restantes === 0 && !tiempoAgotado){
+        tiempoAgotado = true;
         clearInterval(intervaloTiempo);
-        const total = preguntasDelExamen.length;
-        // Calcular nota sobre 10 (Aciertos - Fallos/2)
-        let notaRaw = aciertos - (errores / 2);
-        if (notaRaw < 0) notaRaw = 0;
-        const notaFinal = (notaRaw / total) * 10;
-        
-        const esApto = notaFinal >= 5; 
+        deshabilitarInteraccion();
+        abrirModalFin();
+      }
+    }
 
-        document.getElementById('test-container').innerHTML = `
-            <div class="text-center space-y-8 py-4">
-                <h2 class="text-4xl md:text-5xl font-black ${esApto ? 'text-emerald-600':'text-red-600'} animate-bounce">
-                    ${esApto ? '¡APTO! 🎉' : 'NO APTO ❌'}
-                </h2>
-                
-                <div class="grid grid-cols-3 gap-4 max-w-lg mx-auto text-center">
-                    <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl">
-                        <div class="text-3xl font-bold text-emerald-700">${aciertos}</div>
-                        <div class="text-xs font-semibold uppercase tracking-wide text-emerald-800">Aciertos</div>
-                    </div>
-                    <div class="bg-red-50 border border-red-200 p-4 rounded-xl">
-                        <div class="text-3xl font-bold text-red-700">${errores}</div>
-                        <div class="text-xs font-semibold uppercase tracking-wide text-red-800">Fallos</div>
-                    </div>
-                    <div class="bg-blue-50 border border-blue-200 p-4 rounded-xl">
-                        <div class="text-3xl font-bold text-blue-700">${notaFinal.toFixed(1)}</div>
-                        <div class="text-xs font-semibold uppercase tracking-wide text-blue-800">Nota / 10</div>
-                    </div>
-                </div>
+    function mostrarError(msg) {
+        document.getElementById('test').innerHTML = `<div class="text-center text-red-600 p-6 font-bold">${msg}<br><a href="/" class="underline mt-4 block">Volver</a></div>`;
+    }
 
-                <div class="bg-slate-50 p-4 rounded-lg text-sm text-slate-500">
-                    Preguntas respondidas: ${aciertos + errores} de ${total}
-                </div>
+    function deshabilitarInteraccion(){
+      document.querySelectorAll("#opciones .opcion").forEach(b=>{ b.disabled=true; });
+      document.getElementById('btn-contestar')?.setAttribute('disabled','true');
+      document.removeEventListener('keydown', handleKey);
+    }
 
-                <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-                    <button onclick="location.reload()" class="bg-slate-900 text-white px-8 py-4 rounded-xl font-bold hover:bg-black transition shadow-lg hover:-translate-y-1">
-                        🔄 Repetir Test (Nuevas Preguntas)
-                    </button>
-                    <a href="/" class="bg-white border-2 border-slate-200 text-slate-700 px-8 py-4 rounded-xl font-bold hover:bg-slate-50 transition shadow-sm">
-                        🏠 Volver al Inicio
-                    </a>
-                </div>
+    /* ===== PANTALLAS FINALES ===== */
+    function abrirModalFin(){
+      const { total, respondidas, enBlanco, penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+      const modal = document.getElementById('modal-fin');
+      
+      // Cálculos para mostrar nota sobre 10
+      const notaSobre10 = (validasNetas / total) * 10;
+      
+      document.getElementById('modal-resumen').innerHTML = `
+        <div class="space-y-2">
+            <p>Has respondido <strong>${respondidas}</strong> de ${total}.</p>
+            <div class="grid grid-cols-2 gap-2 text-center my-4">
+                <div class="bg-green-100 p-2 rounded"><div class="text-xl font-bold text-green-700">${aciertos}</div><div class="text-xs">Aciertos</div></div>
+                <div class="bg-red-100 p-2 rounded"><div class="text-xl font-bold text-red-700">${errores}</div><div class="text-xs">Fallos</div></div>
             </div>
-        `;
+            <p class="text-sm text-slate-500">Penalización (Fallos/2): -${penalizacion} aciertos.</p>
+            <p class="text-lg font-bold text-center border-t pt-2">Nota: ${notaSobre10.toFixed(2)} / 10</p>
+            <p class="${apto?'text-emerald-600':'text-red-600'} font-black text-2xl text-center mt-2">${apto?'¡APTO! 🎉':'NO APTO ❌'}</p>
+        </div>
+      `;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
     }
 
-    function actualizarBarra() {
-        const pct = ((indice) / preguntasDelExamen.length) * 100;
-        document.getElementById("progress").style.width = `${pct}%`;
-        document.getElementById("contador-txt").innerText = `${indice + 1} / ${preguntasDelExamen.length}`;
-    }
-    
-    function actualizarContador() {
-        const diff = Math.floor((Date.now() - inicioTiempo)/1000);
-        const rest = DURACION_SEG - diff;
-        
-        if(rest <= 0) {
-            finalizarTest();
-            return;
-        }
+    function mostrarResumen(){
+      clearInterval(intervaloTiempo);
+      const total = preguntasDelExamen.length;
+      const { penalizacion, validasNetas, puntos, porcentaje, apto } = calcularPuntuacion();
+      
+      // Nota sobre 10
+      const notaSobre10 = (validasNetas / total) * 10;
 
-        const m = Math.floor(rest / 60).toString().padStart(2,'0');
-        const s = (rest % 60).toString().padStart(2,'0');
-        
-        const timerElem = document.getElementById("timer");
-        timerElem.innerText = `${m}:${s}`;
-        
-        // Cambiar color si queda poco tiempo
-        if(rest < 60) timerElem.className = "font-mono text-xl font-bold text-red-600 animate-pulse";
-        else timerElem.className = "font-mono text-xl font-bold text-slate-700";
+      // Renderizar historial
+      const detalle = historial.map((h, idx)=>`
+        <div class='mb-4 border border-slate-200 rounded-lg p-4 shadow-sm bg-white'>
+          <p class='font-bold text-slate-800 mb-3'><span class="text-blue-600">#${idx+1}</span> ${h.pregunta}</p>
+          <div class='flex flex-col gap-2'>
+            ${h.opciones.map(op=>{
+              let style = "bg-slate-50 border border-slate-200 text-slate-600"; // Defecto
+              if (op===h.correcta) style = "bg-green-100 border-green-300 text-green-900 font-bold"; // Correcta
+              else if (op===h.elegida && op!==h.correcta) style = "bg-red-100 border-red-300 text-red-900 line-through"; // Fallo usuario
+              
+              // Iconos
+              let icon = "";
+              if(op===h.correcta) icon = "✅";
+              if(op===h.elegida && op!==h.correcta) icon = "❌";
+
+              return `<div class='px-3 py-2 rounded-md text-sm ${style} flex justify-between items-center'>
+                        <span>${op}</span> <span>${icon}</span>
+                      </div>`;
+            }).join('')}
+          </div>
+          <div class='mt-3 text-sm text-slate-600 bg-blue-50 border-l-4 border-blue-500 p-3 rounded-r-md'>
+            <span class="font-bold text-blue-800">Explicación:</span> ${h.explicacion}
+            <br><span class="text-xs text-slate-500 mt-1 block">Ref: ${h.referencia}</span>
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById("test").innerHTML = `
+        <div class="space-y-6">
+          <div class="text-center">
+              <h2 class="text-3xl font-extrabold mb-2">Resultado Final</h2>
+              <div class="${apto?'bg-emerald-100 text-emerald-800':'bg-red-100 text-red-800'} inline-block px-6 py-2 rounded-full font-black text-xl mb-4">
+                ${apto?'APTO ✅':'NO APTO ❌'}
+              </div>
+              <p class="text-4xl font-bold text-slate-800">${notaSobre10.toFixed(2)} <span class="text-lg text-slate-500 font-normal">/ 10</span></p>
+              <p class="text-sm text-slate-500 mt-2">Válidas netas: ${validasNetas} (Penalización: -${penalizacion})</p>
+          </div>
+
+          <hr class="border-slate-200">
+
+          <h3 class="text-xl font-bold text-slate-800">Revisión del Examen</h3>
+          <div class="max-h-[60vh] overflow-auto pr-2 space-y-2 custom-scrollbar">
+            ${detalle}
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-4 mt-8">
+          <button onclick="window.location.reload()" class="bg-slate-900 hover:bg-black text-white px-6 py-3 rounded-xl font-bold shadow-lg transform hover:-translate-y-0.5 transition">
+            🔄 Repetir Test
+          </button>
+          <a href="index.html" class="bg-white border-2 border-slate-200 hover:bg-slate-50 text-slate-700 px-6 py-3 rounded-xl font-bold shadow-sm transition">
+            🏠 Volver al Inicio
+          </a>
+        </div>`;
     }
 
-    // Atajos de teclado
-    function handleKey(e) {
-        if(respondido && e.key === 'Enter') siguiente();
-        
-        if(!respondido && ['1','2','3','4'].includes(e.key)) {
-            const index = parseInt(e.key) - 1;
-            const botones = document.querySelectorAll('.opcion');
-            if(botones[index]) botones[index].click();
-        }
+    /* ===== ATAJOS DE TECLADO ===== */
+    function handleKey(e){
+      if (tiempoAgotado) return;
+      if (e.key === 'Enter') {
+          // Si ya respondió, Enter pasa a la siguiente
+          if (respondido) { siguientePregunta(); return; }
+          // Si no ha respondido pero ya eligió, Enter contesta
+          if (seleccionUsuario && !respondido) { verificarRespuesta(); return; }
+      }
+      
+      const map = {'1':0,'2':1,'3':2,'4':3};
+      if (map[e.key]!==undefined && !respondido){
+        const b = document.querySelectorAll('#opciones .opcion')[map[e.key]];
+        if (b) b.click();
+      }
     }
 
-    // Arranque
     window.onload = iniciarAplicacion;
   </script>
+
 </head>
-<body class="bg-gray-50 text-slate-800 min-h-screen flex flex-col items-center p-4 selection:bg-blue-200">
 
-    <div class="w-full max-w-3xl flex justify-between items-center mb-6 px-2">
-        <div>
-            <a href="/" class="text-xs font-bold tracking-wider text-slate-400 uppercase hover:text-slate-600 transition">APP-REBT.ES</a>
-            <div id="timer" class="font-mono text-xl font-bold text-slate-700">00:00</div>
-        </div>
-        <div class="text-right">
-            <div id="contador-txt" class="text-sm font-bold text-slate-500">...</div>
-        </div>
+<body class="bg-gray-100 text-gray-900 p-4 min-h-screen flex flex-col items-center">
+  
+  <div class="max-w-3xl w-full bg-white p-6 md:p-8 rounded-2xl shadow-lg ring-1 ring-slate-100 mb-8" id="test">
+    <div class="mb-6">
+      <div class="flex items-center justify-between text-sm text-slate-600 mb-2" id="contador">
+        <span>Cargando datos...</span>
+      </div>
+      <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+        <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out" style="width:0%" role="progressbar"></div>
+      </div>
     </div>
 
-    <div id="test-container" class="w-full max-w-3xl bg-white p-6 md:p-10 rounded-3xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] ring-1 ring-black/5 relative overflow-hidden transition-all">
-        
-        <div class="absolute top-0 left-0 w-full h-1.5 bg-slate-100">
-            <div id="progress" class="h-full bg-blue-600 transition-all duration-500" style="width: 0%"></div>
-        </div>
+    <h1 id="titulo-h1" class="text-2xl md:text-3xl font-extrabold mb-6 text-center text-slate-800">Cargando...</h1>
+    <p id="pregunta" class="mb-8 text-lg md:text-xl font-medium text-center text-slate-700 leading-relaxed min-h-[4rem] flex items-center justify-center"></p>
 
-        <h1 id="titulo-h1" class="text-2xl md:text-3xl font-black text-slate-900 mt-2 mb-1">Cargando...</h1>
-        <p id="subtitulo" class="text-slate-500 text-sm mb-6 font-medium"></p>
+    <div id="opciones" class="flex flex-col gap-3"></div>
+    <div id="acciones" class="mt-4 min-h-[60px]"></div>
+  </div>
 
-        <div id="pregunta" class="text-lg md:text-xl font-medium text-slate-800 mb-8 leading-relaxed"></div>
+  <div class="text-center pb-8">
+    <a href="Test_por_ITC_del_REBT.html" class="inline-block bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow transition">Salir / Cancelar</a>
+  </div>
 
-        <div id="opciones" class="flex flex-col gap-3 mb-6">
-            </div>
-
-        <div id="explicacion-box" class="hidden bg-blue-50 border-l-4 border-blue-500 p-5 rounded-r-xl mb-6 text-sm shadow-sm animate-fade-in-down">
-        </div>
-
-        <div class="flex justify-end min-h-[50px]">
-            <button id="btn-next" onclick="siguiente()" class="hidden bg-slate-900 hover:bg-black text-white px-8 py-3 rounded-xl font-bold shadow-lg transform hover:-translate-y-1 transition-all flex items-center gap-2">
-                Siguiente Pregunta 
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-            </button>
-        </div>
+  <div id="modal-fin" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 text-center animate-fade-in-up">
+      <div class="text-5xl mb-4">⏰</div>
+      <h2 class="text-2xl font-extrabold mb-2 text-slate-800">¡Tiempo Agotado!</h2>
+      <p class="text-slate-500 mb-6">El tiempo del examen ha finalizado. Aquí tienes tu resumen:</p>
+      
+      <div id="modal-resumen" class="bg-slate-50 p-4 rounded-xl border border-slate-100 mb-6"></div>
+      
+      <button onclick="mostrarResumen(); document.getElementById('modal-fin').classList.add('hidden');" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-bold shadow-lg transition">
+        Ver corrección detallada
+      </button>
     </div>
-    
-    <div class="mt-8 text-center text-slate-400 text-xs">
-        <p>REBT - Reglamento Electrotécnico para Baja Tensión</p>
-    </div>
+  </div>
 
 </body>
 </html>
