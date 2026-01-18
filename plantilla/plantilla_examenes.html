@@ -137,31 +137,22 @@
 
     const norm = (t) => t ? t.toString().toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim() : "";
 
-    /* ============================================================
-       === MOTOR DE SELECCIÓN CORREGIDO (40 PREGUNTAS EXACTAS) ===
-       Reglas:
-       1) 6 Articulado (29 artículos)
-       2) 2 ITC-BT-03
-       3) 2 ITC-BT-04
-       4) 2 ITC-BT-05
-       5) 25 resto ITCs (excluye Articulado, 03/04/05 y Cálculo)
-       6) 3 Cálculo: 1 Previsión de cargas, 1 Ley de Ohm, 1 Potencia (según Punto)
-       Orden: Bloque1 -> Bloque2 -> Bloque3
-       ============================================================ */
+    /* === MOTOR DE SELECCIÓN CORREGIDO (40 PREGUNTAS EXACTAS Y SIN WHILE FRÁGIL) === */
     function generarExamen(todas) {
-        const usados = new Set();
 
-        const itcNorm = (p) => norm(p.itc);
-        const puntoNorm = (p) => norm(p.punto);
+        const usados = new Set(); // usamos el texto de la pregunta como identificador (como ya venías haciendo)
 
-        const esArticulo = (p) => itcNorm(p).includes("ARTICULO");
-        const esCalculo = (p) => itcNorm(p).includes("CALCULO");
-        const esITCExacta = (p, n) => itcNorm(p) === `ITC-BT-${n}`;
+        const itcN = (p) => norm(p.itc);
+        const ptoN = (p) => norm(p.punto);
+
+        const esArticulo = (p) => itcN(p).includes("ARTICULO");
+        const esCalculo  = (p) => itcN(p).includes("CALCULO");
+        const esITCExacta = (p, n) => itcN(p) === `ITC-BT-${n}`;
 
         const pick = (pool, n) => mezclar(pool).slice(0, n);
 
-        // ===== BLOQUE 1 (12) =====
-        const b1_art = pick(todas.filter(p => esArticulo(p) && !usados.has(p.pregunta)), 6);
+        // ===== BLOQUE 1: 6 Articulado + 2 ITC-03 + 2 ITC-04 + 2 ITC-05 =====
+        const b1_art = pick(todas.filter(p => esArticulo(p)), 6);
         b1_art.forEach(p => usados.add(p.pregunta));
 
         const b1_03 = pick(todas.filter(p => esITCExacta(p, "03") && !usados.has(p.pregunta)), 2);
@@ -173,14 +164,14 @@
         const b1_05 = pick(todas.filter(p => esITCExacta(p, "05") && !usados.has(p.pregunta)), 2);
         b1_05.forEach(p => usados.add(p.pregunta));
 
-        const bloque1 = [...b1_art, ...b1_03, ...b1_04, ...b1_05];
+        const bloque1 = [...b1_art, ...b1_03, ...b1_04, ...b1_05]; // 12
 
-        // ===== BLOQUE 3 (3) - CÁLCULO =====
+        // ===== BLOQUE 3: 3 Cálculo (1 Previsión, 1 Ohm, 1 Potencia) =====
         const c_prevision = pick(
             todas.filter(p =>
                 !usados.has(p.pregunta) &&
                 esCalculo(p) &&
-                puntoNorm(p).includes("PREVISION")
+                ptoN(p).includes("PREVISION")
             ),
             1
         );
@@ -190,7 +181,7 @@
             todas.filter(p =>
                 !usados.has(p.pregunta) &&
                 esCalculo(p) &&
-                puntoNorm(p).includes("OHM")
+                ptoN(p).includes("OHM")
             ),
             1
         );
@@ -200,68 +191,40 @@
             todas.filter(p =>
                 !usados.has(p.pregunta) &&
                 esCalculo(p) &&
-                puntoNorm(p).includes("POTENCIA")
+                ptoN(p).includes("POTENCIA")
             ),
             1
         );
         c_potencia.forEach(p => usados.add(p.pregunta));
 
-        const bloque3 = [...c_prevision, ...c_ohm, ...c_potencia];
+        const bloque3 = [...c_prevision, ...c_ohm, ...c_potencia]; // 3
 
-        // ===== BLOQUE 2 (25) - RESTO ITCs =====
+        // ===== BLOQUE 2: 25 del resto (SIN Articulado, SIN 03/04/05, SIN Cálculo) =====
+        // ✅ Aquí está la corrección REAL: mezclar + slice(25) (sin while que a veces se queda en 22–24)
         const excluidas = new Set(["ITC-BT-03", "ITC-BT-04", "ITC-BT-05"]);
 
         const poolResto = todas.filter(p =>
             !usados.has(p.pregunta) &&
             !esArticulo(p) &&
             !esCalculo(p) &&
-            !excluidas.has(itcNorm(p))
+            !excluidas.has(itcN(p))
         );
 
-        // Para variedad: repartir por ITC
-        const mapa = {};
-        poolResto.forEach(p => {
-            const k = itcNorm(p);
-            if (!mapa[k]) mapa[k] = [];
-            mapa[k].push(p);
-        });
-
-        // Mezclamos cada grupo
-        Object.keys(mapa).forEach(k => mezclar(mapa[k]));
-
-        let keys = mezclar(Object.keys(mapa));
-        const bloque2 = [];
-        let i = 0;
-
-        while (bloque2.length < 25 && keys.length > 0) {
-            const k = keys[i % keys.length];
-            const arr = mapa[k];
-
-            if (arr && arr.length > 0) {
-                const q = arr.pop();
-                if (!usados.has(q.pregunta)) {
-                    bloque2.push(q);
-                    usados.add(q.pregunta);
-                }
-            } else {
-                keys.splice(i % keys.length, 1);
-                continue;
-            }
-            i++;
-        }
-
-        // Relleno defensivo si faltan (sin romper reglas)
-        if (bloque2.length < 25) {
-            const extra = mezclar(poolResto.filter(p => !usados.has(p.pregunta)));
-            extra.slice(0, 25 - bloque2.length).forEach(p => {
-                bloque2.push(p);
-                usados.add(p.pregunta);
-            });
-        }
+        const bloque2 = pick(poolResto, 25);
+        bloque2.forEach(p => usados.add(p.pregunta));
 
         const final = [...bloque1, ...bloque2, ...bloque3];
 
-        // Última defensa: asegurar 40 exactas (sin alterar el orden)
+        // Defensa: si por cualquier motivo no son 40, lo verás claramente en consola
+        if (final.length !== 40) {
+            console.error("Examen generado con", final.length, "preguntas. Revisa filtros/valores itc/punto.", {
+                bloque1: bloque1.length,
+                bloque2: bloque2.length,
+                bloque3: bloque3.length
+            });
+        }
+
+        // Garantía: devuelve 40 exactas (siempre que existan, que en tu BBDD existen)
         return final.slice(0, 40);
     }
 
@@ -523,7 +486,7 @@
 <body>
     <main id="main-card" class="w-full max-w-3xl bg-white rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] overflow-hidden border border-gray-100 border-t-[6px] border-t-blue-600 flex flex-col relative max-h-[90vh]">
         <header class="stats-header px-5 py-2.5 border-b border-gray-100 bg-white flex-shrink-0 flex justify-between items-center text-[11px] font-medium text-gray-500">
-            <div>Cuestión: <strong class="text-gray-900" id="stats-cuestion">0/0</strong></div>
+            <div>Preguntas: <strong class="text-gray-900" id="stats-cuestion">0/0</strong></div>
             <div class="flex gap-3">
                 <span class="text-emerald-600">Aciertos: <strong id="stats-aciertos">0</strong></span>
                 <span class="text-red-600">Fallos: <strong id="stats-fallos">0</strong></span>
