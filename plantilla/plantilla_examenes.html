@@ -23,18 +23,15 @@
     @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes pulse-blue-glow { 0%, 100% { box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.5); } 50% { box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.7); } }
     .btn-attention { animation: pulse-blue-glow 2s infinite ease-in-out; }
-    @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-    .animate-heartbeat { animation: heartbeat 1.5s infinite ease-in-out; }
     .hide-scroll::-webkit-scrollbar { display: none; }
     .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
     button { -webkit-tap-highlight-color: transparent; user-select: none; }
   </style>
 
   <script>
-    /* ===== LÓGICA DE EXAMEN ACTUALIZADA ===== */
     let preguntasDelExamen = [];
     const PREGUNTAS_POR_TEST = 40; 
-    const DURACION_SEG = 120 * 60; // 2 HORAS
+    const DURACION_SEG = 120 * 60; 
 
     let indice = 0, aciertos = 0, errores = 0;
     let historial = [];
@@ -43,15 +40,16 @@
     let inicioTiempo = null;
     let intervaloTiempo = null;
     let tiempoAgotado = false;
-    let testIdActual = "EXAMEN_GENERAL"; 
+    let testIdActual = ""; 
 
     function guardarProgreso() {
+        if (!testIdActual) return;
         const estado = { preguntasDelExamen, indice, aciertos, errores, historial, inicioTiempo, respondido, seleccionUsuario, testIdActual };
-        localStorage.setItem('rebt_examen_progreso', JSON.stringify(estado));
+        localStorage.setItem('rebt_examen_pro_' + testIdActual, JSON.stringify(estado));
     }
 
     function borrarProgreso() {
-        localStorage.removeItem('rebt_examen_progreso');
+        if (testIdActual) localStorage.removeItem('rebt_examen_pro_' + testIdActual);
     }
 
     function cancelarYSalir() {
@@ -59,74 +57,56 @@
         window.location.href = '../Test_por_ITC_del_REBT.html';
     }
 
-    function cargarProgreso() {
-        const guardado = localStorage.getItem('rebt_examen_progreso');
+    function cargarProgreso(id) {
+        const guardado = localStorage.getItem('rebt_examen_pro_' + id);
         if (guardado) {
             try {
                 const estado = JSON.parse(guardado);
-                if (estado.indice < estado.preguntasDelExamen.length) {
-                    preguntasDelExamen = estado.preguntasDelExamen;
-                    indice = estado.indice; aciertos = estado.aciertos; errores = estado.errores;
-                    historial = estado.historial; inicioTiempo = estado.inicioTiempo;
-                    return true;
-                }
-            } catch (e) { console.error(e); }
+                preguntasDelExamen = estado.preguntasDelExamen;
+                indice = estado.indice; aciertos = estado.aciertos; errores = estado.errores;
+                historial = estado.historial; inicioTiempo = estado.inicioTiempo;
+                return true;
+            } catch (e) { return false; }
         }
         return false;
     }
 
-    function lanzarFuegosArtificiales() {
-        var duration = 3 * 1000;
-        var animationEnd = Date.now() + duration;
-        var interval = setInterval(function() {
-            var timeLeft = animationEnd - Date.now();
-            if (timeLeft <= 0) return clearInterval(interval);
-            confetti({ particleCount: 50, origin: { x: Math.random(), y: Math.random() - 0.2 } });
-        }, 250);
-    }
-
     function mezclar(array) {
-        let currentIndex = array.length, randomIndex;
-        while (currentIndex != 0) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--;
-            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
         }
         return array;
     }
 
-    /* === MOTOR DE SELECCIÓN DE PREGUNTAS SEGÚN REGLAS === */
+    // Función para normalizar texto (quita tildes y pasa a mayúsculas)
+    const norm = (t) => t ? t.toString().toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim() : "";
+
     function generarExamen(todas) {
-        let pool = [];
-        
+        let seleccion = [];
+
         // 1. 6 de Artículos (1 al 29)
-        const articulos = mezclar(todas.filter(p => p.itc && p.itc.toUpperCase().includes("ARTICULO"))).slice(0, 6);
+        const articulos = mezclar(todas.filter(p => norm(p.itc).includes("ARTICULO"))).slice(0, 6);
         
         // 2. 2 de ITC-BT-03, 04 y 05
-        const itc03 = mezclar(todas.filter(p => p.itc && p.itc.includes("03"))).slice(0, 2);
-        const itc04 = mezclar(todas.filter(p => p.itc && p.itc.includes("04"))).slice(0, 2);
-        const itc05 = mezclar(todas.filter(p => p.itc && p.itc.includes("05"))).slice(0, 2);
+        const itc03 = mezclar(todas.filter(p => norm(p.itc).includes("03"))).slice(0, 2);
+        const itc04 = mezclar(todas.filter(p => norm(p.itc).includes("04"))).slice(0, 2);
+        const itc05 = mezclar(todas.filter(p => norm(p.itc).includes("05"))).slice(0, 2);
         
         // 3. 3 de Cálculo (Potencia, Ley de Ohm, Previsión)
-        const calculoPotencia = todas.find(p => p.itc && p.itc.includes("Cálculo") && p.punto && p.punto.includes("Potencia"));
-        const calculoOhm = todas.find(p => p.itc && p.itc.includes("Cálculo") && p.punto && p.punto.includes("Ley de Ohm"));
-        const calculoPrevision = todas.find(p => p.itc && p.itc.includes("Cálculo") && p.punto && p.punto.includes("Previsión de cargas"));
+        const cPotencia = mezclar(todas.filter(p => norm(p.itc).includes("CALCULO") && norm(p.punto).includes("POTENCIA"))).slice(0, 1);
+        const cOhm = mezclar(todas.filter(p => norm(p.itc).includes("CALCULO") && norm(p.punto).includes("OHM"))).slice(0, 1);
+        const cPrevision = mezclar(todas.filter(p => norm(p.itc).includes("CALCULO") && norm(p.punto).includes("PREVISION"))).slice(0, 1);
         
-        let seleccion = [...articulos, ...itc03, ...itc04, ...itc05];
-        if(calculoPotencia) seleccion.push(calculoPotencia);
-        if(calculoOhm) seleccion.push(calculoOhm);
-        if(calculoPrevision) seleccion.push(calculoPrevision);
+        seleccion = [...articulos, ...itc03, ...itc04, ...itc05, ...cPotencia, ...cOhm, ...cPrevision];
 
-        // IDs de las preguntas ya seleccionadas para no repetir
-        const idsSeleccionados = seleccion.map(s => s.pregunta);
-
-        // 4. 25 del resto de ITCs (Una por cada una)
-        // Agrupamos el resto por ITC
+        // 4. 25 del resto de ITCs (Una por cada una para evitar repetición de temas)
+        const IDsYaUsados = seleccion.map(s => s.pregunta);
         const restantesPool = todas.filter(p => 
-            !p.itc.includes("Cálculo") && 
-            !p.itc.toUpperCase().includes("ARTICULO") && 
-            !["03","04","05"].some(num => p.itc.includes(num)) &&
-            !idsSeleccionados.includes(p.pregunta)
+            !norm(p.itc).includes("CALCULO") && 
+            !norm(p.itc).includes("ARTICULO") && 
+            !["03","04","05"].some(n => p.itc.includes(n)) &&
+            !IDsYaUsados.includes(p.pregunta)
         );
 
         let itcsMap = {};
@@ -136,23 +116,25 @@
         });
 
         let keys = mezclar(Object.keys(itcsMap));
-        for(let i=0; i < 25 && i < keys.length; i++){
-            let itcPreguntas = mezclar(itcsMap[keys[i]]);
-            seleccion.push(itcPreguntas[0]);
+        for(let i=0; i < keys.length && seleccion.length < 40; i++){
+            seleccion.push(mezclar(itcsMap[keys[i]])[0]);
         }
 
-        // Si faltan para llegar a 40 (por si no hay suficientes ITCs), rellenamos con aleatorias no usadas
+        // Relleno final si falta alguna
         if(seleccion.length < 40){
-            const usadasIds = seleccion.map(s => s.pregunta);
-            const extra = mezclar(todas.filter(p => !usadasIds.includes(p.pregunta))).slice(0, 40 - seleccion.length);
-            seleccion = [...seleccion, ...extra];
+            const finalIds = seleccion.map(s => s.pregunta);
+            const relleno = mezclar(todas.filter(p => !finalIds.includes(p.pregunta))).slice(0, 40 - seleccion.length);
+            seleccion = [...seleccion, ...relleno];
         }
 
-        return mezclar(seleccion.slice(0, 40));
+        return mezclar(seleccion);
     }
 
     async function iniciarAplicacion() {
-        if (cargarProgreso()) {
+        const params = new URLSearchParams(window.location.search);
+        testIdActual = params.get('id') || "EXAMEN-01";
+
+        if (cargarProgreso(testIdActual)) {
             cargarPregunta();
             intervaloTiempo = setInterval(actualizarEstado, 1000);
             return;
@@ -160,27 +142,34 @@
 
         try {
             const response = await fetch('../Data/base_datos_rebt_examenes.json');
-            if (!response.ok) throw new Error("Error " + response.status);
+            if (!response.ok) throw new Error("Error cargando JSON");
             const todas = await response.json();
 
             preguntasDelExamen = generarExamen(todas).map(p => ({
                 ...p, opciones: mezclar([...p.opciones])
             }));
 
+            if (preguntasDelExamen.length === 0) throw new Error("No se generaron preguntas");
+
             inicioTiempo = Date.now();
             guardarProgreso();
             cargarPregunta();
             intervaloTiempo = setInterval(actualizarEstado, 1000);
-        } catch (e) { mostrarError("Error cargando el examen."); }
+        } catch (e) { 
+            console.error(e);
+            document.getElementById('contenedor-test').innerHTML = `<div class="text-center py-10 text-red-500 font-bold">Error cargando el examen. Verifica que el archivo JSON esté en Data/base_datos_rebt_examenes.json</div>`;
+        }
     }
 
-    /* === LAS FUNCIONES DE UI SE MANTIENEN IGUAL QUE TU PLANTILLA ORIGINAL === */
     function cargarPregunta(){
       if (indice >= preguntasDelExamen.length) return finalizarTest();
       const q = preguntasDelExamen[indice];
       seleccionUsuario = null; respondido = false;
-      document.getElementById("itc-title").textContent = q.itc || "EXAMEN";
+      
+      // TÍTULO FIJO PARA EXAMEN
+      document.getElementById("itc-title").textContent = "Examen REBT";
       document.getElementById("texto-pregunta").textContent = q.pregunta;
+      
       const cont = document.getElementById("contenedor-opciones");
       cont.innerHTML = "";
       q.opciones.forEach((op)=>{
@@ -191,8 +180,7 @@
         btn.innerHTML = `<span class="leading-snug">${op}</span>`;
         cont.appendChild(btn);
       });
-      document.getElementById("area-acciones").innerHTML = `
-        <div class="flex justify-end mt-2"><button id="btn-accion" disabled onclick="verificarRespuesta()" class="px-6 py-2 rounded-lg font-bold text-white bg-gray-300 cursor-not-allowed text-xs uppercase">Contestar</button></div>`;
+      document.getElementById("area-acciones").innerHTML = `<div class="flex justify-end mt-2"><button id="btn-accion" disabled onclick="verificarRespuesta()" class="px-6 py-2 rounded-lg font-bold text-white bg-gray-300 cursor-not-allowed text-xs uppercase">Contestar</button></div>`;
       guardarProgreso();
       actualizarEstado();
     }
@@ -203,9 +191,8 @@
       document.querySelectorAll("#contenedor-opciones button").forEach(b => {
         b.className = b.dataset.valor === opcion ? "w-full text-left py-3 px-4 mb-2 rounded-xl border-2 border-blue-600 bg-blue-50 text-blue-900 font-medium flex items-start shadow-sm text-sm" : "w-full text-left py-3 px-4 mb-2 rounded-xl border border-gray-200 bg-white text-gray-600 flex items-start text-sm opacity-60";
       });
-      const btn = document.getElementById('btn-accion');
-      btn.disabled = false;
-      btn.className = "px-6 py-2 rounded-lg font-bold text-white bg-blue-600 shadow-md text-xs uppercase";
+      document.getElementById('btn-accion').disabled = false;
+      document.getElementById('btn-accion').className = "px-6 py-2 rounded-lg font-bold text-white bg-blue-600 shadow-md text-xs uppercase";
     }
 
     function verificarRespuesta(){
@@ -224,12 +211,13 @@
          <div class="fade-in w-full mt-2">
             <div class="flex justify-end mb-3"><button id="btn-siguiente" onclick="siguientePregunta()" class="px-6 py-2 rounded-lg font-bold text-white bg-blue-600 shadow-lg text-xs uppercase btn-attention">Siguiente</button></div>
             <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-700 shadow-sm">
-                <strong>${actual.itc}</strong> | Punto: <strong>${actual.punto || "-"}</strong><br>${actual.explicacion || "Sin explicación."}
+                <strong>Explicación:</strong><br>${actual.explicacion || "Consulta el REBT para más detalles."}
             </div>
          </div>`;
     }
 
     const siguientePregunta = () => { indice++; cargarPregunta(); };
+    const fmt2 = (n) => String(n).padStart(2,'0');
 
     function actualizarEstado(){
       if (!inicioTiempo) return;
@@ -250,23 +238,19 @@
     function finalizarTest(){
         clearInterval(intervaloTiempo);
         borrarProgreso();
-        const total = preguntasDelExamen.length;
-        const nota = (aciertos * (10/total));
-        const apto = nota >= 5; // En examen se suele aprobar con 5
-        if (apto) lanzarFuegosArtificiales();
+        const nota = (aciertos * (10/preguntasDelExamen.length));
+        const apto = nota >= 5;
+        if (apto) confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
         document.getElementById('contenedor-test').innerHTML = `
             <div class="text-center py-6 fade-in">
-                <div class="text-4xl mb-4">${apto ? '🎉' : '💪'}</div>
-                <h2 class="text-2xl font-bold mb-1">${apto ? '¡Aprobado!' : 'No Apto'}</h2>
-                <p class="text-gray-500 text-sm mb-6">Nota: <strong>${nota.toFixed(2)}</strong> / 10</p>
-                <div class="flex gap-3 mb-8">
-                    <button onclick="location.reload()" class="flex-1 py-3 bg-blue-600 text-white rounded-xl font-bold">Repetir</button>
-                    <a href="../Test_por_ITC_del_REBT.html" class="flex-1 py-3 bg-white border border-gray-200 rounded-xl font-bold flex items-center justify-center">Salir</a>
-                </div>
+                <div class="text-5xl mb-4">${apto ? '🎉' : '💪'}</div>
+                <h2 class="text-2xl font-bold mb-1">${apto ? 'APTO' : 'NO APTO'}</h2>
+                <p class="text-gray-500 mb-6">Nota Final: <span class="text-2xl font-black text-slate-900">${nota.toFixed(2)}</span></p>
+                <button onclick="location.reload()" class="w-full py-3 bg-blue-600 text-white rounded-xl font-bold mb-3">Repetir Examen</button>
+                <a href="../Test_por_ITC_del_REBT.html" class="block w-full py-3 bg-gray-100 text-gray-600 rounded-xl font-bold text-center">Volver al Menú</a>
             </div>`;
     }
 
-    function mostrarError(msg) { document.getElementById('contenedor-test').innerHTML = `<div class="text-center py-10 text-red-500">${msg}</div>`; }
     window.onload = iniciarAplicacion;
   </script>
 </head>
@@ -283,12 +267,12 @@
         </header>
         <div class="w-full h-1 bg-gray-100"><div id="progress-bar" class="h-full bg-blue-600 transition-all duration-300" style="width: 0%"></div></div>
         <div id="contenedor-test" class="p-5 md:p-6 overflow-y-auto hide-scroll flex-1">
-            <div id="header-title-container" class="text-center mb-4"><h1 id="itc-title" class="text-lg font-bold text-gray-900 uppercase">EXAMEN REBT</h1></div>
+            <div class="text-center mb-4"><h1 id="itc-title" class="text-lg font-bold text-gray-900 uppercase">Examen REBT</h1></div>
             <div id="texto-pregunta" class="text-[15px] font-medium text-gray-800 leading-relaxed mb-4">...</div>
             <div id="contenedor-opciones" class="mb-2"></div>
             <div id="area-acciones" class="mt-4 pb-2"></div>
         </div>
     </main>
-    <div class="mt-4"><button onclick="cancelarYSalir()" class="px-6 py-2 bg-slate-700 text-white text-xs font-semibold rounded-lg">Cancelar</button></div>
+    <div class="mt-4"><button onclick="cancelarYSalir()" class="px-6 py-2 bg-slate-700 text-white text-xs font-semibold rounded-lg shadow-md">Cancelar Examen</button></div>
 </body>
 </html>
