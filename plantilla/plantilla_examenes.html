@@ -56,10 +56,10 @@
   </style>
 
   <script>
-    /* ===== LÓGICA DE EXAMEN PROFESIONAL ===== */
+    /* ===== LÓGICA DE EXAMEN ESTRUCTURADA ===== */
     let preguntasDelExamen = [];
     const PREGUNTAS_POR_TEST = 40;
-    const DURACION_SEG = 120 * 60; // 120 MINUTOS (2 HORAS)
+    const DURACION_SEG = 120 * 60; // 2 Horas
 
     let indice = 0, aciertos = 0, errores = 0;
     let historial = [];
@@ -70,15 +70,15 @@
     let tiempoAgotado = false;
     let testIdActual = "";
 
-    // Persistencia específica para exámenes
+    // Persistencia
     function guardarProgreso() {
         if (!testIdActual) return;
         const estado = { preguntasDelExamen, indice, aciertos, errores, historial, inicioTiempo, respondido, seleccionUsuario, testIdActual };
-        localStorage.setItem('rebt_examen_final_' + testIdActual, JSON.stringify(estado));
+        localStorage.setItem('rebt_examen_data_' + testIdActual, JSON.stringify(estado));
     }
 
     function borrarProgreso() {
-        if (testIdActual) localStorage.removeItem('rebt_examen_final_' + testIdActual);
+        if (testIdActual) localStorage.removeItem('rebt_examen_data_' + testIdActual);
     }
 
     function cancelarYSalir() {
@@ -87,7 +87,7 @@
     }
 
     function cargarProgreso(id) {
-        const guardado = localStorage.getItem('rebt_examen_final_' + id);
+        const guardado = localStorage.getItem('rebt_examen_data_' + id);
         if (guardado) {
             try {
                 const estado = JSON.parse(guardado);
@@ -98,8 +98,6 @@
                     errores = estado.errores;
                     historial = estado.historial;
                     inicioTiempo = estado.inicioTiempo;
-                    respondido = false; 
-                    seleccionUsuario = null;
                     return true;
                 }
             } catch (e) { console.error(e); }
@@ -114,7 +112,7 @@
         function randomInRange(min, max) { return Math.random() * (max - min) + min; }
         var interval = setInterval(function() {
             var timeLeft = animationEnd - Date.now();
-            if (timeLeft <= 0) { return clearInterval(interval); }
+            if (timeLeft <= 0) return clearInterval(interval);
             var particleCount = 50 * (timeLeft / duration);
             confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
             confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
@@ -131,79 +129,86 @@
         return array;
     }
 
-    // Normalizador de texto para búsquedas seguras (sin tildes, mayúsculas)
     const norm = (t) => t ? t.toString().toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim() : "";
 
-    /* === MOTOR DE SELECCIÓN DE PREGUNTAS (LÓGICA PEDIDA) === */
+    /* === MOTOR DE SELECCIÓN CON ORDEN REQUERIDO === */
     function generarExamen(todas) {
-        let seleccion = [];
+        let bloque1 = []; // Artículos + 03, 04, 05 (12 preguntas)
+        let bloque2 = []; // Resto de ITCs (25 preguntas)
+        let bloque3 = []; // Cálculos (3 preguntas)
 
-        // 1. 6 de Artículos (del 1 al 29)
-        const articulos = mezclar(todas.filter(p => norm(p.itc).includes("ARTICULO"))).slice(0, 6);
+        // 1. BLOQUE 1: Articulado (6) + ITCs 03, 04, 05 (2 de cada = 6). Total 12.
+        const poolArticulos = mezclar(todas.filter(p => norm(p.itc).includes("ARTICULO"))).slice(0, 6);
+        const pool03 = mezclar(todas.filter(p => norm(p.itc).includes("03"))).slice(0, 2);
+        const pool04 = mezclar(todas.filter(p => norm(p.itc).includes("04"))).slice(0, 2);
+        const pool05 = mezclar(todas.filter(p => norm(p.itc).includes("05"))).slice(0, 2);
         
-        // 2. 2 de ITC-BT-03, 04 y 05
-        const itc03 = mezclar(todas.filter(p => norm(p.itc).includes("03"))).slice(0, 2);
-        const itc04 = mezclar(todas.filter(p => norm(p.itc).includes("04"))).slice(0, 2);
-        const itc05 = mezclar(todas.filter(p => norm(p.itc).includes("05"))).slice(0, 2);
-        
-        // 3. 3 de Cálculo (Potencia, Ley de Ohm, Previsión)
+        bloque1 = [...poolArticulos, ...pool03, ...pool04, ...pool05];
+        let idsUsados = bloque1.map(p => p.pregunta);
+
+        // 2. BLOQUE 3 (Reservamos Cálculos para el final): Potencia, Ohm, Previsión. Total 3.
         const cPotencia = mezclar(todas.filter(p => norm(p.itc).includes("CALCULO") && norm(p.punto).includes("POTENCIA"))).slice(0, 1);
         const cOhm = mezclar(todas.filter(p => norm(p.itc).includes("CALCULO") && norm(p.punto).includes("OHM"))).slice(0, 1);
         const cPrevision = mezclar(todas.filter(p => norm(p.itc).includes("CALCULO") && norm(p.punto).includes("PREVISION"))).slice(0, 1);
         
-        seleccion = [...articulos, ...itc03, ...itc04, ...itc05, ...cPotencia, ...cOhm, ...cPrevision];
+        bloque3 = [...cPotencia, ...cOhm, ...cPrevision];
+        idsUsados = [...idsUsados, ...bloque3.map(p => p.pregunta)];
 
-        // 4. 25 del resto de ITCs (Una de cada ITC distinta)
-        const IDsYaUsados = seleccion.map(s => s.pregunta);
-        const restantesPool = todas.filter(p => 
-            !norm(p.itc).includes("CALCULO") && 
-            !norm(p.itc).includes("ARTICULO") && 
-            !["03","04","05"].some(n => p.itc.includes(n)) &&
-            !IDsYaUsados.includes(p.pregunta)
+        // 3. BLOQUE 2: 25 del resto de ITCs (sin repetir de los otros bloques)
+        const poolRestantes = todas.filter(p => 
+            !idsUsados.includes(p.pregunta) &&
+            !norm(p.itc).includes("CALCULO") &&
+            !norm(p.itc).includes("ARTICULO") &&
+            !["03","04","05"].some(n => p.itc.includes(n))
         );
 
-        // Agrupamos por ITC para coger solo una de cada tema
         let itcsMap = {};
-        restantesPool.forEach(p => {
+        poolRestantes.forEach(p => {
             if(!itcsMap[p.itc]) itcsMap[p.itc] = [];
             itcsMap[p.itc].push(p);
         });
 
         let keys = mezclar(Object.keys(itcsMap));
-        for(let i=0; i < keys.length && seleccion.length < 40; i++){
-            seleccion.push(mezclar(itcsMap[keys[i]])[0]);
+        let i = 0;
+        while(bloque2.length < 25 && keys.length > 0) {
+            let key = keys[i % keys.length];
+            if(itcsMap[key].length > 0) {
+                bloque2.push(itcsMap[key].pop());
+            } else {
+                keys.splice(i % keys.length, 1);
+            }
+            if(keys.length > 0) i++;
         }
 
-        // Relleno de seguridad si no se llega a 40
-        if(seleccion.length < 40){
-            const finalIds = seleccion.map(s => s.pregunta);
-            const relleno = mezclar(todas.filter(p => !finalIds.includes(p.pregunta))).slice(0, 40 - seleccion.length);
-            seleccion = [...seleccion, ...relleno];
+        // Si por alguna razón no llegamos a 25, rellenamos con lo que quede
+        if(bloque2.length < 25) {
+            const faltantes = 25 - bloque2.length;
+            const usadosActuales = [...bloque1, ...bloque2, ...bloque3].map(p => p.pregunta);
+            const extra = mezclar(todas.filter(p => !usadosActuales.includes(p.pregunta))).slice(0, faltantes);
+            bloque2 = [...bloque2, ...extra];
         }
 
-        return mezclar(seleccion);
+        // Retornamos el orden exacto solicitado: Bloque 1 (12) -> Bloque 2 (25) -> Bloque 3 (3)
+        return [...mezclar(bloque1), ...mezclar(bloque2), ...bloque3];
     }
 
     async function iniciarAplicacion() {
         const params = new URLSearchParams(window.location.search);
-        let testIdRaw = params.get('id');
-        if (!testIdRaw) { mostrarError("No se ha seleccionado ningún test."); return; }
-
-        testIdActual = testIdRaw.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '');
+        let id = params.get('id');
+        if (!id) { mostrarError("ID de examen no encontrado."); return; }
+        testIdActual = id.toUpperCase();
 
         if (cargarProgreso(testIdActual)) {
             cargarPregunta();
             intervaloTiempo = setInterval(actualizarEstado, 1000);
-            document.addEventListener('keydown', handleKey);
             return;
         }
 
         try {
             const response = await fetch('../Data/base_datos_rebt_examenes.json');
-            if (!response.ok) throw new Error("No se encuentra el archivo de datos.");
+            if (!response.ok) throw new Error("Error al cargar JSON.");
             const todas = await response.json();
 
-            // Aplicar Motor de Selección de 40 preguntas
             preguntasDelExamen = generarExamen(todas).map(p => ({
                 ...p, opciones: mezclar([...p.opciones])
             }));
@@ -213,11 +218,7 @@
             cargarPregunta();
             intervaloTiempo = setInterval(actualizarEstado, 1000);
             document.addEventListener('keydown', handleKey);
-
-        } catch (e) { 
-            console.error(e);
-            mostrarError("Error cargando el examen: " + e.message); 
-        }
+        } catch (e) { mostrarError("Error en la base de datos."); }
     }
 
     function cargarPregunta(){
@@ -226,7 +227,6 @@
       const q = preguntasDelExamen[indice];
       seleccionUsuario = null; respondido = false;
 
-      // TÍTULO FIJO PARA EXAMEN
       document.getElementById("itc-title").textContent = "Examen REBT";
       document.getElementById("texto-pregunta").textContent = q.pregunta;
 
@@ -235,7 +235,7 @@
 
       q.opciones.forEach((op)=>{
         const btn = document.createElement("button");
-        btn.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 hover:border-blue-300 transition-all text-sm font-medium text-gray-700 flex items-start gap-3 group shadow-sm active:scale-[0.99]";
+        btn.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 hover:border-blue-300 transition-all text-sm font-medium text-gray-700 flex items-start gap-3 shadow-sm active:scale-[0.99]";
         btn.dataset.valor = op;
         btn.onclick = ()=>seleccionarOpcion(op);
         btn.innerHTML = `<span class="leading-snug">${op}</span>`;
@@ -245,7 +245,7 @@
       document.getElementById("area-acciones").innerHTML = `
         <div class="flex justify-end mt-2">
             <button id="btn-accion" disabled onclick="verificarRespuesta()" 
-                class="px-6 py-2 rounded-lg font-bold text-white bg-gray-300 cursor-not-allowed transition-all shadow-none text-xs tracking-wide uppercase">
+                class="px-6 py-2 rounded-lg font-bold text-white bg-gray-300 cursor-not-allowed transition-all text-xs tracking-wide uppercase">
                 Contestar
             </button>
         </div>
@@ -257,20 +257,18 @@
     }
 
     function seleccionarOpcion(opcion){
-      if (respondido || tiempoAgotado) return;
+      if (respondido) return;
       seleccionUsuario = opcion;
 
       document.querySelectorAll("#contenedor-opciones button").forEach(b => {
-        if (b.dataset.valor === opcion) {
-            b.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border-2 border-blue-600 bg-blue-50/50 text-blue-900 font-medium flex items-start gap-3 shadow-sm transform scale-[1.01] transition-all text-sm";
-        } else {
-            b.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border border-gray-200 bg-white opacity-60 hover:opacity-100 transition-all text-gray-600 flex items-start gap-3 text-sm";
-        }
+        b.className = b.dataset.valor === opcion 
+            ? "w-full text-left py-3 px-4 mb-2 rounded-xl border-2 border-blue-600 bg-blue-50 text-blue-900 font-medium flex items-start gap-3 shadow-sm scale-[1.01] transition-all text-sm"
+            : "w-full text-left py-3 px-4 mb-2 rounded-xl border border-gray-200 bg-white opacity-60 transition-all text-gray-600 flex items-start gap-3 text-sm";
       });
 
       const btn = document.getElementById('btn-accion');
       btn.disabled = false;
-      btn.className = "px-6 py-2 rounded-lg font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md hover:shadow-lg transition-all transform active:scale-[0.98] text-xs tracking-wide uppercase";
+      btn.className = "px-6 py-2 rounded-lg font-bold text-white bg-blue-600 shadow-md text-xs tracking-wide uppercase";
     }
 
     function verificarRespuesta(){
@@ -282,42 +280,28 @@
       document.querySelectorAll("#contenedor-opciones button").forEach(b => {
         b.disabled = true;
         const val = b.dataset.valor;
-        if (val === actual.respuesta) {
-            b.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-semibold flex items-start gap-3 shadow-sm text-sm";
-        } else if (val === seleccionUsuario && !esCorrecta) {
-            b.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border-2 border-red-500 bg-red-50 text-red-900 font-semibold flex items-start gap-3 shadow-sm text-sm";
-        } else {
-            b.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border border-gray-100 bg-white opacity-40 text-gray-400 flex items-start gap-3 text-sm";
-        }
+        if (val === actual.respuesta) b.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-semibold flex items-start gap-3 shadow-sm text-sm";
+        else if (val === seleccionUsuario) b.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border-2 border-red-500 bg-red-50 text-red-900 font-semibold flex items-start gap-3 shadow-sm text-sm";
+        else b.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border border-gray-100 bg-white opacity-40 text-gray-400 flex items-start gap-3 text-sm";
       });
 
       if (esCorrecta) aciertos++; else errores++;
-      
-      historial.push({ pregunta: actual.pregunta, opciones: actual.opciones, correcta: actual.respuesta, elegida: seleccionUsuario, itc: actual.itc, punto: actual.punto, explicacion: actual.explicacion });
+      historial.push({ ...actual, elegida: seleccionUsuario });
       guardarProgreso();
 
       document.getElementById("area-acciones").innerHTML = `
          <div class="fade-in w-full mt-2">
             <div class="flex justify-end mb-3">
                 <button id="btn-siguiente" onclick="siguientePregunta()" 
-                    class="px-6 py-2 rounded-lg font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-lg transition-all flex items-center justify-center gap-2 text-xs tracking-wide uppercase btn-attention">
+                    class="px-6 py-2 rounded-lg font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-lg text-xs uppercase btn-attention">
                     Siguiente
                 </button>
             </div>
             <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-700 shadow-sm">
-                <div class="flex flex-wrap items-center gap-2 mb-1.5 pb-1.5 border-b border-slate-200">
-                    <strong class="text-xs text-slate-800">${actual.itc}</strong>
-                    <span class="text-slate-300">|</span>
-                    <span class="text-xs font-medium text-slate-500">Punto: <strong>${actual.punto || "-"}</strong></span>
-                </div>
-                <div class="leading-relaxed text-slate-600">${actual.explicacion || "Sin explicación adicional."}</div>
+                <strong>${actual.itc}</strong> | Punto: <strong>${actual.punto || "-"}</strong><br>${actual.explicacion || "Consulta el REBT para más detalles."}
             </div>
          </div>
       `;
-
-      const btnSig = document.getElementById('btn-siguiente');
-      btnSig.focus();
-      actualizarEstado();
     }
 
     const siguientePregunta = () => { indice++; cargarPregunta(); };
@@ -338,69 +322,34 @@
       const mm = fmt2(Math.floor(restantes/60));
       const ss = fmt2(restantes%60);
       document.getElementById('timer-display').innerText = `${mm}:${ss}`;
-      
-      if (restantes === 0 && !tiempoAgotado){
-        tiempoAgotado = true;
-        clearInterval(intervaloTiempo);
-        finalizarTest();
-      }
+      if (restantes === 0 && !tiempoAgotado) { tiempoAgotado = true; finalizarTest(); }
     }
 
     function finalizarTest(){
         clearInterval(intervaloTiempo);
         borrarProgreso();
-        const total = preguntasDelExamen.length;
-        const nota = (aciertos * (10/total));
-        const apto = nota >= 5; // Apto en examen oficial suele ser 5
-
+        const nota = (aciertos * (10/preguntasDelExamen.length));
+        const apto = nota >= 5;
         if (apto) lanzarFuegosArtificiales();
-
-        const htmlHistorial = historial.map((h, i) => {
-            const opcionesHTML = h.opciones.map(op => {
-                let clase = "text-slate-400 border-slate-100 bg-white";
-                let icon = "";
-                if (op === h.correcta) { clase = "text-emerald-700 bg-emerald-50 border-emerald-200 font-medium"; icon = "✅"; } 
-                else if (op === h.elegida && op !== h.correcta) { clase = "text-red-700 bg-red-50 border-red-200 line-through decoration-red-400"; icon = "❌"; }
-                return `<div class="text-xs p-2 rounded border ${clase} flex justify-between items-center mb-1"><span>${op}</span><span>${icon}</span></div>`;
-            }).join('');
-
-            return `
-                <div class="mb-5 pb-3 border-b border-gray-100 last:border-0">
-                    <p class="text-sm font-bold text-gray-800 mb-3">${h.pregunta}</p>
-                    <div class="mb-3">${opcionesHTML}</div>
-                    <div class="text-xs bg-slate-50 p-2.5 rounded-lg border"><strong>${h.itc}</strong>: ${h.explicacion}</div>
-                </div>`;
-        }).join('');
 
         document.getElementById('contenedor-test').innerHTML = `
             <div class="text-center py-6 fade-in">
-                <div class="text-5xl mb-4">${apto ? '🎉' : '💪'}</div>
+                <div class="text-5xl mb-4 ${apto ? '' : 'animate-heartbeat'}">${apto ? '🎉' : '💪'}</div>
                 <h2 class="text-2xl font-bold mb-1">${apto ? 'APTO' : 'NO APTO'}</h2>
-                <p class="text-gray-500 mb-6">Nota Final: <span class="text-2xl font-black text-slate-900">${nota.toFixed(2)}</span></p>
+                <p class="text-gray-500 mb-6">Tu puntuación ha sido de <span class="text-2xl font-black text-slate-900">${nota.toFixed(2)}</span></p>
                 <button onclick="location.reload()" class="w-full py-3 bg-blue-600 text-white rounded-xl font-bold mb-3 shadow-lg">Repetir Examen</button>
                 <a href="../Test_por_ITC_del_REBT.html" class="block w-full py-3 bg-white border text-gray-600 rounded-xl font-bold text-center">Salir al Menú</a>
-                <div class="mt-8 text-left border-t pt-6">${htmlHistorial}</div>
             </div>`;
     }
 
-    function mostrarError(msg) {
-        document.getElementById('contenedor-test').innerHTML = `<div class="text-center py-10 text-red-500 font-bold">${msg}</div>`;
-    }
-
-    function handleKey(e){
-        if(tiempoAgotado) return;
-        if(e.key === 'Enter') {
-            const btn = document.querySelector('#area-acciones button');
-            if(btn && !btn.disabled) btn.click();
-        }
-    }
-
+    function mostrarError(msg) { document.getElementById('contenedor-test').innerHTML = `<div class="text-center py-10 text-red-500 font-bold">${msg}</div>`; }
+    function handleKey(e){ if(e.key === 'Enter') { const b = document.querySelector('#area-acciones button'); if(b && !b.disabled) b.click(); } }
     window.onload = iniciarAplicacion;
   </script>
 </head>
 <body>
     <main id="main-card" class="w-full max-w-3xl bg-white rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] overflow-hidden border border-gray-100 border-t-[6px] border-t-blue-600 flex flex-col relative max-h-[90vh]">
-        <header class="stats-header px-5 py-2.5 border-b border-gray-100 bg-white flex-shrink-0 flex justify-between items-center text-[11px] font-medium text-gray-500">
+        <header class="stats-header px-5 py-2.5 border-b border-gray-100 bg-white flex justify-between items-center text-[11px] font-medium text-gray-500">
             <div>Cuestión: <strong class="text-gray-900" id="stats-cuestion">0/0</strong></div>
             <div class="flex gap-3">
                 <span class="text-emerald-600">Bien: <strong id="stats-aciertos">0</strong></span>
@@ -409,18 +358,14 @@
                 <span class="text-amber-600 font-mono" id="timer-display">120:00</span>
             </div>
         </header>
-        <div class="w-full h-1 bg-gray-100 flex-shrink-0"><div id="progress-bar" class="h-full bg-blue-600 transition-all duration-300 rounded-r-full" style="width: 0%"></div></div>
-        <div id="contenedor-test" class="p-5 md:p-6 overflow-y-auto hide-scroll flex-1 relative">
-            <div id="header-title-container" class="text-center mb-4"><h1 id="itc-title" class="text-lg font-bold text-gray-900 uppercase tracking-tight">EXAMEN REBT</h1></div>
+        <div class="w-full h-1 bg-gray-100"><div id="progress-bar" class="h-full bg-blue-600 transition-all duration-300 rounded-r-full" style="width: 0%"></div></div>
+        <div id="contenedor-test" class="p-5 md:p-6 overflow-y-auto hide-scroll flex-1">
+            <div id="header-title-container" class="text-center mb-4"><h1 id="itc-title" class="text-lg font-bold text-gray-900 uppercase tracking-tight">Examen REBT</h1></div>
             <div id="texto-pregunta" class="text-[15px] font-medium text-gray-800 leading-relaxed mb-4">...</div>
             <div id="contenedor-opciones" class="mb-2"></div>
             <div id="area-acciones" class="mt-4 pb-2"></div>
         </div>
     </main>
-    <div class="mt-4">
-        <button onclick="cancelarYSalir()" class="px-6 py-2 bg-slate-700 hover:bg-slate-800 text-white text-xs font-semibold rounded-lg shadow-lg transition-all">
-            Cancelar Examen
-        </button>
-    </div>
+    <div class="mt-4"><button onclick="cancelarYSalir()" class="px-6 py-2 bg-slate-700 hover:bg-slate-800 text-white text-xs font-semibold rounded-lg shadow-lg">Cancelar Examen</button></div>
 </body>
 </html>
