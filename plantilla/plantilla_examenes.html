@@ -137,13 +137,13 @@
 
     const norm = (t) => t ? t.toString().toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim() : "";
 
-    /* === MOTOR DE SELECCIÓN CON ORDEN ESTRUCTURADO ESTRICTO === */
+    /* === MOTOR DE SELECCIÓN CORREGIDO (40 PREGUNTAS EXACTAS) === */
     function generarExamen(todas) {
         let bloque1 = []; // Artículos + 03, 04, 05 (12 preguntas)
         let bloque2 = []; // Resto de ITCs (25 preguntas)
         let bloque3 = []; // Cálculos (3 preguntas)
 
-        // 1. BLOQUE 1: Articulado (6) + ITCs 03, 04, 05 (2 de cada = 6). Total 12.
+        // 1. BLOQUE 1: Articulado (6) + ITCs 03, 04, 05 (2 cada una). Total 12.
         const poolArticulos = mezclar(todas.filter(p => norm(p.itc).includes("ARTICULO"))).slice(0, 6);
         const pool03 = mezclar(todas.filter(p => norm(p.itc).includes("03"))).slice(0, 2);
         const pool04 = mezclar(todas.filter(p => norm(p.itc).includes("04"))).slice(0, 2);
@@ -152,7 +152,7 @@
         bloque1 = [...poolArticulos, ...pool03, ...pool04, ...pool05];
         let idsUsados = bloque1.map(p => p.pregunta);
 
-        // 2. BLOQUE 3 (Cálculos específicos): Una de cada tipo en Punto. Total 3.
+        // 2. BLOQUE 3: Cálculos (1 de cada en Punto). Total 3.
         const cPotencia = mezclar(todas.filter(p => !idsUsados.includes(p.pregunta) && norm(p.itc).includes("CALCULO") && norm(p.punto).includes("POTENCIA"))).slice(0, 1);
         const cOhm = mezclar(todas.filter(p => !idsUsados.includes(p.pregunta) && norm(p.itc).includes("CALCULO") && norm(p.punto).includes("OHM"))).slice(0, 1);
         const cPrevision = mezclar(todas.filter(p => !idsUsados.includes(p.pregunta) && norm(p.itc).includes("CALCULO") && norm(p.punto).includes("PREVISION"))).slice(0, 1);
@@ -160,7 +160,7 @@
         bloque3 = [...cPrevision, ...cPotencia, ...cOhm];
         idsUsados = [...idsUsados, ...bloque3.map(p => p.pregunta)];
 
-        // 3. BLOQUE 2: 25 del resto de ITCs (sin repetir ITCs si es posible)
+        // 3. BLOQUE 2: Seleccionar EXACTAMENTE 25 del resto
         const poolRestantes = todas.filter(p => 
             !idsUsados.includes(p.pregunta) &&
             !norm(p.itc).includes("CALCULO") &&
@@ -168,6 +168,7 @@
             !["03","04","05"].some(n => p.itc.includes(n))
         );
 
+        // Agrupamos por ITC para variedad
         let itcsMap = {};
         poolRestantes.forEach(p => {
             if(!itcsMap[p.itc]) itcsMap[p.itc] = [];
@@ -186,14 +187,14 @@
             if(keys.length > 0) i++;
         }
 
-        // Relleno de seguridad si bloque2 no llega a 25
+        // RELLENO DE SEGURIDAD: Si faltan para 25, tomamos de poolRestantes
         if(bloque2.length < 25) {
-            const faltantes = 25 - bloque2.length;
-            const extraPool = mezclar(poolRestantes.filter(p => !bloque2.map(b=>b.pregunta).includes(p.pregunta)));
-            bloque2 = [...bloque2, ...extraPool.slice(0, faltantes)];
+            const usadosEnB2 = bloque2.map(b => b.pregunta);
+            const extra = mezclar(poolRestantes.filter(p => !usadosEnB2.includes(p.pregunta)));
+            bloque2 = [...bloque2, ...extra.slice(0, 25 - bloque2.length)];
         }
 
-        // IMPORTANTE: Retornamos los bloques en el orden exacto solicitado (NO mezclar el resultado final)
+        // RESULTADO FINAL: 12 + 25 + 3 = 40 preguntas en orden estricto
         return [...bloque1, ...bloque2, ...bloque3];
     }
 
@@ -348,6 +349,7 @@
       document.getElementById('stats-aciertos').innerText = aciertos;
       document.getElementById('stats-fallos').innerText = errores;
       
+      // Nota sobre 10 con penalización (Errores restan proporcionalmente)
       const nota = Math.max(0, (aciertos - (errores/2)) * (10/total));
       document.getElementById('stats-puntos').innerText = nota.toFixed(2);
       
@@ -459,7 +461,7 @@
                 <span class="text-emerald-600">Aciertos: <strong id="stats-aciertos">0</strong></span>
                 <span class="text-red-600">Fallos: <strong id="stats-fallos">0</strong></span>
                 <span class="text-blue-600 hidden sm:inline">Puntos: <strong id="stats-puntos">0.00</strong></span>
-                <span class="text-amber-600 font-mono" id="timer-display">120:00</span>
+                <span class="text-amber-600 font-mono" id="timer-display">00:00</span>
             </div>
         </header>
         <div class="w-full h-1 bg-gray-100 flex-shrink-0"><div id="progress-bar" class="h-full bg-blue-600 transition-all duration-300 rounded-r-full" style="width: 0%"></div></div>
