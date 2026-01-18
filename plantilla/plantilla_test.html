@@ -81,6 +81,12 @@
         if (testIdActual) localStorage.removeItem('rebt_pro_final_' + testIdActual);
     }
 
+    // Función nueva para el botón cancelar
+    function cancelarYSalir() {
+        borrarProgreso(); // Esto fuerza el borrado de la memoria
+        window.location.href = '../Test_por_ITC_del_REBT.html'; // Redirige al menú
+    }
+
     function cargarProgreso(id) {
         const guardado = localStorage.getItem('rebt_pro_final_' + id);
         if (guardado) {
@@ -117,16 +123,12 @@
         }, 250);
     }
 
-    /* --- NUEVO ALGORITMO DE MEZCLA (FISHER-YATES) --- */
-    // Esto garantiza que el orden sea 100% aleatorio cada vez
+    /* --- ALGORITMO DE MEZCLA (FISHER-YATES) --- */
     function mezclar(array) {
         let currentIndex = array.length,  randomIndex;
-        // Mientras queden elementos a mezclar...
         while (currentIndex != 0) {
-            // Elegir un elemento sin mezclar...
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex--;
-            // Y cambiarlo con el elemento actual.
             [array[currentIndex], array[randomIndex]] = [
                 array[randomIndex], array[currentIndex]];
         }
@@ -172,13 +174,12 @@
             );
 
             // MEZCLA ROBUSTA (Preguntas)
-            // Usamos slice() para crear una copia antes de mezclar
             const preguntasBarajadas = mezclar([...unicas]);
             
             // Cortamos las primeras 20
             preguntasDelExamen = preguntasBarajadas.slice(0, PREGUNTAS_POR_TEST);
             
-            // MEZCLA ROBUSTA (Opciones de cada pregunta)
+            // MEZCLA ROBUSTA (Opciones)
             preguntasDelExamen = preguntasDelExamen.map(p => ({ 
                 ...p, 
                 opciones: mezclar([...p.opciones]) 
@@ -436,8 +437,11 @@
             <div id="area-acciones" class="mt-4 pb-2"></div>
         </div>
     </main>
+    
     <div class="mt-4">
-        <a href="../Test_por_ITC_del_REBT.html" class="px-6 py-2 bg-slate-700 hover:bg-slate-800 text-white text-xs font-semibold rounded-lg shadow-lg transition-all">Cancelar</a>
+        <button onclick="cancelarYSalir()" class="px-6 py-2 bg-slate-700 hover:bg-slate-800 text-white text-xs font-semibold rounded-lg shadow-lg transition-all">
+            Cancelar
+        </button>
     </div>
 </body>
 </html>
