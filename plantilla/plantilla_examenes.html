@@ -137,65 +137,132 @@
 
     const norm = (t) => t ? t.toString().toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim() : "";
 
-    /* === MOTOR DE SELECCIÓN CORREGIDO (40 PREGUNTAS EXACTAS) === */
+    /* ============================================================
+       === MOTOR DE SELECCIÓN CORREGIDO (40 PREGUNTAS EXACTAS) ===
+       Reglas:
+       1) 6 Articulado (29 artículos)
+       2) 2 ITC-BT-03
+       3) 2 ITC-BT-04
+       4) 2 ITC-BT-05
+       5) 25 resto ITCs (excluye Articulado, 03/04/05 y Cálculo)
+       6) 3 Cálculo: 1 Previsión de cargas, 1 Ley de Ohm, 1 Potencia (según Punto)
+       Orden: Bloque1 -> Bloque2 -> Bloque3
+       ============================================================ */
     function generarExamen(todas) {
-        let bloque1 = []; // Artículos + 03, 04, 05 (12 preguntas)
-        let bloque2 = []; // Resto de ITCs (25 preguntas)
-        let bloque3 = []; // Cálculos (3 preguntas)
+        const usados = new Set();
 
-        // 1. BLOQUE 1: Articulado (6) + ITCs 03, 04, 05 (2 cada una). Total 12.
-        const poolArticulos = mezclar(todas.filter(p => norm(p.itc).includes("ARTICULO"))).slice(0, 6);
-        const pool03 = mezclar(todas.filter(p => norm(p.itc).includes("03"))).slice(0, 2);
-        const pool04 = mezclar(todas.filter(p => norm(p.itc).includes("04"))).slice(0, 2);
-        const pool05 = mezclar(todas.filter(p => norm(p.itc).includes("05"))).slice(0, 2);
-        
-        bloque1 = [...poolArticulos, ...pool03, ...pool04, ...pool05];
-        let idsUsados = bloque1.map(p => p.pregunta);
+        const itcNorm = (p) => norm(p.itc);
+        const puntoNorm = (p) => norm(p.punto);
 
-        // 2. BLOQUE 3: Cálculos (1 de cada en Punto). Total 3.
-        const cPotencia = mezclar(todas.filter(p => !idsUsados.includes(p.pregunta) && norm(p.itc).includes("CALCULO") && norm(p.punto).includes("POTENCIA"))).slice(0, 1);
-        const cOhm = mezclar(todas.filter(p => !idsUsados.includes(p.pregunta) && norm(p.itc).includes("CALCULO") && norm(p.punto).includes("OHM"))).slice(0, 1);
-        const cPrevision = mezclar(todas.filter(p => !idsUsados.includes(p.pregunta) && norm(p.itc).includes("CALCULO") && norm(p.punto).includes("PREVISION"))).slice(0, 1);
-        
-        bloque3 = [...cPrevision, ...cPotencia, ...cOhm];
-        idsUsados = [...idsUsados, ...bloque3.map(p => p.pregunta)];
+        const esArticulo = (p) => itcNorm(p).includes("ARTICULO");
+        const esCalculo = (p) => itcNorm(p).includes("CALCULO");
+        const esITCExacta = (p, n) => itcNorm(p) === `ITC-BT-${n}`;
 
-        // 3. BLOQUE 2: Seleccionar EXACTAMENTE 25 del resto
-        const poolRestantes = todas.filter(p => 
-            !idsUsados.includes(p.pregunta) &&
-            !norm(p.itc).includes("CALCULO") &&
-            !norm(p.itc).includes("ARTICULO") &&
-            !["03","04","05"].some(n => p.itc.includes(n))
+        const pick = (pool, n) => mezclar(pool).slice(0, n);
+
+        // ===== BLOQUE 1 (12) =====
+        const b1_art = pick(todas.filter(p => esArticulo(p) && !usados.has(p.pregunta)), 6);
+        b1_art.forEach(p => usados.add(p.pregunta));
+
+        const b1_03 = pick(todas.filter(p => esITCExacta(p, "03") && !usados.has(p.pregunta)), 2);
+        b1_03.forEach(p => usados.add(p.pregunta));
+
+        const b1_04 = pick(todas.filter(p => esITCExacta(p, "04") && !usados.has(p.pregunta)), 2);
+        b1_04.forEach(p => usados.add(p.pregunta));
+
+        const b1_05 = pick(todas.filter(p => esITCExacta(p, "05") && !usados.has(p.pregunta)), 2);
+        b1_05.forEach(p => usados.add(p.pregunta));
+
+        const bloque1 = [...b1_art, ...b1_03, ...b1_04, ...b1_05];
+
+        // ===== BLOQUE 3 (3) - CÁLCULO =====
+        const c_prevision = pick(
+            todas.filter(p =>
+                !usados.has(p.pregunta) &&
+                esCalculo(p) &&
+                puntoNorm(p).includes("PREVISION")
+            ),
+            1
+        );
+        c_prevision.forEach(p => usados.add(p.pregunta));
+
+        const c_ohm = pick(
+            todas.filter(p =>
+                !usados.has(p.pregunta) &&
+                esCalculo(p) &&
+                puntoNorm(p).includes("OHM")
+            ),
+            1
+        );
+        c_ohm.forEach(p => usados.add(p.pregunta));
+
+        const c_potencia = pick(
+            todas.filter(p =>
+                !usados.has(p.pregunta) &&
+                esCalculo(p) &&
+                puntoNorm(p).includes("POTENCIA")
+            ),
+            1
+        );
+        c_potencia.forEach(p => usados.add(p.pregunta));
+
+        const bloque3 = [...c_prevision, ...c_ohm, ...c_potencia];
+
+        // ===== BLOQUE 2 (25) - RESTO ITCs =====
+        const excluidas = new Set(["ITC-BT-03", "ITC-BT-04", "ITC-BT-05"]);
+
+        const poolResto = todas.filter(p =>
+            !usados.has(p.pregunta) &&
+            !esArticulo(p) &&
+            !esCalculo(p) &&
+            !excluidas.has(itcNorm(p))
         );
 
-        // Agrupamos por ITC para variedad
-        let itcsMap = {};
-        poolRestantes.forEach(p => {
-            if(!itcsMap[p.itc]) itcsMap[p.itc] = [];
-            itcsMap[p.itc].push(p);
+        // Para variedad: repartir por ITC
+        const mapa = {};
+        poolResto.forEach(p => {
+            const k = itcNorm(p);
+            if (!mapa[k]) mapa[k] = [];
+            mapa[k].push(p);
         });
 
-        let keys = mezclar(Object.keys(itcsMap));
+        // Mezclamos cada grupo
+        Object.keys(mapa).forEach(k => mezclar(mapa[k]));
+
+        let keys = mezclar(Object.keys(mapa));
+        const bloque2 = [];
         let i = 0;
-        while(bloque2.length < 25 && keys.length > 0) {
-            let key = keys[i % keys.length];
-            if(itcsMap[key].length > 0) {
-                bloque2.push(itcsMap[key].pop());
+
+        while (bloque2.length < 25 && keys.length > 0) {
+            const k = keys[i % keys.length];
+            const arr = mapa[k];
+
+            if (arr && arr.length > 0) {
+                const q = arr.pop();
+                if (!usados.has(q.pregunta)) {
+                    bloque2.push(q);
+                    usados.add(q.pregunta);
+                }
             } else {
                 keys.splice(i % keys.length, 1);
+                continue;
             }
-            if(keys.length > 0) i++;
+            i++;
         }
 
-        // RELLENO DE SEGURIDAD: Si faltan para 25, tomamos de poolRestantes
-        if(bloque2.length < 25) {
-            const usadosEnB2 = bloque2.map(b => b.pregunta);
-            const extra = mezclar(poolRestantes.filter(p => !usadosEnB2.includes(p.pregunta)));
-            bloque2 = [...bloque2, ...extra.slice(0, 25 - bloque2.length)];
+        // Relleno defensivo si faltan (sin romper reglas)
+        if (bloque2.length < 25) {
+            const extra = mezclar(poolResto.filter(p => !usados.has(p.pregunta)));
+            extra.slice(0, 25 - bloque2.length).forEach(p => {
+                bloque2.push(p);
+                usados.add(p.pregunta);
+            });
         }
 
-        // RESULTADO FINAL: 12 + 25 + 3 = 40 preguntas en orden estricto
-        return [...bloque1, ...bloque2, ...bloque3];
+        const final = [...bloque1, ...bloque2, ...bloque3];
+
+        // Última defensa: asegurar 40 exactas (sin alterar el orden)
+        return final.slice(0, 40);
     }
 
     // INICIO APP
