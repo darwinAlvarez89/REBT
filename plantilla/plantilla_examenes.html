@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Examen Oficial REBT</title>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RSH4ZW3VT2');
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; color: #1f2937; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.5rem; }
+    .fade-in { animation: fadeIn 0.3s ease-out forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse-blue-glow { 0%, 100% { box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.5); } 50% { box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.7); } }
+    .btn-attention { animation: pulse-blue-glow 2s infinite ease-in-out; }
+    @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    .animate-heartbeat { animation: heartbeat 1.5s infinite ease-in-out; }
+    .hide-scroll::-webkit-scrollbar { display: none; }
+    .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+    button { -webkit-tap-highlight-color: transparent; user-select: none; }
+  </style>
+
+  <script>
+    /* ===== LÓGICA DE EXAMEN ACTUALIZADA ===== */
+    let preguntasDelExamen = [];
+    const PREGUNTAS_POR_TEST = 40; 
+    const DURACION_SEG = 120 * 60; // 2 HORAS
+
+    let indice = 0, aciertos = 0, errores = 0;
+    let historial = [];
+    let seleccionUsuario = null;
+    let respondido = false;
+    let inicioTiempo = null;
+    let intervaloTiempo = null;
+    let tiempoAgotado = false;
+    let testIdActual = "EXAMEN_GENERAL"; 
+
+    function guardarProgreso() {
+        const estado = { preguntasDelExamen, indice, aciertos, errores, historial, inicioTiempo, respondido, seleccionUsuario, testIdActual };
+        localStorage.setItem('rebt_examen_progreso', JSON.stringify(estado));
+    }
+
+    function borrarProgreso() {
+        localStorage.removeItem('rebt_examen_progreso');
+    }
+
+    function cancelarYSalir() {
+        borrarProgreso();
+        window.location.href = '../Test_por_ITC_del_REBT.html';
+    }
+
+    function cargarProgreso() {
+        const guardado = localStorage.getItem('rebt_examen_progreso');
+        if (guardado) {
+            try {
+                const estado = JSON.parse(guardado);
+                if (estado.indice < estado.preguntasDelExamen.length) {
+                    preguntasDelExamen = estado.preguntasDelExamen;
+                    indice = estado.indice; aciertos = estado.aciertos; errores = estado.errores;
+                    historial = estado.historial; inicioTiempo = estado.inicioTiempo;
+                    return true;
+                }
+            } catch (e) { console.error(e); }
+        }
+        return false;
+    }
+
+    function lanzarFuegosArtificiales() {
+        var duration = 3 * 1000;
+        var animationEnd = Date.now() + duration;
+        var interval = setInterval(function() {
+            var timeLeft = animationEnd - Date.now();
+            if (timeLeft <= 0) return clearInterval(interval);
+            confetti({ particleCount: 50, origin: { x: Math.random(), y: Math.random() - 0.2 } });
+        }, 250);
+    }
+
+    function mezclar(array) {
+        let currentIndex = array.length, randomIndex;
+        while (currentIndex != 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
+
+    /* === MOTOR DE SELECCIÓN DE PREGUNTAS SEGÚN REGLAS === */
+    function generarExamen(todas) {
+        let pool = [];
+        
+        // 1. 6 de Artículos (1 al 29)
+        const articulos = mezclar(todas.filter(p => p.itc && p.itc.toUpperCase().includes("ARTICULO"))).slice(0, 6);
+        
+        // 2. 2 de ITC-BT-03, 04 y 05
+        const itc03 = mezclar(todas.filter(p => p.itc && p.itc.includes("03"))).slice(0, 2);
+        const itc04 = mezclar(todas.filter(p => p.itc && p.itc.includes("04"))).slice(0, 2);
+        const itc05 = mezclar(todas.filter(p => p.itc && p.itc.includes("05"))).slice(0, 2);
+        
+        // 3. 3 de Cálculo (Potencia, Ley de Ohm, Previsión)
+        const calculoPotencia = todas.find(p => p.itc && p.itc.includes("Cálculo") && p.punto && p.punto.includes("Potencia"));
+        const calculoOhm = todas.find(p => p.itc && p.itc.includes("Cálculo") && p.punto && p.punto.includes("Ley de Ohm"));
+        const calculoPrevision = todas.find(p => p.itc && p.itc.includes("Cálculo") && p.punto && p.punto.includes("Previsión de cargas"));
+        
+        let seleccion = [...articulos, ...itc03, ...itc04, ...itc05];
+        if(calculoPotencia) seleccion.push(calculoPotencia);
+        if(calculoOhm) seleccion.push(calculoOhm);
+        if(calculoPrevision) seleccion.push(calculoPrevision);
+
+        // IDs de las preguntas ya seleccionadas para no repetir
+        const idsSeleccionados = seleccion.map(s => s.pregunta);
+
+        // 4. 25 del resto de ITCs (Una por cada una)
+        // Agrupamos el resto por ITC
+        const restantesPool = todas.filter(p => 
+            !p.itc.includes("Cálculo") && 
+            !p.itc.toUpperCase().includes("ARTICULO") && 
+            !["03","04","05"].some(num => p.itc.includes(num)) &&
+            !idsSeleccionados.includes(p.pregunta)
+        );
+
+        let itcsMap = {};
+        restantesPool.forEach(p => {
+            if(!itcsMap[p.itc]) itcsMap[p.itc] = [];
+            itcsMap[p.itc].push(p);
+        });
+
+        let keys = mezclar(Object.keys(itcsMap));
+        for(let i=0; i < 25 && i < keys.length; i++){
+            let itcPreguntas = mezclar(itcsMap[keys[i]]);
+            seleccion.push(itcPreguntas[0]);
+        }
+
+        // Si faltan para llegar a 40 (por si no hay suficientes ITCs), rellenamos con aleatorias no usadas
+        if(seleccion.length < 40){
+            const usadasIds = seleccion.map(s => s.pregunta);
+            const extra = mezclar(todas.filter(p => !usadasIds.includes(p.pregunta))).slice(0, 40 - seleccion.length);
+            seleccion = [...seleccion, ...extra];
+        }
+
+        return mezclar(seleccion.slice(0, 40));
+    }
+
+    async function iniciarAplicacion() {
+        if (cargarProgreso()) {
+            cargarPregunta();
+            intervaloTiempo = setInterval(actualizarEstado, 1000);
+            return;
+        }
+
+        try {
+            const response = await fetch('../Data/base_datos_rebt_examenes.json');
+            if (!response.ok) throw new Error("Error " + response.status);
+            const todas = await response.json();
+
+            preguntasDelExamen = generarExamen(todas).map(p => ({
+                ...p, opciones: mezclar([...p.opciones])
+            }));
+
+            inicioTiempo = Date.now();
+            guardarProgreso();
+            cargarPregunta();
+            intervaloTiempo = setInterval(actualizarEstado, 1000);
+        } catch (e) { mostrarError("Error cargando el examen."); }
+    }
+
+    /* === LAS FUNCIONES DE UI SE MANTIENEN IGUAL QUE TU PLANTILLA ORIGINAL === */
+    function cargarPregunta(){
+      if (indice >= preguntasDelExamen.length) return finalizarTest();
+      const q = preguntasDelExamen[indice];
+      seleccionUsuario = null; respondido = false;
+      document.getElementById("itc-title").textContent = q.itc || "EXAMEN";
+      document.getElementById("texto-pregunta").textContent = q.pregunta;
+      const cont = document.getElementById("contenedor-opciones");
+      cont.innerHTML = "";
+      q.opciones.forEach((op)=>{
+        const btn = document.createElement("button");
+        btn.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-all text-sm font-medium text-gray-700 flex items-start shadow-sm";
+        btn.onclick = ()=>seleccionarOpcion(op);
+        btn.dataset.valor = op;
+        btn.innerHTML = `<span class="leading-snug">${op}</span>`;
+        cont.appendChild(btn);
+      });
+      document.getElementById("area-acciones").innerHTML = `
+        <div class="flex justify-end mt-2"><button id="btn-accion" disabled onclick="verificarRespuesta()" class="px-6 py-2 rounded-lg font-bold text-white bg-gray-300 cursor-not-allowed text-xs uppercase">Contestar</button></div>`;
+      guardarProgreso();
+      actualizarEstado();
+    }
+
+    function seleccionarOpcion(opcion){
+      if (respondido) return;
+      seleccionUsuario = opcion;
+      document.querySelectorAll("#contenedor-opciones button").forEach(b => {
+        b.className = b.dataset.valor === opcion ? "w-full text-left py-3 px-4 mb-2 rounded-xl border-2 border-blue-600 bg-blue-50 text-blue-900 font-medium flex items-start shadow-sm text-sm" : "w-full text-left py-3 px-4 mb-2 rounded-xl border border-gray-200 bg-white text-gray-600 flex items-start text-sm opacity-60";
+      });
+      const btn = document.getElementById('btn-accion');
+      btn.disabled = false;
+      btn.className = "px-6 py-2 rounded-lg font-bold text-white bg-blue-600 shadow-md text-xs uppercase";
+    }
+
+    function verificarRespuesta(){
+      if (respondido || !seleccionUsuario) return;
+      respondido = true;
+      const actual = preguntasDelExamen[indice];
+      const esCorrecta = seleccionUsuario === actual.respuesta;
+      document.querySelectorAll("#contenedor-opciones button").forEach(b => {
+        b.disabled = true;
+        if (b.dataset.valor === actual.respuesta) b.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-semibold flex items-start text-sm";
+        else if (b.dataset.valor === seleccionUsuario) b.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border-2 border-red-500 bg-red-50 text-red-900 font-semibold flex items-start text-sm";
+      });
+      if (esCorrecta) aciertos++; else errores++;
+      historial.push({ ...actual, elegida: seleccionUsuario });
+      document.getElementById("area-acciones").innerHTML = `
+         <div class="fade-in w-full mt-2">
+            <div class="flex justify-end mb-3"><button id="btn-siguiente" onclick="siguientePregunta()" class="px-6 py-2 rounded-lg font-bold text-white bg-blue-600 shadow-lg text-xs uppercase btn-attention">Siguiente</button></div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-700 shadow-sm">
+                <strong>${actual.itc}</strong> | Punto: <strong>${actual.punto || "-"}</strong><br>${actual.explicacion || "Sin explicación."}
+            </div>
+         </div>`;
+    }
+
+    const siguientePregunta = () => { indice++; cargarPregunta(); };
+
+    function actualizarEstado(){
+      if (!inicioTiempo) return;
+      const total = preguntasDelExamen.length;
+      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
+      const restantes = Math.max(0, DURACION_SEG - transcurrido);
+      document.getElementById('progress-bar').style.width = `${(indice / total) * 100}%`;
+      document.getElementById('stats-cuestion').innerText = `${indice + 1}/${total}`;
+      document.getElementById('stats-aciertos').innerText = aciertos;
+      document.getElementById('stats-fallos').innerText = errores;
+      document.getElementById('stats-puntos').innerText = (aciertos * (10/total)).toFixed(2);
+      const mm = fmt2(Math.floor(restantes/60));
+      const ss = fmt2(restantes%60);
+      document.getElementById('timer-display').innerText = `${mm}:${ss}`;
+      if (restantes === 0 && !tiempoAgotado) { tiempoAgotado = true; finalizarTest(); }
+    }
+
+    function finalizarTest(){
+        clearInterval(intervaloTiempo);
+        borrarProgreso();
+        const total = preguntasDelExamen.length;
+        const nota = (aciertos * (10/total));
+        const apto = nota >= 5; // En examen se suele aprobar con 5
+        if (apto) lanzarFuegosArtificiales();
+        document.getElementById('contenedor-test').innerHTML = `
+            <div class="text-center py-6 fade-in">
+                <div class="text-4xl mb-4">${apto ? '🎉' : '💪'}</div>
+                <h2 class="text-2xl font-bold mb-1">${apto ? '¡Aprobado!' : 'No Apto'}</h2>
+                <p class="text-gray-500 text-sm mb-6">Nota: <strong>${nota.toFixed(2)}</strong> / 10</p>
+                <div class="flex gap-3 mb-8">
+                    <button onclick="location.reload()" class="flex-1 py-3 bg-blue-600 text-white rounded-xl font-bold">Repetir</button>
+                    <a href="../Test_por_ITC_del_REBT.html" class="flex-1 py-3 bg-white border border-gray-200 rounded-xl font-bold flex items-center justify-center">Salir</a>
+                </div>
+            </div>`;
+    }
+
+    function mostrarError(msg) { document.getElementById('contenedor-test').innerHTML = `<div class="text-center py-10 text-red-500">${msg}</div>`; }
+    window.onload = iniciarAplicacion;
+  </script>
+</head>
+<body>
+    <main id="main-card" class="w-full max-w-3xl bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 border-t-[6px] border-t-blue-600 flex flex-col relative max-h-[90vh]">
+        <header class="stats-header px-5 py-2.5 border-b border-gray-100 bg-white flex justify-between items-center text-[11px] font-medium text-gray-500">
+            <div>Cuestión: <strong class="text-gray-900" id="stats-cuestion">0/0</strong></div>
+            <div class="flex gap-3">
+                <span class="text-emerald-600">Bien: <strong id="stats-aciertos">0</strong></span>
+                <span class="text-red-600">Mal: <strong id="stats-fallos">0</strong></span>
+                <span class="text-blue-600">Nota: <strong id="stats-puntos">0.00</strong></span>
+                <span class="text-amber-600 font-mono" id="timer-display">120:00</span>
+            </div>
+        </header>
+        <div class="w-full h-1 bg-gray-100"><div id="progress-bar" class="h-full bg-blue-600 transition-all duration-300" style="width: 0%"></div></div>
+        <div id="contenedor-test" class="p-5 md:p-6 overflow-y-auto hide-scroll flex-1">
+            <div id="header-title-container" class="text-center mb-4"><h1 id="itc-title" class="text-lg font-bold text-gray-900 uppercase">EXAMEN REBT</h1></div>
+            <div id="texto-pregunta" class="text-[15px] font-medium text-gray-800 leading-relaxed mb-4">...</div>
+            <div id="contenedor-opciones" class="mb-2"></div>
+            <div id="area-acciones" class="mt-4 pb-2"></div>
+        </div>
+    </main>
+    <div class="mt-4"><button onclick="cancelarYSalir()" class="px-6 py-2 bg-slate-700 text-white text-xs font-semibold rounded-lg">Cancelar</button></div>
+</body>
+</html>
