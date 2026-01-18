@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>Examen Oficial REBT</title>
+  <title>Test REBT Profesional</title>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
   <script>
@@ -56,7 +56,7 @@
   </style>
 
   <script>
-    /* ===== LÓGICA DE EXAMEN ESTRUCTURADA ===== */
+    /* ===== LÓGICA ROBUSTA ===== */
     let preguntasDelExamen = [];
     const PREGUNTAS_POR_TEST = 40;
     const DURACION_SEG = 120 * 60; // 120 minutos
@@ -74,11 +74,11 @@
     function guardarProgreso() {
         if (!testIdActual) return;
         const estado = { preguntasDelExamen, indice, aciertos, errores, historial, inicioTiempo, respondido, seleccionUsuario, testIdActual };
-        localStorage.setItem('rebt_examen_final_' + testIdActual, JSON.stringify(estado));
+        localStorage.setItem('rebt_pro_final_' + testIdActual, JSON.stringify(estado));
     }
 
     function borrarProgreso() {
-        if (testIdActual) localStorage.removeItem('rebt_examen_final_' + testIdActual);
+        if (testIdActual) localStorage.removeItem('rebt_pro_final_' + testIdActual);
     }
 
     // Función nueva para el botón cancelar
@@ -88,7 +88,7 @@
     }
 
     function cargarProgreso(id) {
-        const guardado = localStorage.getItem('rebt_examen_final_' + id);
+        const guardado = localStorage.getItem('rebt_pro_final_' + id);
         if (guardado) {
             try {
                 const estado = JSON.parse(guardado);
@@ -137,7 +137,7 @@
 
     const norm = (t) => t ? t.toString().toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim() : "";
 
-    /* === MOTOR DE SELECCIÓN CON ORDEN REQUERIDO === */
+    /* === MOTOR DE SELECCIÓN CON ORDEN ESTRUCTURADO ESTRICTO === */
     function generarExamen(todas) {
         let bloque1 = []; // Artículos + 03, 04, 05 (12 preguntas)
         let bloque2 = []; // Resto de ITCs (25 preguntas)
@@ -152,15 +152,15 @@
         bloque1 = [...poolArticulos, ...pool03, ...pool04, ...pool05];
         let idsUsados = bloque1.map(p => p.pregunta);
 
-        // 2. BLOQUE 3 (Cálculos específicos al final): Total 3.
-        const cPotencia = mezclar(todas.filter(p => norm(p.itc).includes("CALCULO") && norm(p.punto).includes("POTENCIA"))).slice(0, 1);
-        const cOhm = mezclar(todas.filter(p => norm(p.itc).includes("CALCULO") && norm(p.punto).includes("OHM"))).slice(0, 1);
-        const cPrevision = mezclar(todas.filter(p => norm(p.itc).includes("CALCULO") && norm(p.punto).includes("PREVISION"))).slice(0, 1);
+        // 2. BLOQUE 3 (Cálculos específicos): Una de cada tipo en Punto. Total 3.
+        const cPotencia = mezclar(todas.filter(p => !idsUsados.includes(p.pregunta) && norm(p.itc).includes("CALCULO") && norm(p.punto).includes("POTENCIA"))).slice(0, 1);
+        const cOhm = mezclar(todas.filter(p => !idsUsados.includes(p.pregunta) && norm(p.itc).includes("CALCULO") && norm(p.punto).includes("OHM"))).slice(0, 1);
+        const cPrevision = mezclar(todas.filter(p => !idsUsados.includes(p.pregunta) && norm(p.itc).includes("CALCULO") && norm(p.punto).includes("PREVISION"))).slice(0, 1);
         
         bloque3 = [...cPrevision, ...cPotencia, ...cOhm];
         idsUsados = [...idsUsados, ...bloque3.map(p => p.pregunta)];
 
-        // 3. BLOQUE 2: 25 del resto de ITCs
+        // 3. BLOQUE 2: 25 del resto de ITCs (sin repetir ITCs si es posible)
         const poolRestantes = todas.filter(p => 
             !idsUsados.includes(p.pregunta) &&
             !norm(p.itc).includes("CALCULO") &&
@@ -186,17 +186,15 @@
             if(keys.length > 0) i++;
         }
 
-        // Relleno de seguridad si faltan para llegar a 40
-        let seleccionActual = [...mezclar(bloque1), ...mezclar(bloque2), ...bloque3];
-        if(seleccionActual.length < 40) {
-            let yaElegidas = seleccionActual.map(s => s.pregunta);
-            let poolExtra = mezclar(todas.filter(p => !yaElegidas.includes(p.pregunta)));
-            while (seleccionActual.length < 40 && poolExtra.length > 0) {
-                seleccionActual.splice(seleccionActual.length - 3, 0, poolExtra.pop()); 
-            }
+        // Relleno de seguridad si bloque2 no llega a 25
+        if(bloque2.length < 25) {
+            const faltantes = 25 - bloque2.length;
+            const extraPool = mezclar(poolRestantes.filter(p => !bloque2.map(b=>b.pregunta).includes(p.pregunta)));
+            bloque2 = [...bloque2, ...extraPool.slice(0, faltantes)];
         }
 
-        return seleccionActual.slice(0, 40);
+        // IMPORTANTE: Retornamos los bloques en el orden exacto solicitado (NO mezclar el resultado final)
+        return [...bloque1, ...bloque2, ...bloque3];
     }
 
     // INICIO APP
@@ -318,7 +316,6 @@
                 <button id="btn-siguiente" onclick="siguientePregunta()" 
                     class="px-6 py-2 rounded-lg font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-lg transition-all flex items-center justify-center gap-2 text-xs tracking-wide uppercase btn-attention">
                     Siguiente
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                 </button>
             </div>
             <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-700 shadow-sm">
@@ -334,7 +331,6 @@
 
       const btnSig = document.getElementById('btn-siguiente');
       btnSig.focus();
-      setTimeout(() => { document.getElementById('area-acciones').scrollIntoView({ behavior: "smooth", block: "nearest" }); }, 100);
       actualizarEstado();
     }
 
@@ -352,7 +348,6 @@
       document.getElementById('stats-aciertos').innerText = aciertos;
       document.getElementById('stats-fallos').innerText = errores;
       
-      // NOTA OFICIAL: Aciertos menos errores penalizados
       const nota = Math.max(0, (aciertos - (errores/2)) * (10/total));
       document.getElementById('stats-puntos').innerText = nota.toFixed(2);
       
@@ -371,7 +366,7 @@
         borrarProgreso();
         const total = preguntasDelExamen.length;
         const nota = Math.max(0, (aciertos - (errores/2)) * (10/total));
-        const apto = nota >= 7.0; // 70% para aprobado
+        const apto = nota >= 7.0; // 70%
 
         if (apto) lanzarFuegosArtificiales();
 
