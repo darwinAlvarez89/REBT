@@ -146,7 +146,7 @@
         bloque1 = [...poolArticulos, ...pool03, ...pool04, ...pool05];
         let idsUsados = bloque1.map(p => p.pregunta);
 
-        // 2. BLOQUE 3 (Reservamos Cálculos para el final): Potencia, Ohm, Previsión. Total 3.
+        // 2. BLOQUE 3 (Cálculos): Potencia, Ohm, Previsión. Total 3.
         const cPotencia = mezclar(todas.filter(p => norm(p.itc).includes("CALCULO") && norm(p.punto).includes("POTENCIA"))).slice(0, 1);
         const cOhm = mezclar(todas.filter(p => norm(p.itc).includes("CALCULO") && norm(p.punto).includes("OHM"))).slice(0, 1);
         const cPrevision = mezclar(todas.filter(p => norm(p.itc).includes("CALCULO") && norm(p.punto).includes("PREVISION"))).slice(0, 1);
@@ -154,7 +154,7 @@
         bloque3 = [...cPotencia, ...cOhm, ...cPrevision];
         idsUsados = [...idsUsados, ...bloque3.map(p => p.pregunta)];
 
-        // 3. BLOQUE 2: 25 del resto de ITCs (sin repetir de los otros bloques)
+        // 3. BLOQUE 2: 25 del resto de ITCs (sin repetir)
         const poolRestantes = todas.filter(p => 
             !idsUsados.includes(p.pregunta) &&
             !norm(p.itc).includes("CALCULO") &&
@@ -170,6 +170,7 @@
 
         let keys = mezclar(Object.keys(itcsMap));
         let i = 0;
+        // Bucle robusto para garantizar 25 preguntas
         while(bloque2.length < 25 && keys.length > 0) {
             let key = keys[i % keys.length];
             if(itcsMap[key].length > 0) {
@@ -180,16 +181,18 @@
             if(keys.length > 0) i++;
         }
 
-        // Si por alguna razón no llegamos a 25, rellenamos con lo que quede
-        if(bloque2.length < 25) {
-            const faltantes = 25 - bloque2.length;
-            const usadosActuales = [...bloque1, ...bloque2, ...bloque3].map(p => p.pregunta);
-            const extra = mezclar(todas.filter(p => !usadosActuales.includes(p.pregunta))).slice(0, faltantes);
-            bloque2 = [...bloque2, ...extra];
+        // Relleno de emergencia para garantizar las 40 finales
+        let seleccionFinal = [...mezclar(bloque1), ...mezclar(bloque2), ...bloque3];
+        
+        if (seleccionFinal.length < 40) {
+            let yaElegidas = seleccionFinal.map(s => s.pregunta);
+            let poolExtra = mezclar(todas.filter(p => !yaElegidas.includes(p.pregunta)));
+            while (seleccionFinal.length < 40 && poolExtra.length > 0) {
+                seleccionFinal.splice(seleccionFinal.length - 3, 0, poolExtra.pop()); // Insertamos antes de cálculos
+            }
         }
 
-        // Retornamos el orden exacto solicitado: Bloque 1 (12) -> Bloque 2 (25) -> Bloque 3 (3)
-        return [...mezclar(bloque1), ...mezclar(bloque2), ...bloque3];
+        return seleccionFinal.slice(0, 40);
     }
 
     async function iniciarAplicacion() {
@@ -201,6 +204,7 @@
         if (cargarProgreso(testIdActual)) {
             cargarPregunta();
             intervaloTiempo = setInterval(actualizarEstado, 1000);
+            document.addEventListener('keydown', handleKey);
             return;
         }
 
@@ -302,6 +306,7 @@
             </div>
          </div>
       `;
+      actualizarEstado();
     }
 
     const siguientePregunta = () => { indice++; cargarPregunta(); };
@@ -328,18 +333,55 @@
     function finalizarTest(){
         clearInterval(intervaloTiempo);
         borrarProgreso();
-        const nota = (aciertos * (10/preguntasDelExamen.length));
+        const total = preguntasDelExamen.length;
+        const nota = (aciertos * (10/total));
         const apto = nota >= 5;
         if (apto) lanzarFuegosArtificiales();
 
+        // RESUMEN DE PREGUNTAS (CORREGIDO)
+        const htmlHistorial = historial.map((h, i) => {
+            const opcionesHTML = h.opciones.map(op => {
+                let clase = "text-slate-400 border-slate-100 bg-white";
+                let icon = "";
+                if (op === h.respuesta) { clase = "text-emerald-700 bg-emerald-50 border-emerald-200 font-medium"; icon = "✅"; } 
+                else if (op === h.elegida && op !== h.respuesta) { clase = "text-red-700 bg-red-50 border-red-200 line-through decoration-red-400"; icon = "❌"; }
+                return `<div class="text-xs p-2 rounded border ${clase} flex justify-between items-center mb-1"><span>${op}</span><span>${icon}</span></div>`;
+            }).join('');
+
+            return `
+                <div class="mb-5 pb-3 border-b border-gray-100 last:border-0 text-left">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase bg-gray-50 px-2 py-0.5 rounded">#${i+1}</span>
+                        <span class="text-[10px] font-bold ${h.respuesta === h.elegida ? 'text-emerald-600' : 'text-red-600'}">${h.respuesta === h.elegida ? 'CORRECTA' : 'FALLADA'}</span>
+                    </div>
+                    <p class="text-sm font-bold text-gray-800 mb-3 leading-snug">${h.pregunta}</p>
+                    <div class="mb-3 pl-1 border-l-2 border-slate-100">${opcionesHTML}</div>
+                    <div class="text-xs bg-slate-50 p-2.5 rounded-lg text-slate-600 border border-slate-100">
+                        <strong class="block mb-1 text-slate-800 text-[10px] uppercase tracking-wide">Explicación:</strong>
+                        <span class="font-semibold text-blue-700">${h.itc} | Pto: ${h.punto}</span><br>${h.explicacion}
+                    </div>
+                </div>`;
+        }).join('');
+
         document.getElementById('contenedor-test').innerHTML = `
             <div class="text-center py-6 fade-in">
-                <div class="text-5xl mb-4 ${apto ? '' : 'animate-heartbeat'}">${apto ? '🎉' : '💪'}</div>
-                <h2 class="text-2xl font-bold mb-1">${apto ? 'APTO' : 'NO APTO'}</h2>
-                <p class="text-gray-500 mb-6">Tu puntuación ha sido de <span class="text-2xl font-black text-slate-900">${nota.toFixed(2)}</span></p>
-                <button onclick="location.reload()" class="w-full py-3 bg-blue-600 text-white rounded-xl font-bold mb-3 shadow-lg">Repetir Examen</button>
-                <a href="../Test_por_ITC_del_REBT.html" class="block w-full py-3 bg-white border text-gray-600 rounded-xl font-bold text-center">Salir al Menú</a>
+                <div class="inline-block p-4 rounded-full ${apto ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'} mb-3 ${apto ? '' : 'animate-heartbeat'}">
+                    <span class="text-4xl block">${apto ? '🎉' : '💪'}</span>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-1">${apto ? '¡APTO!' : 'NO APTO'}</h2>
+                <p class="text-gray-500 text-sm mb-6">Puntuación: <strong class="text-gray-900 text-lg">${nota.toFixed(2)}</strong> / 10</p>
+                <div class="flex gap-3 mb-8">
+                    <button onclick="location.reload()" class="flex-1 py-3 bg-blue-600 text-white rounded-xl font-bold shadow-md hover:bg-blue-700">Repetir</button>
+                    <a href="../Test_por_ITC_del_REBT.html" class="flex-1 py-3 bg-white border border-gray-200 text-gray-600 rounded-xl font-bold flex items-center justify-center">Salir</a>
+                </div>
+                <div class="text-left border-t border-gray-100 pt-6">
+                    <h3 class="font-bold text-gray-400 text-xs uppercase mb-4 tracking-widest text-center">Revisión del Examen</h3>
+                    <div class="max-h-96 overflow-y-auto pr-1 hide-scroll bg-white rounded-xl p-2">${htmlHistorial}</div>
+                </div>
             </div>`;
+        
+        document.querySelector('.stats-header').style.display = 'none';
+        document.getElementById('header-title-container').style.display = 'none';
     }
 
     function mostrarError(msg) { document.getElementById('contenedor-test').innerHTML = `<div class="text-center py-10 text-red-500 font-bold">${msg}</div>`; }
@@ -359,7 +401,7 @@
             </div>
         </header>
         <div class="w-full h-1 bg-gray-100"><div id="progress-bar" class="h-full bg-blue-600 transition-all duration-300 rounded-r-full" style="width: 0%"></div></div>
-        <div id="contenedor-test" class="p-5 md:p-6 overflow-y-auto hide-scroll flex-1">
+        <div id="contenedor-test" class="p-5 md:p-6 overflow-y-auto hide-scroll flex-1 relative">
             <div id="header-title-container" class="text-center mb-4"><h1 id="itc-title" class="text-lg font-bold text-gray-900 uppercase tracking-tight">Examen REBT</h1></div>
             <div id="texto-pregunta" class="text-[15px] font-medium text-gray-800 leading-relaxed mb-4">...</div>
             <div id="contenedor-opciones" class="mb-2"></div>
