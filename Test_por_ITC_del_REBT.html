@@ -2,418 +2,170 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>Test REBT Profesional</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <title>Test REBT online – Exámenes y cuestionarios del Reglamento Electrotécnico de Baja Tensión</title>
+  <meta name="description" content="Realiza tus test del Reglamento Electrotécnico de Baja Tensión (REBT) de forma online. Practica con cuestionarios por Instrucción Técnica Complementaria y articulado." />
+  <meta name="keywords" content="test REBT, examen REBT, preguntas REBT, cuestionarios REBT, reglamento electrotécnico baja tensión, ITC, baja tensión" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://app-rebt.es/" />
+  
+  <meta property="og:title" content="Test REBT – Exámenes y cuestionarios online del REBT" />
+  <meta property="og:description" content="Practica con nuestros cuestionarios del REBT organizados por ITC y articulado. Realiza exámenes con corrección automática." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://app-rebt.es/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="icon" href="/favicon.ico" />
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){dataLayer.push(arguments);} 
     gtag('js', new Date());
     gtag('config', 'G-RSH4ZW3VT2');
   </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    body { 
-        font-family: 'Inter', sans-serif; 
-        background-color: #f3f4f6; 
-        color: #1f2937;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 0.5rem;
-    }
-
-    .fade-in { animation: fadeIn 0.3s ease-out forwards; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* Efectos Botón Siguiente */
-    @keyframes pulse-blue-glow {
-        0%, 100% { box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.5), 0 2px 4px -1px rgba(59, 130, 246, 0.25); }
-        50% { box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.7), 0 8px 10px -6px rgba(59, 130, 246, 0.5); }
-    }
-    .btn-attention { animation: pulse-blue-glow 2s infinite ease-in-out; }
-
-    /* Efecto Latido NO APTO */
-    @keyframes heartbeat {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.1); }
-    }
-    .animate-heartbeat { animation: heartbeat 1.5s infinite ease-in-out; }
-
-    .hide-scroll::-webkit-scrollbar { display: none; }
-    .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
-
-    button { -webkit-tap-highlight-color: transparent; user-select: none; }
-  </style>
-
   <script>
-    let preguntasDelExamen = [];
-    const PREGUNTAS_POR_TEST = 20;
-    const DURACION_SEG = 60 * 60;
-
-    let indice = 0, aciertos = 0, errores = 0;
-    let historial = [];
-    let seleccionUsuario = null;
-    let respondido = false;
-    let inicioTiempo = null;
-    let intervaloTiempo = null;
-    let tiempoAgotado = false;
-    let testIdActual = "";
-
-    // Persistencia
-    function guardarProgreso() {
-        if (!testIdActual) return;
-        const estado = { preguntasDelExamen, indice, aciertos, errores, historial, inicioTiempo, respondido, seleccionUsuario, testIdActual };
-        localStorage.setItem('rebt_pro_final_' + testIdActual, JSON.stringify(estado));
-    }
-
-    function borrarProgreso() {
-        if (testIdActual) localStorage.removeItem('rebt_pro_final_' + testIdActual);
-    }
-
-    function cargarProgreso(id) {
-        const guardado = localStorage.getItem('rebt_pro_final_' + id);
-        if (guardado) {
-            try {
-                const estado = JSON.parse(guardado);
-                if (estado.indice < estado.preguntasDelExamen.length) {
-                    preguntasDelExamen = estado.preguntasDelExamen;
-                    indice = estado.indice;
-                    aciertos = estado.aciertos;
-                    errores = estado.errores;
-                    historial = estado.historial;
-                    inicioTiempo = estado.inicioTiempo;
-                    respondido = false; 
-                    seleccionUsuario = null;
-                    return true;
-                }
-            } catch (e) { console.error(e); }
-        }
-        return false;
-    }
-
-    // Efecto Confeti
-    function lanzarFuegosArtificiales() {
-        var duration = 3 * 1000;
-        var animationEnd = Date.now() + duration;
-        var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
-        function randomInRange(min, max) { return Math.random() * (max - min) + min; }
-        var interval = setInterval(function() {
-            var timeLeft = animationEnd - Date.now();
-            if (timeLeft <= 0) { return clearInterval(interval); }
-            var particleCount = 50 * (timeLeft / duration);
-            confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
-            confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
-        }, 250);
-    }
-
-    // INICIO APP
-    async function iniciarAplicacion() {
-        const params = new URLSearchParams(window.location.search);
-        let testIdRaw = params.get('id');
-        if (!testIdRaw) { mostrarError("No se ha seleccionado ningún test."); return; }
-
-        testIdActual = testIdRaw.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '');
-
-        if (cargarProgreso(testIdActual)) {
-            cargarPregunta();
-            intervaloTiempo = setInterval(actualizarEstado, 1000);
-            document.addEventListener('keydown', handleKey);
-            return;
-        }
-
-        try {
-            // CARGA SEGURA DEL JSON
-            const response = await fetch('../Data/base_datos_rebt.json');
-            
-            if (!response.ok) throw new Error("No se encuentra el archivo de datos (Error " + response.status + ")");
-            const todas = await response.json();
-
-            // Filtrado
-            let filtradas = todas.filter(p => {
-                if(!p.itc) return false;
-                const itc = p.itc.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '');
-                if (itc.includes("CALCULO")) return false;
-                if (testIdActual === "ARTICULADO" || testIdActual === "ARTICULOS") return itc.startsWith("ARTICULO");
-                return itc.includes(testIdActual);
-            });
-
-            if (filtradas.length === 0) { mostrarError("No hay preguntas disponibles para este tema."); return; }
-
-            // Deduplicación y Mezcla
-            const unicas = filtradas.filter((pregunta, index, self) =>
-                index === self.findIndex((t) => (t.pregunta === pregunta.pregunta))
-            );
-            const mezcladas = mezclar(unicas);
-            preguntasDelExamen = mezcladas.slice(0, PREGUNTAS_POR_TEST);
-            preguntasDelExamen = preguntasDelExamen.map(p => ({ ...p, opciones: mezclar([...p.opciones]) }));
-
-            inicioTiempo = Date.now();
-            guardarProgreso();
-            cargarPregunta();
-            intervaloTiempo = setInterval(actualizarEstado, 1000);
-            document.addEventListener('keydown', handleKey);
-
-        } catch (e) { 
-            console.error(e);
-            mostrarError("Error cargando el test: " + e.message); 
-        }
-    }
-
-    // UI RENDER
-    function cargarPregunta(){
-      if (indice >= preguntasDelExamen.length) return finalizarTest();
-
-      const q = preguntasDelExamen[indice];
-      seleccionUsuario = null; respondido = false;
-
-      let tituloMostrar = q.itc;
-      if (testIdActual === "ARTICULADO" || testIdActual === "ARTICULOS") {
-          tituloMostrar = "ARTICULADO";
-      }
-      document.getElementById("itc-title").textContent = tituloMostrar;
-      document.getElementById("texto-pregunta").textContent = q.pregunta;
-
-      const cont = document.getElementById("contenedor-opciones");
-      cont.innerHTML = "";
-
-      q.opciones.forEach((op, i)=>{
-        const btn = document.createElement("button");
-        // Estilo compacto
-        btn.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 hover:border-blue-300 transition-all text-sm font-medium text-gray-700 flex items-start gap-3 group shadow-sm active:scale-[0.99]";
-        btn.dataset.valor = op;
-        btn.onclick = ()=>seleccionarOpcion(op);
-        btn.innerHTML = `<span class="leading-snug">${op}</span>`;
-        cont.appendChild(btn);
-      });
-
-      // Botón Siguiente
-      document.getElementById("area-acciones").innerHTML = `
-        <div class="flex justify-end mt-2">
-            <button id="btn-accion" disabled onclick="verificarRespuesta()" 
-                class="px-6 py-2 rounded-lg font-bold text-white bg-gray-300 cursor-not-allowed transition-all shadow-none text-xs tracking-wide uppercase">
-                Contestar
-            </button>
-        </div>
-      `;
-
-      guardarProgreso();
-      document.getElementById("main-card").scrollTop = 0;
-      actualizarEstado();
-    }
-
-    function seleccionarOpcion(opcion){
-      if (respondido || tiempoAgotado) return;
-      seleccionUsuario = opcion;
-
-      document.querySelectorAll("#contenedor-opciones button").forEach(b => {
-        if (b.dataset.valor === opcion) {
-            b.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border-2 border-blue-600 bg-blue-50/50 text-blue-900 font-medium flex items-start gap-3 shadow-sm transform scale-[1.01] transition-all text-sm";
-        } else {
-            b.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border border-gray-200 bg-white opacity-60 hover:opacity-100 transition-all text-gray-600 flex items-start gap-3 text-sm";
-        }
-      });
-
-      const btn = document.getElementById('btn-accion');
-      btn.disabled = false;
-      btn.className = "px-6 py-2 rounded-lg font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md hover:shadow-lg transition-all transform active:scale-[0.98] text-xs tracking-wide uppercase";
-    }
-
-    function verificarRespuesta(){
-      if (respondido || !seleccionUsuario) return;
-      respondido = true;
-      const actual = preguntasDelExamen[indice];
-      const esCorrecta = seleccionUsuario === actual.respuesta;
-
-      document.querySelectorAll("#contenedor-opciones button").forEach(b => {
-        b.disabled = true;
-        const val = b.dataset.valor;
-        if (val === actual.respuesta) {
-            b.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-semibold flex items-start gap-3 shadow-sm text-sm";
-        } else if (val === seleccionUsuario && !esCorrecta) {
-            b.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border-2 border-red-500 bg-red-50 text-red-900 font-semibold flex items-start gap-3 shadow-sm text-sm";
-        } else {
-            b.className = "w-full text-left py-3 px-4 mb-2 rounded-xl border border-gray-100 bg-white opacity-40 text-gray-400 flex items-start gap-3 text-sm";
-        }
-      });
-
-      if (esCorrecta) aciertos++; else errores++;
-      
-      historial.push({ pregunta: actual.pregunta, opciones: actual.opciones, correcta: actual.respuesta, elegida: seleccionUsuario, itc: actual.itc, punto: actual.punto, explicacion: actual.explicacion });
-      guardarProgreso();
-
-      // Explicación y Botón con Efecto
-      document.getElementById("area-acciones").innerHTML = `
-         <div class="fade-in w-full mt-2">
-            <div class="flex justify-end mb-3">
-                <button id="btn-siguiente" onclick="siguientePregunta()" 
-                    class="px-6 py-2 rounded-lg font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-lg transition-all flex items-center justify-center gap-2 text-xs tracking-wide uppercase btn-attention">
-                    Siguiente
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-                </button>
-            </div>
-            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-700 shadow-sm">
-                <div class="flex flex-wrap items-center gap-2 mb-1.5 pb-1.5 border-b border-slate-200">
-                    <strong class="text-xs text-slate-800">${actual.itc}</strong>
-                    <span class="text-slate-300">|</span>
-                    <span class="text-xs font-medium text-slate-500">Punto: <strong>${actual.punto || "-"}</strong></span>
-                </div>
-                <div class="leading-relaxed text-slate-600">${actual.explicacion || "Sin explicación adicional."}</div>
-            </div>
-         </div>
-      `;
-
-      const btnSig = document.getElementById('btn-siguiente');
-      btnSig.focus();
-      setTimeout(() => { document.getElementById('area-acciones').scrollIntoView({ behavior: "smooth", block: "nearest" }); }, 100);
-      actualizarEstado();
-    }
-
-    const siguientePregunta = () => { if(!tiempoAgotado){ indice++; cargarPregunta(); } };
-    const mezclar = (arr) => arr.sort(() => Math.random() - 0.5);
-    const fmt2 = (n) => String(n).padStart(2,'0');
-
-    function actualizarEstado(){
-      if (!inicioTiempo) return;
-      const total = preguntasDelExamen.length;
-      const transcurrido = Math.floor((Date.now()-inicioTiempo)/1000);
-      const restantes = Math.max(0, DURACION_SEG - transcurrido);
-      const pct = (indice / total) * 100;
-      document.getElementById('progress-bar').style.width = `${pct}%`;
-      document.getElementById('stats-cuestion').innerText = `${indice + 1}/${total}`;
-      document.getElementById('stats-aciertos').innerText = aciertos;
-      document.getElementById('stats-fallos').innerText = errores;
-      const nota = Math.max(0, (aciertos - (errores/2)) * (10/total));
-      document.getElementById('stats-puntos').innerText = nota.toFixed(2);
-      const mm = fmt2(Math.floor(restantes/60));
-      const ss = fmt2(restantes%60);
-      document.getElementById('timer-display').innerText = `${mm}:${ss}`;
-      if (restantes === 0 && !tiempoAgotado){
-        tiempoAgotado = true;
-        clearInterval(intervaloTiempo);
-        finalizarTest();
-      }
-    }
-
-    function finalizarTest(){
-        clearInterval(intervaloTiempo);
-        borrarProgreso();
-        const total = preguntasDelExamen.length;
-        const nota = Math.max(0, (aciertos - (errores/2)) * (10/total));
-        const apto = nota >= 7;
-
-        if (apto) lanzarFuegosArtificiales();
-
-        const htmlHistorial = historial.map((h, i) => {
-            const opcionesHTML = h.opciones.map(op => {
-                let clase = "text-slate-400 border-slate-100 bg-white";
-                let icon = "";
-                if (op === h.correcta) { clase = "text-emerald-700 bg-emerald-50 border-emerald-200 font-medium"; icon = "✅"; } 
-                else if (op === h.elegida && op !== h.correcta) { clase = "text-red-700 bg-red-50 border-red-200 line-through decoration-red-400"; icon = "❌"; }
-                return `<div class="text-xs p-2 rounded border ${clase} flex justify-between items-center mb-1"><span>${op}</span><span>${icon}</span></div>`;
-            }).join('');
-
-            return `
-                <div class="mb-5 pb-3 border-b border-gray-100 last:border-0">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="text-[10px] font-bold text-gray-400 uppercase bg-gray-50 px-2 py-0.5 rounded">#${i+1}</span>
-                        <span class="text-[10px] font-bold ${h.correcta === h.elegida ? 'text-emerald-600' : 'text-red-600'}">${h.correcta === h.elegida ? 'CORRECTA' : 'INCORRECTA'}</span>
-                    </div>
-                    <p class="text-sm font-bold text-gray-800 mb-3 leading-snug">${h.pregunta}</p>
-                    <div class="mb-3 pl-1 border-l-2 border-slate-100">${opcionesHTML}</div>
-                    <div class="text-xs bg-slate-50 p-2.5 rounded-lg text-slate-600 border border-slate-100">
-                        <strong class="block mb-1 text-slate-800 text-[10px] uppercase tracking-wide">Explicación:</strong>
-                        <span class="font-semibold text-blue-700">${h.itc} | Pto: ${h.punto}</span><br>${h.explicacion}
-                    </div>
-                </div>
-            `;
-        }).join('');
-
-        const iconoFinal = apto ? '🎉' : '💪';
-        const tituloFinal = apto ? '¡Aprobado!' : '¡No te rindas!';
-        const animacionIcono = apto ? '' : 'animate-heartbeat';
-        const subtituloFinal = apto ? '¡Has demostrado un gran nivel!' : 'Estás cerca, sigue intentándolo.';
-
-        document.getElementById('contenedor-test').innerHTML = `
-            <div class="text-center py-6 fade-in">
-                <div class="inline-block p-4 rounded-full ${apto ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'} mb-3 shadow-sm ${animacionIcono}">
-                    <span class="text-4xl block">${iconoFinal}</span>
-                </div>
-                <h2 class="text-2xl font-bold text-gray-900 mb-1">${tituloFinal}</h2>
-                <p class="text-gray-500 text-xs mb-1">${subtituloFinal}</p>
-                <p class="text-gray-500 text-sm mb-6">Nota final: <strong class="text-gray-900 text-lg">${nota.toFixed(2)}</strong> / 10</p>
-                
-                <div class="flex justify-center gap-3 mb-8">
-                    <div class="text-center w-20 p-2 rounded-lg border border-emerald-100 bg-emerald-50"><div class="text-lg font-bold text-emerald-700">${aciertos}</div><div class="text-[10px] uppercase font-bold text-emerald-800/60">Bien</div></div>
-                    <div class="text-center w-20 p-2 rounded-lg border border-red-100 bg-red-50"><div class="text-lg font-bold text-red-700">${errores}</div><div class="text-[10px] uppercase font-bold text-red-800/60">Mal</div></div>
-                    <div class="text-center w-20 p-2 rounded-lg border border-slate-200 bg-slate-50"><div class="text-lg font-bold text-slate-700">${total-(aciertos+errores)}</div><div class="text-[10px] uppercase font-bold text-slate-500">Blanco</div></div>
-                </div>
-
-                <div class="flex gap-3 mb-8">
-                    <button onclick="location.reload()" class="flex-1 py-3 bg-blue-600 text-white rounded-xl font-bold shadow-md hover:bg-blue-700 transition-all">Repetir</button>
-                    <a href="../Test_por_ITC_del_REBT.html" class="flex-1 py-3 bg-white border border-gray-200 text-gray-600 rounded-xl font-bold hover:bg-gray-50 transition-all flex items-center justify-center">Salir</a>
-                </div>
-
-                <div class="text-left border-t border-gray-100 pt-6">
-                    <h3 class="font-bold text-gray-400 text-xs uppercase mb-4 tracking-widest text-center">Revisión Completa</h3>
-                    <div class="max-h-96 overflow-y-auto pr-1 hide-scroll bg-white">${htmlHistorial}</div>
-                </div>
-            </div>
-        `;
-        document.querySelector('.stats-header').style.display = 'none';
-        document.getElementById('header-title-container').style.display = 'none';
-    }
-
-    function mostrarError(msg) {
-        document.getElementById('contenedor-test').innerHTML = `<div class="text-center py-10 text-red-500 text-sm font-medium">${msg}<br><a href="../Test_por_ITC_del_REBT.html" class="underline mt-2 block text-gray-500">Volver</a></div>`;
-    }
-
-    function handleKey(e){
-        if(tiempoAgotado) return;
-        if(e.key === 'Enter') {
-            const btn = document.querySelector('#area-acciones button');
-            if(btn && !btn.disabled) btn.click();
-        }
-        const map = {'1':0,'2':1,'3':2,'4':3};
-        if(map[e.key] !== undefined && !respondido){
-             const btns = document.querySelectorAll('#contenedor-opciones button');
-             if(btns[map[e.key]]) btns[map[e.key]].click();
-        }
-    }
-
-    window.onload = iniciarAplicacion;
+    tailwind.config = { darkMode: 'class' }
   </script>
+
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4753410879094321"
+     crossorigin="anonymous"></script>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease, color 0.3s ease; }
+    .bg-master { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background-image: url('img/fondo.png'); background-size: cover; background-position: center; background-attachment: fixed; }
+    .bg-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; transition: background-color 0.5s ease; }
+    .light .bg-overlay { background-color: rgba(241, 245, 249, 0.85); }
+    .dark .bg-overlay { background-color: rgba(2, 6, 23, 0.92); }
+    .glass-card { backdrop-filter: blur(12px) saturate(160%); -webkit-backdrop-filter: blur(12px) saturate(160%); border: 1px solid; border-radius: 0.75rem; transition: all 0.2s ease-in-out; min-height: 58px; }
+    .light .glass-card { background: rgba(255, 255, 255, 0.5); border-color: rgba(255, 255, 255, 0.8); }
+    .dark .glass-card { background: rgba(30, 41, 59, 0.6); border-color: rgba(255, 255, 255, 0.1); }
+    .glass-card:hover { transform: translateY(-1px); border-color: #3b82f6; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15); }
+    .theme-toggle { position: fixed; top: 15px; right: 15px; z-index: 100; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border-radius: 10px; border: 1px solid; backdrop-filter: blur(10px); cursor: pointer; transition: all 0.3s ease; }
+    .light .theme-toggle { background: rgba(255, 255, 255, 0.6); color: #1e293b; border-color: rgba(0,0,0,0.1); }
+    .dark .theme-toggle { background: rgba(30, 41, 59, 0.6); color: #fbbf24; border-color: rgba(255,255,255,0.2); }
+    .btn-float { position: fixed; bottom: 20px; right: 20px; z-index: 100; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); border-radius: 50px; padding: 8px 15px; display: flex; align-items: center; gap: 6px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease; }
+    .light .btn-float { background: rgba(255, 255, 255, 0.9); color: #1e293b; }
+    .dark .btn-float { background: rgba(15, 23, 42, 0.9); color: #ffffff; border-color: rgba(255,255,255,0.1); }
+  </style>
 </head>
 
-<body>
-    <main id="main-card" class="w-full max-w-3xl bg-white rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] overflow-hidden border border-gray-100 border-t-[6px] border-t-blue-600 flex flex-col relative max-h-[90vh]">
-        <header class="stats-header px-5 py-2.5 border-b border-gray-100 bg-white flex-shrink-0 flex justify-between items-center text-[11px] font-medium text-gray-500">
-            <div>Cuestión: <strong class="text-gray-900" id="stats-cuestion">0/0</strong></div>
-            <div class="flex gap-3">
-                <span class="text-emerald-600">Aciertos: <strong id="stats-aciertos">0</strong></span>
-                <span class="text-red-600">Fallos: <strong id="stats-fallos">0</strong></span>
-                <span class="text-blue-600 hidden sm:inline">Puntos: <strong id="stats-puntos">0.00</strong></span>
-                <span class="text-amber-600 font-mono" id="timer-display">00:00</span>
-            </div>
-        </header>
-        <div class="w-full h-1 bg-gray-100 flex-shrink-0"><div id="progress-bar" class="h-full bg-blue-600 transition-all duration-300 rounded-r-full" style="width: 0%"></div></div>
-        <div id="contenedor-test" class="p-5 md:p-6 overflow-y-auto hide-scroll flex-1 relative">
-            <div id="header-title-container" class="text-center mb-4"><h1 id="itc-title" class="text-lg font-bold text-gray-900 uppercase tracking-tight">CARGANDO...</h1></div>
-            <div id="texto-pregunta" class="text-[15px] font-medium text-gray-800 leading-relaxed mb-4">...</div>
-            <div id="contenedor-opciones" class="mb-2"></div>
-            <div id="area-acciones" class="mt-4 pb-2"></div>
-        </div>
-    </main>
-    <div class="mt-4">
-        <a href="../Test_por_ITC_del_REBT.html" class="px-6 py-2 bg-slate-700 hover:bg-slate-800 text-white text-xs font-semibold rounded-lg shadow-lg transition-all">Cancelar</a>
-    </div>
+<body class="min-h-screen antialiased light text-slate-900 dark:text-white">
+  <div class="bg-master"></div>
+  <div class="bg-overlay"></div>
+
+  <button onclick="toggleDarkMode()" class="theme-toggle shadow-sm" title="Cambiar modo">
+    <svg id="moon-icon" class="w-6 h-6 block dark:hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+    <svg id="sun-icon" class="w-6 h-6 hidden dark:block" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path></svg>
+  </button>
+
+  <a href="Test_REBT_Completo_Basica.html" class="btn-float group">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+    </svg>
+    <span class="text-[10px] font-bold uppercase tracking-widest">Atrás</span>
+  </a>
+
+  <main class="max-w-4xl mx-auto pt-8 pb-20 px-4 relative z-10">
+    <header class="mb-5 border-b border-slate-400/20 dark:border-white/10 pb-3 text-left">
+      <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+        TEST REBT <span class="text-blue-600 dark:text-blue-400">(IBTB)</span>
+      </h1>
+      <div class="mt-2 space-y-1">
+        <p class="text-slate-700 dark:text-slate-200 text-[13px] md:text-sm font-semibold leading-tight">
+            Refuerza tus conocimientos del Reglamento Electrotécnico de Baja Tensión.
+        </p>
+        <p class="text-slate-500 dark:text-slate-400 text-[11px] md:text-[12px] italic leading-tight">
+            Test enfocados en cada ITC. Dispones de 60 min. para responder 20 preguntas y consolidar tus conocimientos.
+        </p>
+      </div>
+    </header>
+
+    <div id="grid-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
+      </div>
+
+    <footer class="mt-10 text-center border-t border-slate-400/20 dark:border-white/10 pt-5">
+      <p class="opacity-50 text-[9px] font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400">
+        © <span id="year"></span> REBT Online • Tu camino hacia el éxito profesional
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    function toggleDarkMode() {
+        const body = document.body;
+        body.classList.toggle('light');
+        body.classList.toggle('dark');
+        localStorage.setItem('rebt-theme', body.classList.contains('dark') ? 'dark' : 'light');
+    }
+    
+    if (localStorage.getItem('rebt-theme') === 'dark') {
+        document.body.classList.replace('light', 'dark');
+    } else {
+        document.body.classList.add('light');
+    }
+
+    // --- SCRIPT DE GENERACIÓN DINÁMICA (Optimizado para no bloquear) ---
+    document.addEventListener("DOMContentLoaded", function() {
+        const container = document.getElementById('grid-container');
+        
+        // 1. Datos de las ITC
+        const itcTitles = {
+          3: "Empresas instaladoras BT", 4: "Documentación y puesta", 5: "Verificaciones e insp.", 
+          8: "Conexión neutro y masas", 9: "Alumbrado exterior", 10: "Previsión de cargas", 
+          12: "Esquemas", 13: "CGP", 14: "LGA", 15: "Derivación individual", 16: "Contadores", 
+          17: "CGMP + ICP", 18: "Puesta a tierra", 19: "Prescripciones generales.", 20: "Sistemas instalación", 
+          21: "Tubos y canales", 22: "Sobreintensidades", 23: "Sobretensiones", 24: "CD y CI", 
+          25: "Vivienda. Nº circuitos", 26: "Viviendas general", 27: "Bañera o duchas", 
+          28: "Loc. pública conc.", 30: "Locales especiales", 31: "Piscinas y fuentes", 
+          32: "Máquinas elevación", 33: "Provisionales de obra", 34: "Ferias y stands", 
+          35: "Agro y hortícolas", 36: "Muy baja tensión", 37: "Tensiones especiales", 
+          39: "Cercas eléctricas", 40: "Generadoras", 41: "Caravanas", 42: "Puertos y marinas", 
+          43: "Receptores generalidades", 44: "Receptores alumbrado", 45: "Aparatos caldeo", 
+          46: "Cables y folios radiantes", 47: "Motores", 48: "Transformadores", 49: "Muebles", 
+          50: "Saunas", 52: "Vehículo Eléctrico"
+        };
+
+        // 2. Construcción del HTML en memoria (Muy rápido)
+        let htmlContent = '';
+
+        // Botón Articulado
+        htmlContent += `
+            <a href="plantilla/plantilla_test.html?id=ARTICULOS" class="glass-card flex items-center justify-center px-2 py-1 group text-center">
+                <span class="text-[10px] font-medium text-blue-600 dark:text-blue-400 leading-tight uppercase tracking-wide">Articulado</span>
+            </a>
+        `;
+
+        // Botones ITC
+        Object.keys(itcTitles).forEach(num => {
+            const id = num < 10 ? '0' + num : num;
+            
+            // Aquí generamos el enlace apuntando a la nueva plantilla
+            htmlContent += `
+                <a href="plantilla/plantilla_test.html?id=ITC-BT-${id}" class="glass-card flex items-center px-2 py-1 group">
+                    <div class="flex items-center gap-2 w-full">
+                        <div class="flex flex-col items-center min-w-[28px]">
+                            <span class="text-[7px] font-extrabold text-blue-600 dark:text-blue-400 opacity-80 leading-none mb-0.5">ITC</span>
+                            <span class="text-lg font-black text-slate-900 dark:text-white leading-none">${id}</span>
+                        </div>
+                        <span class="text-blue-600 dark:text-blue-400 opacity-20 text-lg">|</span>
+                        <span class="text-[10px] font-medium text-blue-600 dark:text-blue-400 leading-tight">
+                            ${itcTitles[num]}
+                        </span>
+                    </div>
+                </a>
+            `;
+        });
+
+        // 3. Inyección única al DOM
+        container.innerHTML = htmlContent;
+    });
+  </script>
 </body>
 </html>
