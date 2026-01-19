@@ -33,8 +33,7 @@
 
   <link rel="preload" as="image" href="img/fondo.png">
 
- <!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4753410879094321"
+ <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4753410879094321"
      crossorigin="anonymous"></script>
 
   
@@ -122,36 +121,37 @@
 
     <div class="grid grid-cols-2 gap-3">
       <script>
-  const examenes = [
-    { id: 1,  color: "text-emerald-500" },
-    { id: 2,  color: "text-orange-500" },
-    { id: 3,  color: "text-blue-600 dark:text-blue-400" },
-    { id: 4,  color: "text-cyan-500" },
-    { id: 5,  color: "text-purple-500" },
-    { id: 6,  color: "text-pink-500" },
-    { id: 7,  color: "text-lime-500" },
-    { id: 8,  color: "text-yellow-500" },
-    { id: 9,  color: "text-rose-500" },
-    { id: 10, color: "text-indigo-500" }
-  ];
+        const examenes = [
+          { id: 1,  color: "text-emerald-500" },
+          { id: 2,  color: "text-orange-500" },
+          { id: 3,  color: "text-blue-600 dark:text-blue-400" },
+          { id: 4,  color: "text-cyan-500" },
+          { id: 5,  color: "text-purple-500" },
+          { id: 6,  color: "text-pink-500" },
+          { id: 7,  color: "text-lime-500" },
+          { id: 8,  color: "text-yellow-500" },
+          { id: 9,  color: "text-rose-500" },
+          { id: 10, color: "text-indigo-500" }
+        ];
 
-  examenes.forEach(ex => {
-    document.write(`
-      <a href="plantilla/plantilla_examenes.html?id=EXAMEN-${ex.id}" class="glass-card flex items-center px-4 py-1 group">
-        <div class="flex items-center w-full">
-          <span class="text-2xl font-black ${ex.color} leading-none min-w-[28px] text-center">${ex.id}</span>
-          <span class="opacity-20 text-lg mx-2 dark:text-white">|</span>
-          <span class="flex-1 text-center text-[11px] font-bold uppercase tracking-widest text-slate-700 dark:text-slate-200 pr-8">
-            Examen
-          </span>
-        </div>
-      </a>
-    `);
-  });
-</script>
+        examenes.forEach(ex => {
+          document.write(`
+            <a href="plantilla/plantilla_examenes.html?id=EXAMEN-${ex.id}" class="glass-card flex items-center px-4 py-1 group">
+              <div class="flex items-center w-full">
+                <span class="text-2xl font-black ${ex.color} leading-none min-w-[28px] text-center">${ex.id}</span>
+                <span class="opacity-20 text-lg mx-2 dark:text-white">|</span>
+                <span class="flex-1 text-center text-[11px] font-bold uppercase tracking-widest text-slate-700 dark:text-slate-200 pr-8">
+                  Examen
+                </span>
+              </div>
+            </a>
+          `);
+        });
+      </script>
+    </div>
 
-    <footer class="mt-10 w-full text-center mx-auto border-t border-slate-400/20 dark:border-white/10 pt-5">
-      <p class="opacity-40 text-[9px] font-bold tracking-widest uppercase">
+    <footer class="mt-10 w-full text-center border-t border-slate-400/20 dark:border-white/10 pt-5">
+      <p class="text-slate-400 dark:text-slate-400 opacity-60 text-[9px] font-bold tracking-widest uppercase">
         © <span id="year"></span> • Tu camino hacia el éxito profesional
       </p>
     </footer>
