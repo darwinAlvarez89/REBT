@@ -84,7 +84,7 @@
     // Función nueva para el botón cancelar
     function cancelarYSalir() {
         borrarProgreso(); // Esto fuerza el borrado de la memoria
-        window.location.href = '../Test_por_ITC_del_REBT.html'; // Redirige al menú
+        window.location.href = '../Test_completos_REBT.html'; // Redirige al menú
     }
 
     function cargarProgreso(id) {
@@ -468,7 +468,7 @@
 
                 <div class="flex gap-3 mb-8">
                     <button onclick="borrarProgreso(); location.reload()" class="flex-1 py-3 bg-blue-600 text-white rounded-xl font-bold shadow-md hover:bg-blue-700 transition-all">Repetir</button>
-                    <a href="../Test_por_ITC_del_REBT.html" class="flex-1 py-3 bg-white border border-gray-200 text-gray-600 rounded-xl font-bold hover:bg-gray-50 transition-all flex items-center justify-center">Salir</a>
+                    <a href="../Test_completos_REBT.html" class="flex-1 py-3 bg-white border border-gray-200 text-gray-600 rounded-xl font-bold hover:bg-gray-50 transition-all flex items-center justify-center">Salir</a>
                 </div>
 
                 <div class="text-left border-t border-gray-100 pt-6">
@@ -482,7 +482,7 @@
     }
 
     function mostrarError(msg) {
-        document.getElementById('contenedor-test').innerHTML = `<div class="text-center py-10 text-red-500 text-sm font-medium font-bold">${msg}<br><a href="../Test_por_ITC_del_REBT.html" class="underline mt-2 block text-gray-500">Volver</a></div>`;
+        document.getElementById('contenedor-test').innerHTML = `<div class="text-center py-10 text-red-500 text-sm font-medium font-bold">${msg}<br><a href="../Test_completos_REBT.html" class="underline mt-2 block text-gray-500">Volver</a></div>`;
     }
 
     function handleKey(e){
