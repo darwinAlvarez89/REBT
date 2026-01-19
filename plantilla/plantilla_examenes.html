@@ -92,6 +92,13 @@
         if (guardado) {
             try {
                 const estado = JSON.parse(guardado);
+
+                // ✅ si el guardado NO tiene 40 preguntas, lo ignoramos (evita 1/37 antiguos)
+                if (!estado.preguntasDelExamen || estado.preguntasDelExamen.length !== PREGUNTAS_POR_TEST) {
+                    localStorage.removeItem('rebt_pro_final_' + id);
+                    return false;
+                }
+
                 if (estado.indice < estado.preguntasDelExamen.length) {
                     preguntasDelExamen = estado.preguntasDelExamen;
                     indice = estado.indice;
@@ -137,47 +144,47 @@
 
     const norm = (t) => t ? t.toString().toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim() : "";
 
-    /* === MOTOR DE SELECCIÓN CORREGIDO (40 PREGUNTAS EXACTAS Y SIN WHILE FRÁGIL) === */
+    /* ============================================================
+       ✅ MOTOR DE SELECCIÓN DEFINITIVO (40 EXACTAS EN ORDEN)
+       ============================================================ */
     function generarExamen(todas) {
 
-        const usados = new Set(); // usamos el texto de la pregunta como identificador (como ya venías haciendo)
-
+        const usados = new Set();
         const itcN = (p) => norm(p.itc);
         const ptoN = (p) => norm(p.punto);
 
         const esArticulo = (p) => itcN(p).includes("ARTICULO");
-       const esCalculo = (p) => {
-  const pt = ptoN(p);
-  return (
-    pt.includes("PREVISION") ||
-    pt.includes("OHM") ||
-    pt.includes("POTENCIA")
-  );
-};
-        const esITCExacta = (p, n) => itcN(p) === `ITC-BT-${n}`;
+
+        // ✅ Cálculo real según tu BBDD: se identifica por PUNTO
+        const esCalculo = (p) => {
+            const pt = ptoN(p);
+            return pt.includes("PREVISION") || pt.includes("OHM") || pt.includes("POTENCIA");
+        };
+
+        // ✅ ITC 03/04/05 robusta (tu itc puede traer texto extra)
+        const esITC = (p, n) => itcN(p).includes(`ITC-BT-${n}`);
 
         const pick = (pool, n) => mezclar(pool).slice(0, n);
 
-        // ===== BLOQUE 1: 6 Articulado + 2 ITC-03 + 2 ITC-04 + 2 ITC-05 =====
+        /* ===== BLOQUE 1: 12 (6 Articulado + 2 ITC03 + 2 ITC04 + 2 ITC05) ===== */
         const b1_art = pick(todas.filter(p => esArticulo(p)), 6);
         b1_art.forEach(p => usados.add(p.pregunta));
 
-        const b1_03 = pick(todas.filter(p => esITCExacta(p, "03") && !usados.has(p.pregunta)), 2);
+        const b1_03 = pick(todas.filter(p => esITC(p, "03") && !usados.has(p.pregunta)), 2);
         b1_03.forEach(p => usados.add(p.pregunta));
 
-        const b1_04 = pick(todas.filter(p => esITCExacta(p, "04") && !usados.has(p.pregunta)), 2);
+        const b1_04 = pick(todas.filter(p => esITC(p, "04") && !usados.has(p.pregunta)), 2);
         b1_04.forEach(p => usados.add(p.pregunta));
 
-        const b1_05 = pick(todas.filter(p => esITCExacta(p, "05") && !usados.has(p.pregunta)), 2);
+        const b1_05 = pick(todas.filter(p => esITC(p, "05") && !usados.has(p.pregunta)), 2);
         b1_05.forEach(p => usados.add(p.pregunta));
 
         const bloque1 = [...b1_art, ...b1_03, ...b1_04, ...b1_05]; // 12
 
-        // ===== BLOQUE 3: 3 Cálculo (1 Previsión, 1 Ohm, 1 Potencia) =====
+        /* ===== BLOQUE 3: 3 (1 Previsión + 1 Ohm + 1 Potencia) ===== */
         const c_prevision = pick(
             todas.filter(p =>
                 !usados.has(p.pregunta) &&
-                esCalculo(p) &&
                 ptoN(p).includes("PREVISION")
             ),
             1
@@ -187,7 +194,6 @@
         const c_ohm = pick(
             todas.filter(p =>
                 !usados.has(p.pregunta) &&
-                esCalculo(p) &&
                 ptoN(p).includes("OHM")
             ),
             1
@@ -197,7 +203,6 @@
         const c_potencia = pick(
             todas.filter(p =>
                 !usados.has(p.pregunta) &&
-                esCalculo(p) &&
                 ptoN(p).includes("POTENCIA")
             ),
             1
@@ -206,33 +211,40 @@
 
         const bloque3 = [...c_prevision, ...c_ohm, ...c_potencia]; // 3
 
-        // ===== BLOQUE 2: 25 del resto (SIN Articulado, SIN 03/04/05, SIN Cálculo) =====
-        // ✅ Aquí está la corrección REAL: mezclar + slice(25) (sin while que a veces se queda en 22–24)
-        const excluidas = new Set(["ITC-BT-03", "ITC-BT-04", "ITC-BT-05"]);
-
+        /* ===== BLOQUE 2: 25 del resto (sin Articulado, sin 03/04/05, sin Cálculo) ===== */
         const poolResto = todas.filter(p =>
             !usados.has(p.pregunta) &&
             !esArticulo(p) &&
             !esCalculo(p) &&
-            !excluidas.has(itcN(p))
+            !itcN(p).includes("ITC-BT-03") &&
+            !itcN(p).includes("ITC-BT-04") &&
+            !itcN(p).includes("ITC-BT-05")
         );
 
-        const bloque2 = pick(poolResto, 25);
+        let bloque2 = pick(poolResto, 25);
         bloque2.forEach(p => usados.add(p.pregunta));
 
-        const final = [...bloque1, ...bloque2, ...bloque3];
+        /* ===== Defensa final: si por cualquier razón faltan, rellenamos ===== */
+        let final = [...bloque1, ...bloque2, ...bloque3];
 
-        // Defensa: si por cualquier motivo no son 40, lo verás claramente en consola
+        if (final.length < 40) {
+            const faltan = 40 - final.length;
+            const poolExtra = todas.filter(p => !usados.has(p.pregunta) && !esArticulo(p));
+            const extra = pick(poolExtra, faltan);
+            extra.forEach(p => usados.add(p.pregunta));
+            final = [...final, ...extra];
+        }
+
+        // Debug si algo raro pasara
         if (final.length !== 40) {
-            console.error("Examen generado con", final.length, "preguntas. Revisa filtros/valores itc/punto.", {
+            console.error("❌ Examen generado con", final.length, "preguntas", {
                 bloque1: bloque1.length,
                 bloque2: bloque2.length,
                 bloque3: bloque3.length
             });
         }
 
-        // Garantía: devuelve 40 exactas (siempre que existan, que en tu BBDD existen)
-        return final.slice(0, 40);
+        return final;
     }
 
     // INICIO APP
