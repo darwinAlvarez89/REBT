@@ -146,7 +146,14 @@
         const ptoN = (p) => norm(p.punto);
 
         const esArticulo = (p) => itcN(p).includes("ARTICULO");
-        const esCalculo  = (p) => itcN(p).includes("CALCULO");
+       const esCalculo = (p) => {
+  const pt = ptoN(p);
+  return (
+    pt.includes("PREVISION") ||
+    pt.includes("OHM") ||
+    pt.includes("POTENCIA")
+  );
+};
         const esITCExacta = (p, n) => itcN(p) === `ITC-BT-${n}`;
 
         const pick = (pool, n) => mezclar(pool).slice(0, n);
