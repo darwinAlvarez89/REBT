@@ -21,22 +21,38 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 
-  <!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4753410879094321"
-     crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4753410879094321" crossorigin="anonymous"></script>
   
   <style>
     body { font-family: 'Inter', sans-serif; background-color: #020617; margin: 0; }
+    
+    /* FONDO (Mantenido img/fondo.png) */
     .bg-master {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-      background: linear-gradient(to bottom, rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.65)), url('img/fondo.png');
+      background: linear-gradient(to bottom, rgba(2, 6, 23, 0.90), rgba(2, 6, 23, 0.70)), url('img/fondo.png');
       background-size: cover; background-position: center;
     }
-    .glass-card { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
+
+    /* Estilo Glass Claro (Original) */
+    .glass-card { 
+        background: rgba(255, 255, 255, 0.98); 
+        backdrop-filter: blur(20px); 
+        border: 1px solid rgba(255, 255, 255, 0.1); 
+    }
+
+    /* Estilo Glass Oscuro (Nuevo para la sección info) */
+    .dark-glass-card {
+        background: rgba(15, 23, 42, 0.6); 
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
     .btn-primary { transition: all 0.3s ease; }
     .btn-primary:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.5); }
+    
     .title-gradient {
       background: linear-gradient(to bottom, #ffffff, #94a3b8);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -51,16 +67,16 @@
 
   <main class="w-full max-w-5xl relative z-10">
     
-    <header class="text-center mb-10 space-y-1">
+    <header class="text-center mb-10 space-y-2 mt-4">
         <h1 class="text-4xl md:text-5xl font-black text-white">
           <span class="title-gradient">REBT</span>
         </h1>
-        <p class="text-slate-400 text-sm md:text-base max-w-xl mx-auto font-normal leading-relaxed pt-2">
+        <p class="text-slate-400 text-sm md:text-base max-w-xl mx-auto font-normal leading-relaxed">
           Tu herramienta avanzada para el <span class="text-white font-semibold border-b border-blue-500/50">dominio total</span> de la normativa.
         </p>
     </header>
 
-    <div class="flex flex-col lg:grid lg:grid-cols-3 gap-6 items-start">
+    <div class="flex flex-col lg:grid lg:grid-cols-3 gap-6 items-start mb-12">
       
       <section class="lg:col-span-2 w-full glass-card rounded-[2rem] p-6 md:p-8 shadow-2xl flex flex-col border-t-4 border-blue-600">
         <div class="mb-6">
@@ -143,10 +159,70 @@
       </aside>
     </div>
 
-    <footer class="mt-8 text-center opacity-60">
-        <p class="text-slate-500 text-[11px] font-medium tracking-wide">
-            © <span id="year"></span> REBT - Darwin A.
-        </p>
+    <section class="dark-glass-card w-full rounded-[2rem] p-8 md:p-10 mb-8 relative overflow-hidden">
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10">
+            <h2 class="text-xl md:text-2xl font-bold text-white mb-8 text-center">
+                ¿Qué es el Reglamento Electrotécnico de Baja Tensión?
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-8 text-sm">
+                <article class="space-y-3">
+                    <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400 mb-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                    <h3 class="text-white font-semibold text-base">Normativa y Seguridad</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        El REBT es la normativa que regula las instalaciones en España para garantizar la <strong class="text-slate-200">seguridad de las personas</strong>, los bienes y el correcto funcionamiento técnico.
+                    </p>
+                </article>
+
+                <article class="space-y-3">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400 mb-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                    </div>
+                    <h3 class="text-white font-semibold text-base">Herramientas de Estudio</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        Encuentra test por <strong class="text-slate-200">Instrucciones Técnicas (ITC)</strong> y exámenes de práctica diseñados para un aprendizaje progresivo, desde nivel inicial a experto.
+                    </p>
+                </article>
+
+                <article class="space-y-3">
+                    <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 mb-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                    </div>
+                    <h3 class="text-white font-semibold text-base">¿Para quién es?</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        Orientado a estudiantes, instaladores eléctricos, técnicos y profesionales que necesiten preparar <strong class="text-slate-200">exámenes oficiales</strong> o reforzar conocimientos.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <footer class="w-full py-8 border-t border-slate-800/60 mt-4">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6 px-4">
+            
+            <div class="order-2 md:order-1 text-slate-500 text-[10px] font-medium tracking-wider uppercase">
+                © <span id="year"></span> REBT
+            </div>
+
+            <nav class="order-1 md:order-2 flex flex-wrap justify-center gap-6">
+                <a href="aviso-legal.html" class="group flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-xs font-medium">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-600 group-hover:bg-blue-500 transition-colors"></span>
+                    Aviso legal
+                </a>
+                <a href="politica-privacidad.html" class="group flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-xs font-medium">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-600 group-hover:bg-blue-500 transition-colors"></span>
+                    Política de privacidad
+                </a>
+                <a href="politica-cookies.html" class="group flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-xs font-medium">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-600 group-hover:bg-blue-500 transition-colors"></span>
+                    Política de cookies
+                </a>
+            </nav>
+        </div>
     </footer>
 
   </main>
@@ -155,11 +231,10 @@
     // 1. Año automático
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // 2. Rastreo de Video para Google Analytics
+    // 2. Rastreo de Video para Google Analytics (Tu código original)
     const miVideo = document.getElementById('videoTutorial');
     
     if (miVideo) {
-      // Detecta cuando el usuario pulsa Play
       miVideo.addEventListener('play', function() {
         gtag('event', 'video_start', {
           'video_title': 'Tutorial REBT Principal',
@@ -167,7 +242,6 @@
         });
       });
 
-      // Detecta cuando el usuario termina de ver el video
       miVideo.addEventListener('ended', function() {
         gtag('event', 'video_complete', {
           'video_title': 'Tutorial REBT Principal'
