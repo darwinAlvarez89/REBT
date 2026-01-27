@@ -227,9 +227,9 @@
 
   </main>
 
-  <div id="cookieOverlay" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 hidden">
+  <div id="cookieOverlay" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 hidden transition-opacity duration-500 ease-in-out opacity-0">
     
-    <div class="dark-glass-card w-full max-w-md rounded-2xl p-6 sm:p-8 shadow-2xl ring-1 ring-white/10 flex flex-col items-center text-center transform transition-all scale-100">
+    <div class="dark-glass-card w-full max-w-md rounded-2xl p-6 sm:p-8 shadow-2xl ring-1 ring-white/10 flex flex-col items-center text-center transform transition-all duration-500 ease-out scale-95 opacity-0">
         
         <div class="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mb-5 text-blue-400 ring-1 ring-blue-500/20">
              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
@@ -279,28 +279,43 @@
   <script>
     (function () {
       const overlay = document.getElementById('cookieOverlay');
+      const card = overlay.querySelector('.dark-glass-card');
       const acceptBtn = document.getElementById('acceptCookies');
 
-      // Si no existe la marca en localStorage, quitamos el hidden para mostrar el modal
+      // Si no se han aceptado cookies, ejecutar lógica
       if (!localStorage.getItem('cookiesAccepted')) {
-        overlay.classList.remove('hidden');
-        // Bloquear scroll del body para que se centre la atención
-        document.body.style.overflow = 'hidden';
+        
+        // Esperamos 1.5 segundos (1500 ms) antes de iniciar
+        setTimeout(() => {
+            // 1. Hacemos que el elemento exista en el DOM (quitamos display: none)
+            overlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Bloqueamos el scroll
+
+            // 2. Pequeño retraso técnico (50ms) para que el navegador procese que ya no está hidden
+            // antes de aplicar la transición de opacidad. Esto asegura la animación suave.
+            setTimeout(() => {
+                overlay.classList.remove('opacity-0');
+                card.classList.remove('scale-95', 'opacity-0');
+            }, 50);
+
+        }, 1500); 
       }
 
+      // Al aceptar
       acceptBtn.addEventListener('click', function () {
         localStorage.setItem('cookiesAccepted', 'true');
         
-        // Animación de salida (opacidad)
-        overlay.style.transition = 'opacity 0.3s ease';
-        overlay.style.opacity = '0';
+        // Animación de salida
+        overlay.classList.add('opacity-0');
+        card.classList.add('scale-95', 'opacity-0');
         
         // Restaurar scroll
         document.body.style.overflow = '';
 
+        // Esperar a que termine la animación (500ms) para ocultar
         setTimeout(() => {
              overlay.classList.add('hidden');
-        }, 300);
+        }, 500);
       });
     })();
   </script>
