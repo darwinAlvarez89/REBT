@@ -173,6 +173,19 @@
 
     </section>
 
+    <!-- 🔹 BLOQUE AÑADIDO: ACEPTAR COOKIES -->
+    <section class="mt-10 pt-8 border-t border-slate-700/60 text-center space-y-4">
+      <p class="text-slate-400 text-sm">
+        Puedes aceptar el uso de cookies para continuar navegando por el sitio.
+      </p>
+
+      <button
+        id="acceptCookiesFromPolicy"
+        class="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition-all shadow-lg shadow-blue-900/30 hover:shadow-blue-600/40">
+        Aceptar cookies
+      </button>
+    </section>
+
     <footer class="mt-10 pt-6 border-t border-slate-700/60 text-center text-xs text-slate-400">
       © <span id="year"></span> APP-REBT
     </footer>
@@ -181,11 +194,19 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
 
+    // Aceptar cookies desde la política
+    const btnAccept = document.getElementById('acceptCookiesFromPolicy');
+    if (btnAccept) {
+      btnAccept.addEventListener('click', function () {
+        localStorage.setItem('cookiesAccepted', 'true');
+        history.back();
+      });
+    }
+  </script>
 
   <!-- Banner Cookies (global) -->
   <script src="/js/cookies-banner.js"></script>
-  
+
 </body>
 </html>
