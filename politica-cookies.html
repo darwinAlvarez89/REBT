@@ -173,7 +173,7 @@
 
     </section>
 
-    <!-- 🔹 BLOQUE AÑADIDO: ACEPTAR COOKIES -->
+    <!-- ACEPTAR COOKIES DESDE LA POLÍTICA -->
     <section class="mt-10 pt-8 border-t border-slate-700/60 text-center space-y-4">
       <p class="text-slate-400 text-sm">
         Puedes aceptar el uso de cookies para continuar navegando por el sitio.
@@ -195,14 +195,14 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Aceptar cookies desde la política
     const btnAccept = document.getElementById('acceptCookiesFromPolicy');
     if (btnAccept) {
       btnAccept.addEventListener('click', function () {
         localStorage.setItem('cookiesAccepted', 'true');
-        history.back();
+        window.location.href = document.referrer || '/';
       });
     }
   </script>
+
 </body>
 </html>
