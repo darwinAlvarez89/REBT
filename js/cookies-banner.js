@@ -21,7 +21,7 @@
       <h3 class="text-xl font-bold text-white mb-3">Valoramos tu privacidad</h3>
 
       <p class="text-slate-300 text-sm leading-relaxed mb-8">
-        Utilizamos cookies propias y de terceros para garantizar el mejor funcionamiento del sitio,
+        Utilizamos cookies de terceros para garantizar el mejor funcionamiento del sitio,
         analizar la navegación y ofrecerte contenidos adaptados a tus intereses.
       </p>
 
