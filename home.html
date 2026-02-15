@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <title>Aprobar el REBT: Guía y Test para Instalador Baja Tensión</title>
+  <meta name="description" content="Guía de estudio para el Reglamento Electrotécnico de Baja Tensión (REBT). Sistema de aprendizaje paso a paso, test por ITCs y simulacros de examen oficial." />
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-RSH4ZW3VT2');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4753410879094321" crossorigin="anonymous"></script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class', 
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#017AEB', // Tu azul corporativo
+              700: '#1d4ed8',
+              900: '#1e3a8a',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    
+    /* Patrón de fondo sutil */
+    .bg-grid-slate {
+        background-size: 40px 40px;
+        background-image: linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+                          linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+    }
+    html.dark .bg-grid-slate {
+        background-image: linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+                          linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+    }
+  </style>
+
+  <script>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  </script>
+</head>
+
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
+
+  <nav class="fixed w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center gap-2">
+            <div class="bg-brand-600 text-white font-bold rounded-lg w-8 h-8 flex items-center justify-center shadow-lg shadow-brand-600/30">R</div>
+            <span class="font-bold text-xl tracking-tight">APP-REBT</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <button id="theme-toggle" class="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors">
+                <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+            </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center relative">
+    <div class="absolute inset-0 bg-grid-slate [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] dark:[mask-image:linear-gradient(0deg,rgba(2,6,23,1),rgba(2,6,23,0.5))] -z-10"></div>
+    
+    <h1 class="text-6xl md:text-8xl font-black tracking-tight mb-6">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">
+            REBT
+        </span>
+    </h1>
+
+    <p class="max-w-2xl mx-auto text-xl md:text-2xl font-light text-slate-600 dark:text-slate-300 mb-10 leading-relaxed">
+        Tu herramienta avanzada para el <span class="font-bold text-brand-600 dark:text-brand-400 border-b-2 border-brand-600/20">dominio total</span> de la normativa.
+    </p>
+    
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="#metodologia" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-bold rounded-xl text-white bg-brand-600 hover:bg-brand-700 shadow-lg shadow-brand-600/30 transition-all hover:-translate-y-1">
+            Empieza a practicar
+        </a>
+        <a href="#que-es-rebt" class="inline-flex items-center justify-center px-8 py-3 border border-slate-300 dark:border-slate-700 text-base font-medium rounded-xl text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">
+            Información del Reglamento
+        </a>
+    </div>
+  </header>
+
+  <section id="metodologia" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-4">Sistema de Preparación</h2>
+          <p class="text-slate-600 dark:text-slate-400">Orden lógico diseñado para superar la prueba oficial.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 relative">
+          <div class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-slate-200 dark:bg-slate-800 -z-10 transform translate-y-4"></div>
+
+          <div class="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-xl hover:shadow-2xl hover:border-brand-500/50 transition-all group relative">
+              <div class="w-12 h-12 rounded-full bg-brand-100 dark:bg-brand-900 text-brand-600 dark:text-brand-400 flex items-center justify-center font-bold text-xl mb-6 group-hover:scale-110 transition-transform ring-4 ring-white dark:ring-slate-950">1</div>
+              <h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white">Clasificación y Ubicación</h3>
+              <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm leading-relaxed">
+                  Antes de estudiar contenidos, aprende a orientarte. Entrena para saber rápidamente qué ITC regula cada instalación.
+              </p>
+              <a href="Landing_Test_REBT_ITC.html" class="block w-full py-3 px-4 bg-slate-50 dark:bg-slate-800 text-brand-600 dark:text-brand-400 font-semibold rounded-lg text-center hover:bg-brand-600 hover:text-white transition-colors">
+                  Empezar a practicar &rarr;
+              </a>
+          </div>
+
+          <div class="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-xl hover:shadow-2xl hover:border-brand-500/50 transition-all group relative">
+              <div class="w-12 h-12 rounded-full bg-brand-100 dark:bg-brand-900 text-brand-600 dark:text-brand-400 flex items-center justify-center font-bold text-xl mb-6 group-hover:scale-110 transition-transform ring-4 ring-white dark:ring-slate-950">2</div>
+              <h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white">Entrenamiento por ITC</h3>
+              <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm leading-relaxed">
+                  Profundiza en la norma. Selecciona una Instrucción Técnica y realiza baterías de 20 preguntas específicas.
+              </p>
+              <a href="Landing_Test_REBT_ITC.html" class="block w-full py-3 px-4 bg-slate-50 dark:bg-slate-800 text-brand-600 dark:text-brand-400 font-semibold rounded-lg text-center hover:bg-brand-600 hover:text-white transition-colors">
+                  Practicar por Temas &rarr;
+              </a>
+          </div>
+
+          <div class="bg-gradient-to-br from-brand-600 to-brand-800 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-brand-600/20 transition-all group relative text-white">
+              <div class="w-12 h-12 rounded-full bg-white/20 text-white flex items-center justify-center font-bold text-xl mb-6 group-hover:scale-110 transition-transform ring-4 ring-brand-500">3</div>
+              <h3 class="text-xl font-bold mb-3">Simulacro de Examen</h3>
+              <p class="text-brand-100 mb-6 text-sm leading-relaxed">
+                  El reto final. Examen aleatorio de 40 preguntas siguiendo el modelo oficial de Industria. Solo cuando estés listo.
+              </p>
+              <a href="Test_REBT_Completo_Basica.html" class="block w-full py-3 px-4 bg-white text-brand-700 font-bold rounded-lg text-center hover:bg-brand-50 transition-colors shadow-lg">
+                  Iniciar Simulacro
+              </a>
+          </div>
+      </div>
+  </section>
+
+  <section id="que-es-rebt" class="py-16 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+          <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-8 text-center">Todo sobre el Reglamento Electrotécnico (REBT)</h2>
+          
+          <div class="prose prose-slate dark:prose-invert max-w-none">
+              <h3 class="text-xl font-bold text-brand-600 dark:text-brand-400 mb-3">¿Qué es el REBT 2002?</h3>
+              <p class="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+                  El <strong>Reglamento Electrotécnico para Baja Tensión (REBT)</strong> es el conjunto de normas técnicas y administrativas de obligado cumplimiento en España (aprobado por el Real Decreto 842/2002). Su objetivo principal es garantizar la seguridad de las personas, el bienestar animal y la preservación de los bienes en cualquier instalación eléctrica conectada a una fuente de suministro en baja tensión.
+              </p>
+
+              <h3 class="text-xl font-bold text-brand-600 dark:text-brand-400 mb-3">Estructura del Reglamento</h3>
+              <p class="text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">
+                  Para aprobar el examen de instalador autorizado, debes entender que el reglamento se divide en dos partes fundamentales:
+              </p>
+              <ul class="list-disc pl-5 space-y-2 mb-6 text-slate-600 dark:text-slate-400">
+                  <li><strong>El Articulado:</strong> Son los primeros 29 artículos que definen el marco legal, las responsabilidades de los instaladores, las clasificaciones de las instalaciones y el régimen sancionador.</li>
+                  <li><strong>Las ITCs (Instrucciones Técnicas Complementarias):</strong> Son más de 50 instrucciones que desarrollan técnicamente los artículos. Por ejemplo, la ITC-BT-18 explica cómo deben ser las tomas de tierra, o la ITC-BT-25 detalla los circuitos interiores de una vivienda.</li>
+              </ul>
+
+              <h3 class="text-xl font-bold text-brand-600 dark:text-brand-400 mb-3">¿Qué es la Categoría Básica (IBTB)?</h3>
+              <p class="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+                  Esta plataforma está diseñada para la preparación de la <strong>Categoría Básica</strong>. Esto significa que filtramos el contenido para que no pierdas tiempo estudiando ITCs complejas que solo se exigen a la Categoría Especialista (como quirófanos, lámparas de descarga o domótica avanzada).
+              </p>
+          </div>
+      </div>
+  </section>
+
+  <section class="py-12 max-w-4xl mx-auto px-4">
+      <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6">Recursos Adicionales</h3>
+      <div class="grid sm:grid-cols-2 gap-4">
+          <a href="https://www.boe.es/biblioteca_juridica/codigos/codigo.php?modo=2&id=326_Reglamento_electrotecnico_para_baja_tension_e_ITC" target="_blank" class="flex items-center p-4 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-brand-50 dark:hover:bg-slate-700 transition-colors group">
+              <svg class="w-6 h-6 text-slate-500 group-hover:text-brand-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <div>
+                  <div class="font-bold text-slate-900 dark:text-white">Descargar PDF Oficial</div>
+                  <div class="text-sm text-slate-500">Fuente: Boletín Oficial del Estado</div>
+              </div>
+          </a>
+          <a href="glosarioSiglas.html" class="flex items-center p-4 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-brand-50 dark:hover:bg-slate-700 transition-colors group">
+              <svg class="w-6 h-6 text-slate-500 group-hover:text-brand-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+              <div>
+                  <div class="font-bold text-slate-900 dark:text-white">Glosario de Siglas</div>
+                  <div class="text-sm text-slate-500">Diccionario de términos técnicos</div>
+              </div>
+          </a>
+      </div>
+  </section>
+
+  <footer class="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 py-12 mt-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div class="text-sm text-slate-500 dark:text-slate-400">
+              © <span id="year"></span> APP-REBT.ES. Herramienta educativa libre.
+          </div>
+          <div class="flex gap-6 text-sm font-medium text-slate-600 dark:text-slate-400">
+              <a href="aviso-legal.html" class="hover:text-brand-600 transition-colors">Aviso Legal</a>
+              <a href="politica-privacidad.html" class="hover:text-brand-600 transition-colors">Privacidad</a>
+              <a href="politica-cookies.html" class="hover:text-brand-600 transition-colors">Cookies</a>
+              <a href="mailto:informacion.rebt@gmail.com" class="hover:text-brand-600 transition-colors">Contacto</a>
+          </div>
+      </div>
+  </footer>
+
+  <script>
+    // Año automático
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Lógica del Tema (Dark/Light)
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+    function updateIcons() {
+        if (document.documentElement.classList.contains('dark')) {
+            darkIcon.classList.add('hidden');
+            lightIcon.classList.remove('hidden');
+        } else {
+            lightIcon.classList.add('hidden');
+            darkIcon.classList.remove('hidden');
+        }
+    }
+    updateIcons();
+
+    themeToggleBtn.addEventListener('click', function() {
+        document.documentElement.classList.toggle('dark');
+        if (document.documentElement.classList.contains('dark')) {
+            localStorage.setItem('theme', 'dark');
+        } else {
+            localStorage.setItem('theme', 'light');
+        }
+        updateIcons();
+    });
+  </script>
+  
+  <script src="js/cookies-banner.js"></script>
+
+</body>
+</html>
