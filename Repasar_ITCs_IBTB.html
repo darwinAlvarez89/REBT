@@ -53,6 +53,9 @@
         }
         .light .btn-atras { background: rgba(255, 255, 255, 0.9); color: #1e293b; }
         .dark .btn-atras { background: rgba(15, 23, 42, 0.9); color: #ffffff; border-color: rgba(255,255,255,0.1); }
+        
+        /* Aseguramos que el enlace ocupe todo el ancho y se comporte bien */
+        a.itc-row { display: flex; width: 100%; text-decoration: none; color: inherit; }
     </style>
 </head>
 <body class="min-h-screen pb-20 light text-slate-900 dark:text-white">
@@ -98,6 +101,17 @@
                     <h2 class="font-bold uppercase text-xs tracking-widest">Conceptos generales y terminología</h2>
                 </div>
                 <div class="divide-y divide-slate-400/10 dark:divide-white/5">
+                    
+                    <a href="Repasar_Articulado.html" class="itc-row px-4 md:px-6 py-3.5 flex items-center gap-4 cursor-pointer group bg-blue-50/50 dark:bg-blue-900/10" data-speech="Articulado del reglamento.">
+                        <span class="itc-number text-sm">ART</span>
+                        <span class="text-sm md:text-base font-semibold text-slate-800 dark:text-slate-100">Articulado</span>
+                        
+                        <div class="ml-auto flex items-center gap-1.5 text-blue-600 dark:text-blue-400 bg-white dark:bg-slate-800 px-3 py-1.5 rounded-full shadow-sm border border-blue-100 dark:border-blue-900 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                            <span class="text-[10px] font-bold uppercase tracking-wide">Repasar</span>
+                            <svg class="w-3 h-3 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </div>
+                    </a>
+                    
                     <div class="itc-row px-4 md:px-6 py-4 flex items-center gap-4" data-speech="ITC 01. Terminología.">
                         <span class="itc-number text-sm">ITC-01</span>
                         <span class="text-sm md:text-base">Terminología</span>
@@ -208,11 +222,11 @@
         </div>
     </main>
 
-    <a href="Landing_Test_REBT_ITC.html" class="btn-atras group">
+    <a href="index.html" class="btn-atras group">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
-        <span class="text-[10px] font-bold uppercase tracking-widest">Atrás</span>
+        <span class="text-[10px] font-bold uppercase tracking-widest">Inicio</span>
     </a>
 
     <script>
@@ -286,8 +300,7 @@
         window.onbeforeunload = () => synth.cancel();
     </script>
     
-<!-- Banner Cookies (global) -->
-  <script src="/js/cookies-banner.js"></script>
+<script src="/js/cookies-banner.js"></script>
     
 </body>
 </html>
