@@ -47,15 +47,35 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
     
-    /* Patrón de fondo sutil */
-    .bg-grid-slate {
-        background-size: 40px 40px;
-        background-image: linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
-                          linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+    /* CONFIGURACIÓN DE LA IMAGEN DE FONDO */
+    .bg-custom-fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-image: url('img/fondo.png'); /* TU IMAGEN AQUÍ */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
-    html.dark .bg-grid-slate {
-        background-image: linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-                          linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+
+    /* Capa de superposición para asegurar que se lea el texto */
+    .bg-overlay-theme {
+        position: absolute;
+        inset: 0;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Modo Claro: Capa blanca semitransparente sobre la imagen */
+    html:not(.dark) .bg-overlay-theme {
+        background-color: rgba(248, 250, 252, 0.92); /* Slate-50 al 92% */
+    }
+
+    /* Modo Oscuro: Capa oscura semitransparente sobre la imagen */
+    html.dark .bg-overlay-theme {
+        background-color: rgba(2, 6, 23, 0.94); /* Slate-950 al 94% */
     }
   </style>
 
@@ -68,7 +88,11 @@
   </script>
 </head>
 
-<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
+<body class="text-slate-900 dark:text-slate-100 transition-colors duration-300">
+
+  <div class="bg-custom-fixed">
+      <div class="bg-overlay-theme"></div>
+  </div>
 
   <nav class="fixed w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -87,16 +111,15 @@
     </div>
   </nav>
 
-  <header class="pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center relative">
-    <div class="absolute inset-0 bg-grid-slate [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] dark:[mask-image:linear-gradient(0deg,rgba(2,6,23,1),rgba(2,6,23,0.5))] -z-10"></div>
+  <header class="pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center relative z-10">
     
-    <h1 class="text-6xl md:text-8xl font-black tracking-tight mb-6">
+    <h1 class="text-6xl md:text-8xl font-black tracking-tight mb-6 drop-shadow-sm">
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">
             REBT
         </span>
     </h1>
 
-    <p class="max-w-2xl mx-auto text-xl md:text-2xl font-light text-slate-600 dark:text-slate-300 mb-10 leading-relaxed">
+    <p class="max-w-2xl mx-auto text-xl md:text-2xl font-light text-slate-700 dark:text-slate-300 mb-10 leading-relaxed">
         Tu herramienta avanzada para el <span class="font-bold text-brand-600 dark:text-brand-400 border-b-2 border-brand-600/20">dominio total</span> de la normativa.
     </p>
     
@@ -104,13 +127,13 @@
         <a href="#metodologia" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-bold rounded-xl text-white bg-brand-600 hover:bg-brand-700 shadow-lg shadow-brand-600/30 transition-all hover:-translate-y-1">
             Empieza a practicar
         </a>
-        <a href="#que-es-rebt" class="inline-flex items-center justify-center px-8 py-3 border border-slate-300 dark:border-slate-700 text-base font-medium rounded-xl text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">
+        <a href="#que-es-rebt" class="inline-flex items-center justify-center px-8 py-3 border border-slate-300 dark:border-slate-700 text-base font-medium rounded-xl text-slate-700 dark:text-slate-300 bg-white/50 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-700 transition-all backdrop-blur-sm">
             Información del Reglamento
         </a>
     </div>
   </header>
 
-  <section id="metodologia" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+  <section id="metodologia" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
       <div class="text-center mb-16">
           <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-4">Sistema de Preparación</h2>
           <p class="text-slate-600 dark:text-slate-400">Orden lógico diseñado para superar la prueba oficial.</p>
@@ -119,7 +142,7 @@
       <div class="grid md:grid-cols-3 gap-8 relative">
           <div class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-slate-200 dark:bg-slate-800 -z-10 transform translate-y-4"></div>
 
-          <div class="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-xl hover:shadow-2xl hover:border-brand-500/50 transition-all group relative">
+          <div class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-xl hover:shadow-2xl hover:border-brand-500/50 transition-all group relative">
               <div class="w-12 h-12 rounded-full bg-brand-100 dark:bg-brand-900 text-brand-600 dark:text-brand-400 flex items-center justify-center font-bold text-xl mb-6 group-hover:scale-110 transition-transform ring-4 ring-white dark:ring-slate-950">1</div>
               <h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white">Clasificación y Ubicación</h3>
               <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm leading-relaxed">
@@ -130,7 +153,7 @@
               </a>
           </div>
 
-          <div class="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-xl hover:shadow-2xl hover:border-brand-500/50 transition-all group relative">
+          <div class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-xl hover:shadow-2xl hover:border-brand-500/50 transition-all group relative">
               <div class="w-12 h-12 rounded-full bg-brand-100 dark:bg-brand-900 text-brand-600 dark:text-brand-400 flex items-center justify-center font-bold text-xl mb-6 group-hover:scale-110 transition-transform ring-4 ring-white dark:ring-slate-950">2</div>
               <h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white">Entrenamiento por ITC</h3>
               <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm leading-relaxed">
@@ -154,7 +177,7 @@
       </div>
   </section>
 
-  <section id="que-es-rebt" class="py-16 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
+  <section id="que-es-rebt" class="py-16 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800 relative z-10">
       <div class="max-w-4xl mx-auto px-4 sm:px-6">
           <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-8 text-center">Todo sobre el Reglamento Electrotécnico (REBT)</h2>
           
@@ -181,7 +204,7 @@
       </div>
   </section>
 
-  <section class="py-12 max-w-4xl mx-auto px-4">
+  <section class="py-12 max-w-4xl mx-auto px-4 relative z-10">
       <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6">Recursos Adicionales</h3>
       <div class="grid sm:grid-cols-2 gap-4">
           <a href="https://www.boe.es/biblioteca_juridica/codigos/codigo.php?modo=2&id=326_Reglamento_electrotecnico_para_baja_tension_e_ITC" target="_blank" class="flex items-center p-4 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-brand-50 dark:hover:bg-slate-700 transition-colors group">
@@ -201,7 +224,7 @@
       </div>
   </section>
 
-  <footer class="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 py-12 mt-12">
+  <footer class="bg-white/90 dark:bg-slate-950/90 backdrop-blur border-t border-slate-200 dark:border-slate-800 py-12 mt-12 relative z-10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
           <div class="text-sm text-slate-500 dark:text-slate-400">
               © <span id="year"></span> APP-REBT.ES. Herramienta educativa libre.
