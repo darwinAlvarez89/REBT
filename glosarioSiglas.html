@@ -1,170 +1,431 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Glosario REBT</title>
-
-<!-- Google tag (gtag.js) -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <title>Glosario Técnico REBT - Siglas y Definiciones</title>
+  <meta name="description" content="Diccionario de siglas y abreviaturas del Reglamento Electrotécnico de Baja Tensión (REBT). Consulta rápida de términos como IGA, ID, PIA, ITC, etc." />
+  
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSH4ZW3VT2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){dataLayer.push(arguments);} 
     gtag('js', new Date());
     gtag('config', 'G-RSH4ZW3VT2');
   </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4753410879094321" crossorigin="anonymous"></script>
 
- <!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4753410879094321"
-     crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class', 
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#017AEB', // Tu azul corporativo
+              700: '#1d4ed8',
+              900: '#1e3a8a',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
-<style>
-  :root{
-    --bg:#0f172a; --card:#ffffff; --ink:#0b1324; --accent:#059669; --muted:#6b7280;
-  }
-  html,body{margin:0}
-  body{
-    min-height:100vh; display:flex; align-items:flex-start; justify-content:center;
-    background:linear-gradient(180deg,#0f172a,#111827); font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
-    color:var(--ink); padding:32px;
-  }
-  .card{
-    width:min(950px,96vw); background:var(--card); border-radius:18px; box-shadow:0 10px 35px rgba(0,0,0,.25);
-    padding:28px 22px;
-  }
-  h1{margin:0 0 6px; font-size:clamp(22px,3.2vw,32px)}
-  .sub{color:var(--muted); margin:0 0 18px}
-  .toolbar{display:flex; gap:10px; margin:12px 0 16px; flex-wrap:wrap}
-  input[type="search"]{
-    flex:1; min-width:220px; font-size:16px; padding:10px 12px; border-radius:10px; border:1px solid #e5e7eb; outline:none;
-  }
-  .btn{
-    border:0; background:var(--accent); color:#fff; padding:10px 14px; border-radius:10px; font-weight:600; cursor:pointer;
-    text-decoration:none; display:inline-block;
-  }
-  .btn.sec{ background:#e5e7eb; color:#111827 }
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    
+    /* Fondo fijo igual que la home */
+    .bg-custom-fixed {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+        background-image: url('img/fondo.png'); 
+        background-size: cover; background-position: center; background-repeat: no-repeat;
+    }
+    .bg-overlay-theme {
+        position: absolute; inset: 0; transition: background-color 0.3s ease;
+    }
+    html:not(.dark) .bg-overlay-theme { background-color: rgba(248, 250, 252, 0.92); }
+    html.dark .bg-overlay-theme { background-color: rgba(2, 6, 23, 0.94); }
 
-  .item{border-top:1px solid #eef2f7; padding:12px 0}
-  .term{
-    display:flex; align-items:center; gap:10px; width:100%;
-    background:transparent; border:0; cursor:pointer; text-align:left; padding:8px 6px; border-radius:10px;
-    font-weight:700; font-size:16px; color:#065f46;
-  }
-  .chip{background:#ecfdf5; color:#065f46; padding:4px 8px; border-radius:8px; font-weight:700; font-size:14px}
-  .caret{margin-left:auto; transition:transform .25s ease}
-  .item.open .caret{ transform:rotate(180deg) }
+    /* Animación del acordeón */
+    .def-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, opacity 0.3s ease-out, margin 0.3s ease;
+        opacity: 0;
+    }
+    .item.open .def-content {
+        max-height: 300px; /* Altura suficiente */
+        opacity: 1;
+        margin-top: 0.75rem;
+    }
+    .item.open .chevron { transform: rotate(180deg); }
+  </style>
 
-  .def{
-    overflow:hidden; max-height:0; opacity:0;
-    transition:max-height .35s ease, opacity .25s ease;
-    padding:0 6px; color:#334155; line-height:1.6;
-  }
-  .item.open .def{ max-height:250px; opacity:1; margin-top:6px }
-  .hidden{ display:none !important }
-  .empty{ color:#9ca3af; padding:16px 6px }
-</style>
+  <script>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  </script>
 </head>
-<body>
-  <main class="card">
-    <h1>📘 Glosario de Siglas y Abreviaturas</h1>
-    <p class="sub">Pulsa en cada término para ver su descripción. Usa la búsqueda para filtrar.</p>
 
-    <div class="toolbar">
-      <input id="q" type="search" placeholder="Buscar: IGA, ID, DPS…">
-      <button class="btn" id="expand">Expandir todo</button>
-      <button class="btn sec" id="collapse">Contraer todo</button>
+<body class="text-slate-900 dark:text-slate-100 transition-colors duration-300">
+
+  <div class="bg-custom-fixed"><div class="bg-overlay-theme"></div></div>
+
+  <nav class="fixed w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="index.html" class="flex items-center gap-2 group">
+            <div class="bg-brand-600 text-white font-bold rounded-lg w-8 h-8 flex items-center justify-center shadow-lg shadow-brand-600/30 group-hover:scale-105 transition-transform">R</div>
+            <span class="font-bold text-xl tracking-tight group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">APP-REBT</span>
+        </a>
+        <div class="flex items-center gap-4">
+            <a href="index.html" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-brand-600 transition-colors hidden sm:block">Inicio</a>
+            <button id="theme-toggle" class="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors">
+                <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+            </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto min-h-screen relative z-10">
+    
+    <div class="text-center mb-10">
+        <h1 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-4">Glosario Técnico</h1>
+        <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+            Diccionario de siglas y términos esenciales para el examen de Instalador de Baja Tensión.
+        </p>
     </div>
 
-    <div id="list">
-      <!-- ===== SIGLAS ===== -->
-      <div class="item"><button class="term"><span class="chip">ICP</span> Interruptor de Control de Potencia <span class="caret">▾</span></button>
-        <div class="def">Limita la potencia contratada evitando sobrecargas a nivel de acometida.</div></div>
+    <div class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-6 md:p-8">
+        
+        <div class="flex flex-col md:flex-row gap-4 mb-8">
+            <div class="relative flex-1">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </div>
+                <input id="q" type="search" placeholder="Buscar término (ej: IGA, Diferencial...)" 
+                    class="block w-full pl-10 pr-3 py-3 border border-slate-300 dark:border-slate-700 rounded-xl leading-5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-brand-600 sm:text-sm transition-all shadow-sm">
+            </div>
+            <div class="flex gap-2 shrink-0">
+                <button id="expand" class="flex-1 md:flex-none px-4 py-2 bg-brand-50 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300 text-sm font-semibold rounded-lg hover:bg-brand-100 dark:hover:bg-brand-900/50 transition-colors border border-brand-200 dark:border-brand-800">
+                    Expandir todo
+                </button>
+                <button id="collapse" class="flex-1 md:flex-none px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-semibold rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors border border-slate-200 dark:border-slate-700">
+                    Contraer
+                </button>
+            </div>
+        </div>
 
-      <div class="item"><button class="term"><span class="chip">IGA</span> Interruptor General Automático <span class="caret">▾</span></button>
-        <div class="def">Protección general de toda la instalación contra sobreintensidades y cortocircuitos.</div></div>
+        <div id="list" class="space-y-2">
+            
+            <div class="item group border-b border-slate-100 dark:border-slate-800/50 last:border-0 pb-2">
+                <button class="term w-full flex items-center justify-between text-left py-3 px-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors focus:outline-none">
+                    <div class="flex items-center gap-4">
+                        <span class="shrink-0 px-3 py-1 bg-brand-100 dark:bg-brand-900/40 text-brand-700 dark:text-brand-400 text-xs font-bold uppercase rounded-md tracking-wider font-mono border border-brand-200 dark:border-brand-700/50">ICP</span>
+                        <span class="font-bold text-slate-700 dark:text-slate-200 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Interruptor de Control de Potencia</span>
+                    </div>
+                    <svg class="chevron w-5 h-5 text-slate-400 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="def-content pl-2 md:pl-[4.5rem] pr-4">
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        Limita la potencia contratada evitando sobrecargas a nivel de acometida. Se instala antes del cuadro general o integrado en el contador inteligente.
+                    </p>
+                </div>
+            </div>
 
-      <div class="item"><button class="term"><span class="chip">ID</span> Interruptor Diferencial <span class="caret">▾</span></button>
-        <div class="def">Detecta fugas de corriente a tierra. Protege a las personas frente a contactos indirectos.</div></div>
+            <div class="item group border-b border-slate-100 dark:border-slate-800/50 last:border-0 pb-2">
+                <button class="term w-full flex items-center justify-between text-left py-3 px-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors focus:outline-none">
+                    <div class="flex items-center gap-4">
+                        <span class="shrink-0 px-3 py-1 bg-brand-100 dark:bg-brand-900/40 text-brand-700 dark:text-brand-400 text-xs font-bold uppercase rounded-md tracking-wider font-mono border border-brand-200 dark:border-brand-700/50">IGA</span>
+                        <span class="font-bold text-slate-700 dark:text-slate-200 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Interruptor General Automático</span>
+                    </div>
+                    <svg class="chevron w-5 h-5 text-slate-400 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="def-content pl-2 md:pl-[4.5rem] pr-4">
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        Elemento de corte obligatorio que protege la instalación interior contra cortocircuitos y sobrecargas. Define la potencia máxima admisible de la instalación.
+                    </p>
+                </div>
+            </div>
 
-      <div class="item"><button class="term"><span class="chip">PIA</span> Pequeño Interruptor Automático <span class="caret">▾</span></button>
-        <div class="def">Magnetotérmico de circuito. Protege individualmente iluminación, tomas, cocina, etc.</div></div>
+            <div class="item group border-b border-slate-100 dark:border-slate-800/50 last:border-0 pb-2">
+                <button class="term w-full flex items-center justify-between text-left py-3 px-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors focus:outline-none">
+                    <div class="flex items-center gap-4">
+                        <span class="shrink-0 px-3 py-1 bg-brand-100 dark:bg-brand-900/40 text-brand-700 dark:text-brand-400 text-xs font-bold uppercase rounded-md tracking-wider font-mono border border-brand-200 dark:border-brand-700/50">ID</span>
+                        <span class="font-bold text-slate-700 dark:text-slate-200 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Interruptor Diferencial</span>
+                    </div>
+                    <svg class="chevron w-5 h-5 text-slate-400 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="def-content pl-2 md:pl-[4.5rem] pr-4">
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        Dispositivo de seguridad que detecta fugas de corriente a tierra. Su función principal es proteger a las personas frente a contactos directos e indirectos.
+                    </p>
+                </div>
+            </div>
 
-      <div class="item"><button class="term"><span class="chip">DPS</span> Protección contra Sobretensiones <span class="caret">▾</span></button>
-        <div class="def">Deriva sobretensiones transitorias o permanentes a tierra, protegiendo equipos.</div></div>
+            <div class="item group border-b border-slate-100 dark:border-slate-800/50 last:border-0 pb-2">
+                <button class="term w-full flex items-center justify-between text-left py-3 px-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors focus:outline-none">
+                    <div class="flex items-center gap-4">
+                        <span class="shrink-0 px-3 py-1 bg-brand-100 dark:bg-brand-900/40 text-brand-700 dark:text-brand-400 text-xs font-bold uppercase rounded-md tracking-wider font-mono border border-brand-200 dark:border-brand-700/50">PIA</span>
+                        <span class="font-bold text-slate-700 dark:text-slate-200 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Pequeño Interruptor Automático</span>
+                    </div>
+                    <svg class="chevron w-5 h-5 text-slate-400 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="def-content pl-2 md:pl-[4.5rem] pr-4">
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        Conocido como magnetotérmico. Protege individualmente cada circuito (iluminación, enchufes, horno...) contra sobrecargas y cortocircuitos.
+                    </p>
+                </div>
+            </div>
 
-      <div class="item"><button class="term"><span class="chip">LGA</span> Línea General de Alimentación <span class="caret">▾</span></button>
-        <div class="def">Alimenta derivaciones individuales desde la CGP o centralización de contadores.</div></div>
+            <div class="item group border-b border-slate-100 dark:border-slate-800/50 last:border-0 pb-2">
+                <button class="term w-full flex items-center justify-between text-left py-3 px-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors focus:outline-none">
+                    <div class="flex items-center gap-4">
+                        <span class="shrink-0 px-3 py-1 bg-brand-100 dark:bg-brand-900/40 text-brand-700 dark:text-brand-400 text-xs font-bold uppercase rounded-md tracking-wider font-mono border border-brand-200 dark:border-brand-700/50">DPS</span>
+                        <span class="font-bold text-slate-700 dark:text-slate-200 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Protector de Sobretensiones</span>
+                    </div>
+                    <svg class="chevron w-5 h-5 text-slate-400 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="def-content pl-2 md:pl-[4.5rem] pr-4">
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        Dispositivo que deriva a tierra los picos de voltaje (transitorios o permanentes), protegiendo los equipos electrónicos de la vivienda.
+                    </p>
+                </div>
+            </div>
 
-      <div class="item"><button class="term"><span class="chip">CGP</span> Caja General de Protección <span class="caret">▾</span></button>
-        <div class="def">Elemento en límite de propiedad con fusibles de protección de la red de distribución.</div></div>
+            <div class="item group border-b border-slate-100 dark:border-slate-800/50 last:border-0 pb-2">
+                <button class="term w-full flex items-center justify-between text-left py-3 px-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors focus:outline-none">
+                    <div class="flex items-center gap-4">
+                        <span class="shrink-0 px-3 py-1 bg-brand-100 dark:bg-brand-900/40 text-brand-700 dark:text-brand-400 text-xs font-bold uppercase rounded-md tracking-wider font-mono border border-brand-200 dark:border-brand-700/50">LGA</span>
+                        <span class="font-bold text-slate-700 dark:text-slate-200 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Línea General de Alimentación</span>
+                    </div>
+                    <svg class="chevron w-5 h-5 text-slate-400 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="def-content pl-2 md:pl-[4.5rem] pr-4">
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        Línea que enlaza la Caja General de Protección (CGP) con la centralización de contadores.
+                    </p>
+                </div>
+            </div>
 
-      <div class="item"><button class="term"><span class="chip">CPM</span> Caja de Protección y Medida <span class="caret">▾</span>  </button>
-      <div class="def">Conjunto que integra la Caja General de Protección (CGP) y el equipo de medida en un mismo elemento.
-        Se utiliza habitualmente en suministros individuales (como viviendas unifamiliares o locales), alojando tanto los dispositivos de protección generales como el contador de energía eléctrica.</div> </div>
+            <div class="item group border-b border-slate-100 dark:border-slate-800/50 last:border-0 pb-2">
+                <button class="term w-full flex items-center justify-between text-left py-3 px-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors focus:outline-none">
+                    <div class="flex items-center gap-4">
+                        <span class="shrink-0 px-3 py-1 bg-brand-100 dark:bg-brand-900/40 text-brand-700 dark:text-brand-400 text-xs font-bold uppercase rounded-md tracking-wider font-mono border border-brand-200 dark:border-brand-700/50">CGP</span>
+                        <span class="font-bold text-slate-700 dark:text-slate-200 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Caja General de Protección</span>
+                    </div>
+                    <svg class="chevron w-5 h-5 text-slate-400 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="def-content pl-2 md:pl-[4.5rem] pr-4">
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        Primer elemento de la instalación de propiedad. Se sitúa en el límite de la finca y aloja los fusibles de protección de la línea repartidora.
+                    </p>
+                </div>
+            </div>
 
-      <div class="item"><button class="term"><span class="chip">DI</span> Derivación Individual <span class="caret">▾</span></button>
-        <div class="def">Tramo desde el contador hasta el cuadro general de una vivienda o local.</div></div>
+            <div class="item group border-b border-slate-100 dark:border-slate-800/50 last:border-0 pb-2">
+                <button class="term w-full flex items-center justify-between text-left py-3 px-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors focus:outline-none">
+                    <div class="flex items-center gap-4">
+                        <span class="shrink-0 px-3 py-1 bg-brand-100 dark:bg-brand-900/40 text-brand-700 dark:text-brand-400 text-xs font-bold uppercase rounded-md tracking-wider font-mono border border-brand-200 dark:border-brand-700/50">CPM</span>
+                        <span class="font-bold text-slate-700 dark:text-slate-200 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Caja de Protección y Medida</span>
+                    </div>
+                    <svg class="chevron w-5 h-5 text-slate-400 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="def-content pl-2 md:pl-[4.5rem] pr-4">
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        Elemento que integra la CGP y el contador en un solo bloque. Típico en viviendas unifamiliares.
+                    </p>
+                </div>
+            </div>
 
-      <div class="item"><button class="term"><span class="chip">PE</span> Conductor de Protección <span class="caret">▾</span></button>
-        <div class="def">Conductor verde/amarillo que conecta las masas metálicas a la puesta a tierra.</div></div>
+            <div class="item group border-b border-slate-100 dark:border-slate-800/50 last:border-0 pb-2">
+                <button class="term w-full flex items-center justify-between text-left py-3 px-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors focus:outline-none">
+                    <div class="flex items-center gap-4">
+                        <span class="shrink-0 px-3 py-1 bg-brand-100 dark:bg-brand-900/40 text-brand-700 dark:text-brand-400 text-xs font-bold uppercase rounded-md tracking-wider font-mono border border-brand-200 dark:border-brand-700/50">DI</span>
+                        <span class="font-bold text-slate-700 dark:text-slate-200 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Derivación Individual</span>
+                    </div>
+                    <svg class="chevron w-5 h-5 text-slate-400 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="def-content pl-2 md:pl-[4.5rem] pr-4">
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        Es el tramo de cable que va desde el contador individual hasta el Cuadro General de Mando y Protección (CGMP) de la vivienda o local.
+                    </p>
+                </div>
+            </div>
 
-      <div class="item"><button class="term"><span class="chip">TT / TN / IT</span> Esquemas de conexión a tierra <span class="caret">▾</span></button>
-        <div class="def">Formas de conexión del neutro y las masas. En viviendas es habitual el TT.</div></div>
+            <div class="item group border-b border-slate-100 dark:border-slate-800/50 last:border-0 pb-2">
+                <button class="term w-full flex items-center justify-between text-left py-3 px-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors focus:outline-none">
+                    <div class="flex items-center gap-4">
+                        <span class="shrink-0 px-3 py-1 bg-brand-100 dark:bg-brand-900/40 text-brand-700 dark:text-brand-400 text-xs font-bold uppercase rounded-md tracking-wider font-mono border border-brand-200 dark:border-brand-700/50">PE</span>
+                        <span class="font-bold text-slate-700 dark:text-slate-200 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Conductor de Protección</span>
+                    </div>
+                    <svg class="chevron w-5 h-5 text-slate-400 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="def-content pl-2 md:pl-[4.5rem] pr-4">
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        Cable de color verde/amarillo encargado de unir las masas metálicas de la instalación con la puesta a tierra para evitar contactos peligrosos.
+                    </p>
+                </div>
+            </div>
 
-      <div class="item"><button class="term"><span class="chip">MBTS</span> Muy Baja Tensión de Seguridad <span class="caret">▾</span></button>
-        <div class="def">Sistema de seguridad que garantiza tensiones inferiores a 12V AC o 30V DC.</div></div>
+            <div class="item group border-b border-slate-100 dark:border-slate-800/50 last:border-0 pb-2">
+                <button class="term w-full flex items-center justify-between text-left py-3 px-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors focus:outline-none">
+                    <div class="flex items-center gap-4">
+                        <span class="shrink-0 px-3 py-1 bg-brand-100 dark:bg-brand-900/40 text-brand-700 dark:text-brand-400 text-xs font-bold uppercase rounded-md tracking-wider font-mono border border-brand-200 dark:border-brand-700/50">REBT</span>
+                        <span class="font-bold text-slate-700 dark:text-slate-200 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Reglamento Electrotécnico de Baja Tensión</span>
+                    </div>
+                    <svg class="chevron w-5 h-5 text-slate-400 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="def-content pl-2 md:pl-[4.5rem] pr-4">
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        El marco legal (Real Decreto 842/2002) que establece las condiciones técnicas y garantías que deben reunir las instalaciones eléctricas.
+                    </p>
+                </div>
+            </div>
 
-      <div class="item"><button class="term"><span class="chip">MBTP</span> Muy Baja Tensión de Protección <span class="caret">▾</span></button>
-        <div class="def">Similar a MBTS pero con condiciones más estrictas para entornos húmedos o conductivos.</div></div>
+            <div class="item group border-b border-slate-100 dark:border-slate-800/50 last:border-0 pb-2">
+                <button class="term w-full flex items-center justify-between text-left py-3 px-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors focus:outline-none">
+                    <div class="flex items-center gap-4">
+                        <span class="shrink-0 px-3 py-1 bg-brand-100 dark:bg-brand-900/40 text-brand-700 dark:text-brand-400 text-xs font-bold uppercase rounded-md tracking-wider font-mono border border-brand-200 dark:border-brand-700/50">ITC</span>
+                        <span class="font-bold text-slate-700 dark:text-slate-200 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Instrucción Técnica Complementaria</span>
+                    </div>
+                    <svg class="chevron w-5 h-5 text-slate-400 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="def-content pl-2 md:pl-[4.5rem] pr-4">
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        Documentos técnicos que desarrollan y detallan los artículos del REBT. Hay 52 ITCs que cubren desde redes de distribución hasta instalaciones en locales especiales.
+                    </p>
+                </div>
+            </div>
 
-      <div class="item"><button class="term"><span class="chip">REBT</span> Reglamento Electrotécnico de Baja Tensión <span class="caret">▾</span></button>
-        <div class="def">Norma española que regula las instalaciones eléctricas de baja tensión.</div></div>
+            <div id="empty" class="hidden text-center py-10">
+                <p class="text-slate-400 dark:text-slate-500">No se encontraron resultados para tu búsqueda.</p>
+            </div>
 
-      <div class="item"><button class="term"><span class="chip">ITC</span> Instrucciones Técnicas Complementarias <span class="caret">▾</span></button>
-        <div class="def">Desarrollan y detallan requisitos específicos del REBT en distintos campos (alumbrado, LGA, etc.).</div></div>
+        </div>
 
-      <div class="item"><button class="term"><span class="chip">PEN</span> Conductor Combinado Neutro y Protección <span class="caret">▾</span></button>
-        <div class="def">En esquemas TN-C, un único conductor cumple la función de neutro y protección.</div></div>
+        <div class="mt-8 text-center">
+            <a href="index.html" class="inline-flex items-center gap-2 text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 font-medium transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                Volver al inicio
+            </a>
+        </div>
 
-      <div id="empty" class="empty hidden">Sin resultados para tu búsqueda.</div>
     </div>
-
-    <!-- Botón volver al inicio -->
-    <div style="margin-top: 24px; text-align: center;">
-      <a href="index.html" class="btn">⬅️ Volver al inicio</a>
-    </div>
-
   </main>
 
-<script>
-  // Toggle individual
-  document.querySelectorAll('.item .term').forEach(btn=>{
-    btn.addEventListener('click', ()=> btn.parentElement.classList.toggle('open'));
-  });
-  // Expand / Collapse
-  document.getElementById('expand').onclick = () =>
-    document.querySelectorAll('.item').forEach(el=>el.classList.add('open'));
-  document.getElementById('collapse').onclick = () =>
-    document.querySelectorAll('.item').forEach(el=>el.classList.remove('open'));
-  // Buscar
-  const q = document.getElementById('q');
-  q.addEventListener('input', ()=>{
-    const term = q.value.trim().toLowerCase();
-    const items = [...document.querySelectorAll('#list .item')];
-    let visibles = 0;
-    items.forEach(it=>{
-      const txt = it.textContent.toLowerCase();
-      const show = !term || txt.includes(term);
-      it.style.display = show ? '' : 'none';
-      if(show) visibles++;
+  <footer class="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div class="text-sm text-slate-500 dark:text-slate-400">
+              © <span id="year"></span> app-rebt.es
+          </div>
+          <div class="flex gap-6 text-sm font-medium text-slate-600 dark:text-slate-400">
+              <a href="aviso-legal.html" class="hover:text-brand-600 transition-colors">Aviso Legal</a>
+              <a href="politica-privacidad.html" class="hover:text-brand-600 transition-colors">Privacidad</a>
+              <a href="politica-cookies.html" class="hover:text-brand-600 transition-colors">Cookies</a>
+              <a href="mailto:informacion.rebt@gmail.com" class="hover:text-brand-600 transition-colors">Contacto</a>
+          </div>
+      </div>
+  </footer>
+
+  <script>
+    // 1. Footer Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // 2. Theme Logic
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+    function updateIcons() {
+        if (document.documentElement.classList.contains('dark')) {
+            darkIcon.classList.add('hidden');
+            lightIcon.classList.remove('hidden');
+        } else {
+            lightIcon.classList.add('hidden');
+            darkIcon.classList.remove('hidden');
+        }
+    }
+    updateIcons();
+
+    themeToggleBtn.addEventListener('click', function() {
+        document.documentElement.classList.toggle('dark');
+        if (document.documentElement.classList.contains('dark')) {
+            localStorage.setItem('theme', 'dark');
+        } else {
+            localStorage.setItem('theme', 'light');
+        }
+        updateIcons();
     });
-    document.getElementById('empty').classList.toggle('hidden', visibles>0);
-  });
-</script>
 
+    // 3. Glosario Logic (Accordion & Search)
+    const list = document.getElementById('list');
+    const items = document.querySelectorAll('.item');
+    const emptyMsg = document.getElementById('empty');
+    const searchInput = document.getElementById('q');
+    const expandBtn = document.getElementById('expand');
+    const collapseBtn = document.getElementById('collapse');
 
-  <!-- Banner Cookies (global) -->
-  <script src="/js/cookies-banner.js"></script>
+    // Toggle Individual
+    items.forEach(item => {
+        const btn = item.querySelector('.term');
+        btn.addEventListener('click', () => {
+            item.classList.toggle('open');
+        });
+    });
+
+    // Expand/Collapse All
+    expandBtn.addEventListener('click', () => {
+        items.forEach(el => {
+            if(el.style.display !== 'none') el.classList.add('open');
+        });
+    });
+    
+    collapseBtn.addEventListener('click', () => {
+        items.forEach(el => el.classList.remove('open'));
+    });
+
+    // Buscador
+    searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.trim().toLowerCase();
+        let visibleCount = 0;
+
+        items.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            const isVisible = !term || text.includes(term);
+            
+            item.style.display = isVisible ? 'block' : 'none';
+            if(isVisible) visibleCount++;
+        });
+
+        // Mostrar mensaje si no hay resultados
+        if (visibleCount === 0) {
+            emptyMsg.classList.remove('hidden');
+        } else {
+            emptyMsg.classList.add('hidden');
+        }
+    });
+  </script>
+  
+  <script src="js/cookies-banner.js"></script>
+
 </body>
 </html>
