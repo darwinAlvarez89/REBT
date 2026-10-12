@@ -82,6 +82,29 @@
     html.dark .bg-overlay-theme {
         background-color: rgba(2, 6, 23, 0.94);
     }
+
+    /* Invitación opcional a la nueva plataforma, limitada a la portada. */
+    .academy-invite { margin: 2rem auto 0; max-width: 900px; padding: 1.5rem; text-align: left; border: 1px solid #bfdbfe; border-radius: 20px; background: linear-gradient(120deg, #fff, #eff6ff); box-shadow: 0 12px 35px rgba(30,64,175,.07); display: flex; align-items: center; gap: 1.75rem; }
+    .academy-invite-copy { flex: 1; min-width: 0; }
+    .academy-invite-label { margin: 0 0 .5rem; color: #1d4ed8; font-size: .7rem; font-weight: 800; letter-spacing: .12em; }
+    .academy-invite h2 { margin: 0 0 .6rem; color: #0f172a; font-size: clamp(1.25rem, 3vw, 1.6rem); font-weight: 800; line-height: 1.25; }
+    .academy-invite-description { margin: 0; color: #475569; font-size: .9rem; line-height: 1.65; }
+    .academy-invite-actions { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: .65rem; }
+    .academy-invite-cta { display: inline-flex; justify-content: center; align-items: center; min-height: 46px; padding: .75rem 1.2rem; border-radius: 12px; background: #017aeb; color: #fff; font-weight: 700; font-size: .9rem; text-decoration: none; }
+    .academy-invite-cta:hover { background: #1d4ed8; }
+    .academy-invite-details { color: #1d4ed8; font-size: .8rem; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+    .academy-invite-note { color: #64748b; font-size: .7rem; text-align: center; }
+    .academy-invite a:focus-visible { outline: 3px solid #017aeb; outline-offset: 4px; }
+    html.dark .academy-invite { background: linear-gradient(120deg, #0f172a, #172554); border-color: #334155; }
+    html.dark .academy-invite h2 { color: #f8fafc; }
+    html.dark .academy-invite-label, html.dark .academy-invite-details { color: #93c5fd; }
+    html.dark .academy-invite-description { color: #cbd5e1; }
+    html.dark .academy-invite-note { color: #94a3b8; }
+    @media (max-width: 640px) {
+      .academy-invite { flex-direction: column; align-items: stretch; gap: 1.2rem; padding: 1.25rem; }
+      .academy-invite-actions { align-items: stretch; }
+      .academy-invite-details { text-align: center; padding: .3rem; }
+    }
   </style>
 
   <script>
@@ -136,6 +159,19 @@
             Información del Reglamento
         </a>
     </div>
+
+    <aside class="academy-invite" aria-labelledby="academy-invite-title">
+      <div class="academy-invite-copy">
+        <p class="academy-invite-label">NUEVA PLATAFORMA · APP-REBT.COM</p>
+        <h2 id="academy-invite-title">Dale un rumbo a tu preparación.</h2>
+        <p class="academy-invite-description">Estudia con un recorrido guiado, practica tests por ITC con explicaciones y sigue tu progreso en tu espacio de alumno. Conoce la nueva formación por suscripción.</p>
+      </div>
+      <div class="academy-invite-actions">
+        <a class="academy-invite-cta" href="https://app-rebt.com/?utm_source=app-rebt.es&amp;utm_medium=referral&amp;utm_campaign=nueva_plataforma&amp;utm_content=demo#demo" target="_blank" rel="noopener noreferrer">Probar 10 preguntas gratis <span aria-hidden="true">&nbsp;↗</span><span class="sr-only"> (se abre en otra pestaña)</span></a>
+        <a class="academy-invite-details" href="https://app-rebt.com/?utm_source=app-rebt.es&amp;utm_medium=referral&amp;utm_campaign=nueva_plataforma&amp;utm_content=formacion#temario" target="_blank" rel="noopener noreferrer">Ver la formación y suscribirme<span class="sr-only"> (se abre en otra pestaña)</span></a>
+        <p class="academy-invite-note">Demo sin cuenta · Formación completa por suscripción</p>
+      </div>
+    </aside>
   </header>
 
   <section id="metodologia" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
