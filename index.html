@@ -105,6 +105,59 @@
       .academy-invite-actions { align-items: stretch; }
       .academy-invite-details { text-align: center; padding: .3rem; }
     }
+    .academy-invite { max-width: 1120px; display: grid; grid-template-columns: 1fr 1.05fr; gap: 36px; padding: 32px; margin-top: 40px; }
+    .academy-invite h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -.035em; line-height: 1.2; margin-bottom: 18px; }
+    .academy-invite h2 span { color: #017aeb; }
+    .academy-value-list { list-style: none; padding: 0; margin: 24px 0; display: grid; gap: 16px; }
+    .academy-value-list li { border-left: 3px solid #60a5fa; padding-left: 14px; }
+    .academy-value-list b { display: block; color: #0f172a; font-size: 14px; margin-bottom: 4px; }
+    .academy-value-list span { display: block; color: #475569; font-size: 13px; line-height: 1.5; }
+    .academy-results { min-width: 0; background: #fff; border: 1px solid #e2e8f0; border-radius: 18px; overflow: hidden; box-shadow: 0 14px 32px #0f172a12; color: #25364b; }
+    .academy-results-top { padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; gap: 8px; border-bottom: 1px solid #e8eef5; background: #f8fafc; font-size: 11px; }
+    .academy-results-top > span:first-child { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+    .academy-results-top b { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 7px; background: #017aeb; color: white; }
+    .academy-example { padding: 4px 7px; border-radius: 5px; background: #edf5ff; color: #47627b; font-size: 10px; }
+    .academy-results-body { padding: 20px; }
+    .academy-results-eyebrow { font-size: 9px; color: #64748b; letter-spacing: .1em; margin: 0 0 6px; font-weight: 700; }
+    .academy-results h3 { font-size: 20px; font-weight: 800; letter-spacing: -.025em; margin: 0; }
+    .academy-results-type { font-size: 11px; color: #64748b; margin: 9px 0 18px; }
+    .academy-result-metrics { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin-bottom: 18px; }
+    .academy-result-metrics > div + div { border-left: 1px solid #e8eef5; padding-left: 12px; }
+    .academy-result-metrics span { font-size: 11px; color: #64748b; display: block; margin-bottom: 4px; }
+    .academy-result-metrics strong { font-size: 25px; font-weight: 800; letter-spacing: -.04em; }
+    .academy-result-metrics small { font-size: 11px; font-weight: 400; color: #64748b; margin-left: 3px; }
+    .academy-result-chart { border: 1px solid #e8eef5; border-radius: 12px; background: #fbfdff; padding: 12px; margin-bottom: 16px; }
+    .academy-chart-heading { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .academy-chart-heading h4 { font-size: 12px; font-weight: 700; margin: 0; }
+    .academy-chart-heading > span { font-size: 10px; color: #64748b; }
+    .academy-result-chart .academy-chart-heading > span { color: #287b65; background: #edf8f2; padding: 3px 5px; border-radius: 4px; }
+    .academy-result-chart svg { display: block; width: 100%; height: auto; }
+    .academy-chart-caption { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 10px; color: #64748b; }
+    .academy-chart-caption b { color: #017aeb; font-weight: 600; }
+    .academy-topic-row { display: grid; grid-template-columns: 100px minmax(0,1fr) 32px; align-items: center; gap: 12px; margin: 12px 0 0; font-size: 10px; }
+    .academy-topic-row > div:first-child b, .academy-topic-row > div:first-child span { display: block; }
+    .academy-topic-row > div:first-child b { font-weight: 700; }
+    .academy-topic-row > div:first-child span { color: #64748b; margin-top: 2px; }
+    .academy-topic-row > b { text-align: right; color: #967131; font-weight: 600; }
+    .academy-topic-bar { height: 5px; border-radius: 3px; background: #f3f0e8; overflow: hidden; }
+    .academy-topic-bar span { display: block; height: 100%; background: #e6b05b; border-radius: 3px; }
+    .academy-results-note { margin: 0; padding: 12px 16px; background: #f8fafc; border-top: 1px solid #e8eef5; text-align: center; color: #64748b; font-size: 10px; line-height: 1.5; }
+    html.dark .academy-value-list b { color: #f8fafc; }
+    html.dark .academy-value-list span { color: #cbd5e1; }
+    html.dark .academy-invite h2 span { color: #60a5fa; }
+    @media (max-width: 760px) {
+      .academy-invite { grid-template-columns: minmax(0,1fr); gap: 24px; padding: 22px; }
+      .academy-invite-cta { display: flex; }
+      .academy-results { width: 100%; max-width: 520px; margin: auto; }
+    }
+    @media (max-width: 380px) {
+      .academy-invite { padding: 16px; }
+      .academy-results-body { padding: 14px; }
+      .academy-topic-row { grid-template-columns: 82px minmax(0,1fr) 30px; gap: 7px; }
+      .academy-result-metrics { gap: 7px; }
+      .academy-result-metrics > div + div { padding-left: 7px; }
+      .academy-result-metrics strong { font-size: 22px; }
+    }
   </style>
 
   <script>
@@ -163,14 +216,33 @@
 
     <aside class="academy-invite" aria-labelledby="academy-invite-title">
       <div class="academy-invite-copy">
-        <p class="academy-invite-label">NUEVA PLATAFORMA · APP-REBT.COM</p>
-        <h2 id="academy-invite-title">Dale un rumbo a tu preparación.</h2>
-        <p class="academy-invite-description">Estudia con un recorrido guiado, practica tests por ITC con explicaciones y sigue tu progreso en tu espacio de alumno. Descubre dónde mejorar y avanza con un plan.</p>
-      </div>
-      <div class="academy-invite-actions">
+        <p class="academy-invite-label">TU SIGUIENTE PASO · APP-REBT.COM</p>
+        <h2 id="academy-invite-title">Practica. Entiende tus errores.<br><span>Ve cómo avanzas.</span></h2>
+        <p class="academy-invite-description">En APP-REBT.COM, cada práctica te ayuda a conocer tu evolución. Mira tus resultados, descubre qué ITC necesitas reforzar y avanza con un recorrido guiado.</p>
+        <ul class="academy-value-list">
+          <li><b>Tu evolución, de un vistazo</b><span>Gráficas para seguir tus notas a lo largo de tus prácticas.</span></li>
+          <li><b>Descubre dónde mejorar</b><span>Identifica los temas que concentran tus errores.</span></li>
+          <li><b>Un rumbo para tu preparación</b><span>Estudio y entrenamiento organizados paso a paso.</span></li>
+        </ul>
         <a class="academy-invite-cta" href="https://app-rebt.com/" target="_blank" rel="noopener noreferrer">Descubre tu nueva formación <span aria-hidden="true">&nbsp;↗</span><span class="sr-only"> (se abre en otra pestaña)</span></a>
-        <a class="academy-invite-details" href="https://app-rebt.com/" target="_blank" rel="noopener noreferrer">Conocer APP-REBT.COM<span class="sr-only"> (se abre en otra pestaña)</span></a>
-        <p class="academy-invite-note">Recorrido guiado · Estadísticas · Progreso personal</p>
+      </div>
+      <div class="academy-results" aria-label="Vista de ejemplo del análisis en APP-REBT.COM">
+        <div class="academy-results-top"><span><b aria-hidden="true">R</b> Mi aprendizaje</span><span class="academy-example">Vista de ejemplo</span></div>
+        <div class="academy-results-body">
+          <p class="academy-results-eyebrow">TUS RESULTADOS, CON PERSPECTIVA</p>
+          <h3>Cada resultado cuenta.</h3>
+          <p class="academy-results-type">Tests por ITC · 6 prácticas de ejemplo</p>
+          <div class="academy-result-metrics"><div><span>Nota media</span><strong>7,29<small>/10</small></strong></div><div><span>Superados</span><strong>4<small>/6</small></strong></div><div><span>Por respuesta</span><strong>42<small>s</small></strong></div></div>
+          <div class="academy-result-chart"><div class="academy-chart-heading"><h4>Tu evolución</h4><span>Objetivo 7/10</span></div>
+          <svg viewBox="0 0 480 160" role="img" aria-label="Ejemplo de evolución: notas de 5,50 a 8,75 sobre 10 en seis prácticas. Objetivo: 7 sobre 10.">
+<defs><linearGradient id="academy-evolution-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1680e7" stop-opacity=".22"/><stop offset="100%" stop-color="#1680e7" stop-opacity="0"/></linearGradient></defs><line x1="32" x2="452" y1="135" y2="135" stroke="#e2e8f0"/><text x="8" y="139" fill="#64748b" font-size="12">0</text><line x1="32" x2="452" y1="80" y2="80" stroke="#e2e8f0"/><text x="8" y="84" fill="#64748b" font-size="12">5</text><line x1="32" x2="452" y1="25" y2="25" stroke="#e2e8f0"/><text x="8" y="29" fill="#64748b" font-size="12">10</text><line x1="32" x2="452" y1="58" y2="58" stroke="#42a58b" stroke-dasharray="4 5"/><path d="M32,74.5 L116,66.25 L200,58 L284,49.75 L368,41.5 L452,38.75 L452,135 L32,135 Z" fill="url(#academy-evolution-fill)"/><path d="M32,74.5 L116,66.25 L200,58 L284,49.75 L368,41.5 L452,38.75" fill="none" stroke="#1680e7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="74.5" r="3.5" fill="white" stroke="#1680e7" stroke-width="2"/><circle cx="116" cy="66.25" r="3.5" fill="white" stroke="#1680e7" stroke-width="2"/><circle cx="200" cy="58" r="3.5" fill="white" stroke="#1680e7" stroke-width="2"/><circle cx="284" cy="49.75" r="3.5" fill="white" stroke="#1680e7" stroke-width="2"/><circle cx="368" cy="41.5" r="3.5" fill="white" stroke="#1680e7" stroke-width="2"/><circle cx="452" cy="38.75" r="5" fill="#1680e7" stroke="#1680e7" stroke-width="2"/></svg>
+          <div class="academy-chart-caption"><span>Práctica 1 → Práctica 6</span><b>Última nota: 8,75/10</b></div></div>
+          <div class="academy-chart-heading"><h4>Dónde reforzar</h4><span>Fallos por tema</span></div>
+          <div class="academy-topic-row"><div><b>ITC-BT-18</b><span>Puesta a tierra</span></div><div class="academy-topic-bar" role="img" aria-label="6 fallos de 20 respuestas"><span style="width:30%"></span></div><b>6/20</b></div>
+          <div class="academy-topic-row"><div><b>ITC-BT-24</b><span>Protección</span></div><div class="academy-topic-bar" role="img" aria-label="4 fallos de 20 respuestas"><span style="width:20%"></span></div><b>4/20</b></div>
+          <div class="academy-topic-row"><div><b>ITC-BT-25</b><span>Viviendas</span></div><div class="academy-topic-bar" role="img" aria-label="2 fallos de 20 respuestas"><span style="width:10%"></span></div><b>2/20</b></div>
+        </div>
+        <p class="academy-results-note">Vista ilustrativa con datos de ejemplo.<br>Descubre el seguimiento de tu aprendizaje en APP-REBT.COM.</p>
       </div>
     </aside>
   </header>
@@ -315,3 +387,4 @@
 
 </body>
 </html>
+
