@@ -49,7 +49,7 @@
     @media(max-width:700px){.rebt-discover-card{flex-direction:column;align-items:stretch;gap:14px;padding:17px}.rebt-discover-card h2{font-size:16px}.rebt-discover-card>a{align-self:flex-start}}
   `;
   document.head.append(invitationStyle);
-  const placements=['ticker','home','test_menu','exam_menu','test_result','exam_result'];
+  const placements=['ticker','home','orientation_menu','test_menu','exam_menu','test_result','exam_result'];
   // Only aggregate clicks after the existing free-site cookie choice. No answers, scores or IDs.
   document.addEventListener('click',event=>{
     const target=event.target instanceof Element?event.target.closest('a[data-rebt-placement]'):null;
