@@ -387,6 +387,8 @@
                     <a href="../Test_por_ITC_del_REBT.html" class="flex-1 py-3 bg-white border border-gray-200 text-gray-600 rounded-xl font-bold hover:bg-gray-50 transition-all flex items-center justify-center">Salir</a>
                 </div>
 
+                <aside class="rebt-discover-card" aria-label="Formación con seguimiento en APP-REBT.COM"><div><span>APP-REBT.COM · TU SIGUIENTE PASO</span><h2>¿Qué necesitas reforzar para tu siguiente práctica?</h2><p>En APP-REBT.COM puedes seguir tus notas, ver los errores por ITC y avanzar con un recorrido guiado. Empieza allí tu historial de aprendizaje.</p></div><a href="https://app-rebt.com/?utm_source=app-rebt.es&amp;utm_medium=referral&amp;utm_campaign=guia_rebt&amp;utm_content=test_result" data-rebt-placement="test_result" target="_blank" rel="noopener noreferrer" onkeydown="event.stopPropagation()">Ver cómo puedo mejorar <span aria-hidden="true">↗</span><span class="sr-only"> (se abre en otra pestaña)</span></a></aside>
+
                 <div class="text-left border-t border-gray-100 pt-6">
                     <h3 class="font-bold text-gray-400 text-xs uppercase mb-4 tracking-widest text-center">Revisión Completa</h3>
                     <div class="max-h-96 overflow-y-auto pr-1 hide-scroll bg-white">${htmlHistorial}</div>
@@ -394,7 +396,8 @@
             </div>
         `;
         document.querySelector('.stats-header').style.display = 'none';
-        document.getElementById('header-title-container').style.display = 'none';
+        const previousTitle = document.getElementById('header-title-container');
+        if (previousTitle) previousTitle.style.display = 'none';
     }
 
     function mostrarError(msg) {
@@ -416,7 +419,7 @@
 
     window.onload = iniciarAplicacion;
   </script>
-  <script src="/js/platform-banner.js?v=20261012-home" defer></script>
+  <script src="/js/platform-banner.js?v=20261016-guided" defer></script>
 </head>
 
 <body>
@@ -449,3 +452,4 @@
   <script src="/js/cookies-banner.js"></script>
 </body>
 </html>
+
