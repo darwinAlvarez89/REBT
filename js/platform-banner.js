@@ -34,6 +34,11 @@
   `;
   const invitationStyle = document.createElement('style');
   invitationStyle.textContent = `
+    .rebt-test-invite{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;max-width:48rem;min-height:36px;flex-shrink:0;margin:0 0 8px;padding:8px 12px;border:1px solid #bfdbfe;border-radius:10px;background:#eff6ff;color:#1e40af;font:500 12px/18px Inter,system-ui,sans-serif;text-decoration:none;white-space:nowrap}
+    .rebt-test-invite strong{font-size:11px;font-weight:800;letter-spacing:.02em}
+    .rebt-test-invite:hover{background:#dbeafe;border-color:#93c5fd}
+    .rebt-test-invite:focus-visible{outline:3px solid #60a5fa;outline-offset:2px}
+    @media(max-width:359px){.rebt-test-invite{padding-inline:9px;font-size:11px}.rebt-test-invite strong{font-size:10px}}
     .rebt-discover-card{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:0 0 22px;padding:20px;border:1px solid #bfdbfe;border-radius:16px;background:linear-gradient(120deg,#f8fbff,#edf5ff);text-align:left;font-family:Inter,system-ui,sans-serif;color:#1e3551}
     .rebt-discover-card>div{flex:1;min-width:0}
     .rebt-discover-card>div>span{display:block;font-size:9px;font-weight:800;letter-spacing:.09em;color:#1766ae;margin-bottom:7px}
@@ -49,7 +54,7 @@
     @media(max-width:700px){.rebt-discover-card{flex-direction:column;align-items:stretch;gap:14px;padding:17px}.rebt-discover-card h2{font-size:16px}.rebt-discover-card>a{align-self:flex-start}}
   `;
   document.head.append(invitationStyle);
-  const placements=['ticker','home','orientation_menu','test_menu','exam_menu','test_result','exam_result'];
+  const placements=['ticker','home','orientation_menu','test_question','exam_question','test_menu','exam_menu','test_result','exam_result'];
   // Only aggregate clicks after the existing free-site cookie choice. No answers, scores or IDs.
   document.addEventListener('click',event=>{
     const target=event.target instanceof Element?event.target.closest('a[data-rebt-placement]'):null;
