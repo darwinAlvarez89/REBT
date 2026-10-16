@@ -58,6 +58,8 @@
   <script>
     /* ===== LÓGICA ROBUSTA ===== */
     let preguntasDelExamen = [];
+    // Preserve the optional review implementation without rendering it on the free site.
+    const MOSTRAR_REVISION_FINAL = false;
     const PREGUNTAS_POR_TEST = 20;
     const DURACION_SEG = 60 * 60;
 
@@ -337,7 +339,7 @@
 
         if (apto) lanzarFuegosArtificiales();
 
-        const htmlHistorial = historial.map((h, i) => {
+        const htmlHistorial = MOSTRAR_REVISION_FINAL ? historial.map((h, i) => {
             const opcionesHTML = h.opciones.map(op => {
                 let clase = "text-slate-400 border-slate-100 bg-white";
                 let icon = "";
@@ -360,7 +362,7 @@
                     </div>
                 </div>
             `;
-        }).join('');
+        }).join('') : '';
 
         const iconoFinal = apto ? '🎉' : '💪';
         const tituloFinal = apto ? '¡Aprobado!' : '¡No te rindas!';
@@ -390,10 +392,10 @@
                 </div>
 
 
-                <div class="text-left border-t border-gray-100 pt-6">
+                ${MOSTRAR_REVISION_FINAL ? `<div class="text-left border-t border-gray-100 pt-6">
                     <h3 class="font-bold text-gray-400 text-xs uppercase mb-4 tracking-widest text-center">Revisión Completa</h3>
                     <div class="max-h-96 overflow-y-auto pr-1 hide-scroll bg-white">${htmlHistorial}</div>
-                </div>
+                </div>` : ''}
             </div>
         `;
         document.querySelector('.stats-header').style.display = 'none';
