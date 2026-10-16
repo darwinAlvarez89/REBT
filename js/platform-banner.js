@@ -34,11 +34,15 @@
   `;
   const invitationStyle = document.createElement('style');
   invitationStyle.textContent = `
-    .rebt-test-invite{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;max-width:48rem;min-height:36px;flex-shrink:0;margin:0 0 8px;padding:8px 12px;border:1px solid #bfdbfe;border-radius:10px;background:#eff6ff;color:#1e40af;font:500 12px/18px Inter,system-ui,sans-serif;text-decoration:none;white-space:nowrap}
-    .rebt-test-invite strong{font-size:11px;font-weight:800;letter-spacing:.02em}
-    .rebt-test-invite:hover{background:#dbeafe;border-color:#93c5fd}
-    .rebt-test-invite:focus-visible{outline:3px solid #60a5fa;outline-offset:2px}
-    @media(max-width:359px){.rebt-test-invite{padding-inline:9px;font-size:11px}.rebt-test-invite strong{font-size:10px}}
+    .rebt-test-invite{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:18px;width:100%;max-width:48rem;min-height:88px;flex-shrink:0;margin:0 0 12px;padding:16px 18px;border:1px solid #bdd6f5;border-left:4px solid #1976e9;border-radius:14px;background:linear-gradient(115deg,#fff 0%,#eff6ff 70%,#e4efff 100%);box-shadow:0 5px 18px -10px rgba(30,64,175,.28);color:#163351;font-family:Inter,system-ui,sans-serif;text-align:left;text-decoration:none;transition:background .2s,box-shadow .2s}
+    .rebt-test-invite-copy{display:flex;flex-direction:column;gap:5px;min-width:0}
+    .rebt-test-invite-copy>strong{font-size:15px;line-height:1.35;font-weight:800;letter-spacing:-.2px}
+    .rebt-test-invite-copy>span{font-size:12px;line-height:1.45;color:#506984}
+    .rebt-test-invite-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;flex-shrink:0;min-height:38px;padding:9px 13px;border-radius:9px;background:#0875e5;color:#fff;font-size:11px;line-height:18px;font-weight:800;box-shadow:0 3px 8px rgba(8,117,229,.18);white-space:nowrap}
+    .rebt-test-invite:hover{background:linear-gradient(115deg,#f8fbff,#e4efff);box-shadow:0 6px 20px -8px rgba(30,64,175,.3)}
+    .rebt-test-invite:hover .rebt-test-invite-cta{background:#075fc1}
+    .rebt-test-invite:focus-visible{outline:3px solid #60a5fa;outline-offset:3px}
+    @media(max-width:560px){.rebt-test-invite{flex-wrap:wrap;gap:10px;padding:13px 14px}.rebt-test-invite-copy{width:100%;gap:4px}.rebt-test-invite-copy>strong{font-size:14px}.rebt-test-invite-copy>span{font-size:11px}.rebt-test-invite-cta{min-height:34px;padding:7px 11px;margin-left:auto}}
     .rebt-discover-card{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:0 0 22px;padding:20px;border:1px solid #bfdbfe;border-radius:16px;background:linear-gradient(120deg,#f8fbff,#edf5ff);text-align:left;font-family:Inter,system-ui,sans-serif;color:#1e3551}
     .rebt-discover-card>div{flex:1;min-width:0}
     .rebt-discover-card>div>span{display:block;font-size:9px;font-weight:800;letter-spacing:.09em;color:#1766ae;margin-bottom:7px}
