@@ -95,6 +95,7 @@
     .rebt-invite-close:focus-visible{outline:3px solid #60a5fa;outline-offset:1px}
     .rebt-test-invite a{color:inherit;text-decoration:none}
     .rebt-test-invite a.rebt-test-invite-cta{color:white;white-space:normal;text-align:center}
+    .rebt-discover-card [data-rebt-promo-copy="menu_price"]{display:block;min-height:1.6em}
     .rebt-result-invite{min-width:0;overflow-wrap:anywhere}
     .rebt-result-invite>a{max-width:100%;box-sizing:border-box;text-align:center}
     .academy-invite-cta{min-height:54px;text-align:center;line-height:1.4}
@@ -112,6 +113,7 @@
     html.dark .rebt-result-topics>span,body.dark .rebt-result-topics>span{background:#122236;border-color:#365775;color:#dbeafe}
     html.dark .rebt-result-topics b,body.dark .rebt-result-topics b{color:#f1c77c}
     html.dark .rebt-result-invite>small,body.dark .rebt-result-invite>small{color:#b5c9dc}
+    @media(max-width:480px){.academy-invite-cta{min-height:72px}.rebt-result-invite>a{min-height:64px}.rebt-result-invite>small{min-height:30px}}
     @media(max-width:560px){.rebt-invite-slot,.rebt-invite-slot>.rebt-test-invite{min-height:132px}.rebt-test-invite{padding-right:44px}.academy-locked-steps{grid-template-columns:1fr}}
     .rebt-result-invite .sr-only,.rebt-test-invite .sr-only,#rebt-platform-banner .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   `;
