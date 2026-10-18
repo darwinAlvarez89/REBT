@@ -1,37 +1,52 @@
-/* Optional APP-REBT.COM ticker. Independent of questions, timers and saved progress. */
+/* APP-REBT.COM invitations. No writes to questions, timers or learner progress. */
 (() => {
   'use strict';
-  if (document.getElementById('rebt-platform-banner')) return;
-
-  const href = 'https://app-rebt.com/descubre?utm_source=app-rebt.es&utm_medium=referral&utm_campaign=guia_rebt&utm_content=ticker';
-  const benefits = [
-    'Tus notas cuentan una historia: descubre tu evolución',
-    'Descubre qué ITC necesitas reforzar antes de tu próxima práctica',
-    'Recorrido guiado: estudia, practica y avanza',
-    'Repasos con tus errores al completar el articulado y las ITC',
-    'Descubre tu formación en APP-REBT.COM ↗'
-  ];
+  const PROMO_END = '2026-10-31T23:59:59+01:00';
+  function promoActiva() { return Date.now() <= Date.parse(PROMO_END); }
+  function diasRestantes() { return Math.max(0, Math.ceil((Date.parse(PROMO_END) - Date.now()) / 86400000)); }
+  if (window.rebtPlatformBannerReady) return;
+  window.rebtPlatformBannerReady = true;
+  const TICKER_CLOSED = 'rebt:platform-ticker:closed';
+  const QUESTION_SHOWN = 'rebt:question-invite:shown';
+  const storageGet = key => { try { return sessionStorage.getItem(key); } catch { return null; } };
+  const storageSet = key => { try { sessionStorage.setItem(key, 'true'); } catch { /* Session-only memory below still applies. */ } };
+  const screenReader = '<span class="sr-only"> (se abre en otra pestaña)</span>';
+  const placements = ['ticker','home','home_demo','orientation_menu','test_menu','exam_menu','test_question','test_result','exam_result','paso_bloqueado'];
+  function destination(placement) {
+    const page = ['test_result','exam_result'].includes(placement) ? 'registro' : 'descubre';
+    return 'https://app-rebt.com/' + page + '?utm_source=app-rebt.es&utm_medium=referral&utm_campaign=' + (promoActiva() ? 'oferta_oct26' : 'guia_rebt') + '&utm_content=' + placement;
+  }
+  function measure(name, placement) {
+    try {
+      if (localStorage.getItem('cookiesAccepted') !== 'true' || typeof window.gtag !== 'function') return false;
+      window.gtag('event', name, {promotion_placement:placement,link_domain:'app-rebt.com'});
+      return true;
+    } catch { return false; }
+  }
   const style = document.createElement('style');
   style.textContent = `
-    body.rebt-promo-enabled { margin-top: calc(var(--rebt-original-margin-top, 0px) + 44px) !important; min-height: calc(100vh - 44px) !important; }
-    body.rebt-promo-enabled > nav.fixed { top: 44px !important; }
-    body.rebt-promo-enabled .theme-toggle { top: 59px !important; }
-    #rebt-platform-banner { position: fixed; inset: 0 0 auto; height: 44px; z-index: 90; display: flex; align-items: center; gap: 12px; padding: 0 16px; box-sizing: border-box; background: #0f2e55; color: #fff; font: 600 14px/1.3 Inter, system-ui, sans-serif; border-bottom: 1px solid #244a77; }
-    #rebt-platform-banner * { box-sizing: border-box; }
-    #rebt-platform-banner .rebt-promo-brand { flex-shrink: 0; font-size: 11px; font-weight: 800; letter-spacing: .06em; color: #bfdbfe; }
-    #rebt-platform-banner a { flex: 1; display: flex; align-items: center; min-width: 0; height: 28px; overflow: hidden; color: #fff; text-decoration: none; }
-    #rebt-platform-banner .rebt-promo-track { display: flex; width: max-content; flex-shrink: 0; animation: rebt-promo-scroll 38s linear infinite; }
-    #rebt-platform-banner .rebt-promo-group { display: inline-flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap; flex-shrink: 0; }
-    #rebt-platform-banner .rebt-promo-benefit { display: inline-flex; align-items: center; gap: 28px; }
-    #rebt-platform-banner .rebt-promo-benefit::after { content: '◆'; color: #60a5fa; font-size: 8px; }
-    #rebt-platform-banner a:hover { text-decoration: underline; text-underline-offset: 3px; }
-    #rebt-platform-banner a:focus-visible { outline: 2px solid #bfdbfe; outline-offset: -2px; }
-    @keyframes rebt-promo-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    @media (max-width: 480px) {
-      #rebt-platform-banner { gap: 6px; padding: 0 6px; }
-      #rebt-platform-banner .rebt-promo-brand { display: none; }
+    html.rebt-promo-pending body { margin-top:44px !important; min-height:calc(100vh - 44px) !important; }
+    body.rebt-promo-enabled { margin-top:calc(var(--rebt-original-margin-top, 0px) + 44px) !important; min-height:calc(100vh - 44px) !important; }
+    html.rebt-promo-pending body > nav.fixed,body.rebt-promo-enabled > nav.fixed { top:44px !important; }
+    html.rebt-promo-pending .theme-toggle,body.rebt-promo-enabled .theme-toggle { top:59px !important; }
+    #rebt-platform-banner { position:fixed;inset:0 0 auto;height:44px;z-index:90;display:flex;align-items:center;gap:8px;padding:0 12px;box-sizing:border-box;background:#0f2e55;color:#fff;font:600 clamp(9px,1.1vw,12px)/1.25 Inter,system-ui,sans-serif;border-bottom:1px solid #244a77; }
+    #rebt-platform-banner * { box-sizing:border-box; }
+    #rebt-platform-banner a { display:flex;align-items:center;justify-content:center;gap:14px;flex:1;min-width:0;min-height:40px;color:#fff;text-decoration:none; }
+    #rebt-platform-banner .rebt-promo-desktop { min-width:0;text-wrap:balance; }
+    #rebt-platform-banner .rebt-promo-action { flex:none;text-decoration:underline;text-underline-offset:3px; }
+    #rebt-platform-banner .rebt-promo-mobile { display:none; }
+    #rebt-platform-banner button { flex:none;width:32px;height:40px;padding:0;border:0;border-radius:5px;background:transparent;color:#fff;font-size:22px;cursor:pointer; }
+    #rebt-platform-banner :is(a,button):focus-visible { outline:2px solid #bfdbfe;outline-offset:-2px; }
+    #rebt-platform-banner a:hover { text-decoration:underline; }
+    @media(max-width:480px) {
+      #rebt-platform-banner { gap:4px;padding:0 6px;font-size:11px; }
+      #rebt-platform-banner .rebt-promo-desktop,#rebt-platform-banner .rebt-promo-action { display:none; }
+      #rebt-platform-banner .rebt-promo-mobile { display:inline; }
     }
   `;
+  // Loaded synchronously in the head: reserve the same 44px before first paint.
+  document.head.append(style);
+  if (storageGet(TICKER_CLOSED) !== 'true') document.documentElement.classList.add('rebt-promo-pending');
   const invitationStyle = document.createElement('style');
   invitationStyle.textContent = `
     .rebt-test-invite{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:18px;width:100%;max-width:48rem;min-height:88px;flex-shrink:0;margin:0 0 12px;padding:16px 18px;border:1px solid #bdd6f5;border-left:4px solid #1976e9;border-radius:14px;background:linear-gradient(115deg,#fff 0%,#eff6ff 70%,#e4efff 100%);box-shadow:0 5px 18px -10px rgba(30,64,175,.28);color:#163351;font-family:Inter,system-ui,sans-serif;text-align:left;text-decoration:none;transition:background .2s,box-shadow .2s}
@@ -69,7 +84,39 @@
     @media(max-width:700px){.rebt-discover-card{flex-direction:column;align-items:stretch;gap:14px;padding:17px}.rebt-discover-card h2{font-size:16px}.rebt-discover-card>a{align-self:flex-start}}
   `;
   document.head.append(invitationStyle);
-  // Only this attempt's answered questions are summarized locally. No result is transferred.
+
+  const refinements = document.createElement('style');
+  refinements.textContent = `
+    .rebt-invite-slot{width:100%;max-width:48rem;min-height:112px;flex-shrink:0;margin-bottom:12px}
+    .rebt-invite-slot>.rebt-test-invite{margin:0;min-height:112px}
+    .rebt-test-invite[hidden]{display:none}
+    .rebt-test-invite{position:relative;padding-right:44px}
+    .rebt-invite-close{position:absolute;top:5px;right:5px;width:32px;height:32px;border:0;border-radius:6px;background:transparent;color:inherit;font-size:22px;cursor:pointer}
+    .rebt-invite-close:focus-visible{outline:3px solid #60a5fa;outline-offset:1px}
+    .rebt-test-invite a{color:inherit;text-decoration:none}
+    .rebt-test-invite a.rebt-test-invite-cta{color:white;white-space:normal;text-align:center}
+    .rebt-result-invite{min-width:0;overflow-wrap:anywhere}
+    .rebt-result-invite>a{max-width:100%;box-sizing:border-box;text-align:center}
+    .academy-invite-cta{min-height:54px;text-align:center;line-height:1.4}
+    .academy-invite-secondary{display:block;margin-top:12px;font-size:.8rem;line-height:1.5}
+    .academy-invite-note{display:block;margin-top:12px;text-align:left}
+    .academy-locked-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:24px}
+    .academy-locked-step{padding:20px;border:1px solid #bfdbfe;border-radius:16px;background:#eff6ff;color:#163351}
+    .academy-locked-step h3{font-size:16px;font-weight:700;margin:0 0 10px;line-height:1.4}
+    .academy-locked-step a{font-size:12px;color:#1766ae;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:6px 0}
+    .academy-locked-step svg{display:inline-block;vertical-align:middle;margin-right:6px}
+    html.dark .rebt-test-invite,body.dark .rebt-test-invite,html.dark .rebt-result-invite,body.dark .rebt-result-invite,html.dark .academy-locked-step,body.dark .academy-locked-step{background:linear-gradient(120deg,#122236,#172d48);border-color:#365775;color:#f1f7ff}
+    html.dark .rebt-result-invite h2,body.dark .rebt-result-invite h2{color:#f1f7ff}
+    html.dark .rebt-result-invite p,body.dark .rebt-result-invite p,html.dark .rebt-test-invite-copy>span,body.dark .rebt-test-invite-copy>span{color:#c3d6e9}
+    html.dark .rebt-result-kicker,body.dark .rebt-result-kicker,html.dark .academy-locked-step a,body.dark .academy-locked-step a{color:#93c5fd}
+    html.dark .rebt-result-topics>span,body.dark .rebt-result-topics>span{background:#122236;border-color:#365775;color:#dbeafe}
+    html.dark .rebt-result-topics b,body.dark .rebt-result-topics b{color:#f1c77c}
+    html.dark .rebt-result-invite>small,body.dark .rebt-result-invite>small{color:#b5c9dc}
+    @media(max-width:560px){.rebt-invite-slot,.rebt-invite-slot>.rebt-test-invite{min-height:132px}.rebt-test-invite{padding-right:44px}.academy-locked-steps{grid-template-columns:1fr}}
+    .rebt-result-invite .sr-only,.rebt-test-invite .sr-only,#rebt-platform-banner .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  `;
+  document.head.append(refinements);
+  // This attempt's history is read only to label the invitation; no result is transferred.
   window.rebtResultPromotion = (history, placement) => {
     if (!['test_result','exam_result'].includes(placement)) return '';
     const wrong = (Array.isArray(history) ? history : []).filter(h => h && h.elegida && h.elegida !== h.correcta);
@@ -84,53 +131,116 @@
       if (topic) counts.set(topic, (counts.get(topic) || 0) + 1);
     });
     const chips = [...counts].sort((a,b) => b[1]-a[1]).slice(0,3).map(([topic,count]) => `<span>${topic}<b>${count} ${count===1?'fallo':'fallos'}</b></span>`).join('');
-    const title = wrong.length ? `${wrong.length} ${wrong.length===1?'error. Descubre':'errores. Descubre'} qué reforzar.` : 'Dale continuidad a tu preparación.';
-    return `<aside class="rebt-result-invite" aria-label="Tu siguiente paso en APP-REBT.COM"><span class="rebt-result-kicker">TU SIGUIENTE PASO</span><h2>${title}</h2>${chips?`<div class="rebt-result-topics" aria-label="Temas con fallos en este intento">${chips}</div>`:''}<p>Mira cómo seguir tus notas y enfocar tu preparación.</p><a href="https://app-rebt.com/descubre?utm_source=app-rebt.es&amp;utm_medium=referral&amp;utm_campaign=guia_rebt&amp;utm_content=${placement}" data-rebt-placement="${placement}" target="_blank" rel="noopener noreferrer" onkeydown="event.stopPropagation()">Ver cómo mejorar <span aria-hidden="true">↗</span><span class="sr-only"> (se abre en otra pestaña)</span></a><small>Demo visual · Sin registro · Datos de ejemplo</small></aside>`;
+    const title = wrong.length ? `${wrong.length} ${wrong.length===1?'fallo. Conviértelo':'fallos. Conviértelos'} en tu plan de repaso.` : 'Sin fallos. Consolida con simulacros por bloques.';
+    return `<aside class="rebt-result-invite" aria-label="Tu siguiente paso en APP-REBT.COM"><span class="rebt-result-kicker">TU SIGUIENTE PASO</span><h2>${title}</h2>${chips?`<div class="rebt-result-topics" aria-label="Temas con fallos en este intento">${chips}</div>`:''}<p>Aquí tus resultados no se guardan en una cuenta ni forman un historial. En APP-REBT.COM sí: evolución de notas, tiempo por respuesta y repaso de tus errores.</p><a href="${destination(placement).replaceAll('&','&amp;')}" data-rebt-placement="${placement}" target="_blank" rel="noopener noreferrer" onkeydown="event.stopPropagation()"><span data-rebt-promo-copy="result_button">${promoActiva()?'Crear cuenta y reservar 3,50 €/mes ↗':'Crear mi cuenta ↗'}</span>${screenReader}</a><small data-rebt-promo-copy="result_note">${promoActiva()?'−30 % hasta el 31 de octubre · Crear la cuenta es gratis · Sin permanencia':'Crear la cuenta es gratis · Sin permanencia'}</small></aside>`;
   };
-  const placements=['ticker','home','orientation_menu','test_question','exam_question','test_menu','exam_menu','test_result','exam_result'];
-  // Only aggregate clicks after the existing free-site cookie choice. No answers, scores or IDs.
+  function refreshPromotion() {
+    const active = promoActiva();
+    document.querySelectorAll('a[data-rebt-placement]').forEach(link => {
+      const placement = link.getAttribute('data-rebt-placement');
+      if (placements.includes(placement)) link.href = destination(placement);
+    });
+    document.querySelectorAll('[data-rebt-promo-copy]').forEach(node => {
+      switch (node.getAttribute('data-rebt-promo-copy')) {
+        case 'home_button':node.textContent=active?'Ver el plan · 3,50 €/mes hasta el 31 oct':'Ver el plan completo';break;
+        case 'menu_price':node.textContent=active?' 3,50 €/mes hasta el 31 de octubre.':'';break;
+        case 'result_button':node.textContent=active?'Crear cuenta y reservar 3,50 €/mes ↗':'Crear mi cuenta ↗';break;
+        case 'result_note':node.textContent=active?'−30 % hasta el 31 de octubre · Crear la cuenta es gratis · Sin permanencia':'Crear la cuenta es gratis · Sin permanencia';break;
+      }
+    });
+    const link=document.querySelector('#rebt-platform-banner a');
+    if (!link) return;
+    if(active){
+      link.innerHTML=`<span class="rebt-promo-desktop">APP-REBT.COM · −30 % hasta el 31 de octubre · 3,50 €/mes durante 3 meses · Quedan ${diasRestantes()} días</span><strong class="rebt-promo-action">Reservar mi precio →</strong><span class="rebt-promo-mobile">−30 % hasta el 31 oct · 3,50 €/mes · Reservar →</span>${screenReader}`;
+    }else{
+      link.innerHTML=`<span>Tu historial y el repaso de tus errores, en APP-REBT.COM →</span>${screenReader}`;
+    }
+  }
   document.addEventListener('click',event=>{
     const target=event.target instanceof Element?event.target.closest('a[data-rebt-placement]'):null;
     const placement=target?.getAttribute('data-rebt-placement');
-    if(!placements.includes(placement))return;
-    try{if(localStorage.getItem('cookiesAccepted')!=='true'||typeof window.gtag!=='function')return;
-      window.gtag('event','discover_platform_click',{promotion_placement:placement,link_domain:'app-rebt.com'});
-    }catch{/* Measurement must never block navigation or practice. */}
+    if(placements.includes(placement)) {
+      // Refresh the destination at click time too, including after a sleeping tab expires.
+      target.href=destination(placement);
+      measure('discover_platform_click',placement);
+    }
   });
-  const bar = document.createElement('aside');
-  bar.id = 'rebt-platform-banner';
-  bar.setAttribute('aria-label', 'Descubre APP-REBT.COM');
-  const brand = document.createElement('span');
-  brand.className = 'rebt-promo-brand';
-  brand.textContent = 'APP-REBT.COM';
-  brand.setAttribute('aria-hidden', 'true');
-  const link = document.createElement('a');
-  link.href = href;
-  link.setAttribute('data-rebt-placement','ticker');
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
-  link.setAttribute('aria-label', benefits.join('. ') + '. Conoce APP-REBT.COM (se abre en otra pestaña)');
-  const track = document.createElement('span');
-  track.className = 'rebt-promo-track';
-  // Both visual copies belong to one link. The accessible name is stable and not repeated.
-  track.setAttribute('aria-hidden', 'true');
-  const group = document.createElement('span');
-  group.className = 'rebt-promo-group';
-  benefits.forEach(text => {
-    const item = document.createElement('span');
-    item.className = 'rebt-promo-benefit';
-    item.textContent = text;
-    group.append(item);
-  });
-  track.append(group, group.cloneNode(true));
-  link.append(track);
-  bar.append(brand, link);
-  // Keep Enter on the banner link out of the test shortcuts.
-  bar.addEventListener('keydown', event => { event.stopPropagation(); });
-
-  // Reserve space only after the banner is ready; a failed load leaves the page intact.
-  document.body.style.setProperty('--rebt-original-margin-top', getComputedStyle(document.body).marginTop);
-  document.head.append(style);
-  document.body.prepend(bar);
-  document.body.classList.add('rebt-promo-enabled');
+  function mountTicker() {
+    if(storageGet(TICKER_CLOSED)==='true')return;
+    const bar=document.createElement('aside');bar.id='rebt-platform-banner';bar.setAttribute('aria-label','Descubre APP-REBT.COM');
+    bar.innerHTML=`<a data-rebt-placement="ticker" href="${destination('ticker').replaceAll('&','&amp;')}" target="_blank" rel="noopener noreferrer" onkeydown="event.stopPropagation()"></a><button type="button" aria-label="Cerrar aviso de APP-REBT.COM">×</button>`;
+    bar.addEventListener('keydown',event=>event.stopPropagation());
+    bar.querySelector('button').addEventListener('click',()=>{
+      storageSet(TICKER_CLOSED);bar.remove();document.body.classList.remove('rebt-promo-enabled');
+    });
+    document.documentElement.classList.remove('rebt-promo-pending');
+    document.body.style.setProperty('--rebt-original-margin-top',getComputedStyle(document.body).marginTop);
+    document.body.prepend(bar);document.body.classList.add('rebt-promo-enabled');
+  }
+  function initQuestionInvite() {
+    const slot=document.querySelector('.rebt-invite-slot');
+    if(!slot)return;
+    const invite=slot.querySelector('.rebt-test-invite');
+    if(!invite)return;
+    let shown=false;
+    const dismiss=()=>{invite.hidden=true;};
+    invite.querySelector('button').addEventListener('click',dismiss);
+    invite.addEventListener('keydown',event=>event.stopPropagation());
+    const inspect=()=>{
+      const correct=document.getElementById('stats-aciertos'),wrong=document.getElementById('stats-fallos');
+      const inQuestion=document.getElementById('contenedor-opciones');
+      if(!inQuestion){slot.hidden=true;observer.disconnect();return;}
+      const answered=Number(correct?.textContent||0)+Number(wrong?.textContent||0);
+      if(!shown&&storageGet(QUESTION_SHOWN)!=='true'&&answered>=5){shown=true;storageSet(QUESTION_SHOWN);invite.hidden=false;}
+    };
+    const observer=new MutationObserver(inspect);
+    const card=document.getElementById('main-card');
+    if(card)observer.observe(card,{subtree:true,childList:true,characterData:true});
+    inspect();
+  }
+  function observeResults() {
+    const seen=new WeakSet(),tracked=new WeakSet();
+    const visible=element=>{
+      if(!element.isConnected||document.visibilityState==='hidden')return false;
+      const rect=element.getBoundingClientRect();
+      if(rect.width<=0||rect.height<=0||rect.bottom<=0||rect.top>=innerHeight)return false;
+      // Result content scrolls inside the existing card; do not count below its clipping edge.
+      for(let parent=element.parentElement;parent;parent=parent.parentElement){
+        const css=getComputedStyle(parent);
+        if(/auto|scroll|hidden|clip/.test(css.overflowY)){
+          const clip=parent.getBoundingClientRect();if(rect.bottom<=clip.top||rect.top>=clip.bottom)return false;
+        }
+      }
+      return true;
+    };
+    const report=element=>{
+      const placement=element.querySelector('a[data-rebt-placement]')?.getAttribute('data-rebt-placement');
+      if(!seen.has(element)&&visible(element)&&['test_result','exam_result'].includes(placement)&&measure('discover_platform_view',placement))seen.add(element);
+    };
+    const intersection=typeof IntersectionObserver==='function'?new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)report(entry.target);})):null;
+    const scan=()=>document.querySelectorAll('.rebt-result-invite').forEach(element=>{
+      if(!tracked.has(element)){tracked.add(element);intersection?.observe(element);}
+      report(element);
+    });
+    const observer=new MutationObserver(()=>{refreshPromotion();scan();});
+    // Limit observation to inserted/removed result blocks: banner text changes cannot loop it.
+    const card=document.getElementById('contenedor-test');
+    if(card)observer.observe(card,{childList:true});
+    document.addEventListener('scroll',scan,{capture:true,passive:true});
+    document.addEventListener('visibilitychange',scan);
+    window.addEventListener('focus',scan);
+    scan();
+  }
+  function ready() {
+    mountTicker();refreshPromotion();initQuestionInvite();observeResults();
+    // Keep open tabs correct at midnight, on focus and after browser throttling.
+    const refresh=()=>refreshPromotion();
+    setInterval(refresh,60000);
+    const untilEnd=Date.parse(PROMO_END)-Date.now()+1;
+    if(untilEnd>0&&untilEnd<2147483647)setTimeout(refresh,untilEnd);
+    document.addEventListener('visibilitychange',refresh);
+    window.addEventListener('focus',refresh);
+    window.addEventListener('pageshow',refresh);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready,{once:true});else ready();
 })();
