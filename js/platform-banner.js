@@ -226,7 +226,7 @@
     });
     const observer=new MutationObserver(()=>{refreshPromotion();scan();});
     // Limit observation to inserted/removed result blocks: banner text changes cannot loop it.
-    const card=document.getElementById('contenedor-test');
+    const card=document.getElementById('contenedor-test')||document.querySelector('.orientation-quiz #test');
     if(card)observer.observe(card,{childList:true});
     document.addEventListener('scroll',scan,{capture:true,passive:true});
     document.addEventListener('visibilitychange',scan);

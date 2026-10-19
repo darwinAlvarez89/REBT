@@ -23,7 +23,7 @@
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <link rel="stylesheet" href="/styles/orientation-quiz.css?v=20261019"/>
+  <link rel="stylesheet" href="/styles/orientation-quiz.css?v=20261019-cta"/>
   <style>
     @media (prefers-reduced-motion: reduce) {
       * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
@@ -196,6 +196,7 @@
           <div class="orientation-result-distribution" aria-hidden="true"><span style="width:${total?Math.round(aciertos/total*100):0}%"></span></div>
           <div class="orientation-result-meta"><span>Preguntas completadas<strong>${total}</strong></span><span>Tiempo empleado<strong>${mm}:${ss}</strong></span></div>
           <p class="orientation-result-next">Repasa las referencias en las que hayas dudado y vuelve a practicar a tu ritmo.</p>
+          ${typeof window.rebtResultPromotion === 'function' ? window.rebtResultPromotion(historial, 'test_result') : ''}
           <div class="orientation-result-actions"><button type="button" onclick="window.location.reload()">Reiniciar</button><a href="index.html">Volver al inicio</a></div>
         </section>
         <section class="orientation-question-review" hidden aria-hidden="true"><h3>Detalle de preguntas</h3>${detalle}</section>`;
@@ -217,7 +218,7 @@
       document.addEventListener('keydown', handleKey);
     };
   </script>
-  <script src="/js/platform-banner.js?v=20261018-cro"></script>
+  <script src="/js/platform-banner.js?v=20261019-orientation"></script>
 </head>
 
 <body class="orientation-quiz bg-gray-100 text-gray-900 p-4">

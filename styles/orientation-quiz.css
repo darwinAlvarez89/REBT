@@ -54,3 +54,39 @@ body.orientation-quiz--indigo{--quiz-accent:#4f46e5}
 .orientation-result-actions :is(button,a):focus-visible,.orientation-cancel a:focus-visible{outline:3px solid var(--quiz-accent);outline-offset:3px}
 @media(max-width:480px){body.orientation-quiz{padding:16px 12px 24px}.orientation-quiz #test{padding:22px 18px;border-radius:20px}.orientation-quiz #contador{gap:6px 11px;font-size:11px}.orientation-quiz #pregunta{margin-bottom:20px}.orientation-quiz #opciones .opcion{padding:13px 12px;gap:11px;font-size:14px;min-height:60px}.orientation-quiz #acciones button{width:100%;margin-left:0}.orientation-result-header{padding-right:48px}.orientation-result-header p{font-size:13px}.orientation-result-icon{width:36px;height:36px;border-radius:11px;font-size:20px}.orientation-result-scores{gap:10px}.orientation-result-score{padding:17px 15px}.orientation-result-score strong{font-size:40px}.orientation-result-actions>*{flex:1 1 100%}}
 @media(prefers-reduced-motion:reduce){.orientation-quiz #opciones .opcion{transition:none}}
+
+/* Keep the next step beside the summary on desktop and above secondary actions on mobile. */
+.orientation-quiz .orientation-result-header{margin-bottom:16px}
+.orientation-quiz .orientation-result-score{padding:14px 18px}
+.orientation-quiz .orientation-result-score strong{font-size:38px;margin:3px 0 0}
+.orientation-quiz .orientation-result-distribution{margin:14px 0;height:7px}
+.orientation-quiz .orientation-result-meta{padding-bottom:12px;gap:8px}
+.orientation-quiz .orientation-result-next{margin-top:12px;font-size:12px;line-height:1.5}
+.orientation-quiz .rebt-result-invite{margin:16px 0 0;padding:16px;border-radius:14px}
+.orientation-quiz .rebt-result-invite h2{font-size:18px;margin:5px 0 8px;line-height:1.25}
+.orientation-quiz .rebt-result-invite p{font-size:12px;line-height:1.45;margin:0 0 11px}
+.orientation-quiz .rebt-result-invite>a{min-height:44px;padding:10px 12px;line-height:1.4}
+.orientation-quiz .rebt-result-invite>small{min-height:0;margin-top:8px;font-size:10px;line-height:1.4}
+.orientation-quiz .orientation-result-actions{margin-top:14px}
+@media(min-width:768px){
+ .orientation-quiz #test:has(.orientation-result){max-width:1000px;padding:26px}
+ .orientation-quiz .orientation-result{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:26px;align-items:start}
+ .orientation-quiz .orientation-result-header{grid-column:1/-1}
+ .orientation-quiz .orientation-result-scores,.orientation-quiz .orientation-result-distribution,.orientation-quiz .orientation-result-meta,.orientation-quiz .orientation-result-next{grid-column:1}
+ .orientation-quiz .rebt-result-invite{grid-column:2;grid-row:2/6;margin:0}
+ .orientation-quiz .orientation-result-actions{grid-column:1/-1;padding-top:14px;border-top:1px solid var(--quiz-line)}
+}
+@media(max-width:480px){
+ .orientation-quiz #test:has(.orientation-result){padding:18px 16px}
+ .orientation-quiz .orientation-result-header h2{font-size:23px;margin-bottom:7px}
+ .orientation-quiz .orientation-result-header p{font-size:12px;line-height:1.45}
+ .orientation-quiz .orientation-result-score{padding:11px 13px}
+ .orientation-quiz .orientation-result-score strong{font-size:32px}
+ .orientation-quiz .orientation-result-score small{font-size:10px}
+ .orientation-quiz .orientation-result-meta{font-size:11px}
+ .orientation-quiz .orientation-result-next{margin-top:10px;font-size:11px}
+ .orientation-quiz .rebt-result-invite{padding:13px;margin-top:12px}
+ .orientation-quiz .rebt-result-invite h2{font-size:16px}
+ .orientation-quiz .rebt-result-invite p{font-size:11px}
+ .orientation-quiz .orientation-result-actions>*{flex:1 1 0;min-width:0;padding:10px 8px;font-size:12px;min-height:44px}
+}
