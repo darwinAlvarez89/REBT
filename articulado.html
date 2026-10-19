@@ -23,6 +23,7 @@
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <link rel="stylesheet" href="/styles/orientation-quiz.css?v=20261019"/>
   <style>
     @media (prefers-reduced-motion: reduce) {
       * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
@@ -186,19 +187,18 @@
         </div>`).join('');
 
       document.getElementById("test").innerHTML = `
-        <div class="space-y-3">
-          <h2 class="text-2xl font-extrabold">Resultado del test</h2>
-          <p class="text-slate-700">Aciertos: <strong class="text-green-700">${aciertos}</strong> • Fallos: <strong class="text-red-700">${errores}</strong> • Total: ${total}</p>
-          <p class="text-slate-700">Tiempo total: <span class="font-mono">${mm}:${ss}</span> • Acierto: <strong>${nota}%</strong></p>
-          <hr class="my-3 border-slate-200">
-          <h3 class="text-lg font-bold">Detalle de preguntas</h3>
-          <div class="max-h-[50vh] overflow-auto pr-1">${detalle}</div>
-        </div>
-
-        <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
-          <button onclick="window.location.reload()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">Reiniciar</button>
-          <a href="index.html" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg shadow">Volver al inicio</a>
-        </div>`;
+        <section class="orientation-result" aria-labelledby="orientation-result-title">
+          <header class="orientation-result-header"><span class="orientation-result-kicker">PRÁCTICA COMPLETADA</span><span class="orientation-result-icon" aria-hidden="true">✓</span><h2 id="orientation-result-title">Resultado del test</h2><p>${errores===0?'¡Excelente! Has respondido correctamente a todas las preguntas.':'Has completado tu práctica. Sigue reforzando cómo localizar las referencias del REBT.'}</p></header>
+          <div class="orientation-result-scores">
+            <div class="orientation-result-score"><span>Aciertos</span><strong>${aciertos}</strong><small>Respuestas correctas</small></div>
+            <div class="orientation-result-score is-wrong"><span>Fallos</span><strong>${errores}</strong><small>Respuestas incorrectas</small></div>
+          </div>
+          <div class="orientation-result-distribution" aria-hidden="true"><span style="width:${total?Math.round(aciertos/total*100):0}%"></span></div>
+          <div class="orientation-result-meta"><span>Preguntas completadas<strong>${total}</strong></span><span>Tiempo empleado<strong>${mm}:${ss}</strong></span></div>
+          <p class="orientation-result-next">Repasa las referencias en las que hayas dudado y vuelve a practicar a tu ritmo.</p>
+          <div class="orientation-result-actions"><button type="button" onclick="window.location.reload()">Reiniciar</button><a href="index.html">Volver al inicio</a></div>
+        </section>
+        <section class="orientation-question-review" hidden aria-hidden="true"><h3>Detalle de preguntas</h3>${detalle}</section>`;
     }
 
     /* ===== Atajos de teclado ===== */
@@ -220,7 +220,7 @@
   <script src="/js/platform-banner.js?v=20261018-cro"></script>
 </head>
 
-<body class="bg-gray-100 text-gray-900 p-4">
+<body class="orientation-quiz bg-gray-100 text-gray-900 p-4">
   <div class="max-w-3xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-lg ring-1 ring-slate-100" id="test">
     <div class="mb-4">
       <div class="flex items-center justify-between text-sm text-slate-600 mb-2">
@@ -228,7 +228,7 @@
         <span id="progress-txt" class="font-mono text-slate-500">0/0</span>
       </div>
       <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
-        <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out" style="width:0%" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+        <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out" style="width:0%" role="progressbar" aria-label="Progreso del test" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
       </div>
     </div>
 
@@ -239,7 +239,7 @@
     <div id="acciones" class="mt-2"></div>
   </div>
 
-  <div class="mt-6 text-center">
+  <div class="orientation-cancel mt-6 text-center">
     <a href="Landing_Test_REBT_ITC.html" class="inline-block bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-lg shadow">Cancelar</a>
   </div>
 </body>
